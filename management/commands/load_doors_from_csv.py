@@ -2,7 +2,7 @@ import csv
 
 from django.core.management.base import BaseCommand, CommandError
 
-from api.models import Door
+from models import Door
 
 
 class Command(BaseCommand):
