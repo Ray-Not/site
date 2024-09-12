@@ -3,14 +3,15 @@
 # Переход в рабочую директорию проекта
 cd /root/site || exit
 
+# Активация виртуального окружения
+source venv/bin/activate
+
 # Обновление репозитория
 git fetch origin
 git reset --hard origin/main
 
 # Установка зависимостей
 pip install -r requirements.txt
-
-source venv/bin/activate
 
 # Выполнение миграций и других задач
 python manage.py migrate
