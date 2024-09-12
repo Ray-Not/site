@@ -1,0 +1,39 @@
+{% load static %}
+
+<div class='row d-flex align-items-stretch mt-lg-3 border-bottom bg-main mx-auto'>
+  <figure class='col-2 d-flex d-lg-none align-items-center mt-lg-0 mt-4 justify-content-center'>
+    <MenuHeader/>
+  </figure>
+  <figure class='col-lg-4 col-8 d-flex justify-content-center mt-lg-3 align-items-center mt-lg-0 mt-4'>
+    <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
+  </figure>
+  <figure class='col-2 d-lg-none d-block align-items-center mt-lg-0 mt-4'>
+    <a href="tel:+79296224835">
+      <img class='img-fluid' src="{% static 'images/icons/phone.svg' %}" alt="Телефон" style="width: 150%; height: auto"/>
+    </a>
+  </figure>
+  <article class='col-lg-4 d-none d-lg-flex align-items-center d-flex justify-content-center'>
+    <div class="input-group mb-3 w-50">
+      <input type="text" class="form-control" placeholder="Введите название товара" aria-label="Recipient's username" aria-describedby="basic-addon2">
+      <span class="input-group-text bg-dark text-light" id="basic-addon2">Поиск</span>
+    </div>
+  </article>
+  <article class='col-lg-2 d-none d-lg-flex d-flex align-items-center justify-content-center mt-3'>
+    <a href="tel:+79296224835" class='link-underline link-underline-opacity-0 h7 text-center pal-text'>
+      +7 (929) 622-48-35
+      <p class='fw-lighter' style="font-size: 15; ">Без выходных, 08:00 - 20:00</p>
+    </a>
+  </article>
+  <article class='col-lg-2 d-none d-lg-flex text-dark d-flex align-items-center justify-content-center'>
+      <a href="https://wa.me/79296224835">
+        <img class='img-fluid ms-4' src="{% static 'images/icons/whatsapp.png' %}" alt="Whatsapp" style="width: 45%; height: auto"/>
+      </a>
+      <a href="https://t.me/@alex12_alex12">
+        <img class='img-fluid' src="{% static 'images/icons/telegram.png' %}" alt="Telegram" style="width: 45%; height: auto"/>
+      </a>
+  </article>
+</div>
+</header>
+<div class='container border-bottom d-lg-flex d-none'>
+<NavBar orientation='horizontal'/>
+</div>

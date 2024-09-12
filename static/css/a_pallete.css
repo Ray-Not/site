@@ -1,0 +1,31 @@
+/* В файле стилей, например, styles.css */
+:root {
+  --navbar-active: #8B4513;
+  --navbar-text: #8B4513;
+  --navbar-background: #fdfdfd;
+  --navbar-selected: #fdfdfd;
+  --navbar-hover: #e8e8e8;
+  --text: #8B4513;
+  --border: #8B4513;
+  --background: #fdfdfd;
+  --base-block-background: #ff6e6e;
+  --base-block-text: #000000;
+  --base-text: #000000;
+  --base-lock-icon-color: #ff4c4c;
+  --dom-background: #fdfdfd;
+  --stepper-icon: #b9b9b9;
+  --stepper-text: #000;
+  --stepper-label: #000;
+}
+
+.pal-text {
+  color: var(--text);
+}
+
+.pal-bg {
+  background-color: var(--background);
+}
+
+body {
+  background-color: var(--dom-background);
+}
