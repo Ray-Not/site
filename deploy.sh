@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Логирование
-exec > /root/site/deploy.log 2>&1
+su root
 
 # Переход в рабочую директорию проекта
 cd /root/site || exit
