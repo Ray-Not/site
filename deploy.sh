@@ -18,4 +18,4 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 
 # Перезагрузка сервера
-systemctl restart gunicorn  # Замените на вашу службу, например, gunicorn или uwsgi
+sudo systemctl restart gunicorn  # Замените на вашу службу, например, gunicorn или uwsgi
