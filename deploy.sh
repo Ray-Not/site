@@ -11,7 +11,7 @@ git fetch origin
 git reset --hard origin/main
 
 # Установка зависимостей
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 
 # Выполнение миграций и других задач
 python manage.py migrate
