@@ -7,8 +7,12 @@ cd /root/site || exit
 git fetch origin
 git reset --hard origin/main
 
+source venv/bin/activate
+
 # Установка зависимостей
 pip install -r requirements.txt
+
+deactivate
 
 # Выполнение миграций и других задач
 python manage.py migrate
