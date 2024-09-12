@@ -12,8 +12,6 @@ source venv/bin/activate
 # Установка зависимостей
 pip install -r requirements.txt
 
-deactivate
-
 # Выполнение миграций и других задач
 python manage.py migrate
 python manage.py collectstatic --noinput
