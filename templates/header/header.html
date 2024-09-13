@@ -1,0 +1,53 @@
+{% load static %}
+<style>
+  .icon-link {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+</style>
+<header class="container bg-main">
+  <div class='d-flex border-bottom'>
+    <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4">
+      <div class='col-2'>
+        <img class='img-fluid rounded' src="{% static 'images/icons/menu-50.png' %}" alt="Меню"/>
+      </div>
+      <div class='col-8 d-flex justify-content-center'>
+        <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
+      </div>
+      <div class='col-2'>
+        <a href="tel:+79296224835">
+          <img class='img-fluid rounded' src="{% static 'images/icons/phone-50.png' %}" alt="Телефон" />
+        </a>
+      </div>
+    </div>
+    <article class="col-lg-4 d-none d-lg-flex justify-content-center align-items-center">
+      <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
+    </article>
+    <article class='col-lg-4 d-none d-lg-flex align-items-center justify-content-center'>
+      <div class="input-group" style="width: 70%;">
+        <input type="text" class="form-control" placeholder="Введите название товара" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="btn bg-dark text-light" id="basic-addon2">Поиск</div>
+      </div>
+    </article>
+    <article class="col-lg-2 d-none d-lg-flex">
+      <a href="tel:+79296224835" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover d-flex flex-column w-100" style="font-size: 10;">
+        <p class="text-center mt-3">+7 (929) 622-48-35</p>
+        <p class="fw-lighter text-center">Без выходных, 08:00 - 20:00</p>
+      </a>
+    </article>  
+    <article class='col-lg-2 d-none d-lg-flex align-items-center justify-content-center'>
+      <div class="link-underline-opacity-0">
+        <a href="https://wa.me/79296224835" class="icon-link me-4" style="background-image: url('{% static 'images/icons/wapp-50.png' %}');"></a>
+        <a href="https://t.me/alex12_alex12" class="icon-link ms-4" style="background-image: url('{% static 'images/icons/tg-50.png' %}');"></a>
+      </div>
+    </article>
+  </div>
+  {% include 'header/navbar.html' %}
+<!-- <div class='container border-bottom d-lg-flex d-none'>
+<NavBar orientation='horizontal'/>
+</div> -->
+</header>

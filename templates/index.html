@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- Включение header -->
-    {% include 'header.html' %}
+    {% include 'header/header.html' %}
     <main>
         {% block content %}
         {% endblock %}
@@ -22,6 +22,5 @@
 
     <!-- Подключение скриптов JavaScript -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script> <!-- Дополнительно если есть -->
 </body>
 </html>

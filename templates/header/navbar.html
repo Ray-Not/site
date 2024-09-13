@@ -1,0 +1,31 @@
+{% load static %}
+<ul class="nav nav-underline d-flex justify-content-center border-bottom">
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/installation/' %}active{% endif %}" href="/installation/">Установка</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/delivery/' %}active{% endif %}" href="/delivery/">Доставка</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/useful/' %}active{% endif %}" href="/useful/">Полезное</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/news/' %}active{% endif %}" href="/news/">Новости</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/reviews/' %}active{% endif %}" href="/reviews/">Отзывы</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
+  </li>
+</ul>
+<LinkTab label="Каталог" />
+        <LinkTab label="Установка" />
+        <LinkTab label="Доставка" />
+        <LinkTab label="Полезное" />
+        <LinkTab label="Новости" />
+        <LinkTab label="Отзывы" />
+        <LinkTab label="Контакты" />
