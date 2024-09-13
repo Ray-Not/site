@@ -1,12 +1,12 @@
 /* В файле стилей, например, styles.css */
 :root {
-  --navbar-active: #8B4513;
-  --navbar-text: #8B4513;
+  --navbar-active: #000;
+  --navbar-text: #000;
   --navbar-background: #fdfdfd;
   --navbar-selected: #fdfdfd;
   --navbar-hover: #e8e8e8;
-  --text: #8B4513;
-  --border: #8B4513;
+  --text: #000;
+  --border: #000;
   --background: #fdfdfd;
   --base-block-background: #ff6e6e;
   --base-block-text: #000000;
