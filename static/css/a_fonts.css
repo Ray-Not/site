@@ -1,20 +1,6 @@
 @font-face {
-  font-family: 'Involve';
-  src: url('{% static fonts/Involve-Regular.otf %}') format('opentype');
-  font-weight: 400; /* Обычный вес (Regular) */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Involve';
-  src: url('{% static fonts/Involve-Medium.otf %}') format('opentype');
-  font-weight: 500; /* Средний вес (Medium) */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Involve';
-  src: url('{% static fonts/Involve-Bold.otf %}') format('opentype');
-  font-weight: 700; /* Жирный вес (Bold) */
-  font-style: normal;
+  font-family: 'standart';
+  src: url('{% static "fonts/PenguinAttackCyrillic.otf" %}') format('opentype');
+  font-weight: 400; /* Обычный вес */
+  font-style: normal; /* Обычный стиль (не курсив) */
 }
