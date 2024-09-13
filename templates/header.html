@@ -1,40 +1,40 @@
 {% load static %}
 
 <div class='row d-flex align-items-stretch border-bottom bg-main mx-auto'>
-  <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4 bg-success">
-    <div class='col-2 bg-danger'>
+  <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4">
+    <div class='col-2'>
       <img class='img-fluid rounded' src="{% static 'images/icons/menu-50.png' %}" alt="Меню"/>
     </div>
-    <div class='col-8 bg-info'>
+    <div class='col-8 d-flex justify-content-center'>
       <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
     </div>
-    <div class='col-2 bg-danger'>
+    <div class='col-2'>
       <a href="tel:+79296224835">
         <img class='img-fluid rounded' src="{% static 'images/icons/phone-50.png' %}" alt="Телефон" />
       </a>
     </div>
   </div>
-  <article class="col-lg-4 d-none d-lg-flex justify-content-center align-items-center bg-info">
+  <article class="col-lg-4 d-none d-lg-flex justify-content-center align-items-center">
     <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
   </article>
-  <article class='col-lg-4 d-none d-lg-flex align-items-center justify-content-center bg-warning'>
-    <div class="input-group mb-3 w-50">
+  <article class='col-lg-4 d-none d-lg-flex align-items-center justify-content-center'>
+    <div class="input-group w-100">
       <input type="text" class="form-control" placeholder="Введите название товара" aria-label="Recipient's username" aria-describedby="basic-addon2">
       <div class="btn bg-dark text-light" id="basic-addon2">Поиск</div>
     </div>
   </article>
-  <article class='col-lg-2 d-none d-lg-flex d-flex align-items-center justify-content-center bg-success'>
-    <a href="tel:+79296224835" class='link-underline link-underline-opacity-0 h7 text-center pal-text' style="font-size: 30;">
-      +7 (929) 622-48-35
-      <p class='fw-lighter'>Без выходных, 08:00 - 20:00</p>
+  <article class="col-lg-2 d-none d-lg-flex">
+    <a href="tel:+79296224835" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover d-flex flex-column w-100" style="font-size: 10;">
+      <p class="text-center mt-3">+7 (929) 622-48-35</p>
+      <p class="fw-lighter text-center">Без выходных, 08:00 - 20:00</p>
     </a>
-  </article>
-  <article class='col-lg-2 d-none d-lg-flex align-items-center justify-content-center bg-danger'>
-    <div class="d-flex flex-row">
-      <a href="https://wa.me/79296224835">
-        <img class='img-fluid bg-light me-4' src="{% static 'images/icons/wapp-60.png' %}" alt="Whatsapp" style="width: 50px; height: auto"/>
+  </article>  
+  <article class='col-lg-2 d-none d-lg-flex align-items-center justify-content-center'>
+    <div class="link-underline-opacity-0">
+      <a href="https://wa.me/79296224835" class="link-underline link-underline-opacity-0">
+        <img class='img-fluid bg-light me-4' src="{% static 'images/icons/wapp-50.png' %}" alt="Whatsapp" style="width: 50px; height: auto"/>
       </a>
-      <a href="https://t.me/@alex12_alex12">
+      <a href="https://t.me/@alex12_alex12" class="link-underline link-underline-opacity-0">
         <img class='img-fluid bg-light ms-4' src="{% static 'images/icons/tg-50.png' %}" alt="Telegram" style="width: 50px; height: auto"/>
       </a>
     </div>
