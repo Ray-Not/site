@@ -1,0 +1,10 @@
+// custom.scss
+@import '/home/kolyamba/dev/order/avito_dveri/site_doors/node_modules/bootstrap/scss/bootstrap';
+
+.nav-link.active,
+.show > .nav-link {
+  color: var(--#{$prefix}nav-underline-link-active-color); // Устанавливаем желаемый цвет
+  border-bottom: 2px solid currentColor; // Подчеркиваем активную ссылку
+  font-weight: normal !important;
+}
+//  npx sass static/scss/custom.scss static/scss/custom.css --style=compressed

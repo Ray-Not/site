@@ -30,7 +30,9 @@
         <img class='img-fluid rounded' src="{% static 'images/icons/menu-50.png' %}" alt="Меню" id="menuButton"/>
       </div>
       <div class='col-8 d-flex justify-content-center'>
-        <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
+        <a href="/">
+          <img class='img-fluid' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
+        </a>
       </div>
       <div class='col-2'>
         <a href="tel:+79296224835">
@@ -41,11 +43,13 @@
 
     <!-- Десктопная версия -->
     <article class="col-lg-4 d-none d-lg-flex justify-content-center align-items-center">
+      <a href="/">
       <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
+      </a>
     </article>
     <article class='col-lg-4 d-none d-lg-flex align-items-center justify-content-center'>
       <div class="input-group" style="width: 70%;">
-        <input type="text" class="form-control" placeholder="Введите название товара" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <input type="text" class="form-control" placeholder="Введите название товара" aria-describedby="basic-addon2">
         <div class="btn bg-dark text-light" id="basic-addon2">Поиск</div>
       </div>
     </article>

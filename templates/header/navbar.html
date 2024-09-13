@@ -3,15 +3,16 @@
   li :hover {
     background-color: var(--navbar-hover);
   }
+
   @font-face {
-    font-family: 'tilda';
+    font-family: 'tilda'; 
     src: url('{% static "fonts/TildaSans-Regular.ttf" %}') format('truetype');
     font-weight: 400; /* Обычный вес */
     font-style: normal; /* Обычный стиль (не курсив) */
   }
 
 </style>
-<ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda;">
+<ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda; font-size: larger;">
   <li class="nav-item">
     <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог</a>
   </li>
