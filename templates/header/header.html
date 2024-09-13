@@ -8,12 +8,27 @@
     background-position: center;
     background-repeat: no-repeat;
   }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 0; /* Позиционируем меню ниже кнопки */
+    left: 30%;
+    width: 60%;
+    {% comment %} height: 60%; {% endcomment %}
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  .dropdown-menu.show {
+    display: block;
+  }
 </style>
-<header class="container bg-main">
+<header class="container bg-main" style='height: 10000px'>
   <div class='d-flex border-bottom'>
+    <!-- Мобильная версия -->
     <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4">
       <div class='col-2'>
-        <img class='img-fluid rounded' src="{% static 'images/icons/menu-50.png' %}" alt="Меню"/>
+        <img class='img-fluid rounded' src="{% static 'images/icons/menu-50.png' %}" alt="Меню" id="menuButton"/>
       </div>
       <div class='col-8 d-flex justify-content-center'>
         <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
@@ -24,6 +39,8 @@
         </a>
       </div>
     </div>
+
+    <!-- Десктопная версия -->
     <article class="col-lg-4 d-none d-lg-flex justify-content-center align-items-center">
       <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
     </article>
@@ -46,8 +63,34 @@
       </div>
     </article>
   </div>
+  <!-- Navbar -->
   {% include 'header/navbar.html' %}
-<!-- <div class='container border-bottom d-lg-flex d-none'>
-<NavBar orientation='horizontal'/>
-</div> -->
 </header>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.getElementById('menuButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    function toggleMenu() {
+      const isMenuOpen = dropdownMenu.classList.contains('show');
+      if (isMenuOpen) {
+        dropdownMenu.classList.remove('show');
+      } else {
+        dropdownMenu.classList.add('show');
+      }
+    }
+
+    if (menuButton && dropdownMenu) {
+      menuButton.addEventListener('click', function(event) {
+        event.stopPropagation();
+        toggleMenu();
+      });
+    }
+
+    document.addEventListener('click', function(event) {
+      if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
+  });
+</script>
