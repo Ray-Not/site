@@ -98,9 +98,9 @@ class Order(models.Model):
         blank=True
     )
     door = models.ForeignKey(
-        Door,
+        'Door',
         on_delete=models.CASCADE,
-        related_name='doors',
+        related_name='orders',
         blank=True,
         null=True
     )
