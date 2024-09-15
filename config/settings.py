@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'doors_order',
+        'NAME': 'main',
         'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',  # Или IP-адрес сервера PostgreSQL
+        'PASSWORD': 'adminka',
+        'HOST': '212.67.13.248',  # Или IP-адрес сервера PostgreSQL
         'PORT': '5432',       # Порт PostgreSQL по умолчанию
     }
 }
