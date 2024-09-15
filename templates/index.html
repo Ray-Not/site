@@ -437,6 +437,30 @@
               <p class="fs-6 text-secondary">Начните чат в WhatsApp или Telegramm</p>
             </div>
           </div>
+          <div class="my-4">
+            <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
+            <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
+            <h1 style="font-family: tilda;">Отзывы о нас</h1>
+          </div>
+          <div class="container my-5">
+            <div class="row">
+                {% for review in reviews %}
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ review.name }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ review.message }}</h6>
+                                <p class="card-text">
+                                    Рейтинг: <span class="fw-bold">{{ review.rating }}/10</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>Пока нет отзывов</p>
+                {% endfor %}
+            </div>
+          </div>
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
         <script>
             // ymaps.ready(function () {
