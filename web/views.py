@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.shortcuts import redirect, render
+
 from .forms import OrderForm
-from .models import Review, Door
+from .models import Door, Review
 
 
 def index(request):
@@ -20,8 +22,18 @@ def index(request):
 
 
 def catalog(request):
-    doors = Door.objects.all()
-    print(doors)
+    doors_list = Door.objects.all()
+    paginator = Paginator(doors_list, 12)
+    print(paginator)
+
+    page = request.GET.get('page')
+    try:
+        doors = paginator.page(page)
+    except PageNotAnInteger:
+        doors = paginator.page(1)
+    except EmptyPage:
+        doors = paginator.page(paginator.num_pages)
+
     return render(request, 'pages/catalog.html', {
         'doors': doors,
     })

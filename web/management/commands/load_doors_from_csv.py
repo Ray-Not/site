@@ -50,9 +50,14 @@ class Command(BaseCommand):
                         )
                         count += 1
                         if count % 500 == 0:
-                            self.stdout.write(self.style.SUCCESS(f'Загружено записей: {count}'))
+                            self.stdout.write(self.style.SUCCESS(
+                                f'Загружено записей: {count}'
+                            ))
 
-            self.stdout.write(self.style.SUCCESS(f'Все записи успешно загружены из {csv_file}. Всего записей: {count}'))
+            self.stdout.write(self.style.SUCCESS(
+                f'Все записи успешно загружены из {csv_file}.\
+                  Всего записей: {count}'
+            ))
 
         except FileNotFoundError:
             raise CommandError(f'Файл {csv_file} не найден')
