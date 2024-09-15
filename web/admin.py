@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Door
+from .models import Door, Order
 
 
 class DoorAdmin(admin.ModelAdmin):
@@ -9,3 +9,4 @@ class DoorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Door, DoorAdmin)
+admin.site.register(Order)

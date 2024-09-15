@@ -1,53 +1,142 @@
 {% extends '../index.html' %}  <!-- Замените 'base.html' на ваш базовый шаблон -->
 {% load custom_filters %}
 {% block content %}
+
+<script>
+  let currentSort = '';  // To track current sorted field
+  let sortDirection = 'asc'; // Default sort direction
+  
+  function sortItems(sortBy) {
+      const doorList = document.getElementById('door-list');
+      const doors = Array.from(doorList.getElementsByClassName('door-item'));
+  
+      // Обновление символов на кнопках
+      const sortSymbols = {
+          novelty: document.getElementById('novelty-sort-symbol'),
+          price: document.getElementById('price-sort-symbol'),
+          orders: document.getElementById('orders-sort-symbol')
+      };
+  
+      // Сброс символов
+      for (let key in sortSymbols) {
+          if (sortSymbols[key]) {
+              sortSymbols[key].innerHTML = '⇅';
+          }
+      }
+  
+      // Изменение символа на активной кнопке
+      if (sortDirection === 'asc') {
+          if (sortSymbols[sortBy]) {
+              sortSymbols[sortBy].innerHTML = '↑';
+          }
+      } else {
+          if (sortSymbols[sortBy]) {
+              sortSymbols[sortBy].innerHTML = '↓';
+          }
+      }
+  
+      // Сортировка элементов
+      doors.sort((a, b) => {
+          let aValue = a.dataset[sortBy] || '';
+          let bValue = b.dataset[sortBy] || '';
+  
+          // Преобразование в числа если значение числовое
+          if (sortBy === 'price' || sortBy === 'orders') {
+              aValue = parseFloat(aValue) || 0;
+              bValue = parseFloat(bValue) || 0;
+          }
+  
+          if (sortDirection === 'asc') {
+              return aValue > bValue ? 1 : -1;
+          } else {
+              return aValue < bValue ? 1 : -1;
+          }
+      });
+  
+      // Переключение направления сортировки
+      if (currentSort === sortBy) {
+          sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+          sortDirection = 'asc'; // По умолчанию для нового столбца сортировка по возрастанию
+      }
+  
+      currentSort = sortBy;
+  
+      // Обновление DOM
+      doors.forEach(door => doorList.appendChild(door));
+      console.log('Data for sorting:', doors.map(door => ({
+    id: door.id,
+    price: door.dataset.price,
+    orders: door.dataset.orders,
+    novelty: door.dataset.novelty
+})));
+  }
+</script>
+
 <div class="row flex-lg-row flex-column">
   <div class="col-lg-4 col-12">
     Some
   </div>
   <div class="col-lg-8 col-12">
     <h2 class="text-center my-4">Входные двери от производителя</h2>
-    <p class="text-center my-4">Популярные категории:</p>
-    <div class="row">
+    <p class="text-center">Популярные категории:</p>
+  
+    <div class="row d-flex flex-lg-row flex-column align-items-center mx-auto">
+      <p class="my-4 col">Сортировать по:</p>
+      
+      <!-- Сортировка по новизне -->
+      <button class="btn btn-danger col h-50 mt-lg-0 mt-2" onclick="sortItems('novelty')">
+        Новизне <span id="novelty-sort-symbol">⇅</span>
+      </button>
+      
+      <!-- Сортировка по цене -->
+      <button class="btn btn-danger col h-50 mt-lg-0 mt-2 mx-2" onclick="sortItems('price')">
+        Цене <span id="price-sort-symbol">⇅</span>
+      </button>
+      
+      <!-- Сортировка по заказам -->
+      <button class="btn btn-danger col h-50 mt-lg-0 mt-2" onclick="sortItems('orders')">
+        Заказам <span id="orders-sort-symbol">⇅</span>
+      </button>
+    </div>
+  
+    <div class="row" id="door-list">
       {% for door in doors %}
-      <div class="col-md-4 mb-4">
-          <div class="card h-100">
-              <!-- Карусель изображений -->
-              <div id="carousel{{ door.id }}" class="carousel slide" data-bs-ride="false">
-                <div class="carousel-inner">
-                  {% with door.images|split_and_get_all as image_urls %}
-                    {% for image_url in image_urls %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                      <div class="image-container">
-                        <img src="{{ MEDIA_URL }}{{ image_url }}" class="d-block w-100" alt="{{ door.title }} - Image {{ forloop.counter }}">
-                      </div>
-                    </div>
-                    {% endfor %}
-                  {% endwith %}
+      <div class="col-md-4 mb-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+        <div class="card h-100" >
+          <div id="carousel{{ door.id }}" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+              {% with door.images|split_and_get_all as image_urls %}
+                {% for image_url in image_urls %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                  <div class="image-container">
+                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="d-block w-100" alt="{{ door.title }} - Image {{ forloop.counter }}">
+                  </div>
                 </div>
-                <!-- Кнопки переключения -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-              
-              <div class="card-body">
-                  <h5 class="card-title">{{ door.title }}</h5>
-                  <p class="card-text"><strong>Price:</strong> {{ door.price }}</p>
-                  {% if door.discount %}
-                  <p class="text-success">Discount: {{ door.discount }}%</p>
-                  {% endif %}
-                  <p class="card-text">{{ door.purpose }}</p>
-              </div>
+                {% endfor %}
+              {% endwith %}
+            </div>
+            <!-- Кнопки переключения -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
+    
+          <div class="card-body">
+            <h5 class="card-title">{{ door.title }}</h5>
+            <p class="card-text"><strong>Price:</strong> {{ door.price }}</p>
+            {% if door.discount %}
+            <p class="text-success">Discount: {{ door.discount }}%</p>
+            {% endif %}
+            <p class="card-text">{{ door.purpose }}</p>
+          </div>
+        </div>
       </div>
-      {% empty %}
-      <p>No doors available.</p>
       {% endfor %}
     </div>
 
@@ -122,9 +211,6 @@
         {% endif %}
       </ul>
     </nav>
-    
-    
-    
     
   </div>
 </div>

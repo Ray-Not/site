@@ -82,6 +82,9 @@ class Door(models.Model):
         """Возвращает все отзывы, связанные с дверью через заказы."""
         return Review.objects.filter(order__door=self)
 
+    def get_order_count(self):
+        return self.orders.count()
+
     def __str__(self):
         return self.title
 
