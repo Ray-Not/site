@@ -1,4 +1,24 @@
 {% extends '../index.html' %}
 {% block content %}
-SOME content
+<h1 class="text-center mb-4">Door Catalog</h1>
+<div class="row">
+    {% for door in doors %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <!-- Изображение двери -->
+            <img src="{{ door.images }}" class="card-img-top" alt="{{ door.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ door.title }}</h5>
+                <p class="card-text"><strong>Price:</strong> {{ door.price }}</p>
+                {% if door.discount %}
+                <p class="text-success">Discount: {{ door.discount }}%</p>
+                {% endif %}
+                <p class="card-text">{{ door.purpose }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No doors available.</p>
+    {% endfor %}
+</div>
 {% endblock content %}

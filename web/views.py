@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import OrderForm
-from .models import Review
+from .models import Review, Door
 
 
 def index(request):
@@ -12,8 +12,16 @@ def index(request):
     else:
         form = OrderForm()
     reviews = Review.objects.all().order_by('-id')[:6]
-    return render(request, 'index.html', {'form': form, 'reviews': reviews, 'range': range(1, 11)})
+    return render(request, 'index.html', {
+        'form': form,
+        'reviews': reviews,
+        'range': range(1, 11)
+    })
 
 
 def catalog(request):
-    return render(request, 'pages/catalog.html')
+    doors = Door.objects.all()
+    print(doors)
+    return render(request, 'pages/catalog.html', {
+        'doors': doors,
+    })

@@ -3,6 +3,7 @@ Django==5.0
 gunicorn==23.0.0
 packaging==24.1
 psycopg==3.2.1
-slugify==0.0.1
+python-slugify
 sqlparse==0.5.1
 typing_extensions==4.12.2
+requests
