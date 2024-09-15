@@ -1,75 +1,131 @@
 {% extends '../index.html' %}  <!-- Замените 'base.html' на ваш базовый шаблон -->
 {% load custom_filters %}
 {% block content %}
-<h1 class="text-center mb-4">Door Catalog</h1>
-<div class="row">
-    {% for door in doors %}
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <!-- Изображение двери -->
-            {% with door.images|split_and_get_first_two as image_urls %}
-            {% if image_urls %}
-                <img src="{{ MEDIA_URL }}{{ image_urls.0 }}" class="card-img-top" alt="{{ door.title }} - Image 1">
-            {% endif %}
-            {% if image_urls|length > 1 %}
-                <img src="{{ MEDIA_URL }}{{ image_urls.1 }}" class="card-img-top" alt="{{ door.title }} - Image 2">
-            {% endif %}
-            {% endwith %}
-            <div class="card-body">
-                <h5 class="card-title">{{ door.title }}</h5>
-                <p class="card-text"><strong>Price:</strong> {{ door.price }}</p>
-                {% if door.discount %}
-                <p class="text-success">Discount: {{ door.discount }}%</p>
-                {% endif %}
-                <p class="card-text">{{ door.purpose }}</p>
-            </div>
-        </div>
+<div class="row flex-lg-row flex-column">
+  <div class="col-lg-4 col-12">
+    Some
+  </div>
+  <div class="col-lg-8 col-12">
+    <h2 class="text-center my-4">Входные двери от производителя</h2>
+    <p class="text-center my-4">Популярные категории:</p>
+    <div class="row">
+      {% for door in doors %}
+      <div class="col-md-4 mb-4">
+          <div class="card h-100">
+              <!-- Карусель изображений -->
+              <div id="carousel{{ door.id }}" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-inner">
+                  {% with door.images|split_and_get_all as image_urls %}
+                    {% for image_url in image_urls %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                      <div class="image-container">
+                        <img src="{{ MEDIA_URL }}{{ image_url }}" class="d-block w-100" alt="{{ door.title }} - Image {{ forloop.counter }}">
+                      </div>
+                    </div>
+                    {% endfor %}
+                  {% endwith %}
+                </div>
+                <!-- Кнопки переключения -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+              
+              <div class="card-body">
+                  <h5 class="card-title">{{ door.title }}</h5>
+                  <p class="card-text"><strong>Price:</strong> {{ door.price }}</p>
+                  {% if door.discount %}
+                  <p class="text-success">Discount: {{ door.discount }}%</p>
+                  {% endif %}
+                  <p class="card-text">{{ door.purpose }}</p>
+              </div>
+          </div>
+      </div>
+      {% empty %}
+      <p>No doors available.</p>
+      {% endfor %}
     </div>
-    {% empty %}
-    <p>No doors available.</p>
-    {% endfor %}
+
+    <!-- Пагинация -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination flex-wrap justify-content-center">
+        <!-- Кнопка "Первая страница" и "Предыдущая" -->
+        {% if doors.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page=1" aria-label="First">
+              <span aria-hidden="true">&laquo;&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ doors.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        {% endif %}
+    
+        <!-- Логика для многоточий в начале -->
+        {% if doors.number > 3 %}
+          <li class="page-item">
+            <a class="page-link" href="?page=1">1</a>
+          </li>
+          {% if doors.number > 4 %}
+            <li class="page-item disabled">
+              <span class="page-link">...</span>
+            </li>
+          {% endif %}
+        {% endif %}
+    
+        <!-- Отображение страниц вокруг текущей страницы -->
+        {% for num in doors.paginator.page_range %}
+          {% if num <= doors.number|add:2 and num >= doors.number|add:-2 %}
+            {% if doors.number == num %}
+              <li class="page-item active">
+                <span class="page-link">{{ num }}</span>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+    
+        <!-- Логика для многоточий в конце -->
+        {% if doors.number < doors.paginator.num_pages|add:-2 %}
+          {% if doors.number < doors.paginator.num_pages|add:-3 %}
+            <li class="page-item disabled">
+              <span class="page-link">...</span>
+            </li>
+          {% endif %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ doors.paginator.num_pages }}">{{ doors.paginator.num_pages }}</a>
+          </li>
+        {% endif %}
+    
+        <!-- Кнопка "Следующая" и "Последняя" -->
+        {% if doors.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ doors.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?page={{ doors.paginator.num_pages }}" aria-label="Last">
+              <span aria-hidden="true">&raquo;&raquo;</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    
+    
+    
+    
+  </div>
 </div>
-
-<!-- Пагинация -->
-<nav aria-label="Page navigation">
-  <ul class="pagination">
-    {% if doors.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page=1" aria-label="First">
-          <span aria-hidden="true">&laquo;&laquo;</span>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="?page={{ doors.previous_page_number }}" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-    {% endif %}
-
-    {% for num in doors.paginator.page_range %}
-      {% if doors.number == num %}
-        <li class="page-item active">
-          <span class="page-link">{{ num }}</span>
-        </li>
-      {% else %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-        </li>
-      {% endif %}
-    {% endfor %}
-
-    {% if doors.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ doors.next_page_number }}" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="?page={{ doors.paginator.num_pages }}" aria-label="Last">
-          <span aria-hidden="true">&raquo;&raquo;</span>
-        </a>
-      </li>
-    {% endif %}
-  </ul>
-</nav>
 {% endblock %}

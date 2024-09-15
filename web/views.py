@@ -22,9 +22,8 @@ def index(request):
 
 
 def catalog(request):
-    doors_list = Door.objects.all()
-    paginator = Paginator(doors_list, 12)
-    print(paginator)
+    doors_list = Door.objects.all().order_by('id')
+    paginator = Paginator(doors_list, 10)
 
     page = request.GET.get('page')
     try:

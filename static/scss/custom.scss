@@ -1,10 +1,20 @@
 // custom.scss
+
+// Переопределите переменные перед импортом Bootstrap
+$pagination-active-color: #fff !default; // Цвет текста активной страницы
+$pagination-active-bg: #dc3545 !default; // Цвет фона активной страницы
+$pagination-active-border-color: #dc3545 !default; // Цвет границы активной страницы
+$pagination-color: #dc3545;
+$pagination-hover-color: #000;
+$pagination-focus-color: #dc3545;
+$pagination-focus-box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5) !default;
+// Импортируйте Bootstrap после переопределения переменных
 @import '/home/kolyamba/dev/order/avito_dveri/site_doors/node_modules/bootstrap/scss/bootstrap';
 
+// Дополнительные стили
 .nav-link.active,
 .show > .nav-link {
   color: var(--#{$prefix}nav-underline-link-active-color); // Устанавливаем желаемый цвет
   border-bottom: 2px solid currentColor; // Подчеркиваем активную ссылку
   font-weight: normal !important;
 }
-//  npx sass static/scss/custom.scss static/scss/custom.css --style=compressed
