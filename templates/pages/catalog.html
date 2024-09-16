@@ -28,6 +28,22 @@
     font-weight: 400; /* Обычный вес */
     font-style: normal; /* Обычный стиль (не курсив) */
   }
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-body {
+    flex: 1; /* Занимает всё доступное пространство внутри карточки */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Располагает элементы так, чтобы кнопка была внизу */
+  }
+
+  .btn {
+    margin-top: auto; /* Перемещает кнопку к низу карточки */
+  }
 </style>
 
 
@@ -124,7 +140,8 @@
             <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
             {% endif %}
             <label class="card-text text-secondary mt-2">{{ door.in_cover_name }}</label>
-            <label class="card-text text-secondary mt-2">{{ door.size_name }}</;>
+            <label class="card-text text-secondary mt-2">{{ door.size_name }}</label>
+            <button class="btn btn-outline-danger w-100 mt-auto">Узнать подробнее</button>
           </div>
         </div>
       </div>
