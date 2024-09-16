@@ -463,18 +463,18 @@
           </div>
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
         <script>
-            // ymaps.ready(function () {
-            //     var map = new ymaps.Map("map", {
-            //         center: [55.88471, 37.60377], // Центр карты (широта, долгота)
-            //         zoom: 15 // Масштаб
-            //     });
+            ymaps.ready(function () {
+                var map = new ymaps.Map("map", {
+                    center: [55.88471, 37.60377], // Центр карты (широта, долгота)
+                    zoom: 15 // Масштаб
+                });
     
-            //     var placemark = new ymaps.Placemark([55.88471, 37.60377], {
-            //         balloonContent: 'Москва'
-            //     });
+                var placemark = new ymaps.Placemark([55.88471, 37.60377], {
+                    balloonContent: 'Москва'
+                });
     
-            //     map.geoObjects.add(placemark);
-            // });
+                map.geoObjects.add(placemark);
+            });
         </script>
         {% endblock %}
         </div>
