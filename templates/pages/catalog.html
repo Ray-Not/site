@@ -1,8 +1,210 @@
-{% extends '../index.html' %}  <!-- Замените 'base.html' на ваш базовый шаблон -->
+{% extends '../index.html' %}
 {% load custom_filters %}
-{% block content %}
 {% load static %}
 
+{% block content %}
+<style>
+  .strikethrough-svg {
+      position: relative;
+      display: inline-block;
+      font-size: large;
+      color: #ff0000;
+  }
+  .strikethrough-svg svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+  }
+  .strikethrough-svg span {
+      position: relative;
+      z-index: 1;
+  }
+  @font-face {
+    font-family: 'gasalt'; 
+    src: url('{% static "fonts/Roadgeek 2005 series 5wr.ttf" %}') format('truetype');
+    font-weight: 400; /* Обычный вес */
+    font-style: normal; /* Обычный стиль (не курсив) */
+  }
+</style>
+
+
+<div class="row flex-lg-row flex-column">
+
+  <div class="col-lg-4 col-12">
+    <form method="get">
+      <fieldset>
+          <legend>Фильтры</legend>
+          <div class="form-group">
+              {{ filter.form.price_min.label_tag }} {{ filter.form.price_min }}
+          </div>
+          <div class="form-group">
+              {{ filter.form.price_max.label_tag }} {{ filter.form.price_max }}
+          </div>
+          <div class="form-group">
+              <label>Бренды:</label>
+              {% for brand in brands %}
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="brand" value="{{ brand }}" id="brand_{{ brand|slugify }}" 
+                             {% if brand in selected_brands %}checked{% endif %}>
+                      <label class="form-check-label" for="brand_{{ brand|slugify }}">
+                          {{ brand }}
+                      </label>
+                  </div>
+              {% endfor %}
+          </div>
+          <button class="btn btn-outline-danger" type="submit">Применить фильтры</button>
+      </fieldset>
+  </form>
+  
+  </div>
+
+  <div class="col-lg-8 col-12">
+    <h2 class="text-center my-4">Входные двери от производителя</h2>
+    <p class="text-center">Популярные категории:</p>
+    <div class="d-flex flex-lg-row flex-column align-items-center">
+      <p class="my-4 col text-center">Сортировать по:</p>
+      <!-- Сортировка по новизне -->
+      <button class="btn btn-danger col h-50 mt-lg-0 mt-2 w-100" onclick="sortItems('novelty')">
+        Новизне <span id="novelty-sort-symbol">⇅</span>
+      </button>
+      <!-- Сортировка по цене -->
+      <button class="btn btn-danger col h-50 mt-lg-0 mt-2 mx-2 w-100" onclick="sortItems('price')">
+        Цене <span id="price-sort-symbol">⇅</span>
+      </button>
+      <!-- Сортировка по заказам -->
+      <button class="btn btn-danger col h-50 mt-lg-0 mt-2 w-100" onclick="sortItems('orders')">
+        Заказам <span id="orders-sort-symbol">⇅</span>
+      </button>
+    </div>
+  
+    <div class="row" id="door-list">
+      {% for door in doors %}
+      <div class="col-lg-4 col-12 mt-lg-0 mt-4 mb-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+        <div class="card h-100">
+          <div id="carousel{{ door.id }}" class="carousel slide d-flex align-items-center p-2" data-bs-ride="false" style="height: 600px; overflow: hidden;">
+            <div class="carousel-inner">
+              {% with door.images|split_and_get_all as image_urls %}
+                {% for image_url in image_urls %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                  <div class="image-container">
+                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="d-block w-100" alt="{{ door.title }} - Image {{ forloop.counter }}">
+                  </div>
+                </div>
+                {% endfor %}
+              {% endwith %}
+            </div>
+            <!-- Кнопки переключения -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+    
+          <div class="card-body">
+            <p class="card-title fw-bold">{{ door.title }}</p>
+            {% if door.discount %}
+            <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
+              <label class="card-text rounded">{{ door.price|calculate_discount:door.discount }} ₽</label>
+              <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
+                <span>{{ door.price|format_number }} ₽</span>
+                <svg viewBox="0 0 100 100">
+                  <line x1="-150" y1="0" x2="150" y2="80" stroke="#ff0000" stroke-width="4"/>
+                </svg>
+              </label>
+              <label class="card-text rounded bg-danger text-white p-1" style="font-size: x-small;">-{{ door.discount }}%</label>
+            </label>
+            {% else %}
+            <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
+            {% endif %}
+            <label class="card-text text-secondary mt-2">{{ door.in_cover_name }}</label>
+            <label class="card-text text-secondary mt-2">{{ door.size_name }}</;>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Пагинация -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination flex-wrap justify-content-center">
+        <!-- Кнопка "Первая страница" и "Предыдущая" -->
+        {% if doors.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page=1" aria-label="First">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ doors.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&lsaquo;</span>
+            </a>
+          </li>
+        {% endif %}
+    
+        <!-- Логика для многоточий в начале -->
+        {% if doors.number > 3 %}
+          <li class="page-item">
+            <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page=1">1</a>
+          </li>
+          {% if doors.number > 4 %}
+            <li class="page-item disabled">
+              <span class="page-link">...</span>
+            </li>
+          {% endif %}
+        {% endif %}
+    
+        <!-- Отображение страниц вокруг текущей страницы -->
+        {% for num in doors.paginator.page_range %}
+          {% if num <= doors.number|add:2 and num >= doors.number|add:-2 %}
+            {% if doors.number == num %}
+              <li class="page-item active">
+                <span class="page-link">{{ num }}</span>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ num }}">{{ num }}</a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+    
+        <!-- Логика для многоточий в конце -->
+        {% if doors.number < doors.paginator.num_pages|add:-2 %}
+          {% if doors.number < doors.paginator.num_pages|add:-3 %}
+            <li class="page-item disabled">
+              <span class="page-link">...</span>
+            </li>
+          {% endif %}
+          <li class="page-item">
+            <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ doors.paginator.num_pages }}">{{ doors.paginator.num_pages }}</a>
+          </li>
+        {% endif %}
+    
+        <!-- Кнопка "Следующая" и "Последняя" -->
+        {% if doors.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ doors.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&rsaquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ doors.paginator.num_pages }}" aria-label="Last">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    
+  </div>
+</div>
 <script>
   let currentSort = '';  // To track current sorted field
   let sortDirection = 'asc'; // Default sort direction
@@ -73,182 +275,4 @@
 })));
   }
 </script>
-
-<style>
-  .strikethrough-svg {
-      position: relative;
-      display: inline-block;
-      font-size: large;
-      color: #ff0000;
-  }
-  .strikethrough-svg svg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-  }
-  .strikethrough-svg span {
-      position: relative;
-      z-index: 1;
-  }
-  @font-face {
-    font-family: 'gasalt'; 
-    src: url('{% static "fonts/Roadgeek 2005 series 5wr.ttf" %}') format('truetype');
-    font-weight: 400; /* Обычный вес */
-    font-style: normal; /* Обычный стиль (не курсив) */
-  }
-</style>
-
-<div class="row flex-lg-row flex-column">
-
-  <div class="col-lg-4 col-12">
-    Some
-  </div>
-
-  <div class="col-lg-8 col-12">
-    <h2 class="text-center my-4">Входные двери от производителя</h2>
-    <p class="text-center">Популярные категории:</p>
-    <div class="row d-flex flex-lg-row flex-column align-items-center mx-auto">
-      <p class="my-4 col">Сортировать по:</p>
-      <!-- Сортировка по новизне -->
-      <button class="btn btn-danger col h-50 mt-lg-0 mt-2" onclick="sortItems('novelty')">
-        Новизне <span id="novelty-sort-symbol">⇅</span>
-      </button>
-      <!-- Сортировка по цене -->
-      <button class="btn btn-danger col h-50 mt-lg-0 mt-2 mx-2" onclick="sortItems('price')">
-        Цене <span id="price-sort-symbol">⇅</span>
-      </button>
-      <!-- Сортировка по заказам -->
-      <button class="btn btn-danger col h-50 mt-lg-0 mt-2" onclick="sortItems('orders')">
-        Заказам <span id="orders-sort-symbol">⇅</span>
-      </button>
-    </div>
-  
-    <div class="row" id="door-list">
-      {% for door in doors %}
-      <div class="col-md-4 mb-4" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
-        <div class="card h-100">
-          <div id="carousel{{ door.id }}" class="carousel slide d-flex align-items-center p-2" data-bs-ride="false" style="height: 600px; overflow: hidden;">
-            <div class="carousel-inner">
-              {% with door.images|split_and_get_all as image_urls %}
-                {% for image_url in image_urls %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                  <div class="image-container">
-                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="d-block w-100" alt="{{ door.title }} - Image {{ forloop.counter }}">
-                  </div>
-                </div>
-                {% endfor %}
-              {% endwith %}
-            </div>
-            <!-- Кнопки переключения -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-    
-          <div class="card-body">
-            <p class="card-title fw-bold">{{ door.title }}</p>
-            {% if door.discount %}
-            <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
-              <label class="card-text rounded">{{ door.price|calculate_discount:door.discount }} ₽</label>
-              <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
-                <span>{{ door.price }} ₽</span>
-                <svg viewBox="0 0 100 100">
-                  <line x1="-150" y1="0" x2="150" y2="80" stroke="#ff0000" stroke-width="4"/>
-                </svg>
-              </label>
-              <label class="card-text rounded bg-danger text-white p-1" style="font-size: x-small;">-{{ door.discount }}%</label>
-            </label>
-            {% else %}
-            <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price }} ₽</label>
-            {% endif %}
-            <label class="card-text text-secondary mt-2">{{ door.in_cover_name }}</label>
-            <label class="card-text text-secondary mt-2">{{ door.size_name }}</;>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <!-- Пагинация -->
-    <nav aria-label="Page navigation">
-      <ul class="pagination flex-wrap justify-content-center">
-        <!-- Кнопка "Первая страница" и "Предыдущая" -->
-        {% if doors.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page=1" aria-label="First">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="?page={{ doors.previous_page_number }}" aria-label="Previous">
-              <span aria-hidden="true">&lsaquo;</span>
-            </a>
-          </li>
-        {% endif %}
-    
-        <!-- Логика для многоточий в начале -->
-        {% if doors.number > 3 %}
-          <li class="page-item">
-            <a class="page-link" href="?page=1">1</a>
-          </li>
-          {% if doors.number > 4 %}
-            <li class="page-item disabled">
-              <span class="page-link">...</span>
-            </li>
-          {% endif %}
-        {% endif %}
-    
-        <!-- Отображение страниц вокруг текущей страницы -->
-        {% for num in doors.paginator.page_range %}
-          {% if num <= doors.number|add:2 and num >= doors.number|add:-2 %}
-            {% if doors.number == num %}
-              <li class="page-item active">
-                <span class="page-link">{{ num }}</span>
-              </li>
-            {% else %}
-              <li class="page-item">
-                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-              </li>
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-    
-        <!-- Логика для многоточий в конце -->
-        {% if doors.number < doors.paginator.num_pages|add:-2 %}
-          {% if doors.number < doors.paginator.num_pages|add:-3 %}
-            <li class="page-item disabled">
-              <span class="page-link">...</span>
-            </li>
-          {% endif %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ doors.paginator.num_pages }}">{{ doors.paginator.num_pages }}</a>
-          </li>
-        {% endif %}
-    
-        <!-- Кнопка "Следующая" и "Последняя" -->
-        {% if doors.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ doors.next_page_number }}" aria-label="Next">
-              <span aria-hidden="true">&rsaquo;</span>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="?page={{ doors.paginator.num_pages }}" aria-label="Last">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
-    
-  </div>
-</div>
 {% endblock %}

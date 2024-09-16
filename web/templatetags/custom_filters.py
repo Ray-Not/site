@@ -11,12 +11,23 @@ def split_and_get_all(value):
 
 @register.filter
 def calculate_discount(price, discount):
+    """Рассчитать цену со скидкой"""
     try:
-        clean_price = float(price.replace(' ', ''))
-        discount_value = float(discount) / 100
-        final_price = clean_price * (1 - discount_value)
+        # Так как price теперь является числовым полем, преобразование не нужно
+        final_price = price * (1 - float(discount) / 100)
         formatted_price = '{:,.0f}'.format(final_price).replace(',', ' ')
         return formatted_price
     except (ValueError, TypeError) as e:
         print(f'Error in calculating discount: {e}')
         return price
+
+
+@register.filter
+def format_number(value):
+    """Форматировать число с разделителями тысяч в виде пробелов"""
+    try:
+        value = float(value)
+        formatted_value = '{:,.0f}'.format(value).replace(',', ' ')
+        return formatted_value
+    except (ValueError, TypeError):
+        return value

@@ -2,6 +2,8 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import redirect, render
 from .forms import OrderForm
 from .models import Door, Review
+from .filters import DoorFilter
+from django.db.models import Min, Max
 
 
 def index(request):
@@ -21,9 +23,21 @@ def index(request):
 
 
 def catalog(request):
-    doors_list = Door.objects.all().order_by('id')
-    paginator = Paginator(doors_list, 20)
-
+    brands = [
+        'Эталон', 'Персона', 'Black', 'Bravo', 'Бункер', 'Сенатор', 'Эврика', 'Волкодав',
+        'Эврика,', 'Diva', 'Mastino', 'Ратибор', 'Дэко', 'Леванте', 'Оптим', 'Лекс',
+        'Арма', 'Баяр', 'Практик', 'Асд', 'Морра', 'Lummix', 'Str', 'Тефлон', 'Silver',
+        'Quartet', 'Престиж', 'Противопожарные', 'Labirint', 'Премиум', 'Ле-гран',
+        'Интекрон', 'Лира', 'Rex', 'Страж', 'Profildoors', 'Regidoors', 'Falko'
+    ]
+    door_filter = DoorFilter(
+        request.GET,
+        queryset=Door.objects.all().order_by('id')
+    )
+    filtered_doors = door_filter.qs
+    min_price = Door.objects.aggregate(Min('price'))['price__min']
+    max_price = Door.objects.aggregate(Max('price'))['price__max']
+    paginator = Paginator(filtered_doors, 20)
     page = request.GET.get('page')
     try:
         doors = paginator.page(page)
@@ -32,6 +46,14 @@ def catalog(request):
     except EmptyPage:
         doors = paginator.page(paginator.num_pages)
 
+    # Get selected brands from request.GET
+    selected_brands = request.GET.getlist('brand')
+
     return render(request, 'pages/catalog.html', {
         'doors': doors,
+        'filter': door_filter,
+        'min_price': min_price,
+        'max_price': max_price,
+        'selected_brands': selected_brands,
+        'brands': brands
     })

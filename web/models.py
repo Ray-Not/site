@@ -42,7 +42,7 @@ class Review(models.Model):
 class Door(models.Model):
     title = models.CharField(max_length=255)
     article = models.CharField(max_length=255)
-    price = models.CharField(max_length=255)
+    price = models.IntegerField()
     purpose = models.CharField(max_length=255)
     conturs_name = models.CharField(max_length=255)
     size_name = models.CharField(max_length=255)
