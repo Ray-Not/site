@@ -70,7 +70,7 @@ class Door(models.Model):
     images = models.TextField()
     discount = models.PositiveSmallIntegerField(null=True, default=0)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
-    tags = models.ManyToManyField(Tag, related_name='doors')
+    tags = models.ManyToManyField(Tag, related_name='doors', blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

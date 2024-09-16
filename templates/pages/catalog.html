@@ -1,6 +1,7 @@
 {% extends '../index.html' %}  <!-- Замените 'base.html' на ваш базовый шаблон -->
 {% load custom_filters %}
 {% block content %}
+{% load static %}
 
 <script>
   let currentSort = '';  // To track current sorted field
@@ -73,27 +74,52 @@
   }
 </script>
 
+<style>
+  .strikethrough-svg {
+      position: relative;
+      display: inline-block;
+      font-size: large;
+      color: #ff0000;
+  }
+  .strikethrough-svg svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+  }
+  .strikethrough-svg span {
+      position: relative;
+      z-index: 1;
+  }
+  @font-face {
+    font-family: 'gasalt'; 
+    src: url('{% static "fonts/Roadgeek 2005 series 5wr.ttf" %}') format('truetype');
+    font-weight: 400; /* Обычный вес */
+    font-style: normal; /* Обычный стиль (не курсив) */
+  }
+</style>
+
 <div class="row flex-lg-row flex-column">
+
   <div class="col-lg-4 col-12">
     Some
   </div>
+
   <div class="col-lg-8 col-12">
     <h2 class="text-center my-4">Входные двери от производителя</h2>
     <p class="text-center">Популярные категории:</p>
-  
     <div class="row d-flex flex-lg-row flex-column align-items-center mx-auto">
       <p class="my-4 col">Сортировать по:</p>
-      
       <!-- Сортировка по новизне -->
       <button class="btn btn-danger col h-50 mt-lg-0 mt-2" onclick="sortItems('novelty')">
         Новизне <span id="novelty-sort-symbol">⇅</span>
       </button>
-      
       <!-- Сортировка по цене -->
       <button class="btn btn-danger col h-50 mt-lg-0 mt-2 mx-2" onclick="sortItems('price')">
         Цене <span id="price-sort-symbol">⇅</span>
       </button>
-      
       <!-- Сортировка по заказам -->
       <button class="btn btn-danger col h-50 mt-lg-0 mt-2" onclick="sortItems('orders')">
         Заказам <span id="orders-sort-symbol">⇅</span>
@@ -102,9 +128,9 @@
   
     <div class="row" id="door-list">
       {% for door in doors %}
-      <div class="col-md-4 mb-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
-        <div class="card h-100" >
-          <div id="carousel{{ door.id }}" class="carousel slide" data-bs-ride="false">
+      <div class="col-md-4 mb-4" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+        <div class="card h-100">
+          <div id="carousel{{ door.id }}" class="carousel slide d-flex align-items-center p-2" data-bs-ride="false" style="height: 600px; overflow: hidden;">
             <div class="carousel-inner">
               {% with door.images|split_and_get_all as image_urls %}
                 {% for image_url in image_urls %}
@@ -128,12 +154,23 @@
           </div>
     
           <div class="card-body">
-            <h5 class="card-title">{{ door.title }}</h5>
-            <p class="card-text"><strong>Price:</strong> {{ door.price }}</p>
+            <p class="card-title fw-bold">{{ door.title }}</p>
             {% if door.discount %}
-            <p class="text-success">Discount: {{ door.discount }}%</p>
+            <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
+              <label class="card-text rounded">{{ door.price|calculate_discount:door.discount }} ₽</label>
+              <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
+                <span>{{ door.price }} ₽</span>
+                <svg viewBox="0 0 100 100">
+                  <line x1="-150" y1="0" x2="150" y2="80" stroke="#ff0000" stroke-width="4"/>
+                </svg>
+              </label>
+              <label class="card-text rounded bg-danger text-white p-1" style="font-size: x-small;">-{{ door.discount }}%</label>
+            </label>
+            {% else %}
+            <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price }} ₽</label>
             {% endif %}
-            <p class="card-text">{{ door.purpose }}</p>
+            <label class="card-text text-secondary mt-2">{{ door.in_cover_name }}</label>
+            <label class="card-text text-secondary mt-2">{{ door.size_name }}</;>
           </div>
         </div>
       </div>
