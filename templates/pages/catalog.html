@@ -147,12 +147,12 @@
         {% if doors.has_previous %}
           <li class="page-item">
             <a class="page-link" href="?page=1" aria-label="First">
-              <span aria-hidden="true">&laquo;&laquo;</span>
+              <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
           <li class="page-item">
             <a class="page-link" href="?page={{ doors.previous_page_number }}" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
+              <span aria-hidden="true">&lsaquo;</span>
             </a>
           </li>
         {% endif %}
@@ -200,12 +200,12 @@
         {% if doors.has_next %}
           <li class="page-item">
             <a class="page-link" href="?page={{ doors.next_page_number }}" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
+              <span aria-hidden="true">&rsaquo;</span>
             </a>
           </li>
           <li class="page-item">
             <a class="page-link" href="?page={{ doors.paginator.num_pages }}" aria-label="Last">
-              <span aria-hidden="true">&raquo;&raquo;</span>
+              <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
         {% endif %}
