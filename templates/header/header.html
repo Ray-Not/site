@@ -26,18 +26,24 @@
   <div class='d-flex border-bottom'>
     <!-- Мобильная версия -->
     <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4 mb-3">
-      <div class='col-2'>
-        <img class='img-fluid rounded' src="{% static 'images/icons/menu-50.png' %}" alt="Меню" id="menuButton"/>
-      </div>
       <div class='col-8 d-flex justify-content-center'>
         <a href="/">
           <img class='img-fluid' src="{% static 'images/logos/logo-paritet.png' %}" alt="Логотип"/>
         </a>
       </div>
-      <div class='col-2'>
+      <div class='col-4' style="font-size: x-small;">
         <a href="tel:+79296224835">
-          <img class='img-fluid rounded' src="{% static 'images/icons/phone-50.png' %}" alt="Телефон" />
+          <label class="text-dark">+7 (929) 622-48-35</label>
+          <div class="btn btn-outline-danger btn-sm mt-1" style="font-size: x-small; white-space: nowrap;">Обратный звонок</div>
+          <!-- <img class='img-fluid rounded' src="{% static 'images/icons/phone-50.png' %}" alt="Телефон" /> -->
         </a>
+      </div>
+      <div class="col-10 link-underline-opacity-0">
+        <a href="https://wa.me/79296224835" class="icon-link me-4" style="background-image: url('{% static 'images/icons/wapp-50.png' %}');"></a>
+        <a href="https://t.me/alex12_alex12" class="icon-link ms-4" style="background-image: url('{% static 'images/icons/tg-50.png' %}');"></a>
+      </div>
+      <div class='col-2'>
+        <img class='img-fluid rounded' src="{% static 'images/icons/menu-50.png' %}" alt="Меню" id="menuButton"/>
       </div>
     </div>
 
