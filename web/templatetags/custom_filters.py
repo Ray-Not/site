@@ -1,4 +1,5 @@
 from django import template
+from slugify import slugify
 
 register = template.Library()
 
@@ -31,3 +32,8 @@ def format_number(value):
         return formatted_value
     except (ValueError, TypeError):
         return value
+
+
+@register.filter
+def translit_slugify(value):
+    return slugify(value)

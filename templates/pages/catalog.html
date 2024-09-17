@@ -63,13 +63,25 @@
               <label>Бренды:</label>
               {% for brand in brands %}
                   <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="brand" value="{{ brand }}" id="brand_{{ brand|slugify }}" 
+                      <input class="form-check-input" type="checkbox" name="brand" value="{{ brand }}" id="brand_{{ brand|translit_slugify }}" 
                              {% if brand in selected_brands %}checked{% endif %}>
-                      <label class="form-check-label" for="brand_{{ brand|slugify }}">
+                      <label class="form-check-label" for="brand_{{ brand|translit_slugify }}">
                           {{ brand }}
                       </label>
                   </div>
               {% endfor %}
+              <!-- Фильтр по назначению -->
+    <div class="form-group">
+      <label>Назначение:</label>
+      {% for purpose in purposes %}
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="purpose" value="{{ purpose }}" id="purpose_{{ purpose|translit_slugify }}" 
+                 {% if purpose in selected_purposes %}checked{% endif %}>
+          <label class="form-check-label" for="purpose_{{ purpose|translit_slugify }}">
+            {{ purpose }}
+          </label>
+        </div>
+      {% endfor %}
           </div>
           <button class="btn btn-outline-danger" type="submit">Применить фильтры</button>
       </fieldset>
@@ -141,6 +153,7 @@
             {% endif %}
             <label class="card-text text-secondary mt-2">{{ door.in_cover_name }}</label>
             <label class="card-text text-secondary mt-2">{{ door.size_name }}</label>
+            <label class="card-text text-secondary mt-2">{{ door.purpose }}</label>
             <button class="btn btn-outline-danger w-100 mt-auto">Узнать подробнее</button>
           </div>
         </div>

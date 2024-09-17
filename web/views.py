@@ -30,6 +30,10 @@ def catalog(request):
         'Quartet', 'Престиж', 'Противопожарные', 'Labirint', 'Премиум', 'Ле-гран',
         'Интекрон', 'Лира', 'Rex', 'Страж', 'Profildoors', 'Regidoors', 'Falko'
     ]
+    purposes = [
+        'для служебных помещений', 'уличная (необходим козырек)', 'рекомендуется для квартиры, возможно использование в качестве уличной (необходим козырек и тамбур)',
+        'рекомендуется в качестве уличной (необходим козырек и тамбур) или для квартиры', 'противопожарная', 'только для квартиры (внутри подъезда)'
+    ]
     door_filter = DoorFilter(
         request.GET,
         queryset=Door.objects.all().order_by('id')
@@ -48,12 +52,14 @@ def catalog(request):
 
     # Get selected brands from request.GET
     selected_brands = request.GET.getlist('brand')
-
+    selected_purposes = request.GET.getlist('purpose')
     return render(request, 'pages/catalog.html', {
         'doors': doors,
         'filter': door_filter,
         'min_price': min_price,
         'max_price': max_price,
+        'brands': brands,
+        'purposes': purposes,
         'selected_brands': selected_brands,
-        'brands': brands
+        'selected_purposes': selected_purposes
     })
