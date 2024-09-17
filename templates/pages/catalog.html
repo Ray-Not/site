@@ -48,17 +48,20 @@
 
 
 <div class="row flex-lg-row flex-column">
-
   <div class="col-lg-4 col-12">
     <form method="get">
       <fieldset>
           <legend>Фильтры</legend>
+
+          <!-- Фильтры по ценам -->
           <div class="form-group">
               {{ filter.form.price_min.label_tag }} {{ filter.form.price_min }}
           </div>
           <div class="form-group">
               {{ filter.form.price_max.label_tag }} {{ filter.form.price_max }}
           </div>
+
+          <!-- Фильтры по брендам -->
           <div class="form-group">
               <label>Бренды:</label>
               {% for brand in brands %}
@@ -69,7 +72,6 @@
                           {{ brand }}
                       </label>
                   </div>
-                  
               {% endfor %}
               <!-- Фильтр по назначению -->
     <div class="form-group">
@@ -83,8 +85,36 @@
           </label>
         </div>
       {% endfor %}
-          </div>
-          <button class="btn btn-outline-danger" type="submit">Применить фильтры</button>
+        </div>
+
+        <!-- Фильтр по внешней отделке -->
+        <div class="form-group">
+          <label>Тип внешней отделки:</label>
+          {% for out_cover in out_covers %}
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="out_covers" value="{{ out_cover }}" id="out_cover_{{ out_cover|translit_slugify }}" 
+                         {% if out_cover in selected_out_covers %}checked{% endif %}>
+                  <label class="form-check-label" for="out_cover_{{ out_cover|translit_slugify }}">
+                      {{ out_cover }}
+                  </label>
+              </div>
+          {% endfor %}
+        </div>
+
+        <!-- Фильтр по внутренней отделке -->
+        <div class="form-group">
+          <label>Тип внутренней отделки:</label>
+          {% for in_cover in in_covers %}
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="in_covers" value="{{ in_cover }}" id="in_cover_{{ in_cover|translit_slugify }}" 
+                         {% if in_cover in selected_in_covers %}checked{% endif %}>
+                  <label class="form-check-label" for="in_cover_{{ in_cover|translit_slugify }}">
+                      {{ in_cover }}
+                  </label>
+              </div>
+          {% endfor %}
+        </div>
+        <button class="btn btn-outline-danger" type="submit">Применить фильтры</button>
       </fieldset>
   </form>
   
@@ -153,8 +183,8 @@
             <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
             {% endif %}
             <label class="card-text text-secondary mt-2">{{ door.in_cover_name }}</label>
+            <label class="card-text text-secondary mt-2">{{ door.out_cover_name }}</label>
             <label class="card-text text-secondary mt-2">{{ door.size_name }}</label>
-            <label class="card-text text-secondary mt-2">{{ door.purpose }}</label>
             <button class="btn btn-outline-danger w-100 mt-auto">Узнать подробнее</button>
           </div>
         </div>
