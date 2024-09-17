@@ -76,27 +76,27 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'main',
-        'USER': 'admin',
-        'PASSWORD': 'adminka',
-        'HOST': '212.67.13.248',  # Или IP-адрес сервера PostgreSQL
-        'PORT': '5432',       # Порт PostgreSQL по умолчанию
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'doors_order',
+#         'NAME': 'main',
 #         'USER': 'admin',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',  # Или IP-адрес сервера PostgreSQL
+#         'PASSWORD': 'adminka',
+#         'HOST': '212.67.13.248',  # Или IP-адрес сервера PostgreSQL
 #         'PORT': '5432',       # Порт PostgreSQL по умолчанию
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'doors_order',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',  # Или IP-адрес сервера PostgreSQL
+        'PORT': '5432',       # Порт PostgreSQL по умолчанию
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 

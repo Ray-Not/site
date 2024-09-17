@@ -1,0 +1,62 @@
+[
+{
+  "model": "web.tag",
+  "pk": 2,
+  "fields": {
+    "text_color": "dark",
+    "title": "Лето",
+    "color_hex": "#98FB98",
+    "in_cloud": false
+  }
+},
+{
+  "model": "web.tag",
+  "pk": 3,
+  "fields": {
+    "text_color": "dark",
+    "title": "Осень",
+    "color_hex": "#FFA500",
+    "in_cloud": false
+  }
+},
+{
+  "model": "web.tag",
+  "pk": 4,
+  "fields": {
+    "text_color": "dark",
+    "title": "Зима",
+    "color_hex": "#1E90FF",
+    "in_cloud": false
+  }
+},
+{
+  "model": "web.tag",
+  "pk": 5,
+  "fields": {
+    "text_color": "dark",
+    "title": "Весна",
+    "color_hex": "#808000",
+    "in_cloud": false
+  }
+},
+{
+  "model": "web.tag",
+  "pk": 6,
+  "fields": {
+    "text_color": "light",
+    "title": "Скидка",
+    "color_hex": "#FF0000",
+    "in_cloud": true
+  }
+},
+{
+  "model": "web.tag",
+  "pk": 7,
+  "fields": {
+    "text_color": "light",
+    "title": "Другой",
+    "color_hex": "#000000",
+    "in_cloud": true
+  }
+}
+]
