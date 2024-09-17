@@ -7,9 +7,12 @@ from slugify import slugify
 
 class Tag(models.Model):
     title = models.CharField(max_length=255)
-    color_hex = models.CharField(
+    color = models.CharField(
         max_length=7,
         help_text='Введите цвет в формате #RRGGBB'
+    )
+    in_cloud = models.BooleanField(
+        verbose_name='Добавление тэга в каталог категорий'
     )
 
     def __str__(self) -> str:

@@ -8,12 +8,12 @@ class DoorFilter(django_filters.FilterSet):
     price_min = django_filters.NumberFilter(
         field_name='price',
         lookup_expr='gte',
-        label='Минимальная цена'
+        label='От'
     )
     price_max = django_filters.NumberFilter(
         field_name='price',
         lookup_expr='lte',
-        label='Максимальная цена'
+        label='До'
     )
     brand = django_filters.CharFilter(
         method='filter_by_brand',
