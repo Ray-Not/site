@@ -62,10 +62,6 @@ $(document).ready(function() {
     flex-direction: column;
     justify-content: space-between; /* Располагает элементы так, чтобы кнопка была внизу */
   }
-
-  .btn {
-    margin-top: auto; /* Перемещает кнопку к низу карточки */
-  }
 </style>
 
 
@@ -191,7 +187,12 @@ $(document).ready(function() {
 
   <div class="col-lg-8 col-12">
     <h2 class="text-center my-4">Входные двери от производителя</h2>
-    <p class="text-center">Популярные категории:</p>
+    <label class="text-center">Популярные категории:</label>
+    <!-- <div class="tags-cloud"> -->
+      {% for tag in tags_cloud %}
+        <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill text-{{ tag.text_color }}" style="background-color: {{ tag.color_hex }};">{{ tag.title }}</a>
+      {% endfor %}
+    <!-- </div> -->
     <div class="d-flex flex-lg-row flex-column align-items-center">
       <p class="my-4 col text-center">Сортировать по:</p>
       <!-- Сортировка по новизне -->
@@ -213,11 +214,18 @@ $(document).ready(function() {
       <div class="col-lg-4 col-12 mt-lg-0 mt-4 mb-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
         <div class="card h-100">
           <div id="carousel{{ door.id }}" class="carousel slide d-flex align-items-center p-2" data-bs-ride="false" style="height: 600px; overflow: hidden;">
+            <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 10;">
+              {% for tag in door.tags.all %}
+                <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
+              {% endfor %}
+            </div>
             <div class="carousel-inner">
               {% with door.images|split_and_get_all as image_urls %}
                 {% for image_url in image_urls %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
                   <div class="image-container">
+              <div class="tags-container d-flex flex-column w-50">
+              </div>
                     <img src="{{ MEDIA_URL }}{{ image_url }}" class="d-block w-100" alt="{{ door.title }} - Image {{ forloop.counter }}">
                   </div>
                 </div>
@@ -251,9 +259,7 @@ $(document).ready(function() {
             {% else %}
             <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
             {% endif %}
-            <label class="card-text text-secondary mt-2">{{ door.in_cover_name }}</label>
-            <label class="card-text text-secondary mt-2">{{ door.out_cover_name }}</label>
-            <label class="card-text text-secondary mt-2">{{ door.size_name }}</label>
+            <label class="card-text text-secondary pb-3 mt-auto">{{ door.size_name }}</label>
             <button class="btn btn-outline-danger w-100 mt-auto">Узнать подробнее</button>
           </div>
         </div>

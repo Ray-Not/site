@@ -6,8 +6,19 @@ from slugify import slugify
 
 
 class Tag(models.Model):
-    title = models.CharField(max_length=255)
-    color = models.CharField(
+    TEXT_COLOR_CHOICES = [
+        ('dark', 'Dark'),
+        ('light', 'Light'),
+    ]
+
+    text_color = models.CharField(
+        max_length=10,
+        choices=TEXT_COLOR_CHOICES,
+        default='dark',
+        help_text='Выбор цвета текста'
+    )
+    title = models.CharField(max_length=255, unique=True)
+    color_hex = models.CharField(
         max_length=7,
         help_text='Введите цвет в формате #RRGGBB'
     )
