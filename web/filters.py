@@ -1,4 +1,6 @@
 import django_filters
+from django.db.models import Q
+
 from .models import Door
 
 
@@ -21,11 +23,11 @@ class DoorFilter(django_filters.FilterSet):
         method='filter_by_purpose',
         label='Назначение'
     )
-    in_cover_name = django_filters.CharFilter(
+    in_covers = django_filters.CharFilter(
         method='filter_by_in_cover',
         label='Тип отделки (внутри)'
     )
-    out_cover_name = django_filters.CharFilter(
+    out_covers = django_filters.CharFilter(
         method='filter_by_out_cover',
         label='Тип отделки (снаружи)'
     )
@@ -37,38 +39,38 @@ class DoorFilter(django_filters.FilterSet):
             'price_max',
             'brand',
             'purpose',
-            'in_cover_name',
-            'out_cover_name',
+            'in_covers',
+            'out_covers',
         ]
 
     def filter_by_brand(self, queryset, name, value):
+        print(name, value)
         brands = value.split(',')
+        query = Q()
         for brand in brands:
-            queryset = queryset.filter(title__icontains=brand.strip())
-        return queryset
+            query |= Q(title__icontains=brand.strip())
+        return queryset.filter(query)
 
     def filter_by_purpose(self, queryset, name, value):
+        print(name, value)
         purposes = value.split(',')
+        query = Q()
         for purpose in purposes:
-            queryset = queryset.filter(purpose__icontains=purpose.strip())
-        return queryset
+            query |= Q(purpose__icontains=purpose.strip())
+        return queryset.filter(query)
 
     def filter_by_in_cover(self, queryset, name, value):
+        print(name, value)
         in_covers = value.split(',')
-        print(in_covers)
+        query = Q()
         for in_cover in in_covers:
-            queryset = queryset.filter(
-                in_cover_name__icontains=in_cover.strip()
-            )
-            print(queryset)
-        return queryset
+            query |= Q(in_cover_name__icontains=in_cover.strip())
+        return queryset.filter(query)
 
     def filter_by_out_cover(self, queryset, name, value):
+        print(name, value)
         out_covers = value.split(',')
-        print(out_covers)
+        query = Q()
         for out_cover in out_covers:
-            queryset = queryset.filter(
-                out_cover_name__icontains=out_cover.strip()
-            )
-            print(queryset)
-        return queryset
+            query |= Q(out_cover_name__icontains=out_cover.strip())
+        return queryset.filter(query)

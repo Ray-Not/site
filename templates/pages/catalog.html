@@ -49,76 +49,128 @@
 
 <div class="row flex-lg-row flex-column">
   <div class="col-lg-4 col-12">
-    <form method="get">
+    <form method="get" id="filter-form">
       <fieldset>
-          <legend>Фильтры</legend>
-
-          <!-- Фильтры по ценам -->
-          <div class="form-group">
-              {{ filter.form.price_min.label_tag }} {{ filter.form.price_min }}
-          </div>
-          <div class="form-group">
-              {{ filter.form.price_max.label_tag }} {{ filter.form.price_max }}
-          </div>
-
-          <!-- Фильтры по брендам -->
-          <div class="form-group">
-              <label>Бренды:</label>
-              {% for brand in brands %}
-                  <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="brand" value="{{ brand }}" id="brand_{{ brand|translit_slugify }}" 
-                             {% if brand in selected_brands %}checked{% endif %}>
-                      <label class="form-check-label" for="brand_{{ brand|translit_slugify }}">
-                          {{ brand }}
-                      </label>
-                  </div>
-              {% endfor %}
-              <!-- Фильтр по назначению -->
-    <div class="form-group">
-      <label>Назначение:</label>
-      {% for purpose in purposes %}
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="purpose" value="{{ purpose }}" id="purpose_{{ purpose|translit_slugify }}" 
-                 {% if purpose in selected_purposes %}checked{% endif %}>
-          <label class="form-check-label" for="purpose_{{ purpose|translit_slugify }}">
-            {{ purpose }}
-          </label>
-        </div>
-      {% endfor %}
-        </div>
-
-        <!-- Фильтр по внешней отделке -->
-        <div class="form-group">
-          <label>Тип внешней отделки:</label>
-          {% for out_cover in out_covers %}
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="out_covers" value="{{ out_cover }}" id="out_cover_{{ out_cover|translit_slugify }}" 
-                         {% if out_cover in selected_out_covers %}checked{% endif %}>
-                  <label class="form-check-label" for="out_cover_{{ out_cover|translit_slugify }}">
-                      {{ out_cover }}
-                  </label>
-              </div>
-          {% endfor %}
-        </div>
-
-        <!-- Фильтр по внутренней отделке -->
-        <div class="form-group">
-          <label>Тип внутренней отделки:</label>
-          {% for in_cover in in_covers %}
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="in_covers" value="{{ in_cover }}" id="in_cover_{{ in_cover|translit_slugify }}" 
-                         {% if in_cover in selected_in_covers %}checked{% endif %}>
-                  <label class="form-check-label" for="in_cover_{{ in_cover|translit_slugify }}">
-                      {{ in_cover }}
-                  </label>
-              </div>
-          {% endfor %}
-        </div>
-        <button class="btn btn-outline-danger" type="submit">Применить фильтры</button>
-      </fieldset>
-  </form>
+        <legend>Фильтры</legend>
   
+        <!-- Фильтры по цене -->
+        <div class="mb-3">
+          <button class="btn btn-danger w-100" type="button" data-bs-toggle="collapse" data-bs-target="#priceFilters" aria-expanded="false" aria-controls="priceFilters">
+            Фильтры по цене
+          </button>
+          <div class="collapse" id="priceFilters">
+            <div class="card card-body">
+              <div class="form-group">
+                {{ filter.form.price_min.label_tag }} {{ filter.form.price_min }}
+              </div>
+              <div class="form-group">
+                {{ filter.form.price_max.label_tag }} {{ filter.form.price_max }}
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Фильтры по брендам -->
+        <div class="mb-3">
+          <button class="btn btn-danger w-100" type="button" data-bs-toggle="collapse" data-bs-target="#brandFilters" aria-expanded="false" aria-controls="brandFilters">
+            Фильтры по брендам
+          </button>
+          <div class="collapse" id="brandFilters">
+            <div class="card card-body">
+              <div class="form-group">
+                <label>{{ filter.form.brand.label_tag }}</label>
+                {% for brand in brands %}
+                  <div class="form-check">
+                    <input class="form-check-input brand-checkbox" type="checkbox" value="{{ brand }}" id="brand_{{ brand|translit_slugify }}" {% if brand in selected_brands %}checked{% endif %}>
+                    <label class="form-check-label" for="brand_{{ brand|translit_slugify }}">
+                      {{ brand }}
+                    </label>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Фильтр по внешней отделке (out_covers) -->
+        <div class="mb-3">
+          <button class="btn btn-danger w-100" type="button" data-bs-toggle="collapse" data-bs-target="#outCoverFilters" aria-expanded="false" aria-controls="outCoverFilters">
+            Фильтры по внешней отделке
+          </button>
+          <div class="collapse" id="outCoverFilters">
+            <div class="card card-body">
+              <div class="form-group">
+                <label>{{ filter.form.out_covers.label_tag }}</label>
+                {% for out_cover in out_covers %}
+                  <div class="form-check">
+                    <input class="form-check-input out-cover-checkbox" type="checkbox" value="{{ out_cover }}" id="out_cover_{{ out_cover|translit_slugify }}" {% if out_cover in selected_out_covers %}checked{% endif %}>
+                    <label class="form-check-label" for="out_cover_{{ out_cover|translit_slugify }}">
+                      {{ out_cover }}
+                    </label>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Фильтр по внутренней отделке (in_covers) -->
+        <div class="mb-3">
+          <button class="btn btn-danger w-100" type="button" data-bs-toggle="collapse" data-bs-target="#inCoverFilters" aria-expanded="false" aria-controls="inCoverFilters">
+            Фильтры по внутренней отделке
+          </button>
+          <div class="collapse" id="inCoverFilters">
+            <div class="card card-body">
+              <div class="form-group">
+                <label>{{ filter.form.in_covers.label_tag }}</label>
+                {% for in_cover in in_covers %}
+                  <div class="form-check">
+                    <input class="form-check-input in-cover-checkbox" type="checkbox" value="{{ in_cover }}" id="in_cover_{{ in_cover|translit_slugify }}" {% if in_cover in selected_in_covers %}checked{% endif %}>
+                    <label class="form-check-label" for="in_cover_{{ in_cover|translit_slugify }}">
+                      {{ in_cover }}
+                    </label>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Фильтр по назначению (purpose) -->
+        <div class="mb-3">
+          <button class="btn btn-danger w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purposeFilters" aria-expanded="false" aria-controls="purposeFilters">
+            Фильтры по назначению
+          </button>
+          <div class="collapse" id="purposeFilters">
+            <div class="card card-body">
+              <div class="form-group">
+                <label>{{ filter.form.purpose.label_tag }}</label>
+                {% for purpose in purposes %}
+                  <div class="form-check">
+                    <input class="form-check-input purpose-checkbox" type="checkbox" value="{{ purpose }}" id="purpose_{{ purpose|translit_slugify }}" {% if purpose in selected_purposes %}checked{% endif %}>
+                    <label class="form-check-label" for="purpose_{{ purpose|translit_slugify }}">
+                      {{ purpose }}
+                    </label>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Скрытые поля для объединённых значений -->
+        <input type="hidden" name="brand" id="brand-field">
+        <input type="hidden" name="purpose" id="purpose-field">
+        <input type="hidden" name="out_covers" id="out-cover-field">
+        <input type="hidden" name="in_covers" id="in-cover-field">
+  
+        <!-- Кнопки для применения и сброса фильтров -->
+        <button class="btn btn-outline-danger" type="submit">Применить фильтры</button>
+        <button class="btn btn-outline-danger" type="button" id="reset-filters">Сбросить фильтры</button>
+      </fieldset>
+    </form>
   </div>
+  
 
   <div class="col-lg-8 col-12">
     <h2 class="text-center my-4">Входные двери от производителя</h2>
@@ -170,7 +222,7 @@
             <p class="card-title fw-bold">{{ door.title }}</p>
             {% if door.discount %}
             <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
-              <label class="card-text rounded">{{ door.price|calculate_discount:door.discount }} ₽</label>
+              <label class="card-text rounded" style="color: #ff0000;">{{ door.price|calculate_discount:door.discount }} ₽</label>
               <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
                 <span>{{ door.price|format_number }} ₽</span>
                 <svg viewBox="0 0 100 100">
@@ -335,5 +387,36 @@
     novelty: door.dataset.novelty
 })));
   }
+</script>
+<script>
+  document.getElementById('reset-filters').addEventListener('click', function() {
+    var form = document.getElementById('filter-form');
+    form.reset();
+    window.location.href = window.location.pathname;
+  });
+</script>
+<script>
+  // Объединение значений чекбоксов в строку перед отправкой формы
+  document.getElementById('filter-form').addEventListener('submit', function(event) {
+    // Бренды
+    const checkedBrands = document.querySelectorAll('.brand-checkbox:checked');
+    const selectedBrands = Array.from(checkedBrands).map(cb => cb.value).join(',');
+    document.getElementById('brand-field').value = selectedBrands;
+
+    // Внешняя отделка (out_covers)
+    const checkedOutCovers = document.querySelectorAll('.out-cover-checkbox:checked');
+    const selectedOutCovers = Array.from(checkedOutCovers).map(cb => cb.value).join(',');
+    document.getElementById('out-cover-field').value = selectedOutCovers;
+
+    // Внутренняя отделка (in_covers)
+    const checkedInCovers = document.querySelectorAll('.in-cover-checkbox:checked');
+    const selectedInCovers = Array.from(checkedInCovers).map(cb => cb.value).join(',');
+    document.getElementById('in-cover-field').value = selectedInCovers;
+
+    // Назначение
+    const checkedPurposes = document.querySelectorAll('.purpose-checkbox:checked');
+    const selectedPurposes = Array.from(checkedPurposes).map(cb => cb.value).join(',');
+    document.getElementById('purpose-field').value = selectedPurposes;
+  });
 </script>
 {% endblock %}
