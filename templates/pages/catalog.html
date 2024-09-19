@@ -216,7 +216,7 @@ $(document).ready(function() {
       <div class="col-lg-4 col-12 mt-lg-0 mt-4 mb-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
         <div class="card h-100">
           <div id="carousel{{ door.id }}" class="carousel slide d-flex align-items-center p-2" data-bs-ride="false" style="height: 600px; overflow: hidden;">
-            <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 10;">
+            <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
               {% for tag in door.tags.all %}
                 <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
               {% endfor %}

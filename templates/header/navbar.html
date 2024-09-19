@@ -10,121 +10,82 @@
     font-weight: 400; /* Обычный вес */
     font-style: normal; /* Обычный стиль (не курсив) */
   }
-/* Общие стили для выпадающего меню */
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: .25rem;
-}
-
-/* Показываем меню при наведении на родительский элемент */
-.nav-item:hover .dropdown-menu {
-  display: block;
-}
-
-/* Стили для подменю */
-.dropdown-submenu {
-  position: relative;
-}
-
-.dropdown-submenu .dropdown-menu {
-  display: none; /* Скрыть подменю по умолчанию */
-  top: 0;
-  left: 100%;
-  margin-top: -1px;
-}
-
-.dropdown-submenu:hover .dropdown-menu {
-  display: block; /* Показывать подменю при наведении */
-}
-
-
 </style>
 
-<ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda; font-size: larger;">
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/installation/' %}active{% endif %}" href="/installation/">Установка</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/delivery/' %}active{% endif %}" href="/delivery/">Доставка</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/useful/' %}active{% endif %}" href="/useful/">Полезное</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/news/' %}active{% endif %}" href="/news/">Новости</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/reviews/' %}active{% endif %}" href="/reviews/">Отзывы</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
-  </li>
-</ul>
-<ul class="nav nav-underline d-lg-none flex-column dropdown-menu container text-center" id="dropdownMenu">
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/installation/' %}active{% endif %}" href="/installation/">Установка</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/delivery/' %}active{% endif %}" href="/delivery/">Доставка</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/useful/' %}active{% endif %}" href="/useful/">Полезное</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/news/' %}active{% endif %}" href="/news/">Новости</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/reviews/' %}active{% endif %}" href="/reviews/">Отзывы</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link link-dark {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
-  </li>
-</ul>
-<ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda; font-size: larger;">
-  <!-- Другие элементы меню -->
-  <li class="nav-item dropdown">
-    <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="#" id="catalogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Каталог</a>
-    <ul class="dropdown-menu" aria-labelledby="catalogDropdown">
-      {% for chapter in chapters_with_titles %}
-        <li class="dropdown-submenu">
-          <a class="dropdown-item" href="#">{{ chapter.chapter }}</a>
-          <ul class="dropdown-menu">
-            {% for catalog in catalogs_btn %}
-              {% if catalog.chapter == chapter.chapter %}
-                <li><a class="dropdown-item" href="{% url 'catalog_with_slug' catalog.slug %}">{{ catalog.title }}</a></li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </li>
-      {% endfor %}
-    </ul>
-  </li>
-  <!-- Другие элементы меню -->
-</ul>
-<script>
-  // Если требуется JavaScript для улучшения взаимодействия
-document.addEventListener('DOMContentLoaded', function () {
-  const dropdowns = document.querySelectorAll('.dropdown-submenu');
-  dropdowns.forEach(function (dropdown) {
-    dropdown.addEventListener('mouseover', function () {
-      this.querySelector('.dropdown-menu').style.display = 'block';
-    });
-    dropdown.addEventListener('mouseout', function () {
-      this.querySelector('.dropdown-menu').style.display = 'none';
-    });
-  });
-});
+<style>
+  .nav {
+    position: relative;
+  }
 
-</script>
+  .categories-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%; /* Появляется ниже кнопки */
+    left: 0; /* Привязываем к левому краю экрана */
+    right: 0; /* Используем всю ширину экрана */
+    z-index: 5;
+    padding: 15px;
+    width: 100%; /* Устанавливаем ширину в 100% экрана */
+    max-width: 100vw; /* Ограничиваем максимальную ширину экрана */
+  }
+
+  .nav-item:hover + .categories-dropdown,
+  .categories-dropdown:hover {
+    display: block;
+  }
+
+</style>
+<ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda; font-size: larger;">
+  <li class="nav-item dropdown">
+    <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог</a>
+  </li>
+  <div class="categories-dropdown w-100 bg-light">
+    <div class="row rounded shadow p-3">
+      <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Все двери</a>
+      {% for chapter in chapters_with_titles %}
+      <div class="col-3" style="font-family: tilda">
+          <label class="mt-2">{{ chapter.chapter }}</label>
+          <ul class="list-unstyled">
+              {% for catalog in catalogs %}
+              {% if catalog.chapter == chapter.chapter %}
+              <li style="font-size: medium;">{{ catalog.title }}</li>
+              {% endif %}
+              {% endfor %}
+          </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/installation/' %}active{% endif %}" href="/installation/">Установка</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/delivery/' %}active{% endif %}" href="/delivery/">Доставка</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/useful/' %}active{% endif %}" href="/useful/">Полезное</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/news/' %}active{% endif %}" href="/news/">Новости</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/reviews/' %}active{% endif %}" href="/reviews/">Отзывы</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
+  </li>
+  </ul>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropdown = document.querySelector('.nav-item.dropdown');
+      var categoriesDropdown = dropdown.querySelector('.categories-dropdown');
+  
+      dropdown.addEventListener('mouseenter', function() {
+        categoriesDropdown.style.display = 'block';
+      });
+  
+      dropdown.addEventListener('mouseleave', function() {
+        categoriesDropdown.style.display = 'none';
+      });
+    });
+  </script>
