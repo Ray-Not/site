@@ -6,7 +6,7 @@ def catalog_context(request):
     chapters_with_titles = Catalog.objects.values(
         'chapter'
     ).annotate(
-        count=Count('title'),
+        door_count=Count('catalogs'),
     ).order_by('chapter')
 
     catalogs = Catalog.objects.all().order_by('chapter', 'title')
