@@ -37,7 +37,7 @@
 </style>
 <ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda; font-size: larger;">
   <li class="nav-item dropdown">
-    <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог</a>
+    <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог <i class="bi bi-chevron-down"></i></a>
   </li>
   <div class="categories-dropdown w-100 bg-light">
     <div class="row rounded shadow p-3">
@@ -48,7 +48,9 @@
           <ul class="list-unstyled">
               {% for catalog in catalogs %}
               {% if catalog.chapter == chapter.chapter %}
-              <li style="font-size: medium;">{{ catalog.title }}</li>
+              <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="{% url 'catalog_with_slug' catalog.slug %}">
+                <li style="font-size: medium;">{{ catalog.title }}</li>
+              </a>
               {% endif %}
               {% endfor %}
           </ul>
