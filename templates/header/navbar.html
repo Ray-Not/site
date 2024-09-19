@@ -59,9 +59,9 @@
           <ul class="list-unstyled categories-item">
               {% for catalog in catalogs %}
               {% if catalog.chapter == chapter.chapter %}
-              <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="{% url 'catalog_with_slug' catalog.slug %}">
+              <!-- <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="{% url 'catalog_with_slug' catalog.slug %}"> -->
                 <li style="font-size: medium;">{{ catalog.title }}</li>
-              </a>
+              <!-- </a> -->
               {% endif %}
               {% endfor %}
           </ul>
