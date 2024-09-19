@@ -120,7 +120,7 @@ def catalog(request, slug=None):
 
     # Передача данных в шаблон
     return render(request, 'pages/catalog.html', {
-        # 'doors': doors,
+        'doors': doors,
         'filter': door_filter,
         'min_price': min_price,
         'max_price': max_price,
