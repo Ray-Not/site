@@ -10,8 +10,42 @@
     font-weight: 400; /* Обычный вес */
     font-style: normal; /* Обычный стиль (не курсив) */
   }
+/* Общие стили для выпадающего меню */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+}
+
+/* Показываем меню при наведении на родительский элемент */
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+/* Стили для подменю */
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  display: none; /* Скрыть подменю по умолчанию */
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
+.dropdown-submenu:hover .dropdown-menu {
+  display: block; /* Показывать подменю при наведении */
+}
+
 
 </style>
+
 <ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda; font-size: larger;">
   <li class="nav-item">
     <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог</a>
@@ -58,3 +92,39 @@
     <a class="nav-link link-dark {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
   </li>
 </ul>
+<ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda; font-size: larger;">
+  <!-- Другие элементы меню -->
+  <li class="nav-item dropdown">
+    <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="#" id="catalogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Каталог</a>
+    <ul class="dropdown-menu" aria-labelledby="catalogDropdown">
+      {% for chapter in chapters_with_titles %}
+        <li class="dropdown-submenu">
+          <a class="dropdown-item" href="#">{{ chapter.chapter }}</a>
+          <ul class="dropdown-menu">
+            {% for catalog in catalogs_btn %}
+              {% if catalog.chapter == chapter.chapter %}
+                <li><a class="dropdown-item" href="{% url 'catalog_with_slug' catalog.slug %}">{{ catalog.title }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </li>
+  <!-- Другие элементы меню -->
+</ul>
+<script>
+  // Если требуется JavaScript для улучшения взаимодействия
+document.addEventListener('DOMContentLoaded', function () {
+  const dropdowns = document.querySelectorAll('.dropdown-submenu');
+  dropdowns.forEach(function (dropdown) {
+    dropdown.addEventListener('mouseover', function () {
+      this.querySelector('.dropdown-menu').style.display = 'block';
+    });
+    dropdown.addEventListener('mouseout', function () {
+      this.querySelector('.dropdown-menu').style.display = 'none';
+    });
+  });
+});
+
+</script>

@@ -1,10 +1,10 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Max, Min
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 
 from .filters import DoorFilter
 from .forms import OrderForm
-from .models import Door, Review, Tag
+from .models import Door, Review, Tag, Catalog
 
 
 def index(request):
@@ -16,27 +16,34 @@ def index(request):
     else:
         form = OrderForm()
     reviews = Review.objects.all().order_by('-id')[:6]
+
     return render(request, 'index.html', {
         'form': form,
         'reviews': reviews,
-        'range': range(1, 11)
+        'range': range(1, 11),
     })
 
 
-def catalog(request):
-    # Определение фильтров
+def catalog(request, slug=None):
     brands = [
-        'Эталон', 'Персона', 'Black', 'Bravo', 'Бункер', 'Сенатор', 'Эврика', 
-        'Волкодав', 'Diva', 'Mastino', 'Ратибор', 'Дэко', 'Леванте', 'Оптим', 
-        'Лекс', 'Арма', 'Баяр', 'Практик', 'Асд', 'Морра', 'Lummix', 'Str', 
-        'Тефлон', 'Silver', 'Quartet', 'Престиж', 'Противопожарные', 'Labirint', 
-        'Премиум', 'Ле-гран', 'Интекрон', 'Лира', 'Rex', 'Страж', 'Profildoors', 
+        'Эталон', 'Персона', 'Black', 'Bravo',
+        'Бункер', 'Сенатор', 'Эврика',
+        'Волкодав', 'Diva', 'Mastino',
+        'Ратибор', 'Дэко', 'Леванте', 'Оптим',
+        'Лекс', 'Арма', 'Баяр', 'Практик',
+        'Асд', 'Морра', 'Lummix', 'Str',
+        'Тефлон', 'Silver', 'Quartet',
+        'Престиж', 'Противопожарные', 'Labirint',
+        'Премиум', 'Ле-гран', 'Интекрон',
+        'Лира', 'Rex', 'Страж', 'Profildoors',
         'Regidoors', 'Falko'
     ]
     purposes = [
         'для служебных помещений', 'уличная (необходим козырек)',
-        'рекомендуется для квартиры, возможно использование в качестве уличной (необходим козырек и тамбур)',
-        'рекомендуется в качестве уличной (необходим козырек и тамбур) или для квартиры',
+        'рекомендуется для квартиры, возможно использование в \
+качестве уличной (необходим козырек и тамбур)',
+        'рекомендуется в качестве уличной (необходим козырек и тамбур) \
+или для квартиры',
         'противопожарная', 'только для квартиры (внутри подъезда)'
     ]
     in_covers = [
@@ -45,8 +52,8 @@ def catalog(request):
         'Панель Profildoors U (УФ-лак)',
     ]
     out_covers = [
-        'МДФ панель', 'Влагостойкая CPL панель', 'Влаго-термостойкая панель', 
-        'Панель из массива', 'Металл с декоративными элементами', 
+        'МДФ панель', 'Влагостойкая CPL панель', 'Влаго-термостойкая панель',
+        'Панель из массива', 'Металл с декоративными элементами',
         'Влагостойкая шпонированная панель Waterproof Veneer', 'Металл',
         'Влагостойкая ARTWOOD PANEL'
     ]
@@ -58,10 +65,18 @@ def catalog(request):
     else:
         tags_url = Tag.objects.none()  # Пустой QuerySet, если нет тегов
 
+    # В случае передачи слага
+    doors_queryset = Door.objects.all().order_by('id')
+    catalogs = Catalog.objects.all()
+    if slug:
+        catalog = get_object_or_404(Catalog, slug=slug)
+        doors_queryset = doors_queryset.filter(catalogs__in=[catalog])
+        print(doors_queryset)
+
     # Фильтрация дверей
     door_filter = DoorFilter(
         request.GET,
-        queryset=Door.objects.all().order_by('id')
+        queryset=doors_queryset
     )
     filtered_doors = door_filter.qs
 
@@ -83,10 +98,25 @@ def catalog(request):
     max_price = Door.objects.aggregate(Max('price'))['price__max']
 
     # Получение выбранных фильтров
-    selected_brands = request.GET.get('brand', '').split(',') if request.GET.get('brand') else []
-    selected_purposes = request.GET.get('purpose', '').split(',') if request.GET.get('purpose') else []
-    selected_out_covers = request.GET.get('out_covers', '').split(',') if request.GET.get('out_covers') else []
-    selected_in_covers = request.GET.get('in_covers', '').split(',') if request.GET.get('in_covers') else []
+    selected_brands = (
+        request.GET.get('brand', '').split(',')
+        if request.GET.get('brand') else []
+    )
+
+    selected_purposes = (
+        request.GET.get('purpose', '').split(',')
+        if request.GET.get('purpose') else []
+    )
+
+    selected_out_covers = (
+        request.GET.get('out_covers', '').split(',')
+        if request.GET.get('out_covers') else []
+    )
+
+    selected_in_covers = (
+        request.GET.get('in_covers', '').split(',')
+        if request.GET.get('in_covers') else []
+    )
 
     # Передача данных в шаблон
     return render(request, 'pages/catalog.html', {
@@ -103,4 +133,6 @@ def catalog(request):
         'selected_out_covers': selected_out_covers,
         'selected_in_covers': selected_in_covers,
         'tags_cloud': Tag.objects.filter(in_cloud=True),
+        'catalog': catalog if slug else None,
+        'catalogs': catalogs,
     })

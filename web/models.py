@@ -5,6 +5,15 @@ from django.forms import ValidationError
 from slugify import slugify
 
 
+class Catalog(models.Model):
+    title = models.CharField(max_length=255)
+    chapter = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
+
+    def __str__(self) -> str:
+        return f"{self.title} из '{self.chapter}'"
+
+
 class Tag(models.Model):
     TEXT_COLOR_CHOICES = [
         ('dark', 'Dark'),
@@ -23,7 +32,7 @@ class Tag(models.Model):
         help_text='Введите цвет в формате #RRGGBB'
     )
     in_cloud = models.BooleanField(
-        verbose_name='Добавление тэга в каталог категорий'
+        verbose_name='Добавление тэга в облако тэгов (каталог)'
     )
 
     def __str__(self) -> str:
@@ -85,6 +94,11 @@ class Door(models.Model):
     discount = models.PositiveSmallIntegerField(null=True, default=0)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     tags = models.ManyToManyField(Tag, related_name='doors', blank=True)
+    catalogs = models.ManyToManyField(
+        Catalog,
+        related_name='catalogs',
+        blank=True
+    )
 
     def save(self, *args, **kwargs):
         if not self.slug:
