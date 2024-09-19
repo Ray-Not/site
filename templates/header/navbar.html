@@ -88,17 +88,3 @@
     <a class="nav-link link-dark {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
   </li>
   </ul>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var dropdown = document.querySelector('.nav-item.dropdown');
-      var categoriesDropdown = dropdown.querySelector('.categories-dropdown');
-  
-      dropdown.addEventListener('mouseenter', function() {
-        categoriesDropdown.style.display = 'block';
-      });
-  
-      dropdown.addEventListener('mouseleave', function() {
-        categoriesDropdown.style.display = 'none';
-      });
-    });
-  </script>
