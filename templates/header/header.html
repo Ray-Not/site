@@ -29,10 +29,11 @@
         <i class="bi bi-list" id="menuButton" style="font-size: xx-large;"></i>
         <!-- Navbar mobile -->
         <nav id="menu" class="d-none bg-light justify-content-center flex-column text-center w-50 border shadow" style="position: absolute; z-index: 10; right: 10%;">
-          <a class="nav-link link-dark p-2 {% if request.path == '/catalog/' %}active{% endif %}" href="#" id="catalogButton">Каталог</a>
+          <a class="nav-link link-dark p-2 {% if request.path == '/catalog/' %}active{% endif %}" id="catalogButton">Каталог</a>
+          <a class="nav-link mt-2 link-dark chapter-section d-none" href="/catalog/">Все двери</a>
           {% for chapter, catalogs in chapters_with_titles.items %}
           <div class="text-center chapter-section d-none" style="font-family: tilda-medium; position: relative;">
-            <label class="mt-3 border-bottom">{{ chapter }}</label>
+            <label class="mt-2 border-bottom">{{ chapter }}</label>
             <ul class="list-unstyled categories-item">
               {% for catalog in catalogs %}
                 <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'catalog_with_slug' catalog.slug %}">
