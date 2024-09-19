@@ -1,4 +1,5 @@
 {% load static %}
+
 <style>
   li :hover {
     background-color: var(--navbar-hover);
@@ -46,6 +47,7 @@
 }
 
 </style>
+
 <ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda-medium; font-size: larger;">
   <li class="nav-item dropdown">
     <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог <i class="bi bi-chevron-down"></i></a>
@@ -88,4 +90,4 @@
   <li class="nav-item">
     <a class="nav-link link-dark {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
   </li>
-  </ul>
+</ul>
