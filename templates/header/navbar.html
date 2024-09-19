@@ -5,9 +5,15 @@
   }
 
   @font-face {
-    font-family: 'tilda'; 
+    font-family: 'tilda-medium'; 
     src: url('{% static "fonts/TildaSans-Regular.ttf" %}') format('truetype');
     font-weight: 400; /* Обычный вес */
+    font-style: normal; /* Обычный стиль (не курсив) */
+  }
+  @font-face {
+    font-family: 'tilda-bold'; 
+    src: url('{% static "fonts/TildaSans-Bold.ttf" %}') format('truetype');
+    font-weight: 600; /* Обычный вес */
     font-style: normal; /* Обычный стиль (не курсив) */
   }
 </style>
@@ -34,8 +40,13 @@
     display: block;
   }
 
+  .categories-item :hover {
+    background-color: #FFF0F5;
+    margin-left: 3px;
+  }
+
 </style>
-<ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda; font-size: larger;">
+<ul class="nav nav-underline d-flex justify-content-center border-bottom d-none d-lg-flex" style="font-family: tilda-medium; font-size: larger;">
   <li class="nav-item dropdown">
     <a class="nav-link link-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Каталог <i class="bi bi-chevron-down"></i></a>
   </li>
@@ -43,9 +54,9 @@
     <div class="row rounded shadow p-3">
       <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Все двери</a>
       {% for chapter in chapters_with_titles %}
-      <div class="col-3" style="font-family: tilda">
+      <div class="col-3" style="font-family: tilda-medium">
           <label class="mt-2">{{ chapter.chapter }}</label>
-          <ul class="list-unstyled">
+          <ul class="list-unstyled categories-item">
               {% for catalog in catalogs %}
               {% if catalog.chapter == chapter.chapter %}
               <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="{% url 'catalog_with_slug' catalog.slug %}">
