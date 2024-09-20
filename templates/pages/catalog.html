@@ -44,12 +44,6 @@ $(document).ready(function() {
       position: relative;
       z-index: 1;
   }
-  @font-face {
-    font-family: 'gasalt'; 
-    src: url('{% static "fonts/Roadgeek 2005 series 5wr.ttf" %}') format('truetype');
-    font-weight: 400; /* Обычный вес */
-    font-style: normal; /* Обычный стиль (не курсив) */
-  }
   .card {
     display: flex;
     flex-direction: column;
@@ -70,7 +64,6 @@ $(document).ready(function() {
     <form method="get" id="filter-form">
       <fieldset>
         <legend>Фильтры</legend>
-  
         <!-- Фильтры по цене -->
         <div class="mb-3">
           <button class="btn btn-danger w-100" type="button" data-bs-toggle="collapse" data-bs-target="#priceFilters" aria-expanded="false" aria-controls="priceFilters">

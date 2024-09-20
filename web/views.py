@@ -24,6 +24,11 @@ def index(request):
     })
 
 
+def installation(request):
+
+    return render(request, 'pages/installation.html')
+
+
 def catalog(request, slug=None):
     brands = [
         'Эталон', 'Персона', 'Black', 'Bravo',
