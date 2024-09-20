@@ -13,7 +13,7 @@ class OrderForm(forms.ModelForm):
             ),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
-            'address': forms.Textarea(
+            'address': forms.TextInput(
                 attrs={'class': 'form-control', 'rows': 3}
             ),
             'message': forms.Textarea(

@@ -121,7 +121,7 @@ class Order(models.Model):
     name = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
     call_time = models.DateTimeField()
-    address = models.TextField()
+    address = models.CharField(max_length=512)
     message = models.TextField()
     order_number = models.CharField(
         max_length=255,

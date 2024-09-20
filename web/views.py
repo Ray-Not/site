@@ -26,7 +26,24 @@ def index(request):
 
 def installation(request):
 
-    return render(request, 'pages/installation.html')
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('installation')
+    else:
+        form = OrderForm()
+    return render(request, 'pages/installation.html', {
+        'form': form,
+    })
+
+
+def garant(request):
+    return render(request, 'pages/garant.html')
+
+
+def delivery(request):
+    return render(request, 'pages/delivery.html')
 
 
 def catalog(request, slug=None):

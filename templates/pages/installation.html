@@ -1,17 +1,57 @@
 {% extends '../index.html' %}
 {% block content %}
+<h2 class="my-3 text-center">Установка входных дверей</h2>
 <label class="mt-2" style="font-family: tilda-medium;">
-    <h3 class="my-3">Установка входных дверей</h3>
     <p>Установка входных металлических дверей осуществляется штатными специалистами.
     Время установки заранее согласовывается с Заказчиком.
     Гарантия распространяется на услуги по установке, если она выполнялась мастерами Паритет-Двери.
-    Подробнее об условиях предоставления гарантии читайте здесь.</p>
+    Подробнее об условиях предоставления гарантии <a class="link link-dark" href="{% url 'garant' %}">читайте здесь.</a></p>
 </label>
-<table class="table text-center">
+<section class="row d-flex">
+  <ul class="list-group text-center my-4 col-lg-6">
+    <li class="list-group-item text-center text-light" style="background-color: crimson;">Перечень услуг по установке дверей</li>
+    <li class="list-group-item">Замер и подготовка дверного проема</li>
+    <li class="list-group-item">Демонтаж старой двери</li>
+    <li class="list-group-item">Установка входной двери</li>
+    <li class="list-group-item">Регулировка фурнитуры</li>
+    <li class="list-group-item">Оформление гарантии</li>
+    <li class="list-group-item">Консультации</li>
+  </ul>
+  <ul class="list-group text-center my-4 col-lg-6">
+    <form method="POST" action="{% url 'installation' %}">
+      <li class="list-group-item text-center text-light mb-2" style="background-color: crimson;">Расчет стоимости услуг</li>
+      {% csrf_token %}
+      <section class="row">
+        <div class="mb-3 col-6">
+          <label for="id_name">Имя</label>
+          {{ form.name }}
+        </div>
+        <div class="mb-3 col-6">
+          <label for="id_phone">Телефон</label>
+          {{ form.phone }}
+        </div>
+        <div class="mb-3 col-6">
+          <label for="id_call_time">Время звонка</label>
+          {{ form.call_time }}
+        </div>
+        <div class="mb-3 col-6">
+          <label for="id_address">Адрес</label>
+          {{ form.address }}
+        </div>
+        <div class="mb-3">
+          <label for="id_message">Сообщение</label>
+          {{ form.message }}
+        </div>
+      </section>
+      <button type="submit" class="btn btn-danger">Оставить заявку</button>
+    </form>
+  </ul>
+</section>
+<table class="table text-center border">
   <thead>
     <tr>
-      <th scope="col" class="bg-danger text-light rounded-start">Услуга</th>
-      <th scope="col" class="bg-danger text-light rounded-end">Стоимость</th>
+      <th scope="col" class="bg-danger text-light">Услуга</th>
+      <th scope="col" class="bg-danger text-light">Стоимость</th>
     </tr>
   </thead>
   <tbody>
@@ -117,7 +157,8 @@
     прикручивают через петли. При помощи клиньев выстраивают коробку.
     Брусья спиливают под углом, верхний полностью, у боковых только передняя часть.
     Чтобы не ошибиться с выбором, при покупке межкомнатной двери стоит учесть такие
-    факторы, как размер проема, материал двери, ее покрытие и наполнение.Разобраться со всеми тонкостями помогут специалисты Интернет-магазина Paritet-dveri.ru.
+    факторы, как размер проема, материал двери, ее покрытие и наполнение. 
+    Разобраться со всеми тонкостями помогут специалисты Интернет-магазина Paritet-dveri.ru.
   </label>
 </section>
 {% endblock content %}
