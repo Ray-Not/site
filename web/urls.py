@@ -10,6 +10,17 @@ urlpatterns = [
     path('garant/', views.garant, name='garant'),
     path('catalog/', views.catalog, name='catalog'),
     path('catalog/<slug:slug>/', views.catalog, name='catalog_with_slug'),
+    path('blog/', views.blog_chapter, name='blog_chapter'),
+    path(
+        'blog/<slug:chapter_slug>/',
+        views.blog_chapter_detail,
+        name='blog_chapter_detail'
+    ),
+    path(
+        'blog/<slug:chapter_slug>/<slug:post_slug>/',
+        views.blog_post_detail,
+        name='blog_post_detail'
+    ),
     path('', views.index, name='index'),
 ]
 

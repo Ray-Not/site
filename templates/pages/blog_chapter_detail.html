@@ -1,0 +1,37 @@
+{% extends '../index.html' %}
+{% block content %}
+
+<nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a class="link-dark" href="{% url 'index' %}">Главная</a></li>
+      <li class="breadcrumb-item"><a class="link-dark" href="{% url 'blog_chapter' %}">Блог</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ chapter.title }}</li>
+    </ol>
+</nav>
+
+<section class="container mt-3">
+    <div class="text-center mb-4">
+        <h1>{{ chapter.title }}</h1>
+        <img src="{{ chapter.image.url }}" alt="{{ chapter.title }}" class="img-fluid mb-3">
+    </div>
+    <div class="row d-flex justify-content-center">
+        {% for blog in blogs %}
+        <div class="col-lg-4 col-8">
+            <a href="{% url 'blog_post_detail' chapter.slug blog.slug %}" class="text-decoration-none">
+                <div class="card h-100 rounded-top-5" style="overflow: hidden;">
+                    <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}" style="background-size: cover;">
+                    <div class="card-body">
+                        <p class="text-secondary">{{ blog.created_at }}</p>
+                        <p class="h5">{{ blog.title }}</p>
+                        <p class="card-text text-secondary">{{ blog.content|truncatewords:20|striptags }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <p class="text-center">Нет блогов в этой главе.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock content %}

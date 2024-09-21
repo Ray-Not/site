@@ -1,0 +1,12 @@
+{% extends '../index.html' %}
+{% block content %}
+<nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="link-dark" href="{% url 'index' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a class="link-dark" href="{% url 'blog_chapter' %}">Блог</a></li>
+        <li class="breadcrumb-item"><a class="link-dark" href="{% url 'blog_chapter_detail' chapter.slug %}">{{ chapter.title }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ blog.title }}</li>
+    </ol>
+</nav>
+{{ blog.content|safe }}
+{% endblock content %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Door, Order, Tag, Catalog, Review
+from .models import Door, Order, Tag, Catalog, Review, Blog, BlogChapter
 
 
 @admin.register(Door)
@@ -15,6 +15,13 @@ class CatalogAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ['title', 'slug']
+    prepopulated_fields = {'slug': ('title',)}
+
+
 admin.site.register(Order)
 admin.site.register(Tag)
 admin.site.register(Review)
+admin.site.register(BlogChapter)

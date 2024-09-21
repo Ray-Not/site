@@ -3,6 +3,59 @@ import uuid
 from django.db import models
 from django.forms import ValidationError
 from slugify import slugify
+from ckeditor.fields import RichTextField
+
+
+class BlogChapter(models.Model):
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='chapter')
+    slug = models.SlugField(max_length=255, unique=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title, separator='-')
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+
+class Blog(models.Model):
+    title = models.CharField(max_length=255)
+    chapter = models.ForeignKey(
+        BlogChapter,
+        on_delete=models.CASCADE,
+        related_name='blogs'
+    )
+    content = RichTextField()
+    image = models.ImageField(upload_to='blog')
+    created_at = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=255, unique=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title, separator='-')
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+
+class DeliveryRegion(models.Model):
+
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='delivery_region')
+    slug = models.SlugField(max_length=255, unique=True)
+    text = models.TextField()
+    cost = models.IntegerField()
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name, separator='-')
+        super().save(*args, **kwargs)
+
+    class Meta:
+        pass
 
 
 class Catalog(models.Model):

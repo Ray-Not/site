@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 
 from .filters import DoorFilter
 from .forms import OrderForm
-from .models import Door, Review, Tag, Catalog
+from .models import Door, Review, Tag, Catalog, Blog, BlogChapter
 
 
 def index(request):
@@ -158,3 +158,42 @@ def catalog(request, slug=None):
         'catalog': catalog if slug else None,
         'catalogs': catalogs,
     })
+
+
+def blog_chapter(request):
+    chapters = BlogChapter.objects.all()
+    chapter_blog = {}
+
+    for chapter in chapters:
+        count = chapter.blogs.count()
+        chapter_blog[chapter] = count
+
+    context = {
+        'chapters': chapter_blog
+    }
+
+    return render(request, 'pages/blog_chapter.html', context)
+
+
+def blog_chapter_detail(request, chapter_slug):
+    chapter = get_object_or_404(BlogChapter, slug=chapter_slug)
+    blogs = chapter.blogs.all()
+
+    context = {
+        'chapter': chapter,
+        'blogs': blogs
+    }
+
+    return render(request, 'pages/blog_chapter_detail.html', context)
+
+
+def blog_post_detail(request, chapter_slug, post_slug):
+    blog = get_object_or_404(Blog, slug=post_slug)
+    chapter = get_object_or_404(BlogChapter, slug=chapter_slug)
+
+    context = {
+        'chapter': chapter,
+        'blog': blog
+    }
+
+    return render(request, 'pages/blog_post_detail.html', context)
