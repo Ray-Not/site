@@ -37,3 +37,12 @@ def format_number(value):
 @register.filter
 def translit_slugify(value):
     return slugify(value)
+
+
+@register.filter
+def divisibleby(value, divisor):
+    """Returns True if value is divisible by divisor, else False."""
+    try:
+        return value // divisor
+    except (ValueError, TypeError):
+        return False

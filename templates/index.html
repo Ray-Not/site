@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,47 +138,35 @@
             <div class="my-4">
                 <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
                 <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
-                <div class='container bg-danger rounded-3 text-white py-3' style="font-family: tilda;">
-                  <div class="d-flex flex-column justify-content-center align-items-center">
-                    <p class="col-lg-5 col-10 fs-2 text-center">Вызовите замерщика</p>
-                    <p class="col-lg-5 col-10 fs-6 text-center">Закажите бесплатный выезд мастера для снятия размеров дверного проёма, консультации и расчёта итоговой цены</p>
-                    <button class="btn btn-light text-danger fs-5">
-                      Оставить заявку
-                    </button>
-                  </div>
-                </div>
-            </div>
-            <div class="my-4">
-                <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
-                <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
                 <h1 style="font-family: tilda;">Популярные стальные двери</h1>
             </div>
-            <div class="my-4">
-                <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
-                <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
-                <h1 style="font-family: tilda;">Наши услуги</h1>
+            <div class="my-4 text-center">
+              <h1 style="font-family: tilda;">Наши услуги</h1>
             </div>
             <div class="my-4 row d-flex justify-content-center">
-              <div class="col-lg-2 col-12 shadow d-flex flex-column justify-content-center align-items-center py-5 mx-3">
-                <p class="fw-bold fs-5 text-center">Выезд инженера</p>
-                <p class="text-center">Наши мастера выезжают для замеров, консультаций или заключения договора</p>
+              <div class="col-lg-2 col-12 shadow d-flex flex-column justify-content-center align-items-center py-5 mx-3 text-center">
+                <i class="bi bi-tools fs-1 text-primary"></i>
+                <p class="fw-bold fs-5">Выезд инженера</p>
+                <p>Наши мастера выезжают для замеров, консультаций или заключения договора</p>
               </div>
-              <div class="col-lg-2 col-12 shadow d-flex flex-column justify-content-center align-items-center py-5 mx-3">
-                <p class="fw-bold fs-5 text-center">Доставка</p>
-                <p class="text-center">Доставим нужную дверь по вашему адресу в Москве и Подмосковье точно до объекта, даже если в доме нет лифта</p>
+              <div class="col-lg-2 col-12 shadow d-flex flex-column justify-content-center align-items-center py-5 mx-3 text-center">
+                <i class="bi bi-truck fs-1 text-primary"></i>
+                <p class="fw-bold fs-5">Доставка</p>
+                <p>Доставим нужную дверь по вашему адресу в Москве и Подмосковье точно до объекта, даже если в доме нет лифта</p>
               </div>
-              <div class="col-lg-2 col-12 shadow d-flex flex-column justify-content-center align-items-center py-5 mx-3">
-                <p class="fw-bold fs-5 text-center">Монтаж</p>
-                <p class="text-center">Выполняем комплексную установку двери с подготовкой проёма, вывозом мусора и гарантией результата</p>
+              <div class="col-lg-2 col-12 shadow d-flex flex-column justify-content-center align-items-center py-5 mx-3 text-center">
+                <i class="bi bi-house-door fs-1 text-primary"></i>
+                <p class="fw-bold fs-5">Монтаж</p>
+                <p>Выполняем комплексную установку двери с подготовкой проёма, вывозом мусора и гарантией результата</p>
               </div>
-              <div class="col-lg-2 col-12 shadow d-flex flex-column justify-content-center align-items-center py-5 mx-3">
-                <p class="fw-bold fs-5 text-center">Производство</p>
-                <p class="text-center">Изготавливаем двери с нужными параметрами на собственном современном оборудовании</p>
+              <div class="col-lg-2 col-12 shadow d-flex flex-column justify-content-center align-items-center py-5 mx-3 text-center">
+                <i class="bi bi-building fs-1 text-primary"></i>
+                <p class="fw-bold fs-5">Производство</p>
+                <p>Изготавливаем двери с нужными параметрами на собственном современном оборудовании</p>
               </div>
             </div>
+            
             <div class="my-4">
-                <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
-                <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
                 <h1 style="font-family: tilda;">Доставка и выезд мастера</h1>
             </div>
             <table class="table">
@@ -309,125 +298,128 @@
               </form>
             </div>
             <div class="my-4">
-                <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
-                <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
-                <h1 style="font-family: tilda;">Поиск двери по параметрам</h1>
+                <h1 style="font-family: tilda;">Последние новости</h1>
             </div>
             <div class="my-4">
-                <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
-                <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
                 <h1 style="font-family: tilda;">Почему</h1>
                 <h2 style="font-family: tilda;">выбирают нас</h2>
             </div>
             <div class="row d-flex justify-content-center">
-              <div class="col-lg-4 col-10 my-2">
-                <div class="border rounded">
+              <div class="col-lg-4 col-10 my-2 d-flex">
+                <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <img class='img-fluid' src="{% static 'images/icons/over-50.png' %}" alt="Цена"/>
+                      <i class="bi bi-cash fs-1 text-primary"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Покупка дверей без переплаты
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center" style="position: relative;">
-                      <div >
-                        Работая в формате интернет-магазина, мы не тратим деньги на аренду торговых площадей, что позволяет продавать вам двери по фабричным ценам. Двери Йошкар-Ола, Бульдорс, Аргус, Арма, Грофф, Интекрон, Зетта и входные блоки других надежных брендов можно купить выгодно, без наценок.
-
-                        Ежедневно в магазине действуют скидки и акции на популярные серии
-                      </div>
+                    <div class="flex-grow-1 mx-3 text-center">
+                      Работая в формате интернет-магазина, мы не тратим деньги на аренду торговых площадей, что позволяет продавать вам двери по фабричным ценам. Двери Йошкар-Ола, Бульдорс, Аргус, Арма, Грофф, Интекрон, Зетта и входные блоки других надежных брендов можно купить выгодно, без наценок. Ежедневно в магазине действуют скидки и акции на популярные серии.
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-10 my-2">
-                <div class="border rounded">
+            
+              <div class="col-lg-4 col-10 my-2 d-flex">
+                <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <img class='img-fluid' src="{% static 'images/icons/online-50.png' %}" alt="Цена"/>
+                      <i class="bi bi-cart fs-1 text-primary"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Быстрый онлайн-заказ
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center" style="position: relative;">
-                      <div>
-                        Металлические двери в Москве можно приобрести не выходя из дома. Смотрите наш каталог с ценами и фото и выбирайте двери для квартиры, дачи или офиса от российских производителей. Установка дверей под ключ, гарантии. Если вы хотите узнать больше о моделях из каталога или ценах на предоставляемые услуги – позвоните нашим специалистам по телефону или заполните форму обратной связи.</div>
+                    <div class="flex-grow-1 mx-3 text-center">
+                      Металлические двери в Москве можно приобрести не выходя из дома. Смотрите наш каталог с ценами и фото и выбирайте двери для квартиры, дачи или офиса от российских производителей. Установка дверей под ключ, гарантии. Если вы хотите узнать больше о моделях из каталога или ценах на предоставляемые услуги – позвоните нашим специалистам по телефону или заполните форму обратной связи.
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-10 my-2">
-                <div class="border rounded">
+            
+              <div class="col-lg-4 col-10 my-2 d-flex">
+                <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <img class='img-fluid' src="{% static 'images/icons/cost-50.png' %}" alt="Цена"/>
+                      <i class="bi bi-tag fs-1 text-primary"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Цены от эконом до премиум класса
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center" style="position: relative;">
-                      <div>
-                        Мы работаем для клиентов с разным уровнем достатка, чтобы вы подобрали дверь, исходя из своего бюджета. Недорогие входные двери отделаны искусственной кожей, порошковым напылением, ламинатом. В среднем ценовом сегменте популярны металлические двери с декоративными панелями МДФ и шпоном. Поклонники эксклюзивного дизайна выбирают роскошную отделку натуральным массивом, ковкой, стеклом.
-                      </div>
+                    <div class="flex-grow-1 mx-3 text-center">
+                      Мы работаем для клиентов с разным уровнем достатка, чтобы вы подобрали дверь, исходя из своего бюджета. Недорогие входные двери отделаны искусственной кожей, порошковым напылением, ламинатом. В среднем ценовом сегменте популярны металлические двери с декоративными панелями МДФ и шпоном. Поклонники эксклюзивного дизайна выбирают роскошную отделку натуральным массивом, ковкой, стеклом.
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-10 my-2">
-                <div class="border rounded">
+            
+              <div class="col-lg-4 col-10 my-2 d-flex">
+                <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <img class='img-fluid' src="{% static 'images/icons/delivery-50.png' %}" alt="Цена"/>
+                      <i class="bi bi-truck fs-1 text-primary"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Оперативная доставка дверей по Москве
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center" style="position: relative;">
-                      <div>
-                        Железные двери можно купить не только в Москве. Специалисты компании оперативно доставят изделие на фирменном транспорте в Московскую область. Время доставки по указанному адресу предварительно согласовывается с клиентом. Бонус: при заказе услуги монтажа, доставка конструкции бесплатна!
-                      </div>
+                    <div class="flex-grow-1 mx-3 text-center">
+                      Железные двери можно купить не только в Москве. Специалисты компании оперативно доставят изделие на фирменном транспорте в Московскую область. Время доставки по указанному адресу предварительно согласовывается с клиентом. Бонус: при заказе услуги монтажа, доставка конструкции бесплатна!
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-10 my-2">
-                <div class="border rounded">
+            
+              <div class="col-lg-4 col-10 my-2 d-flex">
+                <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <img class='img-fluid' src="{% static 'images/icons/shield-50.png' %}" alt="Цена"/>
+                      <i class="bi bi-shield-lock fs-1 text-primary"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Прочные двери от лучших производителей
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center" style="position: relative;">
-                      <div>
-                        Мы не экономим на качестве и сотрудничаем только с добросовестными производителями. Двери из крепкой стали укомплектованы надежными замками, взломостойкими петлями. удобными ручками. Купить входные двери в интернет-магазине дешево со склада можно оптом и в розницу.
-                      </div>
+                    <div class="flex-grow-1 mx-3 text-center">
+                      Мы не экономим на качестве и сотрудничаем только с добросовестными производителями. Двери из крепкой стали укомплектованы надежными замками, взломостойкими петлями, удобными ручками. Купить входные двери в интернет-магазине дешево со склада можно оптом и в розницу.
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-10 my-2">
-                <div class="border rounded">
+            
+              <div class="col-lg-4 col-10 my-2 d-flex">
+                <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <img class='img-fluid' src="{% static 'images/icons/installation-50.png' %}" alt="Цена"/>
+                      <i class="bi bi-tools fs-1 text-primary"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Профессиональная установка
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center" style="position: relative;">
-                      <div>
-                        Специалисты «Паритет-Двери» аккуратно и бесшумно установят дверь в любой проем. Не забудьте воспользоваться бесплатной услугой «вызов замерщика» чтобы дверь точно подошла под размеры вашего проема.
-                      </div>
+                    <div class="flex-grow-1 mx-3 text-center">
+                      Специалисты «Паритет-Двери» аккуратно и бесшумно установят дверь в любой проем. Не забудьте воспользоваться бесплатной услугой «вызов замерщика», чтобы дверь точно подошла под размеры вашего проема.
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="my-4">
-                <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Категории</h1> -->
                 <h1 style="font-family: tilda;">Категории</h1>
-                <h1>SOON</h1>
+                <section class="row justify-content-center">
+                  {% for chapter, catalogs in chapters_with_titles.items %}
+                  <div class="col-lg-3 col-12" style="font-family: tilda-light">
+                      <label class="mt-3 border-bottom">{{ chapter }}</label>
+                      <ul class="list-unstyled categories-item">
+                          {% for catalog in catalogs %}
+                              <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'catalog_with_slug' catalog.slug %}">
+                                  <li style="font-size: medium;">
+                                      {{ catalog.title }} 
+                                      <label class='text-secondary' style="font-size: small;">{{ catalog.door_count }} шт.</label>
+                                  </li>
+                              </a>
+                          {% endfor %}
+                      </ul>
+                  </div>
+                  {% endfor %}
+              </section>
             </div>
             <div class="my-4">
                 <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Найдите нас</h1>
@@ -471,7 +463,16 @@
                                 <h5 class="card-title">{{ review.name }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">{{ review.message }}</h6>
                                 <p class="card-text">
-                                    Рейтинг: <span class="fw-bold">{{ review.rating }}/10</span>
+                                    {% for i in range %}
+                                        {% if i <= review.rating|divisibleby:2 %}
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                        {% elif i == review.rating|add:1|divisibleby:2 %}
+                                            <i class="bi bi-star-half text-warning"></i> <!-- Полузаполненная звезда -->
+                                        {% else %}
+                                            <i class="bi bi-star text-muted"></i> <!-- Пустая звезда -->
+                                        {% endif %}
+                                    {% endfor %}
+                                    <!-- <span class="fw-bold">{{ review.rating }}/10</span> -->
                                 </p>
                             </div>
                         </div>
@@ -480,7 +481,9 @@
                     <p>Пока нет отзывов</p>
                 {% endfor %}
             </div>
-          </div>
+        </div>
+        
+        
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
         <script>
             ymaps.ready(function () {
@@ -490,7 +493,7 @@
                 });
     
                 var placemark = new ymaps.Placemark([55.88471, 37.60377], {
-                    balloonContent: 'Москва'
+                    balloonContent: 'Паритет'
                 });
     
                 map.geoObjects.add(placemark);

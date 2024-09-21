@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Door, Order, Tag, Catalog
+from .models import Door, Order, Tag, Catalog, Review
 
 
 @admin.register(Door)
@@ -17,3 +17,4 @@ class CatalogAdmin(admin.ModelAdmin):
 
 admin.site.register(Order)
 admin.site.register(Tag)
+admin.site.register(Review)

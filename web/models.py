@@ -51,7 +51,7 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
     message = models.CharField(max_length=255)
 
-    def save(self, *args, **kwargs):
+    def clean(self, *args, **kwargs):
         if not self.order.door:
             raise ValidationError(
                 'Отзыв можно оставить только на заказ, связанный с дверью.'

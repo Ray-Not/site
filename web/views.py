@@ -20,7 +20,7 @@ def index(request):
     return render(request, 'index.html', {
         'form': form,
         'reviews': reviews,
-        'range': range(1, 11),
+        'range': range(1, 6),
     })
 
 
