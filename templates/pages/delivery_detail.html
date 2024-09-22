@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="container mt-3">
-    <div class="row d-flex justify-content-center">
+    <div class="row">
         <h1 class="display-4 text-center">{{ region.name }}</h1>
-        <div class="col-10 mx-auto m-4">
+        <div class="col-10 mx-auto m-4 d-flex justify-content-center">
             {% if region.image %}
                 <img src="{{ region.image.url }}" alt="{{ region.name }}" class="img-fluid rounded">
             {% endif %}
