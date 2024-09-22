@@ -56,7 +56,14 @@ def delivery(request):
 
 
 def delivery_detail(request, slug):
-    return render(request, 'pages/delivery_detail.html')
+
+    region = get_object_or_404(DeliveryRegion, slug=slug)
+
+    context = {
+        'region': region
+    }
+
+    return render(request, 'pages/delivery_detail.html', context)
 
 
 def catalog(request, slug=None):

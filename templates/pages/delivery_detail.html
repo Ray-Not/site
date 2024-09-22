@@ -1,0 +1,21 @@
+{% extends '../index.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row d-flex justify-content-center">
+        <h1 class="display-4 text-center">{{ region.name }}</h1>
+        <div class="col-10 mx-auto m-4">
+            {% if region.image %}
+                <img src="{{ region.image.url }}" alt="{{ region.name }}" class="img-fluid rounded">
+            {% endif %}
+        </div>
+        <div class="col-12">
+            <p class="lead">{{ region.text|safe }}</p>
+            {% if region.cost %}
+                <h5 class="mt-4 text-center">Стоимость доставки: <span class="badge rounded-pill text-bg-danger">{{ region.cost }} руб.</span></h5>
+            {% endif %}
+        </div>
+    <a href="{% url 'delivery' %}" class="btn btn-outline-danger mt-4">Назад к списку районов доставки</a>
+</div>
+</div>
+{% endblock %}

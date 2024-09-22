@@ -113,7 +113,7 @@
     
     <div class="d-flex flex-wrap justify-content-center">
         {% for region in moscow_regions %}
-        <a href="{% url 'delivery_detail' region.slug %}"><span class="fs-5 badge border {{ region|random_bg_with_text_color}} m-1">{{ region.name }}</span></a>
+        <a href="{% url 'delivery_detail' region.slug %}"><span class="fs-6 badge border {{ region|random_bg_with_text_color}} m-1">{{ region.name }}</span></a>
         {% endfor %}
     </div>
 </div>
@@ -1068,7 +1068,7 @@
     
     <div class="d-flex flex-wrap justify-content-center">
         {% for region in moscow_region_areas %}
-            <a href="{% url 'delivery_detail' region.slug %}"><span class="fs-5 badge border {{ region|random_bg_with_text_color}} m-1">{{ region.name }}</span></a>
+            <a href="{% url 'delivery_detail' region.slug %}"><span class="fs-6 badge border {{ region|random_bg_with_text_color}} m-1">{{ region.name }}</span></a>
         {% endfor %}
     </div>
 </div>
