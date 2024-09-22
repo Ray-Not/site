@@ -43,11 +43,25 @@ class Blog(models.Model):
 
 class DeliveryRegion(models.Model):
 
+    REGION_CHOICES = [
+        ('moscow', 'Москва'),
+        ('moscow_region', 'Московская область'),
+    ]
+
     name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='delivery_region')
+    image = models.ImageField(
+        upload_to='delivery_region',
+        blank=True
+    )
     slug = models.SlugField(max_length=255, unique=True)
-    text = models.TextField()
-    cost = models.IntegerField()
+    region = models.CharField(
+        max_length=20,
+        choices=REGION_CHOICES,
+        default='moscow_region',
+        verbose_name='Регион'
+    )
+    text = models.TextField(blank=True)
+    cost = models.IntegerField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

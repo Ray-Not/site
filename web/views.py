@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 
 from .filters import DoorFilter
 from .forms import OrderForm
-from .models import Door, Review, Tag, Catalog, Blog, BlogChapter
+from .models import Door, Review, Tag, Catalog, Blog, BlogChapter, DeliveryRegion
 
 
 def index(request):
@@ -43,7 +43,20 @@ def garant(request):
 
 
 def delivery(request):
-    return render(request, 'pages/delivery.html')
+
+    moscow_regions = DeliveryRegion.objects.filter(region='moscow')
+    moscow_region_areas = DeliveryRegion.objects.filter(region='moscow_region')
+
+    context = {
+        'moscow_regions': moscow_regions,
+        'moscow_region_areas': moscow_region_areas
+    }
+
+    return render(request, 'pages/delivery.html', context)
+
+
+def delivery_detail(request, slug):
+    return render(request, 'pages/delivery_detail.html')
 
 
 def catalog(request, slug=None):

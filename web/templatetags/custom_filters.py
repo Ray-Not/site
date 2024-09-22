@@ -1,5 +1,6 @@
 from django import template
 from slugify import slugify
+import random
 
 register = template.Library()
 
@@ -46,3 +47,27 @@ def divisibleby(value, divisor):
         return value // divisor
     except (ValueError, TypeError):
         return False
+
+
+@register.filter
+def random_bg_with_text_color(value):
+    bg_colors = [
+        'bg-primary', 'bg-success', 'bg-danger',
+        'bg-warning', 'bg-info', 'bg-secondary',
+        'bg-light', 'bg-dark'
+    ]
+
+    chosen_bg = random.choice(bg_colors)
+
+    if chosen_bg in [
+        'bg-dark',
+        'bg-primary',
+        'bg-danger',
+        'bg-secondary',
+        'bg-success'
+    ]:
+        text_color = 'text-light'
+    else:
+        text_color = 'text-dark'
+
+    return f"{chosen_bg} {text_color}"

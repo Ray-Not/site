@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Door, Order, Tag, Catalog, Review, Blog, BlogChapter
+from .models import Door, Order, Tag, Catalog, Review, Blog, BlogChapter, DeliveryRegion
 
 
 @admin.register(Door)
@@ -19,6 +19,12 @@ class CatalogAdmin(admin.ModelAdmin):
 class BlogAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug']
     prepopulated_fields = {'slug': ('title',)}
+
+
+@admin.register(DeliveryRegion)
+class DeliveryRegionAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+    prepopulated_fields = {'slug': ('name',)}
 
 
 admin.site.register(Order)

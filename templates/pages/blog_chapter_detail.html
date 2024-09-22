@@ -16,7 +16,7 @@
     </div>
     <div class="row d-flex justify-content-center">
         {% for blog in blogs %}
-        <div class="col-lg-4 col-8">
+        <div class="col-lg-4 col-10 my-2">
             <a href="{% url 'blog_post_detail' chapter.slug blog.slug %}" class="text-decoration-none">
                 <div class="card h-100 rounded-top-5" style="overflow: hidden;">
                     <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}" style="background-size: cover;">
