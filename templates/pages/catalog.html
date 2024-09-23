@@ -206,37 +206,25 @@ $(document).ready(function() {
   
     <div class="row" id="door-list">
       {% for door in doors %}
-      <div class="col-lg-4 col-12 mt-lg-0 mt-4 mb-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+      <div class="col-lg-6 col-12 mt-lg-0 mt-4 mb-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
         <div class="card h-100">
-          <div id="carousel{{ door.id }}" class="carousel slide d-flex align-items-center p-2" data-bs-ride="false" style="height: 600px; overflow: hidden;">
+          <div class="d-flex align-items-center p-2" data-bs-ride="false" style="height: 500px; overflow: hidden;">
             <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
               {% for tag in door.tags.all %}
                 <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
               {% endfor %}
             </div>
-            <div class="carousel-inner">
+            <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
               {% with door.images|split_and_get_all as image_urls %}
                 {% for image_url in image_urls %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                  <div class="image-container">
-              <div class="tags-container d-flex flex-column w-50">
-              </div>
-                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="d-block w-100" alt="{{ door.title }} - Image {{ forloop.counter }}">
+                  <div class="image-container" style="flex: 1 1 calc(33.33% - 10px); margin: 5px; height: 400px; overflow: hidden;">
+                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
                   </div>
-                </div>
                 {% endfor %}
               {% endwith %}
             </div>
-            <!-- Кнопки переключения -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ door.id }}" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
           </div>
+          
     
           <div class="card-body">
             <p class="card-title fw-bold">Купить {{ door.title }} в Москве</p>

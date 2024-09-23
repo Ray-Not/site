@@ -9,9 +9,8 @@
         <p>Старая цена: <span class="old-price">{{ door.price_before_discount }} руб.</span></p>
         <p>Скидка: {{ door.discount }}%</p>
     {% endif %}
-    {{images}}
     {% for image in images %}
-    <img src="{{ image }}" alt="{{ door.title }}">
+    <img src="{{ MEDIA_URL }}{{ image }}" alt="{{ door.title }}">
     {% endfor %}
     <div class="door-image">
         <img src="{{ door.images }}" alt="{{ door.title }}">
