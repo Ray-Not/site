@@ -10,3 +10,4 @@ requests
 django-filter
 django-ckeditor
 Pillow
+colorama
