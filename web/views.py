@@ -113,7 +113,6 @@ def catalog(request, slug=None):
     if slug:
         catalog = get_object_or_404(Catalog, slug=slug)
         doors_queryset = doors_queryset.filter(catalogs__in=[catalog])
-        print(doors_queryset)
 
     # Фильтрация дверей
     door_filter = DoorFilter(
@@ -217,3 +216,13 @@ def blog_post_detail(request, chapter_slug, post_slug):
     }
 
     return render(request, 'pages/blog_post_detail.html', context)
+
+
+def door_detail(request, slug):
+    door = get_object_or_404(Door, slug=slug)
+    images = door.images.split(',')
+    context = {
+        'door': door,
+        'images': images
+    }
+    return render(request, 'pages/door_detail.html', context)

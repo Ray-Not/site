@@ -255,7 +255,7 @@ $(document).ready(function() {
             <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
             {% endif %}
             <label class="card-text text-secondary pb-3 mt-auto">{{ door.size_name }}</label>
-            <button class="btn btn-outline-danger w-100 mt-auto">Узнать подробнее</button>
+            <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger w-100 mt-auto">Узнать подробнее</button></a>
           </div>
         </div>
       </div>

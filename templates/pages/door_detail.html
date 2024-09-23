@@ -1,0 +1,36 @@
+{% extends '../index.html' %}
+{% load static %}
+{% block content %}
+<div class="door-card">
+    <h1>{{ door.title }}</h1>
+    <p>Размер: {{ door.size_name }}</p>
+    <p>Цена: <span>{{ door.price }} руб.</span></p>
+    {% if door.discount %}
+        <p>Старая цена: <span class="old-price">{{ door.price_before_discount }} руб.</span></p>
+        <p>Скидка: {{ door.discount }}%</p>
+    {% endif %}
+    {{images}}
+    {% for image in images %}
+    <img src="{{ image }}" alt="{{ door.title }}">
+    {% endfor %}
+    <div class="door-image">
+        <img src="{{ door.images }}" alt="{{ door.title }}">
+    </div>
+    
+    <div class="door-features">
+        <p>Артикул: {{ door.article }}</p>
+        <p>Назначение: {{ door.purpose }}</p>
+        <p>Толщина стали: {{ door.steel_size }}</p>
+        <p>Внутренняя отделка: {{ door.in_cover_name }} ({{ door.in_color }})</p>
+        <p>Замок 1: {{ door.zamok1 }}</p>
+        <p>Замок 2: {{ door.zamok2 }}</p>
+        <!-- Добавьте остальные параметры, такие как ручка, глазок и т.д. -->
+    </div>
+    
+    <div class="door-actions">
+        <button>Заказать замер</button>
+        <button>Консультация</button>
+    </div>
+</div>
+
+{% endblock content %}

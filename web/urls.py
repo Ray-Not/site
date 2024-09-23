@@ -7,12 +7,13 @@ from . import views
 urlpatterns = [
     path('delivery/', views.delivery, name='delivery'),
     path(
-        'delivery/<slug:slug>',
+        'delivery/<slug:slug>/',
         views.delivery_detail,
         name='delivery_detail'
     ),
     path('installation/', views.installation, name='installation'),
     path('garant/', views.garant, name='garant'),
+    path('detail/<slug:slug>/', views.door_detail, name='door_detail'),
     path('catalog/', views.catalog, name='catalog'),
     path('catalog/<slug:slug>/', views.catalog, name='catalog_with_slug'),
     path('blog/', views.blog_chapter, name='blog_chapter'),
