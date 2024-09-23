@@ -1,35 +1,71 @@
 {% extends '../index.html' %}
 {% load static %}
+{% load custom_filters %}
 {% block content %}
-<div class="door-card">
-    <h1>{{ door.title }}</h1>
-    <p>Размер: {{ door.size_name }}</p>
-    <p>Цена: <span>{{ door.price }} руб.</span></p>
-    {% if door.discount %}
-        <p>Старая цена: <span class="old-price">{{ door.price_before_discount }} руб.</span></p>
-        <p>Скидка: {{ door.discount }}%</p>
-    {% endif %}
-    {% for image in images %}
-    <img src="{{ MEDIA_URL }}{{ image }}" alt="{{ door.title }}">
-    {% endfor %}
-    <div class="door-image">
-        <img src="{{ door.images }}" alt="{{ door.title }}">
+<style>
+    .image-container {
+        overflow: hidden;
+    }
+
+    @media (min-width: 992px) {
+        .image {
+            height: 900px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .image {
+            height: 750px;
+        }
+    }
+</style>
+<div class="row door-card">
+    <h1 class="my-5">{{ door.title }}</h1>
+    <div class="d-flex align-items-center p-2 col-lg-8 col-12 image" data-bs-ride="false" style="height: 900px; overflow: hidden;">
+        <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
+          {% with door.images|split_and_get_all as image_urls %}
+            {% for image_url in image_urls %}
+              <div class="image-container mx-2 image" style="flex: 1 1 calc(33.33% - 10px);">
+                <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
+              </div>
+            {% endfor %}
+          {% endwith %}
+        </div>
+    </div>
+    <div class="col-lg-4 col-12">
+        <h5>Артикул: {{ door.article }}</h5><hr>
+        <h5 class="text-center">Характеристики</h5><hr>
+        <ul class="list-group">
+            {% for value in characteristics.values %}
+                {% if value != "Нет информации" and key != "colors" %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ value }} 
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <h6 class="text-center my-2">Внешние характеристики</h6>
+        <ul class="list-group">
+            {% for value in out_characteristics.values %}
+                {% if value != "Нет информации" %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ value }}</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <h6 class="text-center my-2">Внутренние характеристики</h6>
+        <ul class="list-group">
+            {% for value in in_characteristics.values %}
+                {% if value != "Нет информации" %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ value }}</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
     </div>
     
-    <div class="door-features">
-        <p>Артикул: {{ door.article }}</p>
-        <p>Назначение: {{ door.purpose }}</p>
-        <p>Толщина стали: {{ door.steel_size }}</p>
-        <p>Внутренняя отделка: {{ door.in_cover_name }} ({{ door.in_color }})</p>
-        <p>Замок 1: {{ door.zamok1 }}</p>
-        <p>Замок 2: {{ door.zamok2 }}</p>
-        <!-- Добавьте остальные параметры, такие как ручка, глазок и т.д. -->
-    </div>
     
-    <div class="door-actions">
-        <button>Заказать замер</button>
-        <button>Консультация</button>
-    </div>
-</div>
 
 {% endblock content %}

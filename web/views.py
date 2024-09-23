@@ -221,8 +221,45 @@ def blog_post_detail(request, chapter_slug, post_slug):
 def door_detail(request, slug):
     door = get_object_or_404(Door, slug=slug)
     images = door.images.split(',')
+    characteristics = {
+        'purpose': door.purpose,
+        'conturs_name': door.conturs_name,
+        'size_name': door.size_name,
+        'steel_size': door.steel_size,
+        'tolshina': door.tolshina,
+        'korob_size': door.korob_size,
+        'uteplitel': door.uteplitel,
+        'ves': door.ves,
+        'constr_korob': door.constr_korob,
+        'constr_fixator': door.constr_fixator,
+        'zamok1': door.zamok1,
+        'zamok2': door.zamok2,
+        'furn_color_name': door.furn_color_name,
+        'petli': door.petli,
+        'zadvijka': door.zadvijka,
+        'ruchka': door.ruchka,
+        'glazok': door.glazok,
+        'cilindr': door.cilindr,
+        'bronia': door.bronia,
+    }
+
+    out_characteristics = {
+        'out_cover_name': door.out_cover_name,
+        'out_color': door.out_color,
+    }
+
+    in_characteristics = {
+        'in_thick': door.in_thick,
+        'in_color': door.in_color,
+    }
+
+    images = door.images.split(',')[2:]
+
     context = {
         'door': door,
-        'images': images
+        'characteristics': characteristics,
+        'images': images,
+        'out_characteristics': out_characteristics,
+        'in_characteristics': in_characteristics,
     }
     return render(request, 'pages/door_detail.html', context)
