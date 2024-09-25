@@ -11,3 +11,4 @@ django-filter
 django-ckeditor
 Pillow
 colorama
+beautifulsoup4
