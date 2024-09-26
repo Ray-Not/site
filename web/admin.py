@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Door, Order, Tag, Catalog, Review, Blog, BlogChapter, DeliveryRegion
+from .models import Door, Order, Tag, Catalog, Review, Blog, BlogChapter, DeliveryRegion, Equipment
 
 
 @admin.register(Door)
@@ -31,3 +31,4 @@ admin.site.register(Order)
 admin.site.register(Tag)
 admin.site.register(Review)
 admin.site.register(BlogChapter)
+admin.site.register(Equipment)
