@@ -40,6 +40,10 @@ def is_cached(file_path):
 
 def save_image_to_cache(img_url, product_dir):
     """Загрузка и сохранение изображения с кэшированием."""
+    # Проверяем, является ли URL относительным
+    if not img_url.startswith('http'):
+        img_url = base_dir + img_url.lstrip('/')  # Преобразуем относительный URL в абсолютный
+
     parts = img_url.split('/')
     img_name = f"{parts[-4]}_{parts[-3]}_{parts[-2]}_{parts[-1].split('.')[0]}.jpg"
     img_path = os.path.join(product_dir, img_name)
@@ -57,6 +61,7 @@ def save_image_to_cache(img_url, product_dir):
     else:
         print(f"Не удалось загрузить изображение: {img_url}")
         return 'Нет изображения'
+
 
 def load_existing_data(csv_file):
     """Чтение существующих данных из CSV файла."""
