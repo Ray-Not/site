@@ -15,13 +15,13 @@
 
     @media (max-width: 991px) {
         .image {
-            height: 750px;
+            height: 400px;
         }
     }
 </style>
 <div class="row door-card">
-    <h1 class="my-5">{{ door.title }}</h1>
-    <div class="d-flex align-items-center p-2 col-lg-8 col-12 image" data-bs-ride="false" style="height: 900px; overflow: hidden;">
+    <h1 class="my-3">{{ door.title }}</h1>
+    <div class="d-flex align-items-center p-2 col-lg-8 col-12 image" data-bs-ride="false" style="overflow: hidden;">
         <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
           {% with door.images|split_and_get_all as image_urls %}
             {% for image_url in image_urls %}
