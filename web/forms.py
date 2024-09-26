@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Order
+from .models import Order, Review
 
 
 class OrderForm(forms.ModelForm):
@@ -19,4 +19,20 @@ class OrderForm(forms.ModelForm):
             'message': forms.Textarea(
                 attrs={'class': 'form-control', 'rows': 3}
             ),
+        }
+
+
+class ReviewFirm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'name', 'message', 'rating']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'message': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(
+                attrs={'class': 'form-control', 'rows': 3}
+            ),
+            'rating': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': 3}
+            )
         }

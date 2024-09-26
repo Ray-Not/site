@@ -263,3 +263,14 @@ def door_detail(request, slug):
         'in_characteristics': in_characteristics,
     }
     return render(request, 'pages/door_detail.html', context)
+
+
+def reviews(request):
+    reviews = Review.objects.all()
+
+    context = {
+        'reviews': reviews,
+        'range': range(1, 6),
+    }
+
+    return render(request, 'pages/reviews.html', context)

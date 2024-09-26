@@ -150,6 +150,6 @@ with open(csv_file, 'a+', newline='', encoding='utf-8') as csvfile:
 
     # Обработка страниц параллельно
     with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = [executor.submit(process_page, page, writer, existing_data) for page in range(total_pages + 1)]
+        futures = [executor.submit(process_page, page, writer, existing_data) for page in range(100, total_pages + 1)]
         for future in as_completed(futures):
             future.result()

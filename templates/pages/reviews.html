@@ -1,0 +1,40 @@
+{% extends '../index.html' %}
+{% load custom_filters %}
+{% load static %}
+{% block content %}
+<div class="my-4">
+    <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
+    <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
+    <h1 style="font-family: tilda;">Отзывы о нас</h1>
+    <p class="fs-5">Хотите оставить отзыв?</p>
+    <p>Уточните номер заказа и заполните следующую форму.</p>
+</div>
+<div class="container my-5">
+    <div class="row">
+        {% for review in reviews %}
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ review.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ review.message }}</h6>
+                        <p class="card-text">
+                            {% for i in range %}
+                                {% if i <= review.rating|divisibleby:2 %}
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                {% elif i == review.rating|add:1|divisibleby:2 %}
+                                    <i class="bi bi-star-half text-warning"></i> <!-- Полузаполненная звезда -->
+                                {% else %}
+                                    <i class="bi bi-star text-muted"></i> <!-- Пустая звезда -->
+                                {% endif %}
+                            {% endfor %}
+                            <!-- <span class="fw-bold">{{ review.rating }}/10</span> -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Пока нет отзывов</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
