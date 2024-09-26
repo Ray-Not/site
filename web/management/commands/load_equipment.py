@@ -2,7 +2,7 @@ import csv
 
 from django.core.management.base import BaseCommand
 
-from web.models import Door, Equipment
+from web.models import Door
 
 
 class Command(BaseCommand):
@@ -17,13 +17,8 @@ class Command(BaseCommand):
 
             for row in reader:
                 title = row[0]
-                # equipment_data = row[1]
-                print(row[0])
-                door, _ = Door.objects.get_or_create(slug=title)
-                # equipment_items = equipment_data.split(';')
-                # for item in equipment_items:
-                #     name, image_path = item.split(', ', 1)
-                #     print(name, image_path)
-                    # door.equipment.add(equipment)
-
+                equipment_data = row[1]
+                print(title)
+                door = Door.objects.get(slug=title)
+                door.equipment = equipment_data
                 door.save()

@@ -1,13 +1,14 @@
+import csv
+import hashlib
+import os
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 import requests
 from bs4 import BeautifulSoup
-import time
-import csv
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from slugify import slugify
-import os
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import hashlib
 
 base_url = 'https://doors007.ru/doors.html'
 base_dir = 'https://doors007.ru/'
@@ -150,6 +151,6 @@ with open(csv_file, 'a+', newline='', encoding='utf-8') as csvfile:
 
     # Обработка страниц параллельно
     with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = [executor.submit(process_page, page, writer, existing_data) for page in range(200, total_pages + 1)]
+        futures = [executor.submit(process_page, page, writer, existing_data) for page in range(0, total_pages + 1)]
         for future in as_completed(futures):
             future.result()

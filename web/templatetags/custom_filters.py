@@ -1,7 +1,8 @@
+import random
+
+from colorama import Fore, Style, init
 from django import template
 from slugify import slugify
-import random
-from colorama import init, Fore, Style
 
 init()
 register = template.Library()

@@ -1,10 +1,11 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Max, Min
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import DoorFilter
 from .forms import OrderForm
-from .models import Door, Review, Tag, Catalog, Blog, BlogChapter, DeliveryRegion
+from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Review,
+                     Tag)
 
 
 def index(request):

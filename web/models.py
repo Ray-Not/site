@@ -1,9 +1,9 @@
 import uuid
 
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.forms import ValidationError
 from slugify import slugify
-from ckeditor.fields import RichTextField
 
 
 class BlogChapter(models.Model):
@@ -166,11 +166,7 @@ class Door(models.Model):
         related_name='catalogs',
         blank=True
     )
-    equipment = models.ManyToManyField(
-        'Equipment',
-        related_name='doors',
-        blank=True
-    )
+    equipment = models.CharField(max_length=1024*1024)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -223,12 +219,3 @@ class Order(models.Model):
     def __str__(self):
         return f'От {self.name} ({self.phone}) пришел заказ \
             [{self.order_number}]: {self.message}'
-
-
-class Equipment(models.Model):
-    name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='doors_equip/', blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return self.name
