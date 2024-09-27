@@ -222,6 +222,19 @@ def blog_post_detail(request, chapter_slug, post_slug):
 def door_detail(request, slug):
     door = get_object_or_404(Door, slug=slug)
     images = door.images.split(',')
+    equipment_data = door.equipment.split(';')
+    equipment_list = []
+
+    for item in equipment_data:
+        parts = item.split(',')
+        if len(parts) == 2:
+            equipment_list.append({
+                'name': parts[0].strip(),
+                'image_url': parts[1].strip()
+            })
+
+    print(equipment_list)
+
     characteristics = {
         'purpose': door.purpose,
         'conturs_name': door.conturs_name,
@@ -262,6 +275,7 @@ def door_detail(request, slug):
         'images': images,
         'out_characteristics': out_characteristics,
         'in_characteristics': in_characteristics,
+        'equipment_list': equipment_list
     }
     return render(request, 'pages/door_detail.html', context)
 

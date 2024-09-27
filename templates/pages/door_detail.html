@@ -56,6 +56,31 @@
         scrollbar-width: thin; /* Уменьшенная ширина скроллбара */
         scrollbar-color: #888 #f1f1f1; /* Цвет полоски и фона */
     }
+
+    .equipment-list {
+        display: flex;
+        overflow-x: auto; /* Горизонтальная прокрутка */
+        gap: 15px; /* Отступы между элементами */
+        padding: 10px;
+    }
+
+    .equipment-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .equipment-item img {
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: contain;
+    }
+
+    .equipment-item p {
+        margin-top: 5px;
+        font-size: 14px;
+    }
 </style>
 <section class="row door-card">
     <h1 class="my-3">{{ door.title }}</h1>
@@ -93,6 +118,14 @@
             </div>
         </div>
         <label class="my-2 h5">Комплектация</label>
+        <div class="equipment-list">
+            {% for equipment in equipment_list %}
+                <div class="equipment-item">
+                    <img src="{{ MEDIA_URL }}{{ equipment.image_url }}" alt="{{ equipment.name }}">
+                    <p>{{ equipment.name }}</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     <article class="col-lg-4 col-12">
         <h5>Артикул: {{ door.article }}</h5><hr>
