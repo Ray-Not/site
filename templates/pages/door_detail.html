@@ -19,18 +19,42 @@
         }
     }
 
-    /* Стили для блока с горизонтальной прокруткой */
     .scroll-container {
         display: flex;
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 10px;
-        padding: 10px 0;
+        max-width: 100%;
     }
 
-    .scroll-container img {
-        flex-shrink: 0;
-        scroll-snap-align: start;
+    .image-container {
+        flex: 0 0 auto; /* Отключаем автоматическое изменение размера */
+        margin-right: 10px; /* Отступы между изображениями */
+    }
+
+    .scroll-container {
+        max-width: calc(100px * 3 + 20px); /* Показываем 3 изображения по 100px с отступами */
+    }
+        /* Стилизация скроллбара для WebKit-браузеров (Chrome, Safari) */
+        .scroll-container::-webkit-scrollbar {
+        height: 8px; /* Высота скроллбара */
+    }
+
+    .scroll-container::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Цвет фона скроллбара */
+    }
+
+    .scroll-container::-webkit-scrollbar-thumb {
+        background: #888; /* Цвет полоски прокрутки */
+        border-radius: 10px; /* Закругление полоски */
+    }
+
+    .scroll-container::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Цвет полоски при наведении */
+    }
+
+    /* Для Firefox */
+    .scroll-container {
+        scrollbar-width: thin; /* Уменьшенная ширина скроллбара */
+        scrollbar-color: #888 #f1f1f1; /* Цвет полоски и фона */
     }
 </style>
 <section class="row door-card">
@@ -47,12 +71,26 @@
             {% endwith %}
             </div>
         </section>
-        <div class="scroll-container">
+        <div class="scroll-container mt-3">
             {% for image_url in images|slice:"2:" %}
                 <div class="image-container mx-2">
-                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100px; width: 100px; object-fit: cover;">
+                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100px; width: 100px; object-fit: cover;" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ MEDIA_URL }}{{ image_url }}">
                 </div>
             {% endfor %}
+        </div>
+        <!-- Модальное окно для показа большой картинки -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">{{ door.title }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img id="modalImage" src="" class="img-fluid" alt="Large Image">
+                    </div>
+                </div>
+            </div>
         </div>
         <label class="my-2 h5">Комплектация</label>
     </div>
@@ -90,7 +128,16 @@
         </ul>
     </article>
 </section>
-    
+<script>
+    // Обработчик события для открытия модального окна с нужной картинкой
+    var imageModal = document.getElementById('imageModal');
+    imageModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var imageUrl = button.getAttribute('data-bs-image');
+        var modalImage = document.getElementById('modalImage');
+        modalImage.src = imageUrl;
+    });
+</script>
     
 
 {% endblock content %}
