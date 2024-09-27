@@ -5,6 +5,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('contacts/', views.contact, name='contact'),
     path('delivery/', views.delivery, name='delivery'),
     path(
         'delivery/<slug:slug>/',

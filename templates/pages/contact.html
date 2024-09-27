@@ -1,0 +1,86 @@
+{% extends '../index.html' %}
+{% load static %}
+{% block content %}
+<section class="container py-5">
+    <h1 class="text-center display-4 mb-4">Наши Магазины</h1>
+    
+    <div class="row mb-5">
+        <!-- Магазин 1 -->
+        <div class="col-md-6 mb-4 d-flex">
+            <div class="p-4 border rounded-lg shadow-sm bg-light flex-fill d-flex flex-column">
+                <h3 class="h5 text-uppercase text-secondary">Магазин 1</h3>
+                <p class="mb-2">
+                    <strong>Адрес:</strong><br>
+                    г. Москва, ул. Пришвина 26, метро Бибирево<br>
+                    ТЦ «Миллион мелочей», магазин "Паритет-двери"
+                </p>
+                <p class="mb-2">
+                    <strong>Время работы:</strong><br>
+                    с 9:00 до 21:00
+                </p>
+                <div class="mt-auto pt-3">
+                    <a href="#" class="btn btn-outline-primary w-100">Подробнее</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Магазин 2 -->
+        <div class="col-md-6 mb-4 d-flex">
+            <div class="p-4 border rounded-lg shadow-sm bg-light flex-fill d-flex flex-column">
+                <h3 class="h5 text-uppercase text-secondary">Магазин 2</h3>
+                <p class="mb-2">
+                    <strong>Адрес:</strong><br>
+                    ТЦ "Метр квадратный", метро Волгоградский проспект<br>
+                    г. Москва, ул. Волгоградский проспект, д.32, к.25
+                </p>
+                <p class="mb-2">
+                    <strong>Время работы:</strong><br>
+                    с 9:00 до 21:00
+                </p>
+                <div class="mt-auto pt-3">
+                    <a href="#" class="btn btn-outline-primary w-100">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Контактная информация с фоном и размытием -->
+    <div class="contact-info text-center py-4 rounded-lg shadow-sm text-white">
+        <h3 class="h4 mb-4">Контактная информация</h3>
+        <p class="lead mb-2">
+            <i class="fas fa-phone-alt"></i> <strong>Телефон:</strong> +7(499)322-91-25 (многоканальный)
+        </p>
+        <p class="lead">
+            <i class="fas fa-envelope"></i> <strong>Email:</strong> 
+            <a href="mailto:paritet-dveri@inbox.ru" class="text-white">paritet-dveri@inbox.ru</a>
+        </p>
+    </div>
+</section>
+
+<!-- CSS для фона и размытия -->
+<style>
+    .contact-info {
+        background-image: url('{% static "images/background_images/doors.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+    .contact-info::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        backdrop-filter: blur(8px); /* Размытие */
+        background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный затемняющий слой */
+        z-index: 1;
+    }
+
+    .contact-info > * {
+        position: relative;
+        z-index: 2; /* Контент над размытием */
+    }
+</style>
+{% endblock %}

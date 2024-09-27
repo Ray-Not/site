@@ -298,3 +298,7 @@ def reviews(request):
     }
 
     return render(request, 'pages/reviews.html', context)
+
+
+def contact(request):
+    return render(request, 'pages/contact.html')
