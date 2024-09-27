@@ -254,7 +254,7 @@ def door_detail(request, slug):
         'in_color': door.in_color,
     }
 
-    images = door.images.split(',')[2:]
+    images = door.images.split(',')
 
     context = {
         'door': door,
