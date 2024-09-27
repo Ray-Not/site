@@ -16,8 +16,12 @@ def catalog_context(request):
             chapters_with_titles[chapter] = []
         chapters_with_titles[chapter].append(catalog)
 
-    random_doors = list(Door.objects.all())
-    random_doors = sample(random_doors, min(4, len(random_doors)))
+    total_count = Door.objects.count()
+    if total_count <= 4:
+        random_doors = list(Door.objects.all())
+    else:
+        random_ids = sample(list(Door.objects.values_list('id', flat=True)), 4)
+        random_doors = Door.objects.filter(id__in=random_ids)
 
     return {
         'chapters_with_titles': chapters_with_titles,

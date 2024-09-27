@@ -1,6 +1,6 @@
 {% load custom_filters %}
-<section class="random-doors container">
-  <h2>Случайные двери</h2>
+<section class="random-doors container my-4">
+  <h2>Популярные двери</h2>
   <div class="row">
     {% for door in random_doors %}
       <div class="col-lg-3 col-6 mt-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">

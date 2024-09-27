@@ -59,17 +59,19 @@
 
     .equipment-list {
         display: flex;
-        flex-wrap: wrap; /* Позволяет элементам переноситься на следующую строку */
-        justify-content: space-between; /* Распределяет элементы по доступной ширине */
+        flex-wrap: wrap;
+        justify-content: space-between; /* Разделяет блоки */
     }
 
     .equipment-item {
-        flex: 1 1 calc(33.33% - 10px); /* Каждому элементу задается ширина 33.33% с учетом отступов */
-        margin: 5px; /* Добавьте отступы между элементами */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        flex: 1 1 calc(33% - 20px); /* Каждому блоку занимает 50% ширины, с отступами */
+        margin: 10px; /* Отступ между элементами */
+        padding: 5px; /* Внутренние отступы */
+        background-color: #f8f9fa; /* Цвет фона */
+        border-radius: 8px; /* Закругление углов */
+        text-align: center; /* Выравнивание текста по центру */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для блока */
+        transition: transform 0.2s; /* Анимация при наведении */
     }
 
     .equipment-item img {
@@ -78,8 +80,13 @@
     }
 
     .equipment-item p {
-        margin-top: auto; /* Автоматическое выравнивание текста внизу */
-        min-height: 50px; /* Устанавливает минимальную высоту для текста */
+        font-size: 0.9rem; /* Размер текста */
+        color: #6c757d; /* Цвет текста */
+    }
+    
+    .equipment-item h5 {
+        font-size: 1.25rem; /* Размер заголовка */
+        margin-bottom: 5px; /* Отступ снизу заголовка */
     }
 
 </style>
