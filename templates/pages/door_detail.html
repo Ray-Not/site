@@ -9,13 +9,13 @@
 
     @media (min-width: 992px) {
         .image {
-            height: 700px;
+            height: 650px;
         }
     }
 
     @media (max-width: 991px) {
         .image {
-            height: 500px;
+            height: 350px;
         }
     }
 
@@ -105,7 +105,7 @@
             {% endfor %}
         </div>
         <!-- Модальное окно для показа большой картинки -->
-        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <section class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -117,9 +117,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         <!-- Модальное окно с формой -->
-        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+        <section class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -154,9 +154,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         <label class="my-2 h5">Комплектация</label>
-        <div class="equipment-list">
+        <section class="equipment-list">
             {% for equipment in equipment_list %}
                 <div class="equipment-item">
                     <img src="{{ MEDIA_URL }}{{ equipment.image_url }}" alt="{{ equipment.name }}" 
@@ -166,7 +166,7 @@
                     <p>{{ equipment.name }}</p>
                 </div>
             {% endfor %}
-        </div>
+        </section>
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#requestModal">
             Оставить заявку
         </button>
