@@ -2,7 +2,6 @@ import csv
 import hashlib
 import os
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
 from bs4 import BeautifulSoup
@@ -63,7 +62,6 @@ def save_image_to_cache(img_url, product_dir):
         print(f"Не удалось загрузить изображение: {img_url}")
         return 'Нет изображения'
 
-
 def load_existing_data(csv_file):
     """Чтение существующих данных из CSV файла."""
     existing_data = set()
@@ -92,9 +90,6 @@ def process_product(product, headers, existing_data):
 
     product_soup = BeautifulSoup(product_response.text, 'html.parser')
     title = slugify(product_soup.find('h1', class_='product_name').text.strip()) if product_soup.find('h1', class_='product_name') else 'Нет информации'
-    product_dir = os.path.join('media/doors_equip', title)
-    os.makedirs(product_dir, exist_ok=True)
-
     equipment_set = set()
     equipment_section = product_soup.find('section', class_='product_equipment block')
     if equipment_section:
@@ -106,8 +101,7 @@ def process_product(product, headers, existing_data):
             img_url = img_src['data-src'] if img_src and img_src.has_attr('data-src') else 'Нет изображения'
 
             if img_url != 'Нет изображения':
-                img_path = save_image_to_cache(img_url, product_dir)  # Используем кэширование при загрузке изображения
-                equipment_set.add(f"{type_label}: {name_label}, {img_path}")
+                equipment_set.add(f"{type_label}: {name_label}")
 
     equipment_str = '; '.join(equipment_set) if equipment_set else 'Нет информации'
 
@@ -128,17 +122,15 @@ def process_page(page, writer, existing_data):
         soup = BeautifulSoup(response.text, 'html.parser')
         products = soup.find_all('div', class_='product')
 
-        with ThreadPoolExecutor(max_workers=10) as executor:
-            futures = [executor.submit(process_product, product, headers, existing_data) for product in products]
-            for future in as_completed(futures):
-                result = future.result()
-                if result:
-                    writer.writerow(result)
+        for product in products:
+            result = process_product(product, headers, existing_data)
+            if result:
+                writer.writerow(result)
     else:
         print(f"Ошибка: не удалось получить доступ к странице {page} (статус код {response.status_code})")
 
 total_pages = 277
-csv_file = 'doors_data.csv'
+csv_file = 'doors_data_default.csv'
 
 # Загружаем уже существующие данные
 existing_data = load_existing_data(csv_file)
@@ -149,8 +141,6 @@ with open(csv_file, 'a+', newline='', encoding='utf-8') as csvfile:
     if not os.path.exists(csv_file) or os.stat(csv_file).st_size == 0:
         writer.writeheader()  # Записываем заголовки, если файл пуст
 
-    # Обработка страниц параллельно
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = [executor.submit(process_page, page, writer, existing_data) for page in range(0, total_pages + 1)]
-        for future in as_completed(futures):
-            future.result()
+    # Последовательная обработка страниц
+    for page in range(0, total_pages + 1):
+        process_page(page, writer, existing_data)

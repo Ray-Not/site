@@ -16,7 +16,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">{{ review.name }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ review.message }}</h6>
+                        {% if review.message %}<h6 class="card-subtitle mb-2 text-muted">{{ review.message }}</h6>{% endif %}
                         <p class="card-text">
                             {% for i in range %}
                                 {% if i <= review.rating|divisibleby:2 %}

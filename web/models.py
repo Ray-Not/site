@@ -113,17 +113,11 @@ class Review(models.Model):
     order = models.OneToOneField(
         'Order',
         on_delete=models.CASCADE,
-        related_name='review'
+        related_name='review',
+        null=True
     )
     rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
-    message = models.CharField(max_length=255)
-
-    def clean(self, *args, **kwargs):
-        if not self.order.door:
-            raise ValidationError(
-                'Отзыв можно оставить только на заказ, связанный с дверью.'
-            )
-        super().save(*args, **kwargs)
+    message = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return f'От {self.name} [{self.order}]: Рейтинг {self.rating}'
