@@ -108,7 +108,7 @@
     </div>
 </div>
 
-<div class="bg-light p-4 rounded">
+<section class="bg-light p-4 rounded">
     <h2 class="text-center mb-4">Доставка по Москве</h2>
     
     <div class="d-flex flex-wrap justify-content-center">
@@ -116,7 +116,7 @@
         <a href="{% url 'delivery_detail' region.slug %}"><span class="fs-6 badge border {{ region|random_bg_with_text_color}} m-1">{{ region.name }}</span></a>
         {% endfor %}
     </div>
-</div>
+</section>
 <!-- Начало карты Москвы -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3250 4250">
     <a href="{% url 'delivery_detail' slug='novomoskovskij_ao' %}">
@@ -1073,6 +1073,7 @@
     </div>
 </div>
 
+<figure>
 <!-- Начало карты московской области -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2700 2450">
     <a href="{% url 'delivery_detail' slug='zato_krasnoznamensk' %}">
@@ -1970,5 +1971,5 @@
         </g>
     </a>
 </svg>
-
+</figure>
 {% endblock content %}

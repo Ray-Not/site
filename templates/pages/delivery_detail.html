@@ -1,7 +1,7 @@
 {% extends '../index.html' %}
 
 {% block content %}
-<div class="container mt-3">
+<section class="container mt-3">
     <div class="row">
         <h1 class="display-4 text-center">{{ region.name }}</h1>
         <div class="col-10 mx-auto m-4 d-flex justify-content-center">
@@ -16,6 +16,6 @@
             {% endif %}
         </div>
     <a href="{% url 'delivery' %}" class="btn btn-outline-danger mt-4">Назад к списку районов доставки</a>
-</div>
-</div>
+    </div>
+</section>
 {% endblock %}

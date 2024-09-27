@@ -2,14 +2,14 @@
 {% load custom_filters %}
 {% load static %}
 {% block content %}
-<div class="my-4">
+<section class="my-4">
     <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
     <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
     <h1 style="font-family: tilda;">Отзывы о нас</h1>
     <p class="fs-5">Хотите оставить отзыв?</p>
     <p>Уточните номер заказа и заполните следующую форму.</p>
-</div>
-<div class="container my-5">
+</section>
+<aside class="container my-5">
     <div class="row">
         {% for review in reviews %}
             <div class="col-lg-6 mb-4">
@@ -36,5 +36,5 @@
             <p>Пока нет отзывов</p>
         {% endfor %}
     </div>
-</div>
+</aside>
 {% endblock content %}

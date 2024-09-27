@@ -59,7 +59,7 @@ $(document).ready(function() {
 </style>
 
 
-<div class="row flex-lg-row flex-column">
+<section class="row flex-lg-row flex-column">
   <div class="col-lg-4 col-12">
     <form method="get" id="filter-form">
       <fieldset>
@@ -176,7 +176,7 @@ $(document).ready(function() {
       </fieldset>
     </form>
   </div>
-  <div class="col-lg-8 col-12">
+  <aside class="col-lg-8 col-12">
     {% if catalog %}
       <h2 class="text-center my-4">{{ catalog.title }}</h2>
     {% else %}
@@ -208,7 +208,7 @@ $(document).ready(function() {
       {% for door in doors %}
       <div class="col-lg-6 col-12 mt-lg-0 mt-4 mb-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
         <div class="card h-100">
-          <div class="d-flex align-items-center p-2" data-bs-ride="false" style="height: 500px; overflow: hidden;">
+          <section class="d-flex align-items-center p-2" data-bs-ride="false" style="height: 500px; overflow: hidden;">
             <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
               {% for tag in door.tags.all %}
                 <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
@@ -223,10 +223,9 @@ $(document).ready(function() {
                 {% endfor %}
               {% endwith %}
             </div>
-          </div>
+          </section>
           
-    
-          <div class="card-body">
+          <section class="card-body">
             <p class="card-title fw-bold">Купить {{ door.title }} в Москве</p>
             {% if door.discount %}
             <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
@@ -244,7 +243,7 @@ $(document).ready(function() {
             {% endif %}
             <label class="card-text text-secondary pb-3 mt-auto">{{ door.size_name }}</label>
             <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger w-100 mt-auto">Узнать подробнее</button></a>
-          </div>
+          </section>
         </div>
       </div>
       {% endfor %}
@@ -322,8 +321,8 @@ $(document).ready(function() {
       </ul>
     </nav>
     
-  </div>
-</div>
+  </aside>
+</section>
 <script>
   let currentSort = '';  // To track current sorted field
   let sortDirection = 'asc'; // Default sort direction
