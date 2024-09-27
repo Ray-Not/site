@@ -1,31 +1,30 @@
-<footer class="text-secondary py-4">
+<footer class="text-light py-4 bg-dark mt-auto">
   <section class="container text-center">
     <nav class="row">
-      <div class="col-lg-6 col-12">
-        <h5>Контактная информация</h5>
+      <section class="col-lg-6 col-12 ">
+        <h5 class="text-uppercase text-warning mb-3">Контактная информация</h5>
         <p class="lh-lg">
           Адрес: г. Москва, ул. Пришвина 26<br>
           Телефон: +7(499) 322-91-25
         </p>
-      </div>
-      <div class="col-lg-6 col-12">
-        <h5>Полезные ссылки</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-secondary">О компании</a></li>
-          <li><a href="#" class="text-secondary">Услуги</a></li>
-          <li><a href="#" class="text-secondary">Часто задаваемые вопросы</a></li>
-          <li><a href="#" class="text-secondary">Политика конфиденциальности</a></li>
-          <li><a href="#" class="text-secondary">Условия использования</a></li>
-        </ul>
-      </div>
-      <div class="text-center mt-4">
-        <p>© 2024 Паритет Двери. Все права защищены.</p>
+      </section>
+      <nav class="col-lg-6 col-12 d-flex flex-column">
+        <h5 class="text-uppercase text-warning mb-3">Полезные ссылки</h5>
+        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'catalog' %}">Каталог</a>
+        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'contact' %}">Контакты</a>
+        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'blog_chapter' %}">Блог</a>
+        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'installation' %}">Установка</a>
+        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'garant' %}">Гарантии</a>
+        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'reviews' %}">Отзывы</a>
+      </nav>
+      <section class="text-center mt-4">
         <div>
-          <a href="#" class="text-secondary me-2">Telegramm</a>
-          <a href="#" class="text-secondary me-2">WhatsApp</a>
-          <a href="#" class="text-secondary me-2">Vk</a>
+          <a href="https://vk.com/paritetdveri" class="link-light me-2" target=_blank>Vk</a>
+          <a href="https://wa.me/79296224835" class="link-light me-2" target=_blank>WhatsApp</a>
+          <a href="https://t.me/alex12_alex12" class="link-light me-2" target="_blank">Telegramm</a>
         </div>
-      </div>
+        <p>© 2024 Паритет Двери. Все права защищены.</p>
+      </section>
     <nav>
   </section>
 </footer>
