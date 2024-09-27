@@ -59,12 +59,13 @@
 
     .equipment-list {
         display: flex;
-        overflow-x: auto; /* Горизонтальная прокрутка */
-        gap: 15px; /* Отступы между элементами */
-        padding: 10px;
+        flex-wrap: wrap; /* Позволяет элементам переноситься на следующую строку */
+        justify-content: space-between; /* Распределяет элементы по доступной ширине */
     }
 
     .equipment-item {
+        flex: 1 1 calc(33.33% - 10px); /* Каждому элементу задается ширина 33.33% с учетом отступов */
+        margin: 5px; /* Добавьте отступы между элементами */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -72,15 +73,15 @@
     }
 
     .equipment-item img {
-        max-width: 100px;
-        max-height: 100px;
-        object-fit: contain;
+        width: 100px; /* Устанавливает ширину изображения в 100% от родителя */
+        height: 100px; /* Сохраняет пропорции изображения */
     }
 
     .equipment-item p {
-        margin-top: 5px;
-        font-size: 14px;
+        margin-top: auto; /* Автоматическое выравнивание текста внизу */
+        min-height: 50px; /* Устанавливает минимальную высоту для текста */
     }
+
 </style>
 <section class="row door-card">
     <h1 class="my-3">{{ door.title }}</h1>
@@ -121,7 +122,10 @@
         <div class="equipment-list">
             {% for equipment in equipment_list %}
                 <div class="equipment-item">
-                    <img src="{{ MEDIA_URL }}{{ equipment.image_url }}" alt="{{ equipment.name }}">
+                    <img src="{{ MEDIA_URL }}{{ equipment.image_url }}" alt="{{ equipment.name }}" 
+                         data-bs-toggle="modal" 
+                         data-bs-target="#imageModal" 
+                         data-bs-image="{{ MEDIA_URL }}{{ equipment.image_url }}">
                     <p>{{ equipment.name }}</p>
                 </div>
             {% endfor %}

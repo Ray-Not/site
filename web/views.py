@@ -233,8 +233,6 @@ def door_detail(request, slug):
                 'image_url': parts[1].strip()
             })
 
-    print(equipment_list)
-
     characteristics = {
         'purpose': door.purpose,
         'conturs_name': door.conturs_name,
