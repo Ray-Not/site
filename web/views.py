@@ -3,9 +3,9 @@ from django.db.models import Max, Min
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import DoorFilter
-from .forms import OrderForm
+from .forms import OrderForm, ReviewForm
 from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Review,
-                     Tag)
+                     Tag, Order)
 
 
 def index(request):
@@ -292,7 +292,33 @@ def door_detail(request, slug):
 def reviews(request):
     reviews = Review.objects.all()
 
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            order_number = form.cleaned_data['order_number']
+
+            try:
+                order = Order.objects.get(order_number=order_number)  # Получите заказ по номеру
+                
+                if hasattr(order, 'review'):
+                    form.add_error('order_number', 'Отзыв для данного заказа уже существует.')
+                else:
+                    review = form.save(commit=False)  # Не сохраняйте еще
+                    review.order = order  # Присвойте заказ
+                    review.door = order.door  # Присвойте дверь из заказа
+                    review.save()  # Теперь сохраните отзыв
+                    return redirect('reviews')
+                
+                return redirect('reviews')  # Перенаправление на страницу отзывов
+            except Order.DoesNotExist:
+                form.add_error('order_number', 'Заказ с таким номером не существует.')
+            return redirect('reviews')
+    else:
+        form = ReviewForm()
+
     context = {
+        'range_10': range(10),
+        'form': form,
         'reviews': reviews,
         'range': range(1, 6),
     }

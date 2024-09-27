@@ -2,12 +2,74 @@
 {% load custom_filters %}
 {% load static %}
 {% block content %}
+<style>
+.star {
+    font-size: 20px; /* Размер звезд */
+}
+
+.star-active {
+    color: rgb(229, 195, 0); /* Цвет для активных звезд */
+}
+
+.star-inactive {
+    color: rgb(123, 123, 123); /* Цвет для неактивных звезд */
+}
+</style>
 <section class="my-4">
     <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
     <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
     <h1 style="font-family: tilda;">Отзывы о нас</h1>
     <p class="fs-5">Хотите оставить отзыв?</p>
-    <p>Уточните номер заказа и заполните следующую форму.</p>
+    <p>Уточните номер заказа
+    <button type="button" class="btn btn-outline-danger ms-2" data-bs-toggle="modal" data-bs-target="#reviewModal">
+        Оставить отзыв
+    </button>
+    </p>
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">Оставить отзыв</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'reviews' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_order_number" class="form-label">Номер заказа</label>
+                            {{ form.order_number }}
+                            {% if form.order_number.errors %}
+                                <div class="text-danger">{{ form.order_number.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Ваш отзыв</label>
+                            {{ form.message }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Ваше имя</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="rating" class="form-label">Рейтинг</label>
+                            <div class="d-flex align-items-center">
+                                {% for i in range_10 %}
+                                <div class="form-check">
+                                    <input type="radio" name="rating" id="rating{{ i }}" value="{{ i }}" class="form-check-input" style="display:none;" 
+                                           {% if form.instance.rating == i %} checked {% endif %}>
+                                    <label class="form-check-label star" for="rating{{ i }}" data-value="{{ i }}">
+                                        <i class="bi bi-star-fill {% if form.instance.rating >= i %}star-active{% else %}star-inactive{% endif %}"></i>
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <aside class="container my-5">
     <div class="row">
@@ -37,4 +99,33 @@
         {% endfor %}
     </div>
 </aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.star');
+    
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const ratingValue = this.getAttribute('data-value');
+    
+                // Установить активные и неактивные звезды
+                stars.forEach(s => {
+                    const sValue = s.getAttribute('data-value');
+                    if (sValue <= ratingValue) {
+                        s.querySelector('i').classList.add('star-active');
+                        s.querySelector('i').classList.remove('star-inactive');
+                    } else {
+                        s.querySelector('i').classList.remove('star-active');
+                        s.querySelector('i').classList.add('star-inactive');
+                    }
+                });
+    
+                // Установить значение в скрытом radio
+                const radioInput = document.querySelector(`input[name="rating"][value="${ratingValue}"]`);
+                if (radioInput) {
+                    radioInput.checked = true;
+                }
+            });
+        });
+    });
+    </script>
 {% endblock content %}
