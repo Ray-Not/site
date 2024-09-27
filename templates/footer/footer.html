@@ -1,3 +1,54 @@
+{% load custom_filters %}
+<section class="random-doors container">
+  <h2>Случайные двери</h2>
+  <div class="row">
+    {% for door in random_doors %}
+      <div class="col-lg-3 col-6 mt-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+        <div class="card h-100 d-flex flex-column">
+          <section class="d-flex align-items-center p-2" style="height: 200px; overflow: hidden;">
+            <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
+              {% for tag in door.tags.all %}
+                <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
+              {% endfor %}
+            </div>
+            <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
+              {% with door.images|split_and_get_all as image_urls %}
+                {% for image_url in image_urls %}
+                  <div class="image-container" style="flex: 1 1 calc(100%); margin: 5px; height: 100px; overflow: hidden;">
+                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
+                  </div>
+                {% endfor %}
+              {% endwith %}
+            </div>
+          </section>
+
+          <section class="card-body d-flex flex-column mt-auto">
+            <p class="card-title fw-bold">{{ door.title }}</p>
+            {% if door.discount %}
+            <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
+              <label class="card-text rounded" style="color: #ff0000;">{{ door.price|calculate_discount:door.discount }} ₽</label>
+              <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
+                <span>{{ door.price|format_number }} ₽</span>
+                <svg viewBox="0 0 100 100">
+                  <line x1="-150" y1="0" x2="150" y2="80" stroke="#ff0000" stroke-width="4"/>
+                </svg>
+              </label>
+              <label class="card-text rounded bg-danger text-white p-1" style="font-size: x-small;">-{{ door.discount }}%</label>
+            </label>
+            {% else %}
+            <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
+            {% endif %}
+            <div class="mt-auto">
+              <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger w-100">Узнать подробнее</button></a>
+            </div>
+          </section>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+
 <footer class="text-light py-4 bg-dark mt-auto">
   <section class="container text-center">
     <nav class="row">
