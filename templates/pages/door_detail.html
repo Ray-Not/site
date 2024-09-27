@@ -9,28 +9,52 @@
 
     @media (min-width: 992px) {
         .image {
-            height: 900px;
+            height: 700px;
         }
     }
 
     @media (max-width: 991px) {
         .image {
-            height: 400px;
+            height: 500px;
         }
+    }
+
+    /* Стили для блока с горизонтальной прокруткой */
+    .scroll-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    .scroll-container img {
+        flex-shrink: 0;
+        scroll-snap-align: start;
     }
 </style>
 <section class="row door-card">
     <h1 class="my-3">{{ door.title }}</h1>
-    <div class="d-flex align-items-center p-2 col-lg-8 col-12 image" data-bs-ride="false" style="overflow: hidden;">
-        <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
-          {% with door.images|split_and_get_all as image_urls %}
-            {% for image_url in image_urls %}
-              <div class="image-container mx-2 image" style="flex: 1 1 calc(33.33% - 10px);">
-                <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
-              </div>
+    <div class="d-flex align-items-center p-2 col-lg-8 col-12 flex-column" data-bs-ride="false">
+        <section class="row">
+            <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%; overflow: hidden;">
+            {% with door.images|split_and_get_all as image_urls %}
+                {% for image_url in image_urls %}
+                <div class="image-container mx-2 image" style="flex: 1 1 calc(33.33% - 10px);">
+                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
+                </div>
+                {% endfor %}
+            {% endwith %}
+            </div>
+        </section>
+        <div class="scroll-container">
+            {% for image_url in images|slice:"2:" %}
+                <div class="image-container mx-2">
+                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100px; width: 100px; object-fit: cover;">
+                </div>
             {% endfor %}
-          {% endwith %}
         </div>
+        <label class="my-2 h5">Комплектация</label>
     </div>
     <article class="col-lg-4 col-12">
         <h5>Артикул: {{ door.article }}</h5><hr>
