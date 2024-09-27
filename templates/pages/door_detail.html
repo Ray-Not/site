@@ -118,6 +118,43 @@
                 </div>
             </div>
         </div>
+        <!-- Модальное окно с формой -->
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="requestModalLabel">Форма заявки</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{% url 'door_detail' slug=door.slug %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="id_name" class="form-label">Имя</label>
+                                {{ form.name }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_phone" class="form-label">Телефон</label>
+                                {{ form.phone }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_call_time" class="form-label">Время звонка</label>
+                                {{ form.call_time }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_address" class="form-label">Адрес</label>
+                                {{ form.address }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_message" class="form-label">Сообщение</label>
+                                {{ form.message }}
+                            </div>
+                            <button type="submit" class="btn btn-danger">Оставить заявку</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <label class="my-2 h5">Комплектация</label>
         <div class="equipment-list">
             {% for equipment in equipment_list %}
@@ -130,6 +167,9 @@
                 </div>
             {% endfor %}
         </div>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#requestModal">
+            Оставить заявку
+        </button>
     </div>
     <article class="col-lg-4 col-12">
         <h5>Артикул: {{ door.article }}</h5><hr>

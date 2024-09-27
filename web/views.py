@@ -225,6 +225,16 @@ def door_detail(request, slug):
     equipment_data = door.equipment.split(';')
     equipment_list = []
 
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.door = door
+            order.save()
+            return redirect('door_detail', slug=door.slug)
+    else:
+        form = OrderForm()
+
     for item in equipment_data:
         parts = item.split(',')
         if len(parts) == 2:
@@ -273,7 +283,8 @@ def door_detail(request, slug):
         'images': images,
         'out_characteristics': out_characteristics,
         'in_characteristics': in_characteristics,
-        'equipment_list': equipment_list
+        'equipment_list': equipment_list,
+        'form': form,
     }
     return render(request, 'pages/door_detail.html', context)
 

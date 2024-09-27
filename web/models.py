@@ -2,7 +2,6 @@ import uuid
 
 from ckeditor.fields import RichTextField
 from django.db import models
-from django.forms import ValidationError
 from slugify import slugify
 
 

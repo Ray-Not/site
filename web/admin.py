@@ -2,6 +2,8 @@ from django.contrib import admin
 
 from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
                      Review, Tag)
+from django.urls import reverse
+from django.utils.html import format_html
 
 
 @admin.register(Door)
@@ -29,7 +31,24 @@ class DeliveryRegionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
-admin.site.register(Order)
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = (
+        'name', 'phone', 'order_number', 'view_door_link', 'message'
+    )
+
+    def view_door_link(self, obj):
+        if obj.door:
+            return format_html(
+                '<a href="{}">{}</a>',
+                reverse('door_detail', args=[obj.door.slug]),
+                obj.door.title
+            )
+        return "Нет двери"
+
+    view_door_link.short_description = 'Дверь'
+
+
 admin.site.register(Tag)
 admin.site.register(Review)
 admin.site.register(BlogChapter)
