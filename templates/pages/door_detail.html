@@ -121,7 +121,7 @@
         <div class="equipment-list">
             {% for equipment in equipment_list %}
                 <div class="equipment-item">
-                    <img src="{{ MEDIA_URL }}{{ equipment.image_url }}" alt="{{ equipment.name }}">
+                    <img src="{{ equipment.image_url }}" alt="{{ equipment.name }}">
                     <p>{{ equipment.name }}</p>
                 </div>
             {% endfor %}
