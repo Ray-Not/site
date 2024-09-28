@@ -7,6 +7,26 @@
 {% endblock %}
 
 {% block content %}
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": {{ door.title }},
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": {{ avg_rating }},
+        "reviewCount": {{ door_count }}
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": {{ min_price }},
+        "highPrice": {{ max_price }},
+        "priceCurrency": "RUB"
+      }
+    }
+</script>
+
 <style>
     .image-container {
         overflow: hidden;

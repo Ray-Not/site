@@ -1,5 +1,5 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Max, Min
+from django.db.models import Max, Min, Avg
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import DoorFilter
@@ -224,6 +224,10 @@ def door_detail(request, slug):
     images = door.images.split(',')
     equipment_data = door.equipment.split(';')
     equipment_list = []
+    min_price = Door.objects.aggregate(Min('price'))['price__min']
+    max_price = Door.objects.aggregate(Max('price'))['price__max']
+    average_rating = Review.objects.aggregate(Avg('rating'))['rating__avg']
+    door_count = Door.objects.count()
 
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -285,6 +289,10 @@ def door_detail(request, slug):
         'in_characteristics': in_characteristics,
         'equipment_list': equipment_list,
         'form': form,
+        'min_price': min_price,
+        'max_price': max_price,
+        'avg_rating': average_rating,
+        'door_count': door_count
     }
     return render(request, 'pages/door_detail.html', context)
 
@@ -298,20 +306,26 @@ def reviews(request):
             order_number = form.cleaned_data['order_number']
 
             try:
-                order = Order.objects.get(order_number=order_number)  # Получите заказ по номеру
-                
+                order = Order.objects.get(order_number=order_number)
+
                 if hasattr(order, 'review'):
-                    form.add_error('order_number', 'Отзыв для данного заказа уже существует.')
+                    form.add_error(
+                        'order_number',
+                        'Отзыв для данного заказа уже существует.'
+                    )
                 else:
-                    review = form.save(commit=False)  # Не сохраняйте еще
-                    review.order = order  # Присвойте заказ
-                    review.door = order.door  # Присвойте дверь из заказа
-                    review.save()  # Теперь сохраните отзыв
+                    review = form.save(commit=False)
+                    review.order = order
+                    review.door = order.door
+                    review.save()
                     return redirect('reviews')
-                
-                return redirect('reviews')  # Перенаправление на страницу отзывов
+
+                return redirect('reviews')
             except Order.DoesNotExist:
-                form.add_error('order_number', 'Заказ с таким номером не существует.')
+                form.add_error(
+                    'order_number',
+                    'Заказ с таким номером не существует.'
+                )
             return redirect('reviews')
     else:
         form = ReviewForm()
