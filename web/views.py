@@ -229,7 +229,7 @@ def door_detail(request, slug):
     average_rating = Review.objects.aggregate(Avg('rating'))['rating__avg']
 
     if average_rating is not None:
-        average_rating = round(average_rating, 1)
+        average_rating = average_rating // 2
         average_rating = str(average_rating).replace(',', '.')
     else:
         average_rating = '9.0'
