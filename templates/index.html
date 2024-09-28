@@ -75,6 +75,10 @@
   .text-scroll::-webkit-scrollbar-thumb:hover {
     background-color: #999; /* Цвет ползунка при наведении */
   }
+  .banner-btn {
+    width: 200px;
+    font-size: xx-small;
+  }
   }
   @media (min-width: 992px) { 
   .border-end-lg {
@@ -92,7 +96,7 @@
     <main>
         <aside class='container'>
           {% block content %}
-            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
               <article class="carousel-inner">
                 <div class="carousel-item active">
                   <img src="{% static 'images/banners/baner-argus-slide.png' %}" class="d-block w-100" alt="Аргус">
@@ -121,7 +125,16 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
-            </div>
+            </div> -->
+            <aside class="mt-2 position-relative" style="overflow: hidden;">
+              <img src="{% static 'images/index_banner.png' %}" 
+                   alt="Описание изображения" 
+                   style="width: 100%; height: auto; object-fit: cover;">
+              <a href="/catalog" class="btn btn-outline-dark position-absolute banner-btn" 
+                 style="top: 80%; left: 62%; transform: translate(-50%, -50%);">
+                Смотрите двери в нашем каталоге
+              </a>
+            </aside>
             <aside class="my-4">
               <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Двери</h1> -->
               <!-- <h2 class=" text-danger mt-3" style="font-family: tilda;">По выгодным ценам</h2> -->
