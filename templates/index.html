@@ -5,7 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Паритет двери | Двери в Москве</title>
+    <title>
+      {% block title %}
+      Купить двери в Москве — Входные двери по лучшим ценам | Паритет двери
+      {% endblock %}
+    </title>
     <!-- Подключение стилей CSS -->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link rel="stylesheet" href="{% static 'css/a_pallete.css' %}">
