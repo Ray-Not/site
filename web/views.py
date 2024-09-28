@@ -342,3 +342,7 @@ def reviews(request):
 
 def contact(request):
     return render(request, 'pages/contact.html')
+
+
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)
