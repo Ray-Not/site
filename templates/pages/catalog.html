@@ -230,7 +230,7 @@ $(document).ready(function() {
           </section>
           
           <section class="card-body">
-            <p class="card-title fw-bold">Купить {{ door.title }} в Москве</p>
+            <p class="card-title fw-bold">{{ door.title }}</p>
             {% if door.discount %}
             <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
               <label class="card-text rounded" style="color: #ff0000;">{{ door.price|calculate_discount:door.discount }} ₽</label>
