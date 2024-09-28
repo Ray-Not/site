@@ -227,6 +227,12 @@ def door_detail(request, slug):
     min_price = Door.objects.aggregate(Min('price'))['price__min']
     max_price = Door.objects.aggregate(Max('price'))['price__max']
     average_rating = Review.objects.aggregate(Avg('rating'))['rating__avg']
+
+    if average_rating is not None:
+        average_rating = str(average_rating).replace(',', '.')
+    else:
+        average_rating = '9.0'
+
     door_count = Door.objects.count()
 
     if request.method == 'POST':
