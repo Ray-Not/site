@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-dz5pl9ml++f%$74p3o(7q5wk5lm@0@tu2xd0j_x=w+r!ackjeb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'web',
     'ckeditor',
+    'compressor'
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',  # Добавьте эту строку
+]
+
+# Опционально: установите сжатие по умолчанию
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True  # Включение оффлайн-сжатия
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+    ('text/x-less', 'lessc {infile} {outfile}'),
+)

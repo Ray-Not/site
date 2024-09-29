@@ -12,3 +12,4 @@ django-ckeditor
 Pillow
 colorama
 beautifulsoup4
+django-compressor
