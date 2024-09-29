@@ -115,6 +115,11 @@ def catalog(request, slug=None):
         catalog = get_object_or_404(Catalog, slug=slug)
         doors_queryset = doors_queryset.filter(catalogs__in=[catalog])
 
+    search = request.GET.get('search')
+
+    if search:
+        doors_queryset = doors_queryset.filter(title__icontains=search)
+
     # Фильтрация дверей
     door_filter = DoorFilter(
         request.GET,

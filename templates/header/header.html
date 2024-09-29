@@ -62,10 +62,12 @@
       </a>
     </article>
     <article class='col-lg-4 d-none d-lg-flex align-items-center justify-content-center'>
-      <div class="input-group" style="width: 70%;">
-        <input type="text" class="form-control" placeholder="Введите название товара" aria-describedby="basic-addon2">
-        <div class="btn bg-dark text-light" id="basic-addon2">Поиск</div>
-      </div>
+      <form method="GET" action="{% url 'catalog' %}">
+        <div class="input-group" style="width: 100%;">
+          <input type="text" name="search" class="form-control" placeholder="Введите название товара">
+          <button type="submit" class="btn bg-dark text-light">Поиск</button>
+        </div>
+      </form>
     </article>
     <article class="col-lg-2 d-none d-lg-flex">
       <a href="tel:+79296224835" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover d-flex flex-column w-100" style="font-size: 10;">
