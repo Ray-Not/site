@@ -186,7 +186,7 @@ $(document).ready(function() {
     {% else %}
       <h1 class="text-center my-4">Входные двери от производителя</h1>
     {% endif %}
-    <label class="text-center">Популярные теги:</label>
+    <label class="text-center">Популярные категории: </label>
     <!-- <div class="tags-cloud"> -->
       {% for tag in tags_cloud %}
         <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill text-{{ tag.text_color }}" style="background-color: {{ tag.color_hex }};">{{ tag.title }}</a>
