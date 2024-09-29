@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from faker import Faker
-from web.models import Review, Door
+
+from web.models import Door, Review
 
 
 class Command(BaseCommand):

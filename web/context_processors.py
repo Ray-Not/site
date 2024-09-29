@@ -1,7 +1,8 @@
+from random import sample
+
 from django.db.models import Count
 
 from .models import Catalog, Door
-from random import sample
 
 
 def catalog_context(request):

@@ -117,7 +117,7 @@
 </style>
 <section class="row door-card">
     <h1 class="my-3">Купить металлическую входную дверь в Москве по цене {{ door.price }} руб. {{ door.title }} Паритет двери</h1>
-    <div class="d-flex align-items-center p-2 col-lg-8 col-12 flex-column" data-bs-ride="false">
+    <div class="d-flex align-items-center p-2 col-lg-6 col-12 flex-column" data-bs-ride="false">
         <section class="row">
             <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%; overflow: hidden;">
             {% with door.images|split_and_get_all as image_urls %}
@@ -203,8 +203,27 @@
             Оставить заявку
         </button>
     </div>
-    <article class="col-lg-4 col-12">
+    <article class="col-lg-6 col-12">
         <h5>Артикул: {{ door.article }}</h5><hr>
+
+        <section class="d-flex flex-row text-secondary my-4 justify-content-center" style="gap: 10px;">
+            <div class="shadow rounded px-2" style="font-size: small;">
+                <i class="bi bi-arrow-up-left-square"></i> Доставка + установка:
+                <p class="text-dark">бесплатно по МКАД + 15 км</p>
+            </div>
+            <div class="shadow rounded px-2" style="font-size: small;">
+                <i class="bi bi-arrow-up-left-square"></i> Выезд на замер:
+                <p class="text-dark">0 рублей</p>
+            </div>
+            <div class="shadow rounded px-2" style="font-size: small;">
+                <i class="bi bi-arrow-up-left-square"></i> Ближайший монтаж:
+                <p class="text-dark">{{ delivery_date }}</p>
+            </div>
+            <div class="shadow rounded px-2" style="font-size: small;">
+                <i class="bi bi-arrow-up-left-square"></i> Гарантия:
+                <p class="text-dark">5-20 лет</p>
+            </div>
+        </section><hr>
         <h5 class="text-center">Характеристики</h5><hr>
         <ul class="list-group">
             {% for value in characteristics.values %}

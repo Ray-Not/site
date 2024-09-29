@@ -1,11 +1,14 @@
+import locale
+from datetime import datetime, timedelta
+
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Max, Min, Avg
+from django.db.models import Avg, Max, Min
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import DoorFilter
 from .forms import OrderForm, ReviewForm
-from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Review,
-                     Tag, Order)
+from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
+                     Review, Tag)
 
 
 def index(request):
@@ -293,6 +296,9 @@ def door_detail(request, slug):
 
     images = door.images.split(',')
 
+    locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
+    delivery_date = datetime.now() + timedelta(days=3)
+
     context = {
         'door': door,
         'characteristics': characteristics,
@@ -304,7 +310,8 @@ def door_detail(request, slug):
         'min_price': min_price,
         'max_price': max_price,
         'avg_rating': average_rating,
-        'door_count': door_count
+        'door_count': door_count,
+        'delivery_date': delivery_date.strftime('%d %B')
     }
     return render(request, 'pages/door_detail.html', context)
 

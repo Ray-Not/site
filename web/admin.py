@@ -1,9 +1,9 @@
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
 
 from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
                      Review, Tag)
-from django.urls import reverse
-from django.utils.html import format_html
 
 
 @admin.register(Door)
