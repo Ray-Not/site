@@ -24,7 +24,7 @@
         <div class="col-lg-4 col-10 my-2">
             <a href="{% url 'blog_post_detail' chapter.slug blog.slug %}" class="text-decoration-none">
                 <div class="card h-100 rounded-top-5" style="overflow: hidden;">
-                    <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}" style="background-size: cover;">
+                    <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}" style="max-height: 250px; width: 100%; object-fit: cover; object-position: center;">
                     <div class="card-body">
                         <p class="text-secondary">{{ blog.created_at }}</p>
                         <p class="h5">{{ blog.title }}</p>
