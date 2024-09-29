@@ -1,14 +1,17 @@
+import json
 import locale
 from datetime import datetime, timedelta
 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Avg, Max, Min
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import DoorFilter
 from .forms import OrderForm, ReviewForm
 from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
                      Review, Tag)
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -365,3 +368,19 @@ def contact(request):
 
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
+
+
+@csrf_exempt
+def compare_doors(request):
+    if request.method == 'GET':
+        door_ids = request.GET.get('door_ids', '')
+        door_ids = [int(id) for id in door_ids.split(',') if id.isdigit()]
+        request.session['compareList'] = door_ids  # Обновляем список дверей в сессии
+
+    # Получаем ID дверей из сессии
+    door_ids = request.session.get('compareList', [])
+    doors_to_compare = Door.objects.filter(id__in=door_ids)
+
+    return render(request, 'pages/compare.html', {
+        'doors': doors_to_compare
+    })

@@ -1,0 +1,145 @@
+{% extends '../index.html' %}
+{% block content %}
+<h1 class="mb-4">Сравнение дверей</h1>
+
+<div class="table-responsive">
+    {% if doors %}
+        <table class="table table-bordered table-striped" id="compareTable">
+            <thead class="table-primary">
+                <tr>
+                    <th>Характеристика</th>
+                    {% for door in doors %}
+                        <th id="door-{{ door.id }}">{{ door.title }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Размер</td>
+                    {% for door in doors %}
+                        <td>{{ door.size_name }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Цена</td>
+                    {% for door in doors %}
+                        <td>{{ door.price|floatformat:2 }} ₽</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Сталь</td>
+                    {% for door in doors %}
+                        <td>{{ door.steel_size }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Толщина</td>
+                    {% for door in doors %}
+                        <td>{{ door.tolshina }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Коробка</td>
+                    {% for door in doors %}
+                        <td>{{ door.korob_size }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Вес</td>
+                    {% for door in doors %}
+                        <td>{{ door.ves }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Цвет фурнитуры</td>
+                    {% for door in doors %}
+                        <td>{{ door.furn_color_name }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Действия</td>
+                    {% for door in doors %}
+                        <td>
+                            <button class="btn btn-danger" onclick="removeFromCompare({{ door.id }})">
+                                Убрать из сравнения
+                            </button>
+                        </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p class="content">Нет дверей для сравнения.</p>
+    {% endif %}
+</div>
+
+<a href="{% url 'catalog' %}" class="btn btn-outline-primary mt-3">Вернуться в каталог</a>
+
+<script>
+function removeFromCompare(doorId) {
+    let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
+    
+    // Удаляем дверь из списка сравнения
+    compareList = compareList.filter(id => id !== doorId);
+    localStorage.setItem('compareList', JSON.stringify(compareList));
+
+    // Удаляем столбец из таблицы
+    const doorColumnIndex = getColumnIndex(doorId);
+    if (doorColumnIndex !== -1) {
+        const table = document.getElementById('compareTable');
+        
+        // Удаляем заголовок столбца
+        const headerRow = table.querySelector('thead tr');
+        if (headerRow) {
+            headerRow.deleteCell(doorColumnIndex);
+        }
+
+        // Удаляем ячейки из всех строк
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            row.deleteCell(doorColumnIndex);
+        });
+    }
+
+    // Проверяем, остались ли двери для сравнения
+    if (compareList.length === 0) {
+        const table = document.getElementById('compareTable');
+        if (table) {
+            table.remove(); // Удаляем всю таблицу
+            document.querySelector('.content').innerHTML = 'Нет дверей для сравнения.'; // Отображаем сообщение
+        }
+    }
+}
+
+// Функция для получения индекса столбца на основе ID двери
+function getColumnIndex(doorId) {
+    const table = document.getElementById('compareTable');
+    const headerRow = table.querySelector('thead tr');
+    const cells = headerRow.querySelectorAll('th');
+
+    for (let i = 0; i < cells.length; i++) {
+        if (cells[i].id === `door-${doorId}`) { // Проверяем ID заголовка
+            return i; // Возвращаем индекс столбца
+        }
+    }
+    return -1; // Если не найден
+}
+</script>
+
+<style>
+.table-responsive {
+    max-height: 400px; /* Установите максимальную высоту для прокрутки */
+    overflow-y: auto; /* Добавляем прокрутку по вертикали */
+    overflow-x: auto; /* Добавляем прокрутку по горизонтали */
+}
+
+.table {
+    width: 100%; /* Устанавливаем ширину таблицы на 100% */
+}
+
+.table th, .table td {
+    vertical-align: middle; /* Центрируем содержимое ячеек */
+    white-space: nowrap; /* Запрещаем перенос строк в ячейках */
+}
+</style>
+{% endblock %}

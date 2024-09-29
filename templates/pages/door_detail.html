@@ -199,9 +199,16 @@
                 </div>
             {% endfor %}
         </section>
-        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#requestModal">
-            Оставить заявку
-        </button>
+        <section class="d-flex flex-row mt-3" style="gap: 20px;">
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#requestModal">
+                Оставить заявку
+            </button>
+            <a href="tel:+74993229125">
+                <button type="button" class="btn btn-outline-primary">
+                    Консультация
+                </button>
+            </a>
+        </section>
     </div>
     <article class="col-lg-6 col-12">
         <h5>Артикул: {{ door.article }}</h5><hr>
