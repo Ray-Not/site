@@ -293,12 +293,12 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="my-4">
+              <aside class="my-4">
                 <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
                 <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
                 <h1 style="font-family: tilda;">Расчет стоимости и услуг</h1>
-              </div>
-              <form method="POST" action="{% url 'index' %}">
+              </aside>
+              <form method="POST" action="{% url 'index' %}" style="background-color: blue;" class="p-3 text-light rounded-3 d-flex justify-content-center flex-column">
                 {% csrf_token %}
                 <div class="mb-3">
                   <label for="id_name" class="form-label">Имя</label>
@@ -317,10 +317,10 @@
                   {{ form.address }}
                 </div>
                 <div class="mb-3">
-                  <label for="id_message" class="form-label">Сообщение</label>
+                  <label for="id_message" class="form-label">Техническое задание</label>
                   {{ form.message }}
                 </div>
-                <button type="submit" class="btn btn-danger">Оставить заявку</button>
+                <button type="submit" class="btn rounded-pill text-light" style="background-color: crimson;">Оставить заявку</button>
               </form>
             </aside>
             <aside class="my-4">

@@ -1,10 +1,8 @@
-import json
 import locale
 from datetime import datetime, timedelta
 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Avg, Max, Min
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import DoorFilter
@@ -375,9 +373,8 @@ def compare_doors(request):
     if request.method == 'GET':
         door_ids = request.GET.get('door_ids', '')
         door_ids = [int(id) for id in door_ids.split(',') if id.isdigit()]
-        request.session['compareList'] = door_ids  # Обновляем список дверей в сессии
+        request.session['compareList'] = door_ids
 
-    # Получаем ID дверей из сессии
     door_ids = request.session.get('compareList', [])
     doors_to_compare = Door.objects.filter(id__in=door_ids)
 

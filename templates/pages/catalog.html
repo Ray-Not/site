@@ -192,18 +192,18 @@ $(document).ready(function() {
         <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill text-{{ tag.text_color }}" style="background-color: {{ tag.color_hex }};">{{ tag.title }}</a>
       {% endfor %}
     <!-- </div> -->
-    <div class="d-flex flex-lg-row flex-column align-items-center">
-      <p class="my-4 col text-center">Сортировать по:</p>
+    <p class="my-4 col text-center">Сортировать по:</p>
+    <div class="d-flex flex-lg-row align-items-center">
       <!-- Сортировка по новизне -->
-      <button class="btn btn-danger col h-50 mt-lg-0 mt-2 w-100" onclick="sortItems('novelty')">
+      <button class="btn text-light col h-50 mt-lg-0 mt-2 w-100 rounded-pill" style="background-color: crimson;" onclick="sortItems('novelty')">
         Новизне <span id="novelty-sort-symbol">⇅</span>
       </button>
       <!-- Сортировка по цене -->
-      <button class="btn btn-danger col h-50 mt-lg-0 mt-2 mx-2 w-100" onclick="sortItems('price')">
+      <button class="btn text-light col h-50 mt-lg-0 mt-2 w-100 mx-2 rounded-pill" style="background-color: crimson;" onclick="sortItems('price')">
         Цене <span id="price-sort-symbol">⇅</span>
       </button>
       <!-- Сортировка по заказам -->
-      <button class="btn btn-danger col h-50 mt-lg-0 mt-2 w-100" onclick="sortItems('orders')">
+      <button class="btn text-light col h-50 mt-lg-0 mt-2 w-100 rounded-pill" style="background-color: crimson;"  onclick="sortItems('orders')">
         Заказам <span id="orders-sort-symbol">⇅</span>
       </button>
     </div>

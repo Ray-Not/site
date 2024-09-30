@@ -3,7 +3,7 @@
 {% load custom_filters %}
 
 {% block title %}
-Купить дверь {{ door.title }} в Москве | Паритет двери
+Купить металлическую входную дверь в Москве по цене {{ door.price }} руб. {{ door.title }} Паритет двери
 {% endblock %}
 
 {% block content %}
@@ -116,7 +116,7 @@
 
 </style>
 <section class="row door-card">
-    <h1 class="my-3">Купить металлическую входную дверь в Москве по цене {{ door.price }} руб. {{ door.title }} Паритет двери</h1>
+    <h1 class="my-3">{{ door.title }}</h1>
     <div class="d-flex align-items-center p-2 col-lg-6 col-12 flex-column" data-bs-ride="false">
         <section class="row">
             <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%; overflow: hidden;">
