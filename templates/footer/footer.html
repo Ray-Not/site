@@ -1,9 +1,28 @@
 {% load custom_filters %}
+
+<section class="random-catalogs container my-4">
+  <h2>Популярные категории</h2>
+  <section class="row">
+    {% for catalog in random_catalogs %}
+      <div class="col-lg-3 col-12 mt-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+        <div class="card h-100 d-flex flex-column">
+          <section class="d-flex align-items-center p-2" style="height: 500px; overflow: hidden;">
+            <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
+              {{ catalog.title }}
+              <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
+            </div>
+          </section>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+</section>
+
 <section class="random-doors container my-4">
   <h2>Популярные двери</h2>
-  <div class="row">
+  <section class="row">
     {% for door in random_doors %}
-      <div class="col-lg-3 col-6 mt-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+      <div class="col-lg-3 col-12 mt-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
         <div class="card h-100 d-flex flex-column">
           <section class="d-flex align-items-center p-2" style="height: 500px; overflow: hidden;">
             <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
@@ -14,8 +33,8 @@
             <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
               {% with door.images|split_and_get_one as image_urls %}
                 {% for image_url in image_urls %}
-                  <div class="image-container" style="flex: 1 1 calc(100%); margin: 5px; overflow: hidden; height: 480px;">
-                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
+                  <div class="image-container d-flex justify-content-center" style="flex: 1 1 calc(100%); margin: 5px; overflow: hidden; height: 480px;">
+                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
                   </div>
                 {% endfor %}
               {% endwith %}
@@ -45,9 +64,8 @@
         </div>
       </div>
     {% endfor %}
-  </div>
+  </section>
 </section>
-
 
 <footer class="text-light py-4 bg-dark mt-auto">
   <section class="container text-center">

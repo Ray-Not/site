@@ -10,10 +10,17 @@ def footer_context(request):
         door_count=Count('catalogs')
     ).order_by('chapter', 'title')
 
-    catalogs = Catalog.objects.all()
-
-
-    print(catalogs)
+    catalogs_with_images = Catalog.objects.exclude(
+        image=''
+    ).exclude(image__isnull=True)
+    if catalogs_with_images.count() <= 8:
+        random_catalogs = list(catalogs_with_images)
+    else:
+        random_catalog_ids = sample(list(catalogs_with_images.values_list(
+            'id',
+            flat=True
+        )), 8)
+        random_catalogs = Catalog.objects.filter(id__in=random_catalog_ids)
 
     chapters_with_titles = {}
     for catalog in catalogs_with_door_count:
@@ -32,4 +39,5 @@ def footer_context(request):
     return {
         'chapters_with_titles': chapters_with_titles,
         'random_doors': random_doors,
+        'random_catalogs': random_catalogs
     }
