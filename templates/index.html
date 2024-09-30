@@ -320,7 +320,7 @@
                   <label for="id_message" class="form-label">Техническое задание</label>
                   {{ form.message }}
                 </div>
-                <button type="submit" class="btn rounded-pill text-light" style="background-color: crimson;">Оставить заявку</button>
+                <button type="submit" class="btn rounded-pill text-light w-50" style="background-color: crimson;">Оставить заявку</button>
               </form>
             </aside>
             <aside class="my-4">
@@ -443,7 +443,7 @@
                     </article>
                   </div>
                 {% endfor %}
-                <section class="d-flex justify-content-center">
+                <section class="d-flex justify-content-center flex-lg-row flex-column">
                   <a href="{% url 'catalog' %}" class="btn m-3 rounded-pill text-light btn-lg fw-bold px-3" style="background-color: blue;">Каталог металлических дверей</a>
                   <a class="btn m-3 rounded-pill text-light btn-lg fw-bold px-3" style="background-color: crimson;">Изготовление дверей на заказ</a>
                 </section>
