@@ -1,23 +1,5 @@
 {% load custom_filters %}
 
-<section class="random-catalogs container my-4">
-  <h2>Популярные категории</h2>
-  <section class="row">
-    {% for catalog in random_catalogs %}
-      <div class="col-lg-3 col-12 mt-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
-        <div class="card h-100 d-flex flex-column">
-          <section class="d-flex align-items-center p-2" style="height: 500px; overflow: hidden;">
-            <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
-              {{ catalog.title }}
-              <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
-            </div>
-          </section>
-        </div>
-      </div>
-    {% endfor %}
-  </section>
-</section>
-
 <section class="random-doors container my-4">
   <h2>Популярные двери</h2>
   <section class="row">
@@ -68,32 +50,37 @@
 </section>
 
 <footer class="text-light py-4 bg-dark mt-auto">
-  <section class="container text-center">
-    <nav class="row">
-      <section class="col-lg-6 col-12 ">
-        <h5 class="text-uppercase text-warning mb-3">Контактная информация</h5>
-        <p class="lh-lg">
+  <section class="container d-flex justify-content-center flex-lg-row flex-column">
+    <nav class="col-lg-4 col-12 d-flex flex-column">
+        <h5 class="text-light mb-3 fw-bold">Контактная информация</h5>
+        <p class="lh-lg text-secondary">
           Адрес: г. Москва, ул. Пришвина 26<br>
-          Телефон: +7(499) 322-91-25
+          Телефон: +7(499) 322-91-25<br>
+          Почта: paritet-dveri@inbox.ru
         </p>
-      </section>
-      <nav class="col-lg-6 col-12 d-flex flex-column">
-        <h5 class="text-uppercase text-warning mb-3">Полезные ссылки</h5>
-        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'catalog' %}">Каталог</a>
-        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'contact' %}">Контакты</a>
-        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'blog_chapter' %}">Блог</a>
-        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'installation' %}">Установка</a>
-        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'garant' %}">Гарантии</a>
-        <a class="link-underline link-underline-opacity-0 text-light" href="{% url 'reviews' %}">Отзывы</a>
-      </nav>
-      <section class="text-center mt-4">
-        <div>
-          <a href="https://vk.com/paritetdveri" class="link-light me-2" target=_blank>Vk</a>
-          <a href="https://wa.me/79296224835" class="link-light me-2" target=_blank>WhatsApp</a>
-          <a href="https://t.me/alex12_alex12" class="link-light me-2" target="_blank">Telegramm</a>
-        </div>
-        <p>© 2024 Паритет Двери. Все права защищены.</p>
-      </section>
-    <nav>
+    </nav>
+    <nav class="col-lg-4 col-12 d-flex flex-column">
+      <h5 class="text-light mb-3">Полезные ссылки</h5>
+      <a class="link-underline link-underline-opacity-0 text-secondary" href="{% url 'catalog' %}">Каталог</a>
+      <a class="link-underline link-underline-opacity-0 text-secondary" href="{% url 'contact' %}">Контакты</a>
+      <a class="link-underline link-underline-opacity-0 text-secondary" href="{% url 'blog_chapter' %}">Блог</a>
+      <a class="link-underline link-underline-opacity-0 text-secondary" href="{% url 'installation' %}">Установка</a>
+      <a class="link-underline link-underline-opacity-0 text-secondary" href="{% url 'garant' %}">Гарантии</a>
+      <a class="link-underline link-underline-opacity-0 text-secondary" href="{% url 'reviews' %}">Отзывы</a>
+    </nav>
+    <nav class="col-lg-4 col-12 d-flex flex-column">
+      <a class="link-underline-light text-light fw-bold mb-3" href="{% url 'catalog' %}" style="font-size: large;">Каталог дверей</a>
+      {% for catalog in random_catalogs %}
+        <a class="link-underline link-underline-opacity-0 text-secondary" href="{% url 'catalog_with_slug' catalog.slug %}">{{ catalog.title }}</a>
+      {% endfor %}
+    </nav>
+  </section>
+  <section class="text-center mt-4">
+    <div>
+      <a href="https://vk.com/paritetdveri" class="link-light me-2" target=_blank>Vk</a>
+      <a href="https://wa.me/79296224835" class="link-light me-2" target=_blank>WhatsApp</a>
+      <a href="https://t.me/alex12_alex12" class="link-light me-2" target="_blank">Telegramm</a>
+    </div>
+    <p>© 2024 Паритет Двери. Все права защищены.</p>
   </section>
 </footer>

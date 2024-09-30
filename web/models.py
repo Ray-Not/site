@@ -81,6 +81,10 @@ class Catalog(models.Model):
         blank=True
     )
 
+    def get_door_count(self):
+        """Возвращает количество дверей, связанных с данной категорией."""
+        return self.catalogs.count()
+
     def __str__(self) -> str:
         return f"{self.title} из '{self.chapter}'"
 
