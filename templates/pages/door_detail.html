@@ -116,14 +116,10 @@
 
 </style>
 <section class="row d-flex flex-row mt-2">
-    <label class="text-center fs-2">Популярные предложения</label>
     <div class="tags-cloud d-flex flex-wrap">
+        <label class="text-center" style="font-size: 15px;">Популярные категории: </label>
         {% for tag in tags_cloud %}
-            <div class="col-auto mb-2">  <!-- Use col-auto for responsive sizing -->
-                <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 p-1 m-2 rounded-1" style="background-color:rgb(255, 185, 199) ; color: rgb(155, 12, 41); display: inline-block; gap: 10px;">
-                    {{ tag.title }}
-                </a>
-            </div>
+        <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill" style="color: crimson;">{{ tag.title }}</a>
         {% endfor %}
     </div>
 </section>
