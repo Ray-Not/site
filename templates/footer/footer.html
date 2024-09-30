@@ -14,7 +14,7 @@
             <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
               {% with door.images|split_and_get_one as image_urls %}
                 {% for image_url in image_urls %}
-                  <div class="image-container" style="flex: 1 1 calc(100%); margin: 5px; height: 100px; overflow: hidden;">
+                  <div class="image-container" style="flex: 1 1 calc(100%); margin: 5px; height: 450px; overflow: hidden;">
                     <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
                   </div>
                 {% endfor %}
