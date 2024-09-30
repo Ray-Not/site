@@ -229,6 +229,7 @@ def blog_post_detail(request, chapter_slug, post_slug):
 
 
 def door_detail(request, slug):
+
     door = get_object_or_404(Door, slug=slug)
     images = door.images.split(',')
     equipment_data = door.equipment.split(';')

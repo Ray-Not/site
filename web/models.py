@@ -75,6 +75,11 @@ class Catalog(models.Model):
     title = models.CharField(max_length=255)
     chapter = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
+    image = models.ImageField(
+        upload_to='catalog',
+        null=True,
+        blank=True
+    )
 
     def __str__(self) -> str:
         return f"{self.title} из '{self.chapter}'"

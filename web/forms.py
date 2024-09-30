@@ -23,7 +23,13 @@ class OrderForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
-    order_number = forms.CharField(max_length=255, label="Номер заказа", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Номер заказа'}))
+    order_number = forms.CharField(
+        max_length=255,
+        label="Номер заказа",
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'Номер заказа'}
+            )
+        )
 
     def clean_order_number(self):
         order_number = self.cleaned_data.get('order_number')
@@ -35,7 +41,15 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['name', 'message', 'rating', 'order_number']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ваше имя'}),
-            'message': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Ваш отзыв'}),
+            'name': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Ваше имя'}
+            ),
+            'message': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 3,
+                    'placeholder': 'Ваш отзыв'
+                }
+            ),
             'rating': forms.RadioSelect(attrs={'class': 'form-check-input'})
         }

@@ -5,10 +5,13 @@ from django.db.models import Count
 from .models import Catalog, Door
 
 
-def catalog_context(request):
+def footer_context(request):
     catalogs_with_door_count = Catalog.objects.annotate(
         door_count=Count('catalogs')
     ).order_by('chapter', 'title')
+
+    catalogs = Catalog.objects.all()
+    print(catalogs)
 
     chapters_with_titles = {}
     for catalog in catalogs_with_door_count:
