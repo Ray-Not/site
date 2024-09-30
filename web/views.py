@@ -316,7 +316,8 @@ def door_detail(request, slug):
         'max_price': max_price,
         'avg_rating': average_rating,
         'door_count': door_count,
-        'delivery_date': delivery_date.strftime('%d %B')
+        'delivery_date': delivery_date.strftime('%d %B'),
+        'tags_cloud': Tag.objects.filter(in_cloud=True),
     }
     return render(request, 'pages/door_detail.html', context)
 

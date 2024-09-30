@@ -166,6 +166,53 @@
                 <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
                 <h1 style="font-family: tilda;">Популярные стальные двери</h1>
             </aside>
+            <section class="random-doors container">
+              <section class="row">
+                {% for door in random_doors %}
+                  <div class="col-lg-3 col-12 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+                    <div class="card h-100 d-flex flex-column">
+                      <section class="d-flex align-items-center p-2" style="height: 500px; overflow: hidden;">
+                        <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
+                          {% for tag in door.tags.all %}
+                            <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
+                          {% endfor %}
+                        </div>
+                        <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
+                          {% with door.images|split_and_get_one as image_urls %}
+                            {% for image_url in image_urls %}
+                              <div class="image-container d-flex justify-content-center" style="flex: 1 1 calc(100%); margin: 5px; overflow: hidden; height: 480px;">
+                                <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
+                              </div>
+                            {% endfor %}
+                          {% endwith %}
+                        </div>
+                      </section>
+            
+                      <section class="card-body d-flex flex-column mt-auto">
+                        <p class="card-title fw-bold">{{ door.title }}</p>
+                        {% if door.discount %}
+                        <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
+                          <label class="card-text rounded" style="color: #ff0000;">{{ door.price|calculate_discount:door.discount }} ₽</label>
+                          <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
+                            <span>{{ door.price|format_number }} ₽</span>
+                            <svg viewBox="0 0 100 100">
+                              <line x1="-150" y1="0" x2="150" y2="80" stroke="#ff0000" stroke-width="4"/>
+                            </svg>
+                          </label>
+                          <label class="card-text rounded bg-danger text-white p-1" style="font-size: x-small;">-{{ door.discount }}%</label>
+                        </label>
+                        {% else %}
+                        <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
+                        {% endif %}
+                        <div class="mt-auto">
+                          <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger w-100">Узнать подробнее</button></a>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+                {% endfor %}
+              </section>
+            </section>
             <aside class="my-4 text-center">
               <h1 style="font-family: tilda;">Наши услуги</h1>
             </aside>
@@ -298,31 +345,35 @@
                 <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
                 <h1 style="font-family: tilda;">Расчет стоимости и услуг</h1>
               </aside>
-              <form method="POST" action="{% url 'index' %}" class="p-3 text-light d-flex justify-content-center flex-column align-items-center">
-
-                {% csrf_token %}
-                <div class="mb-3 w-100">
-                  <label for="id_name" class="text-dark">Имя</label>
-                  {{ form.name }}
-                </div>
-                <div class="mb-3 w-100">
-                  <label for="id_phone" class="text-dark">Телефон</label>
-                  {{ form.phone }}
-                </div>
-                <div class="mb-3 w-100">
-                  <label for="id_call_time" class="text-dark">Время звонка</label>
-                  {{ form.call_time }}
-                </div>
-                <div class="mb-3 w-100">
-                  <label for="id_address" class="text-dark">Адрес</label>
-                  {{ form.address }}
-                </div>
-                <div class="mb-3 w-100">
-                  <label for="id_message" class="text-dark">Техническое задание</label>
-                  {{ form.message }}
-                </div>
-                <button type="submit" class="btn rounded-pill text-light col-4" style="background-color: sienna;">Оставить заявку</button>
-              </form>
+              <section>
+              <div class="bg-secondary text-light d-flex align-items-center justify-content-center" style="height: 50px; font-size: large;">
+                Свяжитесь с нами по телефону +7 (929) 622-48-35
+              </div>
+                <form method="POST" action="{% url 'index' %}" class="p-3 text-light d-flex justify-content-center flex-column align-items-center" >
+                  {% csrf_token %}
+                  <div class="mb-3 w-100">
+                    <label for="id_name" class="text-dark">Имя</label>
+                    {{ form.name }}
+                  </div>
+                  <div class="mb-3 w-100">
+                    <label for="id_phone" class="text-dark">Телефон</label>
+                    {{ form.phone }}
+                  </div>
+                  <div class="mb-3 w-100">
+                    <label for="id_call_time" class="text-dark">Время звонка</label>
+                    {{ form.call_time }}
+                  </div>
+                  <div class="mb-3 w-100">
+                    <label for="id_address" class="text-dark">Адрес</label>
+                    {{ form.address }}
+                  </div>
+                  <div class="mb-3 w-100">
+                    <label for="id_message" class="text-dark">Техническое задание</label>
+                    {{ form.message }}
+                  </div>
+                  <button type="submit" class="btn text-light col-4" style="background-color: sienna;">Оставить заявку</button>
+                </form>
+              </section>
             </aside>
             <aside class="my-4">
                 <h1 style="font-family: tilda;">Последние новости</h1>

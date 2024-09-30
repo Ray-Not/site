@@ -115,6 +115,18 @@
     }
 
 </style>
+<section class="row d-flex flex-row mt-2">
+    <label class="text-center fs-2">Популярные предложения</label>
+    <div class="tags-cloud d-flex flex-wrap">
+        {% for tag in tags_cloud %}
+            <div class="col-auto mb-2">  <!-- Use col-auto for responsive sizing -->
+                <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 p-1 m-2 rounded-1" style="background-color:rgb(255, 185, 199) ; color: rgb(155, 12, 41); display: inline-block; gap: 10px;">
+                    {{ tag.title }}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
 <section class="row door-card mx-auto">
     <h1 class="my-3">{{ door.title }}</h1>
     <div class="d-flex align-items-center p-2 col-lg-6 col-12 flex-column" data-bs-ride="false">
@@ -261,33 +273,39 @@
                 {% endif %}
             {% endfor %}
         </ul>
-        <form method="POST" action="{% url 'door_detail' door.slug %}" style="background-color: blue;" class="p-3 text-light rounded-3 d-flex justify-content-center flex-column mt-3">
-            {% csrf_token %}
-            <div class="mb-3">
-              <label for="id_name" class="form-label">Имя</label>
-              {{ form.name }}
-            </div>
-            <div class="mb-3">
-              <label for="id_phone" class="form-label">Телефон</label>
-              {{ form.phone }}
-            </div>
-            <div class="mb-3">
-              <label for="id_call_time" class="form-label">Время звонка</label>
-              {{ form.call_time }}
-            </div>
-            <div class="mb-3">
-              <label for="id_address" class="form-label">Адрес</label>
-              {{ form.address }}
-            </div>
-            <div class="mb-3">
-              <label for="id_message" class="form-label">Техническое задание</label>
-              {{ form.message }}
-            </div>
-            <button type="submit" class="btn rounded-pill text-light" style="background-color: crimson;">Оставить заявку</button>
-          </form>
     </article>
     
 </section>
+        
+<section class="mt-4">
+    <div class="bg-secondary text-light d-flex align-items-center justify-content-center" style="height: 50px; font-size: large;">
+      Свяжитесь с нами по телефону +7 (929) 622-48-35
+    </div>
+      <form method="POST" action="{% url 'index' %}" class="p-3 text-light d-flex justify-content-center flex-column align-items-center" >
+        {% csrf_token %}
+        <div class="mb-3 w-100">
+          <label for="id_name" class="text-dark">Имя</label>
+          {{ form.name }}
+        </div>
+        <div class="mb-3 w-100">
+          <label for="id_phone" class="text-dark">Телефон</label>
+          {{ form.phone }}
+        </div>
+        <div class="mb-3 w-100">
+          <label for="id_call_time" class="text-dark">Время звонка</label>
+          {{ form.call_time }}
+        </div>
+        <div class="mb-3 w-100">
+          <label for="id_address" class="text-dark">Адрес</label>
+          {{ form.address }}
+        </div>
+        <div class="mb-3 w-100">
+          <label for="id_message" class="text-dark">Техническое задание</label>
+          {{ form.message }}
+        </div>
+        <button type="submit" class="btn text-light col-4" style="background-color: sienna;">Оставить заявку</button>
+      </form>
+    </section>
 <script>
     // Обработчик события для открытия модального окна с нужной картинкой
     var imageModal = document.getElementById('imageModal');
