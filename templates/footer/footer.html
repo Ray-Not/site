@@ -70,7 +70,7 @@
     </nav>
     <nav class="col-lg-4 col-12 d-flex flex-column">
       <a class="link-underline-light text-light fw-bold mb-3" href="{% url 'catalog' %}" style="font-size: large;">Каталог дверей</a>
-      {% for catalog in random_catalogs %}
+      {% for catalog in random_catalogs_in_footer %}
         <a class="link-underline link-underline-opacity-0 text-secondary" href="{% url 'catalog_with_slug' catalog.slug %}">{{ catalog.title }}</a>
       {% endfor %}
     </nav>

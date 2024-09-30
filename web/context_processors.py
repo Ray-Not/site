@@ -22,6 +22,18 @@ def footer_context(request):
         )), 8)
         random_catalogs = Catalog.objects.filter(id__in=random_catalog_ids)
 
+    catalogs_in_footer = Catalog.objects.all()
+    if catalogs_in_footer.count() <= 8:
+        random_catalogs_in_footer = list(catalogs_in_footer)
+    else:
+        random_catalog_ids = sample(list(catalogs_in_footer.values_list(
+            'id',
+            flat=True
+        )), 8)
+        random_catalogs_in_footer = Catalog.objects.filter(
+            id__in=random_catalog_ids
+        )
+
     chapters_with_titles = {}
     for catalog in catalogs_with_door_count:
         chapter = catalog.chapter
@@ -39,5 +51,6 @@ def footer_context(request):
     return {
         'chapters_with_titles': chapters_with_titles,
         'random_doors': random_doors,
-        'random_catalogs': random_catalogs
+        'random_catalogs': random_catalogs,
+        'random_catalogs_in_footer': random_catalogs_in_footer
     }
