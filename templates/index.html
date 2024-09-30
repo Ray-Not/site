@@ -298,29 +298,30 @@
                 <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
                 <h1 style="font-family: tilda;">Расчет стоимости и услуг</h1>
               </aside>
-              <form method="POST" action="{% url 'index' %}" style="background-color: blue;" class="p-3 text-light rounded-3 d-flex justify-content-center flex-column">
+              <form method="POST" action="{% url 'index' %}" class="p-3 text-light d-flex justify-content-center flex-column align-items-center">
+
                 {% csrf_token %}
-                <div class="mb-3">
-                  <label for="id_name" class="form-label">Имя</label>
+                <div class="mb-3 w-100">
+                  <label for="id_name" class="text-dark">Имя</label>
                   {{ form.name }}
                 </div>
-                <div class="mb-3">
-                  <label for="id_phone" class="form-label">Телефон</label>
+                <div class="mb-3 w-100">
+                  <label for="id_phone" class="text-dark">Телефон</label>
                   {{ form.phone }}
                 </div>
-                <div class="mb-3">
-                  <label for="id_call_time" class="form-label">Время звонка</label>
+                <div class="mb-3 w-100">
+                  <label for="id_call_time" class="text-dark">Время звонка</label>
                   {{ form.call_time }}
                 </div>
-                <div class="mb-3">
-                  <label for="id_address" class="form-label">Адрес</label>
+                <div class="mb-3 w-100">
+                  <label for="id_address" class="text-dark">Адрес</label>
                   {{ form.address }}
                 </div>
-                <div class="mb-3">
-                  <label for="id_message" class="form-label">Техническое задание</label>
+                <div class="mb-3 w-100">
+                  <label for="id_message" class="text-dark">Техническое задание</label>
                   {{ form.message }}
                 </div>
-                <button type="submit" class="btn rounded-pill text-light w-50" style="background-color: crimson;">Оставить заявку</button>
+                <button type="submit" class="btn rounded-pill text-light col-4" style="background-color: sienna;">Оставить заявку</button>
               </form>
             </aside>
             <aside class="my-4">
