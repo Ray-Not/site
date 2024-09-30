@@ -5,7 +5,7 @@
     {% for door in random_doors %}
       <div class="col-lg-3 col-6 mt-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
         <div class="card h-100 d-flex flex-column">
-          <section class="d-flex align-items-center p-2" style="height: 200px; overflow: hidden;">
+          <section class="d-flex align-items-center p-2" style="height: 500px; overflow: hidden;">
             <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
               {% for tag in door.tags.all %}
                 <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
@@ -14,7 +14,7 @@
             <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
               {% with door.images|split_and_get_one as image_urls %}
                 {% for image_url in image_urls %}
-                  <div class="image-container" style="flex: 1 1 calc(100%); margin: 5px; height: 800px; overflow: hidden;">
+                  <div class="image-container" style="flex: 1 1 calc(100%); margin: 5px; overflow: hidden;">
                     <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
                   </div>
                 {% endfor %}
