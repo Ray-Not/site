@@ -169,6 +169,8 @@ def catalog(request, slug=None):
         if request.GET.get('in_covers') else []
     )
 
+    page_number = request.GET.get('page', 1)
+
     # Передача данных в шаблон
     return render(request, 'pages/catalog.html', {
         'doors': doors,
@@ -186,6 +188,7 @@ def catalog(request, slug=None):
         'tags_cloud': Tag.objects.filter(in_cloud=True),
         'catalog': catalog if slug else None,
         'catalogs': catalogs,
+        'page': page_number
     })
 
 
