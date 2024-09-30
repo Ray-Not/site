@@ -11,6 +11,8 @@ def footer_context(request):
     ).order_by('chapter', 'title')
 
     catalogs = Catalog.objects.all()
+
+
     print(catalogs)
 
     chapters_with_titles = {}

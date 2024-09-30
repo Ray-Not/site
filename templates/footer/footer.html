@@ -12,9 +12,9 @@
               {% endfor %}
             </div>
             <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
-              {% with door.images|split_and_get_all as image_urls %}
+              {% with door.images|slice:1 as image_urls %}
                 {% for image_url in image_urls %}
-                  <div class="image-container" style="flex: 1 1 calc(100%); margin: 5px; height: 100px; overflow: hidden;">
+                  <div class="image-container bg-danger" style="flex: 1 1 calc(100%); margin: 5px; height: 300px; overflow: hidden;">
                     <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
                   </div>
                 {% endfor %}
