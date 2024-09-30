@@ -9,6 +9,17 @@ register = template.Library()
 
 
 @register.filter
+def split_and_get_one(value):
+    urls = [url.strip() for url in value.split(',') if url.strip()]
+
+    php_images = [url for url in urls if url.endswith('.php')]
+    if php_images:
+        return php_images[:1]
+
+    return [urls[0]]
+
+
+@register.filter
 def split_and_get_all(value):
     urls = [url.strip() for url in value.split(',') if url.strip()]
 
