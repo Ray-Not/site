@@ -221,3 +221,241 @@ class Order(models.Model):
     def __str__(self):
         return f'От {self.name} ({self.phone}) пришел заказ \
             [{self.order_number}]: {self.message}'
+
+
+class CustomOrder(models.Model):
+
+    construct_choices = [
+        ('0', '1 лист 2 мм + 1 контур уплотнения'),
+        ('1', '1 лист 3 мм + 1 контур уплотнения'),
+        ('2', '1 лист 4 мм + 1 контур уплотнения'),
+        ('3', '2 листа 2 мм + 2 контура уплотнения'),
+        ('4', '2 листа 3 мм + 2 контура уплотнения'),
+        ('5', '2 листа 4 мм + 2 контура уплотнения'),
+        ('1.6', 'Цельноугольный лист 1.5 мм + полотно 70 мм'),
+        ('7', 'Цельноугольный лист 1.5 мм, противосъемная'),
+        ('8', 'Противопожарная'),
+    ]
+
+    glazing_choices = [
+        ('0', 'Нет'),
+        ('1', 'Однокамерный'),
+        ('2', 'Двухкамерный'),
+        ('3', 'Трехкамерный'),
+    ]
+
+    cover_choices = [
+        ('0', 'Нет'),
+        ('1', 'Нитроэмаль'),
+        ('2', 'Искусственная кожа'),
+        ('3', 'Вагонка'),
+        ('4', 'Порошковое напыление'),
+        ('5', 'Ламинат-панель'),
+        ('6', 'Панель МДФ 10 мм сплошная'),
+        ('7', 'МДФ-плита 10 мм сплошная'),
+        ('9', 'МДФ-плита 12+ мм с рисунком'),
+        ('10', 'МДФ-плита 12+ мм с полноразмерной фрезеровкой'),
+        ('11', 'МДФ-плита 12+ мм окрашенная с фрезеровкой'),
+        ('12', 'Массив дуба'),
+        ('13', 'Массив дуба с фрезеровкой'),
+    ]
+
+    platbans_choices = [
+        ('0', 'Нет'),
+        ('1', 'Наличник металлический гнутый'),
+        ('2', 'Наличник из МДФ'),
+        ('3', 'Наличник из массива дуба'),
+    ]
+
+    bot_castle_choices = [
+        ('0', 'Нет'),
+        ('1', 'Apecs 1900-INOX врезной, противопожарный'),
+        ('2', 'Эльбор 1.05.41 сувальдный, ручка + задвижка'),
+        ('3', 'Apecs T-05-CR, цилиндровый, ручка на общей планке'),
+        ('4', 'Apecs 2000-Panic-ZN врезной, противопожарный'),
+        ('5', 'МЕТТЭМ 3В4 713.0.0 цилиндровый (Apecs), без ручки'),
+        ('6', 'МЕТТЭМ 3В9 144.0.0 сувальдный под ночную задвижку'),
+        ('7', 'МЕТТЭМ 3В9 343.1.1 сувальдный (без перекодировки)'),
+        ('8', 'МЕТТЭМ 3В9 143 сувальдный под ручку без ночной задвижки'),
+        ('9', 'Kale 252R (с броненакладкой)'),
+        ('10', 'Kale 257RL, сувальдный'),
+        ('11', 'Гардиан 30.11, сувальдный'),
+        ('12', 'Гардиан 32.11, цилиндровый'),
+        ('13', 'Гардиан 22.12Т, цилиндровый'),
+        ('14', 'Гардиан 25.14, двухсистемый'),
+        ('15', 'Гардиан 32.01, цилиндровый'),
+        ('16', 'Гардиан 21.12, сувальдный'),
+        ('17', 'Гардиан 40.11, сувальдный'),
+        ('18', 'Гардиан 75.14, двухсистемный'),
+        ('19', 'Гардиан 12.14.ДТ, сувальдный'),
+        ('17', 'Cisa 57.986, двухсистемный'),
+        ('18', 'Cisa 57.535, сувальдный + ручка'),
+        ('19', 'Cisa 56.535, цилиндровый + ручка'),
+    ]
+
+    top_castle_choices = [
+        ('0', 'Нет'),
+        ('1', 'CAM 3B8-8M'),
+        ('2', 'ЭЛЬБОР 1.05.01, сувальдный'),
+        ('3', 'CRIT, цилиндровый'),
+        ('4', 'Kale 257, цилиндровый'),
+        ('5', 'Kale 257L, сувальдный'),
+        ('6', 'KERBEROS 115'),
+        ('7', 'KERBEROS 3'),
+        ('8', 'KERBEROS 6'),
+        ('9', 'KERBEROS 9й серии'),
+        ('10', 'Гардиан 30.01, сувальдный'),
+        ('11', 'Гардиан 50.01, сувальдный'),
+        ('12', 'Гардиан 32.01 цилиндровый'),
+        ('13', 'Cisa 57.525, сувальдный'),
+        ('14', 'Cisa 57.675, сувальдный'),
+        ('15', 'Cisa 56.525, цилинровый'),
+        ('16', 'МЕТТЭМ 3В1 711.0.0, цилиндровый'),
+        ('17', 'МЕТТЭМ 3В8 160.0.0, сувальдный'),
+        ('18', 'МЕТТЭМ 3В8 611.0.1, сувальдный'),
+        ('19', 'МЕТТЭМ 3В7 Т-П, цилиндровый'),
+        ('20', 'Кодовый замок'),
+        ('21', 'Биометрический замок (отпечаток пальца)'),
+        ('22', 'Биометрический замок (лицо)'),
+    ]
+
+    cylinder_choices = [
+        ('0', 'Нет'),
+        ('1', 'Fuaro с перфорацией'),
+        ('2', 'Apecs с перфорацией'),
+        ('3', 'Kale с перфорацией'),
+        ('4', 'Cisa Asics'),
+        ('5', 'Cisa Astral'),
+        ('6', 'Cisa AP3'),
+        ('7', 'EVVA ICS'),
+        ('8', 'CISA RS3'),
+        ('9', 'EVVA 3KS'),
+    ]
+
+    hinge_choices = [
+        ('0', 'На подшипнике, 2 шт.'),
+        ('1', 'На подшипнике, 3 шт.'),
+        ('2', 'На подшипнике, 4 шт.'),
+        ('3', 'На подшипнике, 5 шт.'),
+        ('4', 'На подшипнике, 6 шт.'),
+    ]
+
+    blockers_choices = [
+        ('0', 'Нет'),
+        ('1', 'Блокираторы конусный, 2 шт.'),
+        ('2', 'Блокираторы конусный, 3 шт.'),
+        ('3', 'Блокираторы конусный, 4 шт.'),
+    ]
+
+    insulation_choices = [
+        ('0', 'Нет'),
+        ('1', 'ISOVER'),
+        ('2', 'ROCKWOOL'),
+    ]
+
+    dismantling_choices = [
+        ('0', 'Нет'),
+        ('1', 'Деревянная дверь одностворчатая'),
+        ('2', 'Металлическая дверь одностворчатая'),
+        ('3', 'Деревянная дверь полуторная / двустворчатая'),
+        ('4', 'Металлическая дверь полуторная / двустворчатая'),
+    ]
+
+    phone = models.CharField(max_length=30)
+    height = models.DecimalField(decimal_places=0, max_digits=10)
+    width = models.DecimalField(decimal_places=0, max_digits=10)
+    type_contruction = models.CharField(
+        max_length=64,
+        choices=construct_choices,
+        default='0',
+        verbose_name='Тип конструкции'
+    )
+    double_glazing = models.CharField(
+        max_length=32,
+        choices=glazing_choices,
+        default='0',
+        verbose_name='Стеклопакет'
+    )
+    out_cover = models.CharField(
+        max_length=128,
+        choices=cover_choices,
+        default='0',
+        verbose_name='Отделка снаружи'
+    )
+    in_cover = models.CharField(
+        max_length=128,
+        choices=cover_choices,
+        default='0',
+        verbose_name='Отделка внутри'
+    )
+    platbans = models.CharField(
+        max_length=64,
+        choices=platbans_choices,
+        default='0',
+        verbose_name='Наличники'
+    )
+    top_castle = models.CharField(
+        max_length=64,
+        choices=top_castle_choices,
+        default='0',
+        verbose_name='Нижний замок'
+    )
+    bot_castle = models.CharField(
+        max_length=64,
+        choices=bot_castle_choices,
+        default='0',
+        verbose_name='Верхний замок'
+    )
+    cylinder = models.CharField(
+        max_length=32,
+        choices=cylinder_choices,
+        default='0',
+        verbose_name='Целиндр'
+    )
+    hinge = models.CharField(
+        max_length=32,
+        choices=hinge_choices,
+        default='0',
+        verbose_name='Петли'
+    )
+    blockers = models.CharField(
+        max_length=64,
+        choices=blockers_choices,
+        default='0',
+        verbose_name='Блокираторы'
+    )
+    insulation = models.CharField(
+        max_length=32,
+        choices=insulation_choices,
+        default='0',
+        verbose_name='Утеплитель'
+    )
+    dismantling = models.CharField(
+        max_length=32,
+        choices=dismantling_choices,
+        default='0',
+        verbose_name='Демонтаж'
+    )
+    night_lock = models.BooleanField(
+        default=False,
+        verbose_name='Ночная задвижка'
+    )
+    peephole = models.BooleanField(
+        default=False,
+        verbose_name='Глазок'
+    )
+    door_closer_100kg = models.BooleanField(
+        default=False,
+        verbose_name='Доводчик до 100 кг'
+    )
+    door_closer_120kg = models.BooleanField(
+        default=False,
+        verbose_name='Доводчик до 120 кг'
+    )
+    handle_scarf = models.BooleanField(
+        default=False,
+        verbose_name='Ручка-скоба'
+    )
+
+    def __str__(self):
+        return f'От {self.phone} пришел заказ'

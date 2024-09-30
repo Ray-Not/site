@@ -1,0 +1,293 @@
+{% extends '../index.html' %}
+{% load custom_filters %}
+{% load static %}
+
+{% block title %}
+Калькулятор | Паритет двери
+{% endblock %}
+
+{% block content %}
+<h1 class="my-3">Изготовление входных дверей</h1>
+<p>Компания Паритет двери предлагает изготовление входных дверей с нужными размерами и параметрами. В производстве применяются металлические листы 1-5 мм, все варианты современной отделки и комплектующих.</p>
+<h3 class="my-3">Калькулятор для расчета стоимости двери</h3>
+<form class="needs-validation" method="post" novalidate>
+    {% csrf_token %}
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-1-square"></i>
+                    <label for="phone" style="font-size: small; font-weight: bold;" class="ms-2">Телефон</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="phone" name="phone" required>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-2-square"></i><label for="height" style="font-size: small; font-weight: bold;" class="ms-2">Высота (мм)</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="height" name="height" value="{{ form.height.value }}" required>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-3-square"></i><label for="width" style="font-size: small; font-weight: bold;" class="ms-2">Ширина (мм)</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="width" name="width" value="{{ form.width.value }}" required>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-4-square"></i><label for="type_contruction" style="font-size: small; font-weight: bold;" class="ms-2">Тип конструкции</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="type_contruction" name="type_contruction">
+                            {% for value, label in form.type_contruction.field.choices %}
+                                <option value="{{ value }}" {% if value == form.type_contruction.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-5-square"></i><label for="double_glazing" style="font-size: small; font-weight: bold;" class="ms-2">Стеклопакет</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="double_glazing" name="double_glazing">
+                            {% for value, label in form.double_glazing.field.choices %}
+                                <option value="{{ value }}" {% if value == form.double_glazing.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-6-square"></i><label for="out_cover" style="font-size: small; font-weight: bold;" class="ms-2">Отделка снаружи</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="out_cover" name="out_cover">
+                            {% for value, label in form.out_cover.field.choices %}
+                                <option value="{{ value }}" {% if value == form.out_cover.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-7-square"></i><label for="in_cover" style="font-size: small; font-weight: bold;" class="ms-2">Отделка внутри</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="in_cover" name="in_cover">
+                            {% for value, label in form.in_cover.field.choices %}
+                                <option value="{{ value }}" {% if value == form.in_cover.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-8-square"></i><label for="platbans" style="font-size: small; font-weight: bold;" class="ms-2">Наличники</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="platbans" name="platbans">
+                            {% for value, label in form.platbans.field.choices %}
+                                <option value="{{ value }}" {% if value == form.platbans.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-9-square"></i><label for="top_castle" style="font-size: small; font-weight: bold;" class="ms-2">Верхний замок</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="top_castle" name="top_castle">
+                            {% for value, label in form.top_castle.field.choices %}
+                                <option value="{{ value }}" {% if value == form.top_castle.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-1-square"></i><i class="bi bi-0-square"></i><label for="bot_castle" style="font-size: small; font-weight: bold;" class="ms-2">Нижний замок</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="bot_castle" name="bot_castle">
+                            {% for value, label in form.bot_castle.field.choices %}
+                                <option value="{{ value }}" {% if value == form.bot_castle.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-1-square"></i><i class="bi bi-1-square"></i><label for="cylinder" style="font-size: small; font-weight: bold;" class="ms-2">Цилиндр</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="cylinder" name="cylinder">
+                            {% for value, label in form.cylinder.field.choices %}
+                                <option value="{{ value }}" {% if value == form.cylinder.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-1-square"></i><i class="bi bi-2-square"></i><label for="hinge" style="font-size: small; font-weight: bold;" class="ms-2">Петли</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="hinge" name="hinge">
+                            {% for value, label in form.hinge.field.choices %}
+                                <option value="{{ value }}" {% if value == form.hinge.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-1-square"></i><i class="bi bi-3-square"></i><label for="blockers" style="font-size: small; font-weight: bold;" class="ms-2">Блокираторы</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="blockers" name="blockers">
+                            {% for value, label in form.blockers.field.choices %}
+                                <option value="{{ value }}" {% if value == form.blockers.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-1-square"></i><i class="bi bi-4-square"></i><label for="insulation" style="font-size: small; font-weight: bold;" class="ms-2">Утеплитель</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="insulation" name="insulation">
+                            {% for value, label in form.insulation.field.choices %}
+                                <option value="{{ value }}" {% if value == form.insulation.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-1-square"></i><i class="bi bi-5-square"></i><label for="dismantling" style="font-size: small; font-weight: bold;" class="ms-2">Демонтаж</label>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <select class="form-control" id="dismantling" name="dismantling">
+                            {% for value, label in form.dismantling.field.choices %}
+                                <option value="{{ value }}" {% if value == form.dismantling.value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    <i class="bi bi-1-square"></i><i class="bi bi-6-square"></i><label for="dismantling" style="font-size: small; font-weight: bold;" class="ms-2">Дополнительные опции</label>
+                </th>
+                <th class="d-flex flex-row" style="font-weight: normal; gap: 10px;">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="night_lock" name="night_lock" {% if form.night_lock.value %}checked{% endif %}>
+                        <label class="form-check-label" for="night_lock">Ночная задвижка</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="peephole" name="peephole" {% if form.peephole.value %}checked{% endif %}>
+                        <label class="form-check-label" for="peephole">Глазок</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="door_closer_100kg" name="door_closer_100kg" {% if form.door_closer_100kg.value %}checked{% endif %}>
+                        <label class="form-check-label" for="door_closer_100kg">Доводчик до 100 кг</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="door_closer_120kg" name="door_closer_120kg" {% if form.door_closer_120kg.value %}checked{% endif %}>
+                        <label class="form-check-label" for="door_closer_120kg">Доводчик до 120 кг</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="handle_scarf" name="handle_scarf" {% if form.handle_scarf.value %}checked{% endif %}>
+                        <label class="form-check-label" for="handle_scarf">Ручка-скоба</label>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <button type="submit" class="btn rounded-pill mt-3 text-light px-3 m-3 d-flex" style="background-color: crimson; font-size: small;">ЗАКАЗ И КОНСУЛЬТАЦИЯ</button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+
+    <!-- Модальное окно успешной отправки -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Форма успешно отправлена</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    Спасибо за ваш заказ! Мы скоро свяжемся с вами.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Валидация формы
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation');
+    
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                        successModal.show();
+                    }
+    
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+
+{% endblock %}

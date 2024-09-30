@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Order, Review
+from .models import CustomOrder, Order, Review
 
 
 class OrderForm(forms.ModelForm):
@@ -52,4 +52,39 @@ class ReviewForm(forms.ModelForm):
                 }
             ),
             'rating': forms.RadioSelect(attrs={'class': 'form-check-input'})
+        }
+
+
+class CustomOrderForm(forms.ModelForm):
+    class Meta:
+        model = CustomOrder
+        fields = '__all__'
+        widgets = {
+            'type_contruction': forms.Select(attrs={'class': 'form-control'}),
+            'double_glazing': forms.Select(attrs={'class': 'form-control'}),
+            'out_cover': forms.Select(attrs={'class': 'form-control'}),
+            'in_cover': forms.Select(attrs={'class': 'form-control'}),
+            'platbans': forms.Select(attrs={'class': 'form-control'}),
+            'top_castle': forms.Select(attrs={'class': 'form-control'}),
+            'bot_castle': forms.Select(attrs={'class': 'form-control'}),
+            'cylinder': forms.Select(attrs={'class': 'form-control'}),
+            'hinge': forms.Select(attrs={'class': 'form-control'}),
+            'blockers': forms.Select(attrs={'class': 'form-control'}),
+            'insulation': forms.Select(attrs={'class': 'form-control'}),
+            'dismantling': forms.Select(attrs={'class': 'form-control'}),
+            'night_lock': forms.CheckboxInput(
+                attrs={'class': 'form-check-input'}
+            ),
+            'peephole': forms.CheckboxInput(
+                attrs={'class': 'form-check-input'}
+            ),
+            'door_closer_100kg': forms.CheckboxInput(
+                attrs={'class': 'form-check-input'}
+            ),
+            'door_closer_120kg': forms.CheckboxInput(
+                attrs={'class': 'form-check-input'}
+            ),
+            'handle_scarf': forms.CheckboxInput(
+                attrs={'class': 'form-check-input'}
+            ),
         }

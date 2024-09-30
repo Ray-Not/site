@@ -6,7 +6,7 @@ from django.db.models import Avg, Max, Min
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import DoorFilter
-from .forms import OrderForm, ReviewForm
+from .forms import CustomOrderForm, OrderForm, ReviewForm
 from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
                      Review, Tag)
 from django.views.decorators.csrf import csrf_exempt
@@ -382,3 +382,19 @@ def compare_doors(request):
     return render(request, 'pages/compare.html', {
         'doors': doors_to_compare
     })
+
+
+def calculator(request):
+    if request.method == 'POST':
+        form = CustomOrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/calc/')
+    else:
+        form = CustomOrderForm()
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'pages/calculator.html', context)
