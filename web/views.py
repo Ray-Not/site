@@ -13,6 +13,42 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
+    brands = [
+        'Эталон', 'Персона', 'Black', 'Bravo',
+        'Бункер', 'Сенатор', 'Эврика',
+        'Волкодав', 'Diva', 'Mastino',
+        'Ратибор', 'Дэко', 'Леванте', 'Оптим',
+        'Лекс', 'Арма', 'Баяр', 'Практик',
+        'Асд', 'Морра', 'Lummix', 'Str',
+        'Тефлон', 'Silver', 'Quartet',
+        'Престиж', 'Противопожарные', 'Labirint',
+        'Премиум', 'Ле-гран', 'Интекрон',
+        'Лира', 'Rex', 'Страж', 'Profildoors',
+        'Regidoors', 'Falko'
+    ]
+    purposes = [
+        'для служебных помещений', 'уличная (необходим козырек)',
+        'рекомендуется для квартиры, возможно использование в \
+качестве уличной (необходим козырек и тамбур)',
+        'рекомендуется в качестве уличной (необходим козырек и тамбур) \
+или для квартиры',
+        'противопожарная', 'только для квартиры (внутри подъезда)'
+    ]
+    in_covers = [
+        'МДФ панель', 'ЛДСП', 'Меламин', 'Металл', 'ДВП', 'Массив + Шпон',
+        'Меламиновая панель', 'Gloss (Глянец)', 'Шпонированная панель',
+        'Панель Profildoors U (УФ-лак)',
+    ]
+    out_covers = [
+        'МДФ панель', 'Влагостойкая CPL панель', 'Влаго-термостойкая панель',
+        'Панель из массива', 'Металл с декоративными элементами',
+        'Влагостойкая шпонированная панель Waterproof Veneer', 'Металл',
+        'Влагостойкая ARTWOOD PANEL'
+    ]
+
+    min_price = Door.objects.aggregate(Min('price'))['price__min']
+    max_price = Door.objects.aggregate(Max('price'))['price__max']
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -26,6 +62,12 @@ def index(request):
         'form': form,
         'reviews': reviews,
         'range': range(1, 6),
+        'min_price': min_price,
+        'max_price': max_price,
+        'brands': brands,
+        'purposes': purposes,
+        'out_covers': out_covers,
+        'in_covers': in_covers,
     })
 
 

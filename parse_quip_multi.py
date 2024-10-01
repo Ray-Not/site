@@ -76,6 +76,7 @@ def load_existing_data(csv_file):
                 existing_data.add(record_hash)
     return existing_data
 
+
 def process_product(product, headers, existing_data):
     """Функция для обработки одного продукта."""
     thumb = product.find('div', class_='thumb')
