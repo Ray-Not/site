@@ -318,7 +318,7 @@
             <section class="random-doors container">
               <section class="row">
                 {% for door in random_doors %}
-                  <div class="col-lg-3 col-12 door-item mb-3" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+                  <div class="col-lg-3 col-md-4 col-12 door-item mb-3" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
                     <div class="card h-100 d-flex flex-column">
                       <section class="d-flex align-items-center p-2" style="height: 350px; overflow: hidden;">
                         <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
@@ -438,7 +438,7 @@
                 <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
                 <h1 style="font-family: tilda;">Установка дверей и сопутствующие работы</h1>
             </aside>
-            <aside class="d-flex" style="gap: 10px;">
+            <aside class="d-flex flex-column flex-lg-row" style="gap: 10px;">
               <table class="table">
                 <thead>
                   <tr>
