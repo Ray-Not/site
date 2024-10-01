@@ -199,11 +199,14 @@ $(document).ready(function() {
     {% else %}
       <h1 class="text-center my-4">Входные двери от производителя</h1>
     {% endif %}
-    <label class="text-center">Популярные категории: </label>
-    <!-- <div class="tags-cloud"> -->
-      {% for tag in tags_cloud %}
-        <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill" style="color: crimson;">{{ tag.title }}</a>
-      {% endfor %}
+    <section class="row d-flex flex-row mt-2">
+      <div class="tags-cloud d-flex flex-wrap">
+          <label class="text-center" style="font-size: 15px;">Популярные категории: </label>
+          {% for tag in tags_cloud %}
+          <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill" style="color: crimson; font-size: 15px;">{{ tag.title }}</a>
+          {% endfor %}
+      </div>
+    </section>
     <!-- </div> -->
     <p class="my-4 col text-center">Сортировать по:</p>
     <div class="d-flex flex-lg-row align-items-center my-3">

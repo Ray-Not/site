@@ -26,7 +26,6 @@
       }
     }
 </script>
-
 <style>
     .image-container {
         overflow: hidden;
@@ -119,7 +118,7 @@
     <div class="tags-cloud d-flex flex-wrap">
         <label class="text-center" style="font-size: 15px;">Популярные категории: </label>
         {% for tag in tags_cloud %}
-        <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill" style="color: crimson;">{{ tag.title }}</a>
+        <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill" style="color: crimson; font-size: 15px;">{{ tag.title }}</a>
         {% endfor %}
     </div>
 </section>
