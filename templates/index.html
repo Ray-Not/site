@@ -171,6 +171,29 @@
                 двери напрямую, без посредников. Цены формируем с учётом реальных затрат. Никаких накруток и дополнительных наценок.
               </p>
             </aside>
+
+            <aside class="my-4">
+              <h1 style="font-family: tilda;">Популярные категории</h1>
+              <div class="row">
+                {% for catalog in random_catalogs %}
+                  <div class="col-lg-3 col-6 door-item d-flex flex-column" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+                    <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
+                    <article class="d-flex flex-column mt-2">
+                      <label class="fw-bold" style="font-size: small;">
+                        {{ catalog.title }}
+                      </label>
+                      <label class="text-secondary" style="font-size: small;">
+                        {{ catalog.get_door_count }} шт.
+                      </label>
+                    </article>
+                  </div>
+                {% endfor %}
+                <section class="d-flex justify-content-center flex-lg-row flex-column">
+                  <a href="{% url 'catalog' %}" class="btn m-3 rounded-pill text-light btn-lg fw-bold px-3" style="background-color: blue;">Каталог металлических дверей</a>
+                  <a href="{% url 'calculator' %}" class="btn m-3 rounded-pill text-light btn-lg fw-bold px-3" style="background-color: sienna;">Изготовление дверей на заказ</a>
+                </section>
+              </div>
+            </aside>
             <aside class="my-4">
                 <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
                 <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
@@ -607,28 +630,6 @@
                   </fieldset>
                 </form>
               </section>
-            </aside>
-            <aside class="my-4">
-              <h1 style="font-family: tilda;">Популярные категории</h1>
-              <div class="row">
-                {% for catalog in random_catalogs %}
-                  <div class="col-lg-3 col-6 door-item d-flex flex-column" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
-                    <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
-                    <article class="d-flex flex-column mt-2">
-                      <label class="fw-bold" style="font-size: small;">
-                        {{ catalog.title }}
-                      </label>
-                      <label class="text-secondary" style="font-size: small;">
-                        {{ catalog.get_door_count }} шт.
-                      </label>
-                    </article>
-                  </div>
-                {% endfor %}
-                <section class="d-flex justify-content-center flex-lg-row flex-column">
-                  <a href="{% url 'catalog' %}" class="btn m-3 rounded-pill text-light btn-lg fw-bold px-3" style="background-color: blue;">Каталог металлических дверей</a>
-                  <a href="{% url 'calculator' %}" class="btn m-3 rounded-pill text-light btn-lg fw-bold px-3" style="background-color: sienna;">Изготовление дверей на заказ</a>
-                </section>
-              </div>
             </aside>
             <aside class="my-4">
                 <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Найдите нас</h1>
