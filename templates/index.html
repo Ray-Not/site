@@ -35,7 +35,6 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% endcompress %}
 
-    <script src="https://cdn.jsdelivr.net/npm/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
 </head>
 
 <style>
@@ -97,7 +96,17 @@
   }
 }
 </style>
+<style>
+  /* Задать цвет границы */
+  .custom-border {
+    border: 2px solid #ff5733; /* Замените цвет на желаемый */
+  }
 
+  /* Задать цвет тени */
+  .custom-shadow {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Настройте цвет и параметры тени */
+  }
+</style>
 <body class="d-flex flex-column min-vh-100">
     <!-- Включение header -->
     {% include 'header/header.html' %}
@@ -485,14 +494,14 @@
             </aside>
             <aside class=" d-flex justify-content-center">
               <section class="col-6 flex-column">
-                <form method="get" id="filter-form" action="{% url 'catalog' %}" class="w-100">
+                <form method="get" id="filter-form" action="{% url 'catalog' %}" class="w-100 d-flex justify-content-center">
                   <fieldset>
                     <!-- Фильтры по цене -->
                     <div class="mb-3">
-                      <button class="btn btn-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#priceFilters" aria-expanded="false" aria-controls="priceFilters">
+                      <button class="btn text-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#priceFilters" aria-expanded="false" aria-controls="priceFilters" style="background-color: #ff0000;">
                         Фильтры по цене
                       </button>
-                      <div class="collapse" id="priceFilters">
+                      <div class="collapse show" id="priceFilters">
                         <div class="card card-body">
                           <input type="text" id="range-slider" value="" />
                           <input type="hidden" id="min-value" name="price_min">
@@ -503,10 +512,10 @@
               
                     <!-- Фильтры по брендам -->
                     <div class="mb-3">
-                      <button class="btn btn-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#brandFilters" aria-expanded="false" aria-controls="brandFilters">
+                      <button class="btn text-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#brandFilters" aria-expanded="false" aria-controls="brandFilters" style="background-color: #ff0000;">
                         Фильтры по брендам
                       </button>
-                      <div class="collapse" id="brandFilters">
+                      <div class="collapse show" id="brandFilters">
                         <div class="card card-body">
                           <div class="form-group">
                             {% for brand in brands %}
@@ -524,10 +533,10 @@
             
                     <!-- Фильтр по внешней отделке (out_covers) -->
                     <div class="mb-3">
-                      <button class="btn btn-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#outCoverFilters" aria-expanded="false" aria-controls="outCoverFilters">
+                      <button class="btn text-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#outCoverFilters" aria-expanded="false" aria-controls="outCoverFilters" style="background-color: #ff0000;">
                         Фильтры по внешней отделке
                       </button>
-                      <div class="collapse" id="outCoverFilters">
+                      <div class="collapse show" id="outCoverFilters">
                         <div class="card card-body">
                           <div class="form-group">
                             {% for out_cover in out_covers %}
@@ -545,10 +554,10 @@
             
                     <!-- Фильтр по внутренней отделке (in_covers) -->
                     <div class="mb-3">
-                      <button class="btn btn-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#inCoverFilters" aria-expanded="false" aria-controls="inCoverFilters">
+                      <button class="btn text-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#inCoverFilters" aria-expanded="false" aria-controls="inCoverFilters" style="background-color: #ff0000;">
                         Фильтры по внутренней отделке
                       </button>
-                      <div class="collapse" id="inCoverFilters">
+                      <div class="collapse show" id="inCoverFilters">
                         <div class="card card-body">
                           <div class="form-group">
                             {% for in_cover in in_covers %}
@@ -566,10 +575,10 @@
             
                     <!-- Фильтр по назначению (purpose) -->
                     <div class="mb-3">
-                      <button class="btn btn-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purposeFilters" aria-expanded="false" aria-controls="purposeFilters">
+                      <button class="btn text-light shadow w-100" type="button" data-bs-toggle="collapse" data-bs-target="#purposeFilters" aria-expanded="false" aria-controls="purposeFilters" style="background-color: #ff0000;">
                         Фильтры по назначению
                       </button>
-                      <div class="collapse" id="purposeFilters">
+                      <div class="collapse show" id="purposeFilters">
                         <div class="card card-body">
                           <div class="form-group">
                             {% for purpose in purposes %}
