@@ -42,10 +42,10 @@ def footer_context(request):
         chapters_with_titles[chapter].append(catalog)
 
     total_count = Door.objects.count()
-    if total_count <= 4:
+    if total_count <= 10:
         random_doors = list(Door.objects.all())
     else:
-        random_ids = sample(list(Door.objects.values_list('id', flat=True)), 4)
+        random_ids = sample(list(Door.objects.values_list('id', flat=True)), 10)
         random_doors = Door.objects.filter(id__in=random_ids)
 
     return {
