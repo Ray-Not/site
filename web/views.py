@@ -154,6 +154,14 @@ def catalog(request, slug=None):
     else:
         tags_url = Tag.objects.none()  # Пустой QuerySet, если нет тегов
 
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = OrderForm()
+
     # В случае передачи слага
     doors_queryset = Door.objects.all().order_by('id')
     catalogs = Catalog.objects.all()
@@ -215,6 +223,7 @@ def catalog(request, slug=None):
 
     # Передача данных в шаблон
     return render(request, 'pages/catalog.html', {
+        'form': form,
         'doors': doors,
         'filter': door_filter,
         'min_price': min_price,

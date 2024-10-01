@@ -427,48 +427,55 @@
             <aside class="my-4">
                 <h1 style="font-family: tilda;">Доставка и выезд мастера</h1>
             </aside>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class='bg-danger text-white' scope="col">Услуга</th>
-                  <th class='bg-danger text-white' scope="col">Цена</th>
-                </tr>                
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Выезд внутри МКАД + 25 км</td>
-                  <td>Бесплатно</td>
-                </tr>
-                <tr>
-                  <td>Выезд далее 25 км от МКАД</td>
-                  <td>30 руб./км</td>
-                </tr>
-                <tr>
-                  <td>Доставка до терминала ТК</td>
-                  <td>от 250 руб., в зависимости от удалённости компании</td>
-                </tr>
-                <tr>
-                  <td>Замер, консультация, расчёты</td>
-                  <td>Бесплатно</td>
-                </tr>
-                <tr>
-                  <td>Ручной подъём без лифта</td>
-                  <td>50-120 руб./этаж, в зависимости от типа подъезда и высоты</td>
-                </tr>
-                <tr>
-                  <td>Ночной/срочный выезд</td>
-                  <td>от 500 руб.</td>
-                </tr>
-                <tr>
-                  <td>Выезд на крупные объекты (расчёт более 20 позиций)</td>
-                  <td>от 1000 руб.</td>
-                </tr>
-                <tr>
-                  <td>Доставка свыше 25 позиций</td>
-                  <td>от 2000 руб.</td>
-                </tr>
-              </tbody>
-            </table>
+            <section class="row d-flex flex-lg-row flex-column justify-content-center">
+              <div class="col col-lg-6 d-flex text-center">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class='bg-danger text-white' scope="col">Услуга</th>
+                      <th class='bg-danger text-white' scope="col">Цена</th>
+                    </tr>                
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Выезд внутри МКАД + 25 км</td>
+                      <td>Бесплатно</td>
+                    </tr>
+                    <tr>
+                      <td>Выезд далее 25 км от МКАД</td>
+                      <td>30 руб./км</td>
+                    </tr>
+                    <tr>
+                      <td>Доставка до терминала ТК</td>
+                      <td>от 250 руб., в зависимости от удалённости компании</td>
+                    </tr>
+                    <tr>
+                      <td>Замер, консультация, расчёты</td>
+                      <td>Бесплатно</td>
+                    </tr>
+                    <tr>
+                      <td>Ручной подъём без лифта</td>
+                      <td>50-120 руб./этаж, в зависимости от типа подъезда и высоты</td>
+                    </tr>
+                    <tr>
+                      <td>Ночной/срочный выезд</td>
+                      <td>от 500 руб.</td>
+                    </tr>
+                    <tr>
+                      <td>Выезд на крупные объекты (расчёт более 20 позиций)</td>
+                      <td>от 1000 руб.</td>
+                    </tr>
+                    <tr>
+                      <td>Доставка свыше 25 позиций</td>
+                      <td>от 2000 руб.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col col-lg-6 text-center">
+                <img src="{% static 'images/banners/moscow.jpeg' %}" class="img-fluid">
+              </div>
+            </section>
             <aside class="my-4">
                 <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
                 <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
@@ -564,7 +571,7 @@
             </aside>
             <aside class="row d-flex justify-content-center">
               <div class="col-lg-4 col-10 my-2 d-flex rounded-5">
-                <div class="border rounded shadow-sm p-3 w-100">
+                <div class="border rounded-5 shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
                       <i class="bi bi-cash text-primary" style="font-size: 60px;"></i>
@@ -580,7 +587,7 @@
               </div>
             
               <div class="col-lg-4 col-10 my-2 d-flex rounded-5">
-                <div class="border rounded shadow-sm p-3 w-100">
+                <div class="border rounded-5  shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
                       <i class="bi bi-cart text-primary" style="font-size: 60px;"></i>
@@ -596,7 +603,7 @@
               </div>
             
               <div class="col-lg-4 col-10 my-2 d-flex rounded-5">
-                <div class="border rounded shadow-sm p-3 w-100">
+                <div class="border rounded-5  shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
                       <i class="bi bi-tag text-primary" style="font-size: 60px;"></i>
@@ -612,7 +619,7 @@
               </div>
             
               <div class="col-lg-4 col-10 my-2 d-flex rounded-5">
-                <div class="border rounded shadow-sm p-3 w-100">
+                <div class="border rounded-5  shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
                       <i class="bi bi-truck text-primary" style="font-size: 60px;"></i>
@@ -628,7 +635,7 @@
               </div>
             
               <div class="col-lg-4 col-10 my-2 d-flex">
-                <div class="border rounded shadow-sm p-3 w-100">
+                <div class="border rounded-5  shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
                       <i class="bi bi-shield-lock text-primary" style="font-size: 60px;"></i>
@@ -644,7 +651,7 @@
               </div>
             
               <div class="col-lg-4 col-10 my-2 d-flex">
-                <div class="border rounded shadow-sm p-3 w-100">
+                <div class="border rounded-5 shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
                       <i class="bi bi-tools text-primary" style="font-size: 60px;"></i>

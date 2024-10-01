@@ -259,8 +259,9 @@ $(document).ready(function() {
             <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
             {% endif %}
             <label class="card-text text-secondary pb-3 mt-auto">{{ door.size_name }}</label>
-            <div class="d-flex flex-row mt-auto align-items-center justify-content-center" style="gap: 20px;">
-              <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger w-100">Узнать подробнее</button></a>
+            <div class="d-flex flex-row mt-auto align-items-center justify-content-center" style="gap: 10px;">
+              <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger">Узнать подробнее</button></a>
+              <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
               <button onclick="addToCompare({{ door.id }})" class="btn">
                 <i class="bi bi-bar-chart-fill" style="color: #ff0000; font-size: large;"></i>
               </button>
@@ -342,7 +343,43 @@ $(document).ready(function() {
         {% endif %}
       </ul>
     </nav>
-    
+  
+    <section class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="requestModalLabel">Форма заявки</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form method="POST" action="{% url 'catalog' %}">
+                      {% csrf_token %}
+                      <div class="mb-3">
+                          <label for="id_name" class="form-label">Имя</label>
+                          {{ form.name }}
+                      </div>
+                      <div class="mb-3">
+                          <label for="id_phone" class="form-label">Телефон</label>
+                          {{ form.phone }}
+                      </div>
+                      <div class="mb-3">
+                          <label for="id_call_time" class="form-label">Время звонка</label>
+                          {{ form.call_time }}
+                      </div>
+                      <div class="mb-3">
+                          <label for="id_address" class="form-label">Адрес</label>
+                          {{ form.address }}
+                      </div>
+                      <div class="mb-3">
+                          <label for="id_message" class="form-label">Сообщение</label>
+                          {{ form.message }}
+                      </div>
+                      <button type="submit" class="btn btn-danger">Оставить заявку</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </section>
   </aside>
 </section>
 <script>
