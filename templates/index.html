@@ -339,10 +339,12 @@
                     </article>
                   </div>
                 {% endfor %}
-                <section class="d-flex justify-content-center flex-lg-row flex-column">
-                  <a href="{% url 'catalog' %}" class="btn m-3 rounded-pill text-light btn-lg fw-bold px-3" style="background-color: blue;">Каталог металлических дверей</a>
-                  <a href="{% url 'calculator' %}" class="btn m-3 rounded-pill text-light btn-lg fw-bold px-3" style="background-color: sienna;">Изготовление дверей на заказ</a>
+                <div class="row d-flex justify-content-center">
+                <section class="d-flex justify-content-center flex-lg-row flex-column col-10 col-lg-10 btn-sm btn-lg-md">
+                  <a href="{% url 'catalog' %}" class="btn m-3 rounded-pill text-light fw-bold px-3" style="background-color: blue;">Каталог металлических дверей</a>
+                  <a href="{% url 'calculator' %}" class="btn m-3 rounded-pill text-light fw-bold px-3" style="background-color: sienna;">Изготовление дверей на заказ</a>
                 </section>
+                </div>
               </div>
             </aside>
             <aside class="my-4">
@@ -400,7 +402,7 @@
             <aside class="my-4 text-center">
               <h1 style="font-family: tilda;">Наши услуги</h1>
             </aside>
-            <aside class="my-4 row d-flex justify-content-center gap-3">
+            <aside class="my-4 row d-flex justify-content-center gap-3 ">
               <div class="col-lg-2 col-md-4 col-sm-6 col-11 shadow d-flex flex-column justify-content-center align-items-center py-5 text-center rounded-5">
                 <i class="bi bi-tools fs-1 text-primary"></i>
                 <p class="fw-bold fs-5">Выезд инженера</p>
@@ -561,64 +563,64 @@
                 <h2 style="font-family: tilda;">выбирают нас</h2>
             </aside>
             <aside class="row d-flex justify-content-center">
-              <div class="col-lg-4 col-10 my-2 d-flex">
+              <div class="col-lg-4 col-10 my-2 d-flex rounded-5">
                 <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <i class="bi bi-cash fs-1 text-primary"></i>
+                      <i class="bi bi-cash text-primary" style="font-size: 60px;"></i>
                     </div>
-                    <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
+                    <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold flex-shrink-0">
                       Покупка дверей без переплаты
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center">
+                    <div class="flex-grow-1 mx-3">
                       Работая в формате интернет-магазина, мы не тратим деньги на аренду торговых площадей, что позволяет продавать вам двери по фабричным ценам. Двери Йошкар-Ола, Бульдорс, Аргус, Арма, Грофф, Интекрон, Зетта и входные блоки других надежных брендов можно купить выгодно, без наценок. Ежедневно в магазине действуют скидки и акции на популярные серии.
                     </div>
                   </div>
                 </div>
               </div>
             
-              <div class="col-lg-4 col-10 my-2 d-flex">
+              <div class="col-lg-4 col-10 my-2 d-flex rounded-5">
                 <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <i class="bi bi-cart fs-1 text-primary"></i>
+                      <i class="bi bi-cart text-primary" style="font-size: 60px;"></i>
                     </div>
-                    <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
+                    <div class="my-4 d-flex align-items-center justify-content-center fw-bold text-center flex-shrink-0">
                       Быстрый онлайн-заказ
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center">
+                    <div class="flex-grow-1 mx-3">
                       Металлические двери в Москве можно приобрести не выходя из дома. Смотрите наш каталог с ценами и фото и выбирайте двери для квартиры, дачи или офиса от российских производителей. Установка дверей под ключ, гарантии. Если вы хотите узнать больше о моделях из каталога или ценах на предоставляемые услуги – позвоните нашим специалистам по телефону или заполните форму обратной связи.
                     </div>
                   </div>
                 </div>
               </div>
             
-              <div class="col-lg-4 col-10 my-2 d-flex">
+              <div class="col-lg-4 col-10 my-2 d-flex rounded-5">
                 <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <i class="bi bi-tag fs-1 text-primary"></i>
+                      <i class="bi bi-tag text-primary" style="font-size: 60px;"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Цены от эконом до премиум класса
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center">
+                    <div class="flex-grow-1 mx-3">
                       Мы работаем для клиентов с разным уровнем достатка, чтобы вы подобрали дверь, исходя из своего бюджета. Недорогие входные двери отделаны искусственной кожей, порошковым напылением, ламинатом. В среднем ценовом сегменте популярны металлические двери с декоративными панелями МДФ и шпоном. Поклонники эксклюзивного дизайна выбирают роскошную отделку натуральным массивом, ковкой, стеклом.
                     </div>
                   </div>
                 </div>
               </div>
             
-              <div class="col-lg-4 col-10 my-2 d-flex">
+              <div class="col-lg-4 col-10 my-2 d-flex rounded-5">
                 <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <i class="bi bi-truck fs-1 text-primary"></i>
+                      <i class="bi bi-truck text-primary" style="font-size: 60px;"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Оперативная доставка дверей по Москве
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center">
+                    <div class="flex-grow-1 mx-3">
                       Железные двери можно купить не только в Москве. Специалисты компании оперативно доставят изделие на фирменном транспорте в Московскую область. Время доставки по указанному адресу предварительно согласовывается с клиентом. Бонус: при заказе услуги монтажа, доставка конструкции бесплатна!
                     </div>
                   </div>
@@ -629,12 +631,12 @@
                 <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <i class="bi bi-shield-lock fs-1 text-primary"></i>
+                      <i class="bi bi-shield-lock text-primary" style="font-size: 60px;"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Прочные двери от лучших производителей
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center">
+                    <div class="flex-grow-1 mx-3">
                       Мы не экономим на качестве и сотрудничаем только с добросовестными производителями. Двери из крепкой стали укомплектованы надежными замками, взломостойкими петлями, удобными ручками. Купить входные двери в интернет-магазине дешево со склада можно оптом и в розницу.
                     </div>
                   </div>
@@ -645,12 +647,12 @@
                 <div class="border rounded shadow-sm p-3 w-100">
                   <div class="d-flex flex-column h-100">
                     <div class="d-flex align-items-center justify-content-center pt-3">
-                      <i class="bi bi-tools fs-1 text-primary"></i>
+                      <i class="bi bi-tools text-primary" style="font-size: 60px;"></i>
                     </div>
                     <div class="my-4 d-flex align-items-center justify-content-center fs-5 fw-bold text-center flex-shrink-0">
                       Профессиональная установка
                     </div>
-                    <div class="flex-grow-1 mx-3 text-center">
+                    <div class="flex-grow-1 mx-3">
                       Специалисты «Паритет-Двери» аккуратно и бесшумно установят дверь в любой проем. Не забудьте воспользоваться бесплатной услугой «вызов замерщика», чтобы дверь точно подошла под размеры вашего проема.
                     </div>
                   </div>
