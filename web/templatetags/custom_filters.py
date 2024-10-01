@@ -32,15 +32,26 @@ def split_and_get_all(value):
 
 @register.filter
 def calculate_discount(price, discount):
-    """Рассчитать цену со скидкой"""
+    """Рассчитать цену со скидкой и сумму скидки"""
     try:
-        # Так как price теперь является числовым полем, преобразование не нужно
         final_price = price * (1 - float(discount) / 100)
-        formatted_price = '{:,.0f}'.format(final_price).replace(',', ' ')
-        return formatted_price
+
+        discount_amount = price * (float(discount) / 100)
+
+        # Форматируем итоговую цену и сумму скидки
+        formatted_final_price = '{:,.0f}'.format(final_price).replace(',', ' ')
+        formatted_discount_amount = '{:,.0f}'.format(discount_amount).replace(',', ' ')
+
+        return {
+            'final_price': formatted_final_price,
+            'discount_amount': formatted_discount_amount,
+        }
     except (ValueError, TypeError) as e:
         print(f'Error in calculating discount: {e}')
-        return price
+        return {
+            'final_price': price,
+            'discount_amount': 0,
+        }
 
 
 @register.filter

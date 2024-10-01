@@ -227,37 +227,45 @@ $(document).ready(function() {
         <div class="card h-100">
           <section class="d-flex align-items-center p-2" data-bs-ride="false" style="height: 500px; overflow: hidden;">
             <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
-              {% for tag in door.tags.all %}
-                <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
-              {% endfor %}
+                {% for tag in door.tags.all %}
+                    <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
+                {% endfor %}
             </div>
             <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
-              {% with door.images|split_and_get_all as image_urls %}
-                {% for image_url in image_urls %}
-                  <div class="image-container" style="flex: 1 1 calc(33.33% - 10px); margin: 5px; height: 400px; overflow: hidden;">
-                    <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
-                  </div>
-                {% endfor %}
-              {% endwith %}
+                {% with door.images|split_and_get_all as image_urls %}
+                    {% for image_url in image_urls %}
+                        <div class="image-container" style="flex: 1 1 calc(33.33% - 10px); margin: 5px; height: 400px; overflow: hidden;">
+                            <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
+                        </div>
+                    {% endfor %}
+                {% endwith %}
             </div>
-          </section>
+        </section>
           
           <section class="card-body">
             <p class="card-title fw-bold">{{ door.title }}</p>
             {% if door.discount %}
             <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
-              <label class="card-text rounded" style="color: #ff0000;">{{ door.price|calculate_discount:door.discount }} ₽</label>
-              <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
-                <span>{{ door.price|format_number }} ₽</span>
-                <svg viewBox="0 0 100 100">
-                  <line x1="-150" y1="0" x2="150" y2="80" stroke="#ff0000" stroke-width="4"/>
-                </svg>
-              </label>
-              <label class="card-text rounded bg-danger text-white p-1" style="font-size: x-small;">-{{ door.discount }}%</label>
+                {% with result=door.price|calculate_discount:door.discount %}
+                    <div class="position-absolute d-flex flex-column" style="bottom: 40%; z-index: 2; right: 10px;">
+                        {% if door.discount %}
+                            <span class="badge rounded-pill bg-danger text-white mx-auto" style="margin-bottom: 5px; font-size: 15px;"><i class="bi bi-plus-circle-fill me-2"></i>{{ result.discount_amount }} ₽</span>
+                        {% endif %}
+                    </div>
+                    <label class="card-text rounded" style="color: #ff0000;">{{ result.final_price }} ₽</label>
+                    <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
+                        <span>{{ door.price|format_number }} ₽</span>
+                        <svg viewBox="0 0 100 100">
+                            <line x1="-150" y1="0" x2="150" y2="80" stroke="#ff0000" stroke-width="4"/>
+                        </svg>
+                    </label>
+                    <label class="card-text rounded bg-danger text-white p-1" style="font-size: x-small;">-{{ door.discount }}%</label>
+                {% endwith %}
             </label>
-            {% else %}
+        {% else %}
             <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
-            {% endif %}
+        {% endif %}
+        
             <label class="card-text text-secondary pb-3 mt-auto">{{ door.size_name }}</label>
             <div class="d-flex flex-row mt-auto align-items-center justify-content-center" style="gap: 10px;">
               <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger">Узнать подробнее</button></a>
