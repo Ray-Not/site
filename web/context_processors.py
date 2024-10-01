@@ -13,13 +13,13 @@ def footer_context(request):
     catalogs_with_images = Catalog.objects.exclude(
         image=''
     ).exclude(image__isnull=True)
-    if catalogs_with_images.count() <= 8:
+    if catalogs_with_images.count() <= 15:
         random_catalogs = list(catalogs_with_images)
     else:
         random_catalog_ids = sample(list(catalogs_with_images.values_list(
             'id',
             flat=True
-        )), 8)
+        )), 15)
         random_catalogs = Catalog.objects.filter(id__in=random_catalog_ids)
 
     catalogs_in_footer = Catalog.objects.all()

@@ -176,7 +176,7 @@
               <h1 style="font-family: tilda;">Популярные категории</h1>
               <div class="row">
                 {% for catalog in random_catalogs %}
-                  <div class="col-lg-3 col-6 door-item d-flex flex-column" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+                  <div class="col-lg-3 col-6 door-item d-flex flex-column my-2" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
                     <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
                     <article class="d-flex flex-column mt-2">
                       <label class="fw-bold" style="font-size: small;">
