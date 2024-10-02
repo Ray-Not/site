@@ -87,6 +87,28 @@
     {% endfor %}
   </section>
 </section>
+<script>
+  window.onload = function() {
+      const recentlyViewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+      const footerSection = document.querySelector('.recently-viewed-doors');
+  
+      recentlyViewed.forEach(door => {
+          const doorElement = document.createElement('div');
+          doorElement.classList.add('col-6');
+          doorElement.innerHTML = `<p>${door.title}</p>`;
+          footerSection.appendChild(doorElement);
+      });
+  }
+</script>
+
+<section>
+  <div class="recently-viewed-doors">
+    <h5>Недавно просмотренные двери:</h5>
+    <div class="row">
+        <!-- Двери будут добавлены сюда с помощью JavaScript -->
+    </div>
+  </div>
+</section>
 
 <footer class="text-light py-4 bg-dark mt-auto">
   <section class="container d-flex justify-content-center flex-lg-row flex-column">

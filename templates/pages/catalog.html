@@ -251,39 +251,39 @@ $(document).ready(function() {
             </div>
         </section>
           
-          <section class="card-body">
-            <p class="card-title fw-bold">{{ door.title }}</p>
-            {% if door.discount %}
-            <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
-                {% with result=door.price|calculate_discount:door.discount %}
-                    <div class="position-absolute d-flex flex-column" style="bottom: 40%; z-index: 2; right: 10px;">
-                        {% if door.discount %}
-                            <span class="badge rounded-pill bg-danger text-white mx-auto" style="margin-bottom: 5px; font-size: 15px;"><i class="bi bi-plus-circle-fill me-2"></i>{{ result.discount_amount }} ₽</span>
-                        {% endif %}
-                    </div>
-                    <label class="card-text rounded" style="color: #ff0000;">{{ result.final_price }} ₽</label>
-                    <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
-                        <span>{{ door.price|format_number }} ₽</span>
-                        <svg viewBox="0 0 100 100">
-                            <line x1="-150" y1="0" x2="150" y2="80" stroke="#ff0000" stroke-width="4"/>
-                        </svg>
-                    </label>
-                    <label class="card-text rounded bg-danger text-white p-1" style="font-size: x-small;">-{{ door.discount }}%</label>
-                {% endwith %}
-            </label>
-        {% else %}
-            <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
-        {% endif %}
-        
-            <label class="card-text text-secondary pb-3 mt-auto">{{ door.size_name }}</label>
-            <div class="d-flex flex-row mt-auto align-items-center justify-content-center" style="gap: 10px;">
-              <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger">Узнать подробнее</button></a>
-              <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
-              <button onclick="addToCompare({{ door.id }})" class="btn">
-                <i class="bi bi-bar-chart-fill" style="color: #ff0000; font-size: large;"></i>
-              </button>
-            </div>
-          </section>
+        <section class="card-body">
+          <p class="card-title fw-bold">{{ door.title }}</p>
+          {% if door.discount %}
+          <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
+              {% with result=door.price|calculate_discount:door.discount %}
+                  <div class="position-absolute d-flex flex-column" style="bottom: 40%; z-index: 2; right: 10px;">
+                      {% if door.discount %}
+                          <span class="badge rounded-pill bg-danger text-white mx-auto" style="margin-bottom: 5px; font-size: 15px;"><i class="bi bi-plus-circle-fill me-2"></i>{{ result.discount_amount }} ₽</span>
+                      {% endif %}
+                  </div>
+                  <label class="card-text rounded" style="color: #ff0000;">{{ result.final_price }} ₽</label>
+                  <label class="card-text rounded text-secondary strikethrough-svg" style="font-size: small;">
+                      <span>{{ door.price|format_number }} ₽</span>
+                      <svg viewBox="0 0 100 100">
+                          <line x1="-150" y1="0" x2="150" y2="80" stroke="#ff0000" stroke-width="4"/>
+                      </svg>
+                  </label>
+                  <label class="card-text rounded bg-danger text-white p-1" style="font-size: x-small;">-{{ door.discount }}%</label>
+              {% endwith %}
+          </label>
+      {% else %}
+          <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
+      {% endif %}
+      
+          <label class="card-text text-secondary pb-3 mt-auto">{{ door.size_name }}</label>
+          <div class="d-flex flex-row mt-auto align-items-center justify-content-center" style="gap: 10px;">
+            <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger">Узнать подробнее</button></a>
+            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
+            <button onclick="addToCompare({{ door.id }})" class="btn">
+              <i class="bi bi-bar-chart-fill" style="color: #ff0000; font-size: large;"></i>
+            </button>
+          </div>
+        </section>
         </div>
       </div>
       {% endfor %}
