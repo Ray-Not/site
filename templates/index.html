@@ -146,7 +146,7 @@
     <!-- Включение header -->
     {% include 'header/header.html' %}
     <main>
-        <aside class='container'>
+        <aside class='container mx-auto'>
           {% block content %}
             <!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
               <article class="carousel-inner">
@@ -532,7 +532,7 @@
                 </table>
               </div>
               <div class="col col-lg-6 text-center">
-                <img src="{% static 'images/banners/moscow.jpeg' %}" style="width: 400px; height: 500px;">
+                <img src="{% static 'images/banners/moscow.jpeg' %}" style="width: 350px; height: 400px;">
               </div>
             </section>
             <aside class="my-4">
@@ -852,9 +852,6 @@
         </script>
         {% endblock %}
         </div>
-    </main>
-    <!-- Включение footer -->
-    {% include 'footer/footer.html' %}
 
 
   <div class="row sticky-bottom d-lg-none mx-auto">
@@ -878,7 +875,11 @@
     </a>
     <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">
       <i class="bi bi-arrow-left-right"></i>
-    </a>    
+    </a>
   </div>
+    </main>
+    <!-- Включение footer -->
+    {% include 'footer/footer.html' %}
+
 </body>
 </html>

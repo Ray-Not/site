@@ -13,7 +13,7 @@
   background-color: #f8f9fa; /* Задает фоновый цвет */
 }
 </style>
-<header class="container bg-light sticky-top mx-auto">
+<header class="container bg-light sticky-top">
   <nav class='d-flex border-bottom'>
     <!-- Мобильная версия -->
     <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4 mb-3">
@@ -36,35 +36,6 @@
           <i class="bi bi-telegram" style="color: black; font-size: x-large;"></i>
         </a>
       </div>
-      <!-- <div class='col-2'>
-        <i class="bi bi-list" id="menuButton" style="font-size: xx-large;"></i>
-        <nav id="menu" class="d-none bg-light justify-content-center flex-column text-center w-50 border shadow" style="position: absolute; z-index: 10; right: 10%;">
-          <a class="nav-link link-dark p-2 {% if request.path == '/catalog/' %}active{% endif %}" id="catalogButton">Каталог</a>
-          <a class="nav-link mt-2 link-dark chapter-section d-none" href="/catalog/">Все двери</a>
-          {% for chapter, catalogs in chapters_with_titles.items %}
-          <div class="text-center chapter-section d-none" style="font-family: tilda-medium; position: relative;">
-            <label class="mt-2 border-bottom">{{ chapter }}</label>
-            <ul class="list-unstyled categories-item">
-              {% for catalog in catalogs %}
-                <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'catalog_with_slug' catalog.slug %}">
-                  <li style="font-size: medium;">
-                    {{ catalog.title }} 
-                    <label class='text-secondary' style="font-size: small;">{{ catalog.door_count }} шт.</label>
-                  </li>
-                </a>
-              {% endfor %}
-            </ul>
-          </div>
-          {% endfor %}
-          <a class="nav-link link-dark p-2 {% if request.path == '/delivery/' %}active{% endif %}" href="/delivery/">Доставка</a>
-          <a class="nav-link link-dark p-2 {% if request.path == '/blog/' %}active{% endif %}" href="/blog/">Блог</a>
-          <a class="nav-link link-dark p-2 {% if request.path == '/reviews/' %}active{% endif %}" href="/reviews/">Отзывы</a>
-          <a class="nav-link link-dark p-2 {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
-          <a class="nav-link link-dark p-2 {% if request.path == '/contacts/' %}active{% endif %}" href="/calc/">Калькулятор</a>
-          <a class="nav-link link-dark p-2 {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">Сравнение</a>
-        </nav>
-
-      </div> -->
     </div>
 
     <!-- Десктопная версия -->
