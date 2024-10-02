@@ -6,7 +6,7 @@ from django.db.models import Avg, Max, Min
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import DoorFilter
-from .forms import CustomOrderForm, OrderForm, ReviewForm
+from .forms import CustomOrderForm, OrderForm, ReviewForm, GetDiscountForm
 from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
                      Review, Tag)
 from django.views.decorators.csrf import csrf_exempt
@@ -310,6 +310,16 @@ def door_detail(request, slug):
     else:
         form = OrderForm()
 
+    if request.method == 'POST':
+        discount_form = GetDiscountForm(request.POST)
+        if discount_form.is_valid():
+            order = discount_form.save(commit=False)
+            order.door = door
+            order.save()
+            return redirect('door_detail', slug=door.slug)
+    else:
+        discount_form = GetDiscountForm()
+
     for item in equipment_data:
         parts = item.split(',')
         if len(parts) == 2:
@@ -363,6 +373,7 @@ def door_detail(request, slug):
         'in_characteristics': in_characteristics,
         'equipment_list': equipment_list,
         'form': form,
+        'discount_form': discount_form,
         'min_price': min_price,
         'max_price': max_price,
         'avg_rating': average_rating,

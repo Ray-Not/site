@@ -1,6 +1,15 @@
 from django import forms
 
-from .models import CustomOrder, Order, Review
+from .models import CustomOrder, Order, Review, GetDiscount
+
+
+class GetDiscountForm(forms.ModelForm):
+    class Meta:
+        model = GetDiscount
+        fields = ['phone',]
+        widgets = {
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 class OrderForm(forms.ModelForm):

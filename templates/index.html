@@ -591,35 +591,35 @@
                   </tr>
                 </tbody>
               </table>
-              <section>
-              <div class="bg-secondary text-light d-flex align-items-center justify-content-center p-4" style="height: 50px; font-size: large;">
-                Свяжитесь с нами по телефону +7 (929) 622-48-35
-              </div>
-                <form method="POST" action="{% url 'index' %}" class="p-3 text-light d-flex justify-content-center flex-column align-items-center" >
-                  {% csrf_token %}
-                  <div class="mb-3 w-100">
-                    <label for="id_name" class="text-dark">Имя</label>
-                    {{ form.name }}
-                  </div>
-                  <div class="mb-3 w-100">
-                    <label for="id_phone" class="text-dark">Телефон</label>
-                    {{ form.phone }}
-                  </div>
-                  <div class="mb-3 w-100">
-                    <label for="id_call_time" class="text-dark">Время звонка</label>
-                    {{ form.call_time }}
-                  </div>
-                  <div class="mb-3 w-100">
-                    <label for="id_address" class="text-dark">Адрес</label>
-                    {{ form.address }}
-                  </div>
-                  <div class="mb-3 w-100">
-                    <label for="id_message" class="text-dark">Техническое задание</label>
-                    {{ form.message }}
-                  </div>
-                  <button type="submit" class="btn text-light col-4" style="background-color: sienna;">Оставить заявку</button>
-                </form>
-              </section>
+              <section class="mt-4" style="background-color: #ff0000;">
+                <div class="text-light d-flex align-items-center justify-content-center fw-bold" style="height: 50px; font-size: large;">
+                  Обратная связь
+                </div>
+                  <form method="POST" action="{% url 'index' %}" class="p-3 text-light d-flex justify-content-center flex-column align-items-center" >
+                    {% csrf_token %}
+                    <div class="mb-3 w-100">
+                      <label for="id_name">Имя</label>
+                      {{ form.name }}
+                    </div>
+                    <div class="mb-3 w-100">
+                      <label for="id_phone">Телефон</label>
+                      {{ form.phone }}
+                    </div>
+                    <div class="mb-3 w-100">
+                      <label for="id_call_time">Время звонка</label>
+                      {{ form.call_time }}
+                    </div>
+                    <div class="mb-3 w-100">
+                      <label for="id_address">Адрес</label>
+                      {{ form.address }}
+                    </div>
+                    <div class="mb-3 w-100">
+                      <label for="id_message">Техническое задание</label>
+                      {{ form.message }}
+                    </div>
+                    <button type="submit" class="btn btn-light col-4">Оставить заявку</button>
+                  </form>
+            </section>
             </aside>
             <aside class="my-4">
                 <h1 style="font-family: tilda;">Последние новости</h1>

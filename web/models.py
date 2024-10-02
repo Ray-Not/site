@@ -459,3 +459,10 @@ class CustomOrder(models.Model):
 
     def __str__(self):
         return f'От {self.phone} пришел заказ'
+
+
+class GetDiscount(models.Model):
+    phone = models.CharField(max_length=32)
+
+    def __str__(self) -> str:
+        return f"{self.phone} нужна скидка"
