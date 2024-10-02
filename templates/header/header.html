@@ -5,6 +5,13 @@
     position: static; /* Отменяет фиксированное позиционирование для больших экранов */
   }
 }
+.sticky-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1030; /* Устанавливает приоритет отображения над другими элементами */
+  background-color: #f8f9fa; /* Задает фоновый цвет */
+}
 </style>
 <header class="container bg-light sticky-top">
   <nav class='d-flex border-bottom'>
@@ -29,9 +36,8 @@
           <i class="bi bi-telegram" style="color: black; font-size: x-large;"></i>
         </a>
       </div>
-      <div class='col-2'>
+      <!-- <div class='col-2'>
         <i class="bi bi-list" id="menuButton" style="font-size: xx-large;"></i>
-        <!-- Navbar mobile -->
         <nav id="menu" class="d-none bg-light justify-content-center flex-column text-center w-50 border shadow" style="position: absolute; z-index: 10; right: 10%;">
           <a class="nav-link link-dark p-2 {% if request.path == '/catalog/' %}active{% endif %}" id="catalogButton">Каталог</a>
           <a class="nav-link mt-2 link-dark chapter-section d-none" href="/catalog/">Все двери</a>
@@ -58,7 +64,7 @@
           <a class="nav-link link-dark p-2 {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">Сравнение</a>
         </nav>
 
-      </div>
+      </div> -->
     </div>
 
     <!-- Десктопная версия -->
@@ -92,7 +98,6 @@
       </div>
     </article>    
   </nav>
-
 
   <!-- Navbar -->
   {% include 'header/navbar.html' %}

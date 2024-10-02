@@ -856,5 +856,29 @@
     <!-- Включение footer -->
     {% include 'footer/footer.html' %}
 
+
+  <div class="row sticky-bottom d-lg-none mx-auto">
+    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/installation/' %}active{% endif %}" href="/installation/">
+      <i class="bi bi-save"></i>
+    </a> 
+    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/delivery/' %}active{% endif %}" href="/delivery/">
+      <i class="bi bi-truck"></i>
+    </a>
+    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/blog/' %}active{% endif %}" href="/blog/">
+      <i class="bi bi-journal-text"></i>
+    </a>
+    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/reviews/' %}active{% endif %}" href="/reviews/">
+      <i class="bi bi-star"></i>
+    </a>
+    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">
+      <i class="bi bi-envelope"></i>
+    </a>
+    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/calc/' %}active{% endif %}" href="/calc/">
+      <i class="bi bi-calculator"></i>
+    </a>
+    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">
+      <i class="bi bi-arrow-left-right"></i>
+    </a>    
+  </div>
 </body>
 </html>

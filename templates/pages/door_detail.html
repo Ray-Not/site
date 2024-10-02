@@ -218,7 +218,7 @@
         <h5>Артикул: {{ door.article }}</h5><hr>
         <section class="d-flex flex-lg-row flex-column text-secondary my-4 justify-content-center" style="gap: 10px;">
             <div class="col p-2">
-                <p>Цена</p>
+                <p>Стоимость двери:</p>
                 {% if door.discount %}
                     <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt; font-size: 25px;">
                         {% with result=door.price|calculate_discount:door.discount %}
