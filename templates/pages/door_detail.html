@@ -114,6 +114,13 @@
     }
 
 </style>
+<nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a class="link-dark" href="{% url 'index' %}">Главная</a></li>
+      <li class="breadcrumb-item"><a class="link-dark" href="{% url 'catalog' %}">Каталог</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ door.title }}</li>
+    </ol>
+</nav>
 <section class="row d-flex flex-row mt-2">
     <div class="tags-cloud d-flex flex-wrap">
         <label class="text-center" style="font-size: 15px;">Популярные категории: </label>
