@@ -142,11 +142,11 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Настройте цвет и параметры тени */
   }
 </style>
-<body class="d-flex flex-column min-vh-100">
+<body class="min-vh-100">
     <!-- Включение header -->
     {% include 'header/header.html' %}
     <main>
-        <aside class='container mx-auto'>
+        <aside class='container'>
           {% block content %}
             <!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
               <article class="carousel-inner">
@@ -854,32 +854,26 @@
         </script>
         {% endblock %}
         </div>
-
-
-  <div class="row sticky-bottom d-lg-none d-flex justify-content-center align-items-center text-center">
-    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/installation/' %}active{% endif %}" href="/installation/">
-      <i class="bi bi-save"></i>
-    </a> 
-    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/delivery/' %}active{% endif %}" href="/delivery/">
-      <i class="bi bi-truck"></i>
-    </a>
-    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/blog/' %}active{% endif %}" href="/blog/">
-      <i class="bi bi-journal-text"></i>
-    </a>
-    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/reviews/' %}active{% endif %}" href="/reviews/">
-      <i class="bi bi-star"></i>
-    </a>
-    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">
-      <i class="bi bi-envelope"></i>
-    </a>
-    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/calc/' %}active{% endif %}" href="/calc/">
-      <i class="bi bi-calculator"></i>
-    </a>
-    <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">
-      <i class="bi bi-arrow-left-right"></i>
-    </a>
-  </div>
     </main>
+    <div class="container-fluid bottom-0 bg-light" style="z-index: 900;">
+      <div class="row sticky-bottom d-lg-none d-flex justify-content-center">
+          <a class="text-center text-danger col-2 nav-link link-dark" href="tel:+79296224835">
+            <i class="bi bi-telephone-inbound" style="font-size: 25px;"></i>
+          </a>
+          <a class="text-center text-danger col-2 nav-link link-dark {% if request.path == '/blog/' %}active{% endif %}" href="/blog/">
+            <i class="bi bi-journal-text" style="font-size: 25px;"></i>
+          </a>
+          <a class="text-center text-danger col-2 nav-link link-dark" href="mailto:paritet-dveri@inbox.ru">
+            <i class="bi bi-envelope" style="font-size: 25px;"></i>
+          </a>
+          <a class="text-center text-danger col-2 nav-link link-dark {% if request.path == '/calc/' %}active{% endif %}" href="/calc/">
+            <i class="bi bi-calculator" style="font-size: 25px;"></i>
+          </a>
+          <a class="text-center text-danger col-2 nav-link link-dark {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">
+            <i class="bi bi-reception-4" style="font-size: 25px;"></i>
+          </a>
+      </div>
+    </div>
     <!-- Включение footer -->
     {% include 'footer/footer.html' %}
 
