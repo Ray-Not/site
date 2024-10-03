@@ -328,7 +328,9 @@
               <div class="row">
                 {% for catalog in random_catalogs %}
                   <div class="col-lg-3 col-6 door-item d-flex flex-column my-2" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
-                    <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
+                    <a href="{% url 'catalog_with_slug' catalog.slug %}">
+                      <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
+                    </a>
                     <article class="d-flex flex-column mt-2">
                       <label class="fw-bold" style="font-size: small;">
                         {{ catalog.title }}
@@ -854,7 +856,7 @@
         </div>
 
 
-  <div class="row sticky-bottom d-lg-none mx-auto">
+  <div class="row sticky-bottom d-lg-none d-flex justify-content-center align-items-center text-center">
     <a class="text-center text-danger col nav-link link-dark p-2 {% if request.path == '/installation/' %}active{% endif %}" href="/installation/">
       <i class="bi bi-save"></i>
     </a> 
