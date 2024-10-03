@@ -115,10 +115,20 @@
 
 </style>
 <nav aria-label="breadcrumb" class="mt-3">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a class="link-dark" href="{% url 'index' %}">Главная</a></li>
-      <li class="breadcrumb-item"><a class="link-dark" href="{% url 'catalog' %}">Каталог</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{ door.title }}</li>
+    <ol class="breadcrumb d-flex flex-wrap" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+      <li class="breadcrumb-item">
+        <a class="link-dark" href="{% url 'index' %}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+          Главная
+        </a>
+      </li>
+      <li class="breadcrumb-item">
+        <a class="link-dark" href="{% url 'catalog' %}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+          Каталог
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40%;">
+        {{ door.title }}
+      </li>
     </ol>
 </nav>
 <section class="row d-flex flex-row mt-2">
@@ -308,7 +318,7 @@
     
 </section>
 <div class="row d-flex align-items-center justify-content-center">  
-<section class="mt-4 col-6" style="background-color: #ff0000;">
+<section class="mt-4 col-lg-6" style="background-color: #ff0000;">
     <div class="text-light fw-bold text-center pt-2" style="height: 50px; font-size: large;">
       Обратная связь
     </div>
