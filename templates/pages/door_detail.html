@@ -266,24 +266,25 @@
                 </form>
             </div>
         </section><hr>
-        <section class="d-flex flex-row text-secondary my-4 justify-content-center" style="gap: 10px;">
-            <div class="shadow rounded px-2" style="font-size: small;">
+        <section class="d-flex flex-wrap text-secondary my-4 justify-content-center" style="gap: 20px;">
+            <div class="col-5 col-md-5 col-lg-2 shadow rounded px-2" style="font-size: small;">
                 <i class="bi bi-arrow-up-left-square"></i> Доставка + установка:
                 <p class="text-dark">бесплатно по МКАД</p>
             </div>
-            <div class="shadow rounded px-2" style="font-size: small;">
+            <div class="col-5 col-md-5 col-lg-3 shadow rounded px-2" style="font-size: small;">
                 <i class="bi bi-arrow-up-left-square"></i> Выезд на замер:
                 <p class="text-dark">0 рублей</p>
             </div>
-            <div class="shadow rounded px-2" style="font-size: small;">
+            <div class="col-5 col-md-5 col-lg-3 shadow rounded px-2" style="font-size: small;">
                 <i class="bi bi-arrow-up-left-square"></i> Ближайший монтаж:
                 <p class="text-dark">{{ delivery_date }}</p>
             </div>
-            <div class="shadow rounded px-2" style="font-size: small;">
+            <div class="col-5 col-md-5 col-lg-2 shadow rounded px-2" style="font-size: small;">
                 <i class="bi bi-arrow-up-left-square"></i> Гарантия:
                 <p class="text-dark">5-20 лет</p>
             </div>
-        </section><hr>
+        </section>
+        <hr>        
         <h5 class="text-center">Характеристики</h5><hr>
         <ul class="list-group">
             {% for value in characteristics.values %}

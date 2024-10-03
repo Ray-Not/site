@@ -78,8 +78,9 @@
             {% else %}
             <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
             {% endif %}
-            <div class="mt-auto">
-              <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger w-100">Узнать подробнее</button></a>
+            <div class="d-flex flex-row mt-auto align-items-center justify-content-center" style="gap: 10px;">
+              <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger">Узнать подробнее</button></a>
+              <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
             </div>
           </section>
         </div>
