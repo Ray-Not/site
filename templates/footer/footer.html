@@ -103,23 +103,23 @@
         {% csrf_token %}
         <div class="mb-3 w-100">
           <label for="id_name">Имя</label>
-          {{ form.name }}
+          {{ form_footer.name }}
         </div>
         <div class="mb-3 w-100">
           <label for="id_phone">Телефон</label>
-          {{ form.phone }}
+          {{ form_footer.phone }}
         </div>
         <div class="mb-3 w-100">
           <label for="id_call_time">Время звонка</label>
-          {{ form.call_time }}
+          {{ form_footer.call_time }}
         </div>
         <div class="mb-3 w-100">
           <label for="id_address">Адрес</label>
-          {{ form.address }}
+          {{ form_footer.address }}
         </div>
         <div class="mb-3 w-100">
           <label for="id_message">Техническое задание</label>
-          {{ form.message }}
+          {{ form_footer.message }}
         </div>
         <button type="submit" class="btn btn-light col-4">Оставить заявку</button>
       </form>

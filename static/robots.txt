@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /catalog/?*
 Allow: /
 
 Sitemap: http://paritet-dveri.ru/sitemap.xml

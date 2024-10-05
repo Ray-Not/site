@@ -185,7 +185,7 @@ def catalog(request, slug=None):
         filtered_doors = filtered_doors.filter(tags__in=tags_url).distinct()
 
     # Пагинация
-    paginator = Paginator(filtered_doors, 60)
+    paginator = Paginator(filtered_doors, 30)
     page = request.GET.get('page')
     try:
         doors = paginator.page(page)

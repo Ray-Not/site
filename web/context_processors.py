@@ -50,7 +50,7 @@ def footer_context(request):
         random_doors = Door.objects.filter(id__in=random_ids)
 
     return {
-        'form': OrderForm(),
+        'form_footer': OrderForm(),
         'chapters_with_titles': chapters_with_titles,
         'random_doors': random_doors,
         'random_catalogs': random_catalogs,
