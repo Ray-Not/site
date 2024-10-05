@@ -109,6 +109,76 @@
         {% empty %}
             <p>Пока нет отзывов</p>
         {% endfor %}
+        <nav aria-label="Page navigation" class="mt-2">
+            <ul class="pagination flex-wrap justify-content-center">
+              <!-- Кнопка "Первая страница" и "Предыдущая" -->
+              {% if reviews.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page=1" aria-label="First">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ reviews.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&lsaquo;</span>
+                  </a>
+                </li>
+              {% endif %}
+          
+              <!-- Логика для многоточий в начале -->
+              {% if reviews.number > 3 %}
+                <li class="page-item">
+                  <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page=1">1</a>
+                </li>
+                {% if reviews.number > 4 %}
+                  <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                  </li>
+                {% endif %}
+              {% endif %}
+          
+              <!-- Отображение страниц вокруг текущей страницы -->
+              {% for num in reviews.paginator.page_range %}
+                {% if num <= reviews.number|add:2 and num >= reviews.number|add:-2 %}
+                  {% if reviews.number == num %}
+                    <li class="page-item active">
+                      <span class="page-link">{{ num }}</span>
+                    </li>
+                  {% else %}
+                    <li class="page-item">
+                      <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ num }}">{{ num }}</a>
+                    </li>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+          
+              <!-- Логика для многоточий в конце -->
+              {% if reviews.number < reviews.paginator.num_pages|add:-2 %}
+                {% if reviews.number < reviews.paginator.num_pages|add:-3 %}
+                  <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                  </li>
+                {% endif %}
+                <li class="page-item">
+                  <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ reviews.paginator.num_pages }}">{{ reviews.paginator.num_pages }}</a>
+                </li>
+              {% endif %}
+          
+              <!-- Кнопка "Следующая" и "Последняя" -->
+              {% if reviews.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ reviews.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&rsaquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ reviews.paginator.num_pages }}" aria-label="Last">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
     </div>
 </aside>
 <script>

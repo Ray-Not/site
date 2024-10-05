@@ -386,6 +386,15 @@ def door_detail(request, slug):
 
 def reviews(request):
     reviews = Review.objects.all()
+    paginator = Paginator(reviews, 10)
+    page_number = request.GET.get('page')
+
+    try:
+        reviews = paginator.page(page_number)
+    except PageNotAnInteger:
+        reviews = paginator.page(1)
+    except EmptyPage:
+        reviews = paginator.page(paginator.num_pages)
 
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -422,6 +431,7 @@ def reviews(request):
         'form': form,
         'reviews': reviews,
         'range': range(1, 6),
+        'page': page_number
     }
 
     return render(request, 'pages/reviews.html', context)
