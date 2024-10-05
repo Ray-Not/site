@@ -319,36 +319,7 @@
     </article>
     
 </section>
-<div class="row d-flex align-items-center justify-content-center">  
-<section class="mt-4 col-lg-6" style="background-color: #ff0000;">
-    <div class="text-light fw-bold text-center pt-2" style="height: 50px; font-size: large;">
-      Обратная связь
-    </div>
-      <form method="POST" action="{% url 'door_detail' door.slug %}" class="p-3 text-light d-flex justify-content-center flex-column align-items-center" >
-        {% csrf_token %}
-        <div class="mb-3 w-100">
-          <label for="id_name">Имя</label>
-          {{ form.name }}
-        </div>
-        <div class="mb-3 w-100">
-          <label for="id_phone">Телефон</label>
-          {{ form.phone }}
-        </div>
-        <div class="mb-3 w-100">
-          <label for="id_call_time">Время звонка</label>
-          {{ form.call_time }}
-        </div>
-        <div class="mb-3 w-100">
-          <label for="id_address">Адрес</label>
-          {{ form.address }}
-        </div>
-        <div class="mb-3 w-100">
-          <label for="id_message">Техническое задание</label>
-          {{ form.message }}
-        </div>
-        <button type="submit" class="btn btn-light col-4">Оставить заявку</button>
-      </form>
-</section>
+<div class="row d-flex align-items-center justify-content-center"> 
 <section class="row d-flex justify-content-center">
     <div style="overflow: hidden; height: 250px;" class="d-flex align-items-end">
       <div class="col-12 rounded-3 d-flex justify-content-between align-items-center flex-lg-row flex-column" style="height: 240px; background-color: #ff0000; padding: 20px; position: relative;">
