@@ -16,7 +16,8 @@
 <h1 class="my-3">Изготовление входных дверей</h1>
 <p>Компания Паритет двери предлагает изготовление входных дверей с нужными размерами и параметрами. В производстве применяются металлические листы 1-5 мм, все варианты современной отделки и комплектующих.</p>
 <h3 class="my-3">Калькулятор для расчета стоимости двери</h3>
-<form class="needs-validation rounded-3 p-4" style="background-color:rgb(252, 252, 252);" method="post" novalidate>
+<div class="d-flex justify-content-center">
+<form class="col-12 col-lg-6 needs-validation rounded-3 p-4" style="background-color:rgb(252, 252, 252);" method="post" novalidate>
     {% csrf_token %}
     <div>
         <div class="row">
@@ -252,7 +253,7 @@
         </div>
     </div>
 </form>
-
+</div>
 
 <!-- Модальное окно успешной отправки -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
