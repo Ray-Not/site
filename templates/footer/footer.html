@@ -78,16 +78,20 @@
             {% else %}
             <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
             {% endif %}
-            <div class="d-flex flex-lg-row flex-column mt-auto align-items-center justify-content-center" style="gap: 5px;">
-              <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger fw-bold btn-sm">Узнать подробнее</button></a>
-              <button class="btn btn-outline-danger fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
-            </div>
+            <div class="flex-lg-row flex-column mt-auto align-items-center justify-content-center" style="gap: 5px;">
+              <a href="{% url 'door_detail' slug=door.slug %}" class="flex-grow-1">
+                  <button class="btn btn-outline-danger fw-bold btn-sm w-100">Узнать подробнее</button>
+              </a>
+              <div class="flex-grow-1">
+                  <button class="btn btn-outline-danger fw-bold btn-sm w-100 mt-2" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
+              </div>
+            </div>          
           </section>
         </div>
       </div>
     {% endfor %}
   </section>
-  <h2 class="text-center">Есть предложение или хотите заказать дверь?</h2>
+  <h2 class="text-center my-2">Есть предложение или хотите заказать дверь?</h2>
   <div class="row d-flex justify-content-center">
     <section class="mt-4 col-lg-6" style="background-color: #ff0000;">
       <div class="text-light fw-bold text-center pt-2" style="height: 50px; font-size: large;">
