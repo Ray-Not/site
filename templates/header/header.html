@@ -76,12 +76,12 @@
   <nav class='d-flex border-bottom'>
     <!-- Мобильная версия -->
     <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4 mb-3">
-      <div class='col-6 d-flex justify-content-center align-items-center'>
+      <div class='col-5 d-flex justify-content-center align-items-center'>
         <a href="/">
           <img class='img-fluid' src="{% static 'images/logos/logo.jpg' %}" alt="Логотип"/>
         </a>
       </div>
-      <div class='col-4 d-flex flex-lg-row flex-column' style="font-size: x-small;">
+      <div class='col-5 d-flex flex-lg-row flex-column' style="font-size: x-small;">
         <a href="tel:+79296224835" class="d-flex flex-lg-row flex-column link-dark link-underline-opacity-0">
           <label class="text-dark link-underline-opacity-0">+7 (929) 622-48-35</label>
           <label class="text-dark" style="font-size: x-small; white-space: nowrap;">Обратный звонок</label>
@@ -102,12 +102,12 @@
     
 
     <!-- Десктопная версия -->
-    <article class="col-lg-4 d-none d-lg-flex justify-content-center align-items-center">
+    <article class="col-lg-3 d-none d-lg-flex justify-content-center align-items-center">
       <a href="/">
       <img class='img-fluid btn btn-link' src="{% static 'images/logos/logo.jpg' %}" alt="Логотип"/>
       </a>
     </article>
-    <article class='col-lg-4 d-none d-lg-flex align-items-center justify-content-center'>
+    <article class='col-lg-5 d-none d-lg-flex align-items-center justify-content-center'>
       <form method="GET" action="{% url 'catalog' %}">
         <div class="input-group" style="width: 100%;">
           <input type="text" name="search" class="form-control" placeholder="Введите название товара">
