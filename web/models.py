@@ -80,6 +80,9 @@ class Catalog(models.Model):
         null=True,
         blank=True
     )
+    in_cloud = models.BooleanField(
+        verbose_name='Добавление каталога в облако (каталог)'
+    )
 
     def get_door_count(self):
         """Возвращает количество дверей, связанных с данной категорией."""

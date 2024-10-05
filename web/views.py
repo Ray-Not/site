@@ -236,7 +236,7 @@ def catalog(request, slug=None):
         'selected_purposes': selected_purposes,
         'selected_out_covers': selected_out_covers,
         'selected_in_covers': selected_in_covers,
-        'tags_cloud': Tag.objects.filter(in_cloud=True),
+        'tags_cloud': Catalog.objects.filter(in_cloud=True),
         'catalog': catalog if slug else None,
         'catalogs': catalogs,
         'page': page_number
@@ -379,7 +379,7 @@ def door_detail(request, slug):
         'avg_rating': average_rating,
         'door_count': door_count,
         'delivery_date': delivery_date.strftime('%d %B'),
-        'tags_cloud': Tag.objects.filter(in_cloud=True),
+        'tags_cloud': Catalog.objects.filter(in_cloud=True),
     }
     return render(request, 'pages/door_detail.html', context)
 
