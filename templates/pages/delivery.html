@@ -8,6 +8,13 @@
 {% block content %}
 {% load custom_filters %}
 
+<nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a class="link-dark" href="{% url 'index' %}">Главная</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Доставка</li>
+    </ol>
+</nav>
+
 <style>
 .hover-effect {
     transition: transform 0.3s ease; /* Плавный переход */

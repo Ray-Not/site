@@ -6,6 +6,13 @@
 {% endblock %}
 
 {% block content %}
+
+<nav aria-label="breadcrumb" class="mt-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="link-dark" href="{% url 'index' %}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Установка</li>
+  </ol>
+</nav>
 <h1 class="my-3 text-center">Установка входных дверей</h1>
 <label class="mt-2" style="font-family: tilda-medium;">
     <p>Установка входных металлических дверей осуществляется штатными специалистами.
