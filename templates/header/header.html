@@ -26,6 +26,10 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 0; /* Убедитесь, что отступы по умолчанию отсутствуют */
+  padding: 0;
+  top: 0;
+  left: 0;
 }
 
 .fullscreen-menu.open {
@@ -134,7 +138,7 @@
   {% include 'header/navbar.html' %}
 
   <!-- Burger Menu -->
-  <div id="fullScreenMenu" class="fullscreen-menu container" style="width: 100%;">
+  <div id="fullScreenMenu" class="fullscreen-menu container-fluid">
     <div class="menu-content">
       <button class="close-btn text-dark" onclick="toggleMenu()">×</button>
       <div class="col-12 d-flex flex-column justify-content-center mt-5" style="font-family: tilda-light">

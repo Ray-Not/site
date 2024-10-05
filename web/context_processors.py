@@ -3,6 +3,7 @@ from random import sample
 from django.db.models import Count
 
 from .models import Catalog, Door
+from .forms import OrderForm
 
 
 def footer_context(request):
@@ -49,6 +50,7 @@ def footer_context(request):
         random_doors = Door.objects.filter(id__in=random_ids)
 
     return {
+        'form': OrderForm(),
         'chapters_with_titles': chapters_with_titles,
         'random_doors': random_doors,
         'random_catalogs': random_catalogs,
