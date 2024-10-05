@@ -78,14 +78,16 @@
             {% else %}
             <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
             {% endif %}
-            <div class="flex-lg-row flex-column mt-auto align-items-center justify-content-center" style="gap: 5px;">
-              <a href="{% url 'door_detail' slug=door.slug %}" class="flex-grow-1">
-                  <button class="btn btn-outline-danger fw-bold btn-sm w-100">Узнать подробнее</button>
+            <div class="d-flex flex-lg-row flex-column mt-auto align-items-center justify-content-center w-100" style="gap: 5px;">
+              <a href="{% url 'door_detail' slug=door.slug %}" class="flex-grow-1 w-100" style="font-size: 5px;">
+                  <button class="btn btn-outline-danger fw-bold btn-sm w-100">Подробнее</button>
               </a>
-              <div class="flex-grow-1">
-                  <button class="btn btn-outline-danger fw-bold btn-sm w-100 mt-2" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
+              <div class="flex-grow-1 w-100">
+                  <button class="btn btn-outline-danger fw-bold btn-sm w-100" data-bs-toggle="modal" data-bs-target="#requestModal">
+                      Купить в 1 клик
+                  </button>
               </div>
-            </div>          
+            </div>
           </section>
         </div>
       </div>
