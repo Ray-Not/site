@@ -234,7 +234,7 @@ $(document).ready(function() {
       {% for door in doors %}
       <div class="col-lg-6 col-12 mt-lg-0 mt-4 mb-4 door-item" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
         <div class="card h-100">
-          <section class="d-flex align-items-center p-2" data-bs-ride="false" style="height: 500px; overflow: hidden;">
+          <section class="d-flex align-items-center p-2" data-bs-ride="false" style="height: 450px; overflow: hidden;">
             <div class="position-absolute d-flex flex-column" style="top: 10px; z-index: 2;">
                 {% for tag in door.tags.all %}
                     <span class="badge rounded-pill text-{{ tag.text_color }} mx-auto" style="background-color: {{ tag.color_hex }}; margin-bottom: 5px;">{{ tag.title }}</span>
@@ -244,7 +244,7 @@ $(document).ready(function() {
                 {% with door.images|split_and_get_all as image_urls %}
                     {% for image_url in image_urls %}
                         <div class="image-container" style="flex: 1 1 calc(33.33% - 10px); margin: 5px; height: 400px; overflow: hidden;">
-                            <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;">
+                          <a href="{% url 'door_detail' slug=door.slug %}"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;"></a>
                         </div>
                     {% endfor %}
                 {% endwith %}
@@ -252,7 +252,7 @@ $(document).ready(function() {
         </section>
           
         <section class="card-body">
-          <p class="card-title fw-bold">{{ door.title }}</p>
+          <a href="{% url 'door_detail' slug=door.slug %}"><p class="card-title fw-bold">{{ door.title }}</p></a>
           {% if door.discount %}
           <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
               {% with result=door.price|calculate_discount:door.discount %}
@@ -276,9 +276,9 @@ $(document).ready(function() {
       {% endif %}
       
           <label class="card-text text-secondary pb-3 mt-auto">{{ door.size_name }}</label>
-          <div class="d-flex flex-row mt-auto align-items-center justify-content-center" style="gap: 10px;">
-            <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger">Узнать подробнее</button></a>
-            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
+          <div class="d-flex flex-lg-row flex-column mt-auto align-items-center justify-content-center" style="gap: 5px;">
+            <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger fw-bold btn-sm">Узнать подробнее</button></a>
+            <button class="btn btn-outline-danger fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
             <button onclick="addToCompare({{ door.id }})" class="btn">
               <i class="bi bi-bar-chart-fill" style="color: #ff0000; font-size: large;"></i>
             </button>

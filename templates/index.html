@@ -428,7 +428,7 @@
                           {% with door.images|split_and_get_all as image_urls %}
                             {% for image_url in image_urls %}
                               <div class="image-container d-flex justify-content-center door-image" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
-                                <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
+                                <a href="{% url 'door_detail' slug=door.slug %}"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;"></a>
                               </div>
                             {% endfor %}
                           {% endwith %}
@@ -436,7 +436,7 @@
                       </section>
             
                       <section class="card-body d-flex flex-column mt-auto">
-                        <p class="card-title fw-bold">{{ door.title }}</p>
+                        <a href="{% url 'door_detail' slug=door.slug %}"><p class="card-title fw-bold">{{ door.title }}</p></a>
                         {% if door.discount %}
                         <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
                           <label class="card-text rounded" style="color: #ff0000;">{{ door.price|calculate_discount:door.discount }} ₽</label>
@@ -451,8 +451,9 @@
                         {% else %}
                         <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
                         {% endif %}
-                        <div class="mt-auto">
-                          <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger w-100">Узнать подробнее</button></a>
+                        <div class="d-flex flex-lg-row flex-column mt-auto align-items-center justify-content-center" style="gap: 5px;">
+                          <a href="{% url 'door_detail' slug=door.slug %}"><button class="btn btn-outline-danger fw-bold btn-sm">Узнать подробнее</button></a>
+                          <button class="btn btn-outline-danger fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#requestModal">Купить в 1 клик</button>
                         </div>
                       </section>
                     </div>
