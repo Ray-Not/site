@@ -87,6 +87,38 @@
       </div>
     {% endfor %}
   </section>
+  <h2 class="text-center">Есть предложение или хотите заказать дверь?</h2>
+  <div class="row d-flex justify-content-center">
+    <section class="mt-4 col-lg-6" style="background-color: #ff0000;">
+      <div class="text-light fw-bold text-center pt-2" style="height: 50px; font-size: large;">
+        Обратная связь
+      </div>
+      <form method="POST" action="{% url 'index' %}" class="p-3 text-light d-flex justify-content-center flex-column align-items-center" >
+        {% csrf_token %}
+        <div class="mb-3 w-100">
+          <label for="id_name">Имя</label>
+          {{ form.name }}
+        </div>
+        <div class="mb-3 w-100">
+          <label for="id_phone">Телефон</label>
+          {{ form.phone }}
+        </div>
+        <div class="mb-3 w-100">
+          <label for="id_call_time">Время звонка</label>
+          {{ form.call_time }}
+        </div>
+        <div class="mb-3 w-100">
+          <label for="id_address">Адрес</label>
+          {{ form.address }}
+        </div>
+        <div class="mb-3 w-100">
+          <label for="id_message">Техническое задание</label>
+          {{ form.message }}
+        </div>
+        <button type="submit" class="btn btn-light col-4">Оставить заявку</button>
+      </form>
+    </section>
+  </div>
 </section>
 <script>
   window.onload = function() {
