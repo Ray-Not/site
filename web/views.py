@@ -107,7 +107,8 @@ def delivery_detail(request, slug):
     region = get_object_or_404(DeliveryRegion, slug=slug)
 
     context = {
-        'region': region
+        'region': region,
+        'tags_cloud': Catalog.objects.filter(in_cloud=True),
     }
 
     return render(request, 'pages/delivery_detail.html', context)
