@@ -73,7 +73,7 @@
 }
 </style>
 <header class="container sticky-top" style="background-color: #fff;">
-  <nav class='d-flex border-bottom'>
+  <nav class='d-flex border-bottom justify-content-center'>
     <!-- Мобильная версия -->
     <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4 mb-3">
       <div class='col-5 d-flex justify-content-center align-items-center'>
@@ -81,9 +81,10 @@
           <img class='img-fluid' src="{% static 'images/logos/logo.jpg' %}" alt="Логотип"/>
         </a>
       </div>
-      <div class='col-5 d-flex flex-lg-row flex-column' style="font-size: x-small;">
-        <a href="tel:+79296224835" class="d-flex flex-lg-row flex-column link-dark link-underline-opacity-0">
-          <label class="btn btn-outline-danger btn-sm text-danger m-1 w-75" style="font-size: xx-small; white-space: nowrap;">Обратный звонок</label>
+      <div class='col-5 d-flex flex-column' style="font-size: x-small;">
+        <a href="tel:+79296224835" class="row d-flex flex-column link-dark">
+          <label class="col-6 text-center" style="font-size: xx-small; white-space: nowrap;">Обратный звонок</label>
+          <label class="col-6 text-center" style="font-size: xx-small; white-space: nowrap;">+7(499) 322-91-25</label>
         </a>
       </div>
       <div class="col-2 d-flex justify-content-center align-items-center">
