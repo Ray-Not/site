@@ -233,36 +233,43 @@
 
 
 <script>
-function displayViewedDoors() {
-    // Получаем просмотренные двери из localStorage
-    console.log(localStorage.getItem('viewedDoors'));
-    let viewedData = localStorage.getItem('viewedDoors');
-    let viewed = viewedData ? JSON.parse(viewedData) : [];
-
-    // Находим элемент для вывода
-    const viewedItemsContainer = document.getElementById('viewed-items');
-
-    // Очищаем контейнер
-    viewedItemsContainer.innerHTML = '';
-
-    // Создаем элементы карусели по одному элементу
-    viewed.forEach((item, index) => {
-        const isActive = index === 0 ? 'active' : '';
-        const itemsHTML = `
-            <div class="carousel-item ${isActive}">-
-                <div class="row viewed-item d-flex justify-content-center">
-                  <div class="col-12 door-image d-flex justify-content-center">
-                    <img src="{{MEDIA_URL}}${item.image}" alt="${item.title}" class="img-fluid" style="height: 100%;  object-fit: cover;">
-                  </div>
-                  <div class="col-12">
-                    <p class="text-center mt-2">${item.title}</p>
-                  </div>
-                </div>
-            </div>`;
-        viewedItemsContainer.innerHTML += itemsHTML;
-    });
-}
-
+  function displayViewedDoors() {
+      // Получаем просмотренные двери из localStorage
+      console.log(localStorage.getItem('viewedDoors'));
+      let viewedData = localStorage.getItem('viewedDoors');
+      let viewed = viewedData ? JSON.parse(viewedData) : [];
+  
+      // Находим элемент для вывода
+      const viewedItemsContainer = document.getElementById('viewed-items');
+  
+      // Очищаем контейнер
+      viewedItemsContainer.innerHTML = '';
+  
+      // Проверяем, есть ли просмотренные двери
+      if (viewed.length > 0) {
+          // Создаем элементы для каждой просмотренной двери
+          viewed.forEach((item, index) => {
+            console.log(item.slug)
+              const isActive = index === 0 ? 'active' : '';
+              const itemsHTML = `
+                  <div class="carousel-item ${isActive}">
+                      <div class="row viewed-item d-flex justify-content-center">
+                          <div class="col-12 door-image d-flex justify-content-center">
+                              <img src="{{MEDIA_URL}}${item.image}" alt="${item.title}" class="img-fluid" style="height: 100%; object-fit: cover;">
+                          </div>
+                          <div class="col-12">
+                                  <p class="text-center mt-2">${item.title}</p>
+                          </div>
+                      </div>
+                  </div>`;
+              viewedItemsContainer.innerHTML += itemsHTML;
+          });
+      } else {
+          // Если нет просмотренных дверей
+          viewedItemsContainer.innerHTML = '<p class="text-center">Нет просмотренных дверей.</p>';
+      }
+  }
+  
   // Вызываем функцию при загрузке страницы, чтобы отобразить просмотренные двери
   window.onload = displayViewedDoors;
-</script>
+  </script>

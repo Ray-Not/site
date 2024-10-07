@@ -279,7 +279,7 @@ $(document).ready(function() {
           <div class="d-flex flex-lg-row flex-column mt-auto align-items-center justify-content-center w-100" style="gap: 5px;">
             <a href="{% url 'door_detail' slug=door.slug %}" class="flex-grow-1 w-100">
                 <button class="btn btn-outline-danger fw-bold btn-sm w-100" 
-                        onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}')">
+                        onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')">
                     Узнать подробнее
                 </button>
             </a>        
@@ -551,7 +551,7 @@ function addToCompare(doorId) {
   }
   </script>
 <script>
-  function addToViewed(title, image, price) {
+  function addToViewed(title, image, price, slug) {
     // Получаем текущие просмотренные товары из localStorage
     console.log("Функция вызвана!");
     console.log("Title:", title);
@@ -578,7 +578,7 @@ function addToCompare(doorId) {
 
     if (!existingItem) {
       // Добавляем новый товар в массив, если он еще не просмотрен
-      viewed.push({ title: title, image: image, price: price });
+      viewed.push({ title: title, image: image, price: price, slug: slug });
       console.log("Товар добавлен:", { title, image, price });
 
       // Сохраняем обновленный массив в localStorage
