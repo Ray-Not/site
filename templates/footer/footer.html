@@ -80,7 +80,7 @@
             {% endif %}
             <div class="d-flex flex-lg-row flex-column mt-auto align-items-center justify-content-center w-100" style="gap: 5px;">
               <a href="{% url 'door_detail' slug=door.slug %}" class="flex-grow-1 w-100" style="font-size: 5px;">
-                  <button class="btn btn-outline-danger fw-bold btn-sm w-100">Подробнее</button>
+                  <button class="btn btn-outline-danger fw-bold btn-sm w-100" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')">Подробнее</button>
               </a>
               <div class="flex-grow-1 w-100">
                   <button class="btn btn-outline-danger fw-bold btn-sm w-100" data-bs-toggle="modal" data-bs-target="#requestModal">
@@ -273,3 +273,44 @@
   // Вызываем функцию при загрузке страницы, чтобы отобразить просмотренные двери
   window.onload = displayViewedDoors;
   </script>
+<script>
+  function addToViewed(title, image, price, slug) {
+    // Получаем текущие просмотренные товары из localStorage
+    console.log("Функция вызвана!");
+    console.log("Title:", title);
+    console.log("Image:", image);
+    console.log("Price:", price);
+
+    // Инициализация массива для хранения просмотренных дверей
+    let viewed = [];
+
+    // Безопасное извлечение и парсинг данных из localStorage
+    const storedViewed = localStorage.getItem('viewedDoors');
+    if (storedViewed) {
+      try {
+        viewed = JSON.parse(storedViewed);
+      } catch (error) {
+        console.error("Ошибка при парсинге viewedDoors:", error);
+        // Если парсинг не удался, очищаем данные
+        localStorage.removeItem('viewedDoors');
+      }
+    }
+
+    // Проверяем, существует ли уже товар с таким заголовком в просмотренных
+    const existingItem = viewed.find(item => item.title === title);
+
+    if (!existingItem) {
+      // Добавляем новый товар в массив, если он еще не просмотрен
+      viewed.push({ title: title, image: image, price: price, slug: slug });
+      console.log("Товар добавлен:", { title, image, price });
+
+      // Сохраняем обновленный массив в localStorage
+      localStorage.setItem('viewedDoors', JSON.stringify(viewed));
+    } else {
+      console.log("Товар уже в просмотренных:", existingItem);
+    }
+
+    // Проверяем, что данные сохранены правильно
+    console.log("Сохраненные данные в localStorage:", JSON.parse(localStorage.getItem('viewedDoors')));
+  }
+</script>
