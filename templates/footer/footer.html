@@ -174,26 +174,22 @@
       </table>
     </div>
   </section>
-</section>
-<script>
-  window.onload = function() {
-      const recentlyViewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
-      const footerSection = document.querySelector('.recently-viewed-doors');
-  
-      recentlyViewed.forEach(door => {
-          const doorElement = document.createElement('div');
-          doorElement.classList.add('col-6');
-          doorElement.innerHTML = `<p>${door.title}</p>`;
-          footerSection.appendChild(doorElement);
-      });
-  }
-</script>
-
-<section>
-  <div class="recently-viewed-doors">
-    <h5>Недавно просмотренные двери:</h5>
-    <div class="row">
-        <!-- Двери будут добавлены сюда с помощью JavaScript -->
+  <aside class="my-4 text-center">
+    <h1 style="font-family: tilda;">Просмотренные двери</h1>
+  </aside>
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-6 col-12">
+      <div id="viewedCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" id="viewed-items"></div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#viewedCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#viewedCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -234,3 +230,39 @@
     <p>© 2024 Паритет Двери. Все права защищены.</p>
   </section>
 </footer>
+
+
+<script>
+function displayViewedDoors() {
+    // Получаем просмотренные двери из localStorage
+    console.log(localStorage.getItem('viewedDoors'));
+    let viewedData = localStorage.getItem('viewedDoors');
+    let viewed = viewedData ? JSON.parse(viewedData) : [];
+
+    // Находим элемент для вывода
+    const viewedItemsContainer = document.getElementById('viewed-items');
+
+    // Очищаем контейнер
+    viewedItemsContainer.innerHTML = '';
+
+    // Создаем элементы карусели по одному элементу
+    viewed.forEach((item, index) => {
+        const isActive = index === 0 ? 'active' : '';
+        const itemsHTML = `
+            <div class="carousel-item ${isActive}">-
+                <div class="row viewed-item d-flex justify-content-center">
+                  <div class="col-12 door-image d-flex justify-content-center">
+                    <img src="{{MEDIA_URL}}${item.image}" alt="${item.title}" class="img-fluid" style="height: 100%;  object-fit: cover;">
+                  </div>
+                  <div class="col-12">
+                    <p class="text-center mt-2">${item.title}</p>
+                  </div>
+                </div>
+            </div>`;
+        viewedItemsContainer.innerHTML += itemsHTML;
+    });
+}
+
+  // Вызываем функцию при загрузке страницы, чтобы отобразить просмотренные двери
+  window.onload = displayViewedDoors;
+</script>
