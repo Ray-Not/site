@@ -285,11 +285,14 @@ $(document).ready(function() {
                     Купить в 1 клик
                 </button>
             </div>
-            <div>
-                <button onclick="addToCompare({{ door.id }})" class="btn">
-                    <i class="bi bi-bar-chart-fill" style="color: #ff0000; font-size: large;"></i>
-                </button>
-            </div>
+        </div>
+        <div class="row d-flex">
+            <button onclick="addToCompare({{ door.id }})" class="btn">
+                <i class="bi bi-bar-chart-fill" style="color: #ff0000; font-size: large;"></i>
+            </button>
+            <button onclick="addToCart('{{ door.title }}', '{{ door.images }}', {{ door.price }})" class="btn">
+              <i class="bi bi-basket2-fill" style="color: #ff0000; font-size: large;"></i>
+            </button>
         </div>
         
         </section>
@@ -522,4 +525,27 @@ function addToCompare(doorId) {
     }
 }
 </script>
+<script>
+  function addToCart(title, image, price) {
+    // Получаем текущие товары из localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+    // Проверяем, существует ли уже товар с таким заголовком в корзине
+    const existingItem = cart.find(item => item.title === title);
+  
+    if (existingItem) {
+      alert('Товар уже добавлен в корзину!');
+      return; // Выходим из функции, если товар уже в корзине
+    }
+  
+    // Добавляем новый товар в массив
+    cart.push({ title: title, image: image, price: price });
+  
+    // Сохраняем обновленный массив в localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+  
+    alert('Товар добавлен в корзину!');
+  }
+  </script>
+  
 {% endblock %}

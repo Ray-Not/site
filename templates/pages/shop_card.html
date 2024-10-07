@@ -1,0 +1,156 @@
+{% extends '../index.html' %}
+
+{% block title %}
+Корзина | Паритет двери
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Для больших экранов (large и выше) */
+    @media (min-width: 992px) {
+        .image-container {
+            height: 140px; /* Высота для больших экранов */
+        }
+    }
+
+    /* Для средних экранов и меньше (до 992px) */
+    @media (max-width: 991.98px) {
+        .image-container {
+            height: 80px; /* Высота для средних экранов и меньше */
+        }
+    }
+
+    /* Дополнительно: для совсем маленьких экранов (например, смартфоны) */
+    @media (max-width: 576px) {
+        .image-container {
+            height: 60px; /* Высота для маленьких экранов */
+        }
+    }
+</style>
+
+<nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a class="link-dark" href="{% url 'index' %}">Главная</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Корзина</li>
+    </ol>
+</nav>
+
+<h2 class="text-center">Товары в корзине</h2>
+<div class="row d-flex justify-content-center">
+    <div class="col-lg-8 col-12">
+        <div id="cart-items" class=""></div>
+        <div id="total-price" style="font-size: 20px; margin-top: 20px;">Общая стоимость: 0 ₽</div>
+        <button class="btn btn-outline-danger fw-bold btn-sm w-50 mt-3" data-bs-toggle="modal" data-bs-target="#requestModal">
+            Купить в 1 клик
+        </button>
+    </div>
+</div>
+<section class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestModalLabel">Форма заявки</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'shop_card' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="cart_data" id="cart_data" value="">
+            
+                    <div class="mb-3">
+                        <label for="id_name" class="form-label">Имя</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_phone" class="form-label">Телефон</label>
+                        {{ form.phone }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_call_time" class="form-label">Время звонка</label>
+                        {{ form.call_time }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_address" class="form-label">Адрес</label>
+                        {{ form.address }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_message" class="form-label">Сообщение</label>
+                        {{ form.message }}
+                    </div>
+                    <button type="submit" class="btn btn-danger">Оставить заявку</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <script>
+    // Получаем товары из localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Находим элементы для вывода товаров и общей стоимости
+    const cartItemsContainer = document.getElementById('cart-items');
+    const totalPriceContainer = document.getElementById('total-price');
+
+    // Функция для отображения товаров
+    function displayCart() {
+        cartItemsContainer.innerHTML = ''; // Очищаем контейнер
+        let totalPrice = 0; // Сбрасываем общую стоимость
+
+        // Отображаем товары
+        cart.forEach((item, index) => {
+            // Преобразуем строку с изображениями в массив
+            let images = item.image.split(',');
+
+            // Берем первые два изображения
+            const firstTwoImages = images.slice(0, 2);
+
+            // Генерируем блок с двумя изображениями
+            let imagesHTML = '<div class="d-flex">';
+            firstTwoImages.forEach((image, index) => {
+                imagesHTML += `
+                    <div class="image-container" style="flex: 1 1 50%; margin-right: 5px; overflow: hidden;">
+                        <img src="{{MEDIA_URL}}${image.trim()}" class="img-fluid" alt="${item.title} - Image ${index + 1}" style="height: 100%; width: auto; object-fit: cover;">
+                    </div>
+                `;
+            });
+            imagesHTML += '</div>';
+
+            // Обновляем общую стоимость
+            totalPrice += parseFloat(item.price); // Приводим цену к числовому типу
+
+            // Выводим один блок с двумя изображениями и информацией о товаре
+            cartItemsContainer.innerHTML += `
+                <div class="row d-flex flex-row align-items-center mb-4" style="border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+                    <div class="col-lg-2 col-3">
+                        ${imagesHTML}
+                    </div>
+                    <div style="padding-left: 20px;" class="col-lg-7 col-9">
+                        <p style="margin-bottom: 10px;">${item.title}</p>
+                        <p style="margin-bottom: 5px;" class="text-secondary">Цена: <strong>${item.price}</strong> ₽</p>
+                    </div>
+                    <div class="col-lg-3 d-flex justify-content-center col-12">
+                        <button onclick="removeFromCart(${index})" class="btn btn-light fs-4 btn-sm"><i class="bi bi-trash3-fill"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Обновляем элемент с общей стоимостью
+        totalPriceContainer.innerHTML = `Общая стоимость: ${totalPrice} ₽`;
+
+        // Обновляем скрытое поле с данными о товарах для отправки с формой
+        document.getElementById('cart_data').value = JSON.stringify(cart);
+    }
+
+    // Функция для удаления товара из корзины
+    function removeFromCart(index) {
+        cart.splice(index, 1); // Удаляем товар из массива
+        localStorage.setItem('cart', JSON.stringify(cart)); // Обновляем localStorage
+        displayCart(); // Перерисовываем корзину
+    }
+
+    displayCart(); // Первоначальное отображение товаров
+</script>
+
+{% endblock content %}

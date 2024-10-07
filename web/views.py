@@ -1,6 +1,6 @@
 import locale
 from datetime import datetime, timedelta
-
+import json
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Avg, Max, Min
 from django.shortcuts import get_object_or_404, redirect, render
@@ -440,6 +440,43 @@ def reviews(request):
 
 def contact(request):
     return render(request, 'pages/contact.html')
+
+
+def shop_card(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            # Сохраняем общую информацию о заказе
+            common_order_info = form.cleaned_data
+            
+            # Получаем данные из корзины
+            cart_data = json.loads(request.POST.get('cart_data', '[]'))
+
+            # Обрабатываем каждую дверь в корзине
+            for item in cart_data:
+                title = item.get('title')  # Получаем заголовок
+                # Находим дверь по заголовку
+                door = get_object_or_404(Door, title=title)
+
+                # Создаем новый заказ для каждой двери
+                order = Order(
+                    name=common_order_info['name'],
+                    phone=common_order_info['phone'],
+                    call_time=common_order_info['call_time'],
+                    address=common_order_info['address'],
+                    message=common_order_info['message'],
+                    door=door  # Привязываем дверь к заказу
+                )
+                order.save()  # Сохраняем новый заказ
+
+            return redirect('shop_card')  # Перенаправляем пользователя после сохранения
+    else:
+        form = OrderForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'pages/shop_card.html', context)
 
 
 def custom_404_view(request, exception):

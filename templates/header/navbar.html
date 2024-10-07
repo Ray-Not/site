@@ -80,6 +80,9 @@
   <li class="nav-item">
     <a class="nav-link link-dark {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">Сравнение</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark {% if request.path == '/shop_card/' %}active{% endif %}" href="/shop_card/">Корзина</a>
+  </li>
 </ul>
 <script>
 function loadComparisonPage() {
