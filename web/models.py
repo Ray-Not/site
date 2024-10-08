@@ -109,9 +109,6 @@ class Tag(models.Model):
         max_length=7,
         help_text='Введите цвет в формате #RRGGBB'
     )
-    in_cloud = models.BooleanField(
-        verbose_name='Добавление тэга в облако тэгов (каталог)'
-    )
 
     def __str__(self) -> str:
         return f"{self.title} [{self.color_hex}]"
