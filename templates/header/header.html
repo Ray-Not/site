@@ -198,26 +198,31 @@
 
   <!-- Catalogs menu -->
   <div id="catalogMenu" class="fullscreen-menu container-fluid">
-    <div class="menu-content">
-      <button class="close-btn text-dark" onclick="openCatalogMenu()">×</button>
-      <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Все двери</a>
-        {% for chapter, catalogs in chapters_with_titles.items %}
-        <div class="col-12" style="font-family: tilda-light">
-            <label class="text-dark fw-bold border-bottom">{{ chapter }}</label>
-            <ul class="list-unstyled categories-item">
-                {% for catalog in catalogs %}
-                <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'catalog_with_slug' catalog.slug %}">
-                    <li style="font-size: medium;">
-                        <label>{{ catalog.title }}</label> 
-                        <label class='text-secondary' style="font-size: small;">{{ catalog.door_count }} шт.</label>
-                    </li>
-                </a>
-                {% endfor %}
-            </ul>
+    <div class="menu-content mt-5">
+        <button class="close-btn text-dark" onclick="openCatalogMenu()">×</button>
+        <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Все двери</a>
+        <div class="row">
+            {% for chapter, catalogs in chapters_with_titles.items %}
+            <div class="col-6" style="font-family: tilda-light">
+                <label class="text-dark fw-bold border-bottom">{{ chapter }}</label>
+                <ul class="list-unstyled categories-item">
+                    {% for catalog in catalogs %}
+                    <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'catalog_with_slug' catalog.slug %}">
+                        <li style="font-size: medium;">
+                            <label>{{ catalog.title }}</label>
+                            <label class='text-secondary' style="font-size: small;">{{ catalog.door_count }} шт.</label>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% if forloop.counter|divisibleby:2 %}
+          </div><div class="row">
+            {% endif %}
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-  </div>
+</div>
 </div>
 </header>
 <script>
