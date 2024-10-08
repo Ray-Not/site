@@ -82,20 +82,20 @@
   <nav class='d-flex border-bottom justify-content-center'>
     <!-- Мобильная версия -->
     <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4 mb-3">
-      <div class='col-5 d-flex justify-content-center align-items-center'>
+      <div class='col-6 d-flex justify-content-center align-items-center'>
         <a href="/">
           <img class='img-fluid' src="{% static 'images/logos/logo.jpg' %}" alt="Логотип"/>
         </a>
       </div>
-      <div class='col-3 d-flex flex-column' style="font-size: x-small;">
+      <div class='col-4 d-flex flex-column' style="font-size: x-small;">
         <a href="tel:+79296224835" class="text-center d-flex flex-column link-dark link-underline-dark">
-          <label class="col-12 fw-bold" style="font-size: xx-small; white-space: nowrap;">Обратный звонок</label>
-          <label class="col-12" style="font-size: xx-small; white-space: nowrap;">+7(499) 322-91-25</label>
+          <label class="col-12 fw-bold" style="font-size: x-small;">Обратный звонок</label>
+          <label class="col-12" style="font-size: x-small;">+7(499) 322-91-25</label>
         </a>
       </div>
-      <div class="col-4 d-flex justify-content-center align-items-center">
+      <div class="col-2 d-flex justify-content-center align-items-center">
         <label class="btn btn-danger d-flex justify-content-center p-1 m-1" style="font-size: 12px;" onclick="openCatalogMenu()">Каталог<i class="bi bi-list ms-1"></i></label>
-        <i class="bi bi-list" style="font-size: 15px;" onclick="toggleMenu()"></i>
+        <!-- <i class="bi bi-list" style="font-size: 15px;" onclick="toggleMenu()"></i> -->
       </div>
       <div class="col-12">
         <form method="GET" action="{% url 'catalog' %}">
@@ -144,7 +144,7 @@
   {% include 'header/navbar.html' %}
 
   <!-- Burger Menu -->
-  <div id="fullScreenMenu" class="fullscreen-menu container-fluid">
+  <!-- <div id="fullScreenMenu" class="fullscreen-menu container-fluid">
     <div class="menu-content">
       <button class="close-btn text-dark" onclick="toggleMenu()">×</button>
       <div class="col-12 d-flex flex-column justify-content-center mt-5" style="font-family: tilda-light">
@@ -197,7 +197,7 @@
           </label>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Catalogs menu -->
   <div id="catalogMenu" class="fullscreen-menu container-fluid">
@@ -227,6 +227,30 @@
         <!-- Блок с кнопкой -->
         <div class="text-center mb-5">
             <a class="btn btn-danger text-white" href="/catalog/">Полный каталог входных дверей</a>
+        </div>
+        <div class="mt-3 border-bottom text-dark">
+            <a class="nav-link link-dark {% if request.path == '/delivery/' %}active{% endif %}" href="/delivery/">Доставка</a>
+        </div>
+        <div class="mt-3 border-bottom text-dark">
+            <a class="nav-link link-dark {% if request.path == '/installation/' %}active{% endif %}" href="/installation/">Установка</a>
+        </div>
+        <div class="mt-3 border-bottom text-dark">
+            <a class="nav-link link-dark {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
+        </div>
+        <div class="mt-3 border-bottom text-dark">
+            <a class="nav-link link-dark {% if request.path == '/garant/' %}active{% endif %}" href="/garant/">Гарантии</a>
+        </div>
+        <div class="mt-3 border-bottom text-dark">
+            <a class="nav-link link-dark {% if request.path == '/calc/' %}active{% endif %}" href="/calc/">Калькулятор</a>
+        </div>
+        <div class="mt-3 border-bottom text-dark">
+            <a class="nav-link link-dark {% if request.path == '/reviews/' %}active{% endif %}" href="/reviews/">Отзывы</a>
+        </div>
+        <div class="mt-3 border-bottom text-dark">
+            <a class="nav-link link-dark {% if request.path == '/shop_card/' %}active{% endif %}" href="/shop_card/">Корзина</a>
+        </div>
+        <div class="mt-3 border-bottom text-dark">
+          <a class="nav-link link-dark {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">Сравнение</a>
         </div>
     </div>
   </div>
@@ -268,28 +292,6 @@
   });
 </script>
 <script>
-function toggleMenu() {
-  const menu = document.getElementById('fullScreenMenu');
-  
-  if (menu.classList.contains('open')) {
-    // Закрытие меню
-    document.body.classList.remove('no-scroll'); // Разрешаем прокрутку
-    menu.classList.remove('open'); // Убираем класс 'open'
-
-    setTimeout(() => {
-      menu.style.visibility = 'hidden'; // Скрываем меню после анимации
-    }, 300); // Ожидание завершения анимации перед скрытием
-  } else {
-    // Открытие меню
-    menu.style.visibility = 'visible'; // Делаем меню видимым
-    document.body.classList.add('no-scroll'); // Запрещаем прокрутку
-
-    // Небольшая задержка для плавного эффекта
-    setTimeout(() => {
-      menu.classList.add('open'); // Добавляем класс 'open' для анимации
-    }, 10); 
-  }
-}
 
 function openCatalogMenu() {
   const menu = document.getElementById('catalogMenu');
