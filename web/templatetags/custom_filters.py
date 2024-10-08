@@ -20,6 +20,20 @@ def split_and_get_one(value):
 
 
 @register.filter
+def random_catalogs(catalogs, count=4):
+    """Возвращает случайные каталоги из списка"""
+    if not catalogs:
+        return []
+
+    # Преобразуем в список и выбираем случайные каталоги
+    catalogs_list = list(catalogs)
+    if len(catalogs_list) <= count:
+        return catalogs_list
+    else:
+        return random.sample(catalogs_list, count)
+
+
+@register.filter
 def split_and_get_all(value):
     urls = [url.strip() for url in value.split(',') if url.strip()]
 

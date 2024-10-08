@@ -17,11 +17,11 @@ def footer_context(request):
     if catalogs_with_images.count() <= 15:
         random_catalogs = list(catalogs_with_images)
     else:
-        random_catalog_ids = sample(list(catalogs_with_images.values_list(
-            'id',
-            flat=True
-        )), 15)
+        random_catalog_ids = sample(
+            catalogs_with_images.values_list('id', flat=True), 15
+        )
         random_catalogs = Catalog.objects.filter(id__in=random_catalog_ids)
+        print(random_catalogs)
 
     catalogs_in_footer = Catalog.objects.all()
     if catalogs_in_footer.count() <= 8:
