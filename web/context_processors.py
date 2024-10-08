@@ -4,9 +4,18 @@ from django.db.models import Count
 
 from .models import Catalog, Door
 from .forms import OrderForm, CallBackForm
+from django.shortcuts import redirect
 
 
 def footer_context(request):
+
+    if request.method == 'POST':
+        form_callback = CallBackForm(request.POST)
+        if form_callback.is_valid():
+            form_callback.save()
+        else:
+            print(form_callback.errors)
+
     catalogs_with_door_count = Catalog.objects.annotate(
         door_count=Count('catalogs')
     ).order_by('chapter', 'title')

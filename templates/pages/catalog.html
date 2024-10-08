@@ -256,8 +256,8 @@ $(document).ready(function() {
             <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%;">
                 {% with door.images|split_and_get_all as image_urls %}
                     {% for image_url in image_urls %}
-                        <div class="image-container" style="flex: 1 1 calc(33.33% - 10px); margin: 5px; height: 400px; overflow: hidden;">
-                          <a href="{% url 'door_detail' slug=door.slug %}"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: cover;"></a>
+                        <div class="image-container" style="flex: 1 1 calc(33.33% - 10px); margin: 5px; height: 360px; overflow: hidden;">
+                          <a href="{% url 'door_detail' slug=door.slug %}"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: contain;"></a>
                         </div>
                     {% endfor %}
                 {% endwith %}
