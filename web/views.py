@@ -108,7 +108,7 @@ def delivery_detail(request, slug):
 
     context = {
         'region': region,
-        'tags_cloud': Catalog.objects.filter(in_cloud=True),
+        'tags_cloud': Catalog.objects.order_by('?')[:4],
     }
 
     return render(request, 'pages/delivery_detail.html', context)
@@ -237,7 +237,7 @@ def catalog(request, slug=None):
         'selected_purposes': selected_purposes,
         'selected_out_covers': selected_out_covers,
         'selected_in_covers': selected_in_covers,
-        'tags_cloud': Catalog.objects.filter(in_cloud=True),
+        'tags_cloud': Catalog.objects.order_by('?')[:4],
         'catalog': catalog if slug else None,
         'catalogs': catalogs,
         'page': page_number
@@ -365,6 +365,13 @@ def door_detail(request, slug):
 
     locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
     delivery_date = datetime.now() + timedelta(days=3)
+    catalog_tags = door.catalogs_cloud.all()  # Или другой способ получения тегов для двери
+
+    # Если catalog_tags пустой, берем 4 случайных тега
+    if not catalog_tags.exists():
+        tags_cloud = Catalog.objects.order_by('?')[:4]
+    else:
+        tags_cloud = catalog_tags
 
     context = {
         'door': door,
@@ -380,7 +387,7 @@ def door_detail(request, slug):
         'avg_rating': average_rating,
         'door_count': door_count,
         'delivery_date': delivery_date.strftime('%d %B'),
-        'tags_cloud': Catalog.objects.filter(in_cloud=True),
+        'tags_cloud': tags_cloud,
     }
     return render(request, 'pages/door_detail.html', context)
 

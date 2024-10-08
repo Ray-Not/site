@@ -170,6 +170,11 @@ class Door(models.Model):
     )
     equipment = models.CharField(max_length=1024*1024)
     description = models.CharField(max_length=255, blank=True)
+    catalogs_cloud = models.ManyToManyField(
+        Catalog,
+        related_name='catalogs_cloud',
+        blank=True
+    )
 
     def save(self, *args, **kwargs):
         if not self.slug:
