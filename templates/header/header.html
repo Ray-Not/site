@@ -94,12 +94,12 @@
         </a>
       </div>
       <div class="col-4 d-flex justify-content-center align-items-center">
-        <label class="me-3 d-flex justify-content-center" style="font-size: 12px;" onclick="openCatalogMenu()">Каталог<i class="bi bi-list ms-1"></i></label>
+        <label class="me-3 btn btn-danger d-flex justify-content-center p-1" style="font-size: 12px;" onclick="openCatalogMenu()">Каталог<i class="bi bi-list ms-1"></i></label>
         <i class="bi bi-list" style="font-size: 15px;" onclick="toggleMenu()"></i>
       </div>
       <div class="col-12">
         <form method="GET" action="{% url 'catalog' %}">
-          <div class="input-group" style="width: 100%;">
+          <div class="input-group mt-2" style="width: 100%;">
             <input type="text" name="search" class="form-control" placeholder="Введите название товара">
             <button type="submit" class="btn bg-dark text-light">Поиск</button>
           </div>
