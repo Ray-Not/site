@@ -88,10 +88,10 @@
         </a>
       </div>
       <div class='col-5 d-flex flex-column' style="font-size: x-small;">
-        <a href="tel:+79296224835" class="text-center d-flex flex-column link-dark link-underline-dark">
+        <a href="#" class="text-center d-flex flex-column link-dark link-underline-dark" data-bs-toggle="modal" data-bs-target="#callbackModal">
           <label class="col-12 fw-bold" style="font-size: x-small;">Обратный звонок</label>
           <label class="col-12" style="font-size: x-small;">+7(499) 322-91-25</label>
-        </a>
+        </a>      
       </div>
       <div class="col-2 d-flex justify-content-center align-items-center">
         <label class="btn btn-danger d-flex justify-content-center p-1" style="font-size: 12px;" onclick="openCatalogMenu()">Каталог<i class="bi bi-list ms-1"></i></label>
@@ -106,7 +106,7 @@
         </form>
       </div>
     </div>
-    
+
 
     <!-- Десктопная версия -->
     <article class="col-lg-3 d-none d-lg-flex justify-content-center align-items-center">
@@ -251,6 +251,35 @@
         </div>
         <div class="mt-3 border-bottom text-dark">
           <a class="nav-link link-dark {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">Сравнение</a>
+        </div>
+    </div>
+  </div>
+
+  <!-- Callback modal -->
+  <div class="modal" id="callbackModal" tabindex="-1" aria-labelledby="callbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="callbackModalLabel">Форма обратного звонка</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="callbackForm" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_name" class="form-label">Ваше имя</label>
+                        {{ form_callback.name }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_phone" class="form-label">Телефон</label>
+                        {{ form_callback.phone }}
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="submit" form="callbackForm" class="btn btn-primary">Отправить</button>
+            </div>
         </div>
     </div>
   </div>

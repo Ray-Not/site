@@ -3,7 +3,7 @@ from random import sample
 from django.db.models import Count
 
 from .models import Catalog, Door
-from .forms import OrderForm
+from .forms import OrderForm, CallBackForm
 
 
 def footer_context(request):
@@ -51,6 +51,7 @@ def footer_context(request):
 
     return {
         'form_footer': OrderForm(),
+        'form_callback': CallBackForm(),
         'chapters_with_titles': chapters_with_titles,
         'random_doors': random_doors,
         'random_catalogs': random_catalogs,
