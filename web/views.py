@@ -387,7 +387,7 @@ def door_detail(request, slug):
 
 def reviews(request):
     reviews = Review.objects.all()
-    paginator = Paginator(reviews, 10)
+    paginator = Paginator(reviews, 20)
     page_number = request.GET.get('page')
 
     try:
@@ -448,7 +448,7 @@ def shop_card(request):
         if form.is_valid():
             # Сохраняем общую информацию о заказе
             common_order_info = form.cleaned_data
-            
+
             # Получаем данные из корзины
             cart_data = json.loads(request.POST.get('cart_data', '[]'))
 
@@ -469,7 +469,7 @@ def shop_card(request):
                 )
                 order.save()  # Сохраняем новый заказ
 
-            return redirect('shop_card')  # Перенаправляем пользователя после сохранения
+            return redirect('shop_card')
     else:
         form = OrderForm()
 
