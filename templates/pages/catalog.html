@@ -14,6 +14,13 @@
 
 {% block content %}
 
+<style>
+  .btn-light:hover {
+      background-color: #ffdae0; /* Розовый цвет при наведении */
+      border-color: #ffc0cb; /* Розовая рамка при наведении */
+      color: #fff; /* Белый текст при наведении */
+  }
+</style>
 <script>
 var minValue = {{ min_price|default:"0" }};
 var maxValue = {{ max_price|default:"1000" }};
@@ -213,9 +220,9 @@ $(document).ready(function() {
     {% endif %}
     <section class="row d-flex flex-row mt-2">
       <div class="tags-cloud d-flex flex-wrap">
-          <label class="text-center" style="font-size: 15px;">Популярные категории: </label>
+          <label class="text-center" style="font-size: 15px;">Основные категории: </label>
           {% for tag in tags_cloud %}
-          <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill" style="color: crimson; font-size: 15px;">{{ tag.title }}</a>
+          <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="btn btn-light link-underline link-underline-opacity-0 px-2 py-0 mx-1 mb-2" style="color: #000; font-size: 15px; border: 1px solid #ddd;">{{ tag.title }}</a>
           {% endfor %}
       </div>
     </section>

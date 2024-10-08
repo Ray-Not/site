@@ -12,6 +12,13 @@
 
 {% block content %}
 
+<style>
+  .btn-light:hover {
+      background-color: #ffdae0; /* Розовый цвет при наведении */
+      border-color: #ffc0cb; /* Розовая рамка при наведении */
+      color: #fff; /* Белый текст при наведении */
+  }
+</style>
 <script type="application/ld+json">
     {
       "@context": "https://schema.org/",
@@ -137,12 +144,12 @@
     </ol>
 </nav>
 <section class="row d-flex flex-row mt-2">
-    <div class="tags-cloud d-flex flex-wrap">
-        <label class="text-center" style="font-size: 15px;">Популярные категории: </label>
-        {% for tag in tags_cloud %}
-        <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="link-underline link-underline-opacity-0 badge rounded-pill" style="color: crimson; font-size: 15px;">{{ tag.title }}</a>
-        {% endfor %}
-    </div>
+  <div class="tags-cloud d-flex flex-wrap">
+      <label class="text-center" style="font-size: 15px;">Основные категории: </label>
+      {% for tag in tags_cloud %}
+      <a href="{% url 'catalog' %}?tags={{ tag.title }}" class="btn btn-light link-underline link-underline-opacity-0 px-2 py-0 mx-1 mb-2" style="color: #000; font-size: 15px; border: 1px solid #ddd;">{{ tag.title }}</a>
+      {% endfor %}
+  </div>
 </section>
 <section class="row door-card mx-auto">
     <h1 class="my-3">{{ door.title }}</h1>
@@ -332,7 +339,7 @@
     </article>
     
 </section>
-<section class="row d-flex justify-content-center">
+<section class="row d-flex justify-content-center mt-4">
     <div class="d-flex align-items-end">
       <div class="col-12 rounded-3 d-flex justify-content-between align-items-center flex-lg-row flex-column p-lg-0 p-4" style="background-color: #ff0000; position: relative;">
         <div class="col-lg-4 d-lg-flex d-none p-0" style="overflow: hidden; height: 250px;">
