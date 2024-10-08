@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
-                     Review, Tag, CustomOrder, GetDiscount)
+                     Review, Tag, CustomOrder, GetDiscount, CallBack)
 
 
 @admin.register(Door)
@@ -54,3 +54,4 @@ admin.site.register(Review)
 admin.site.register(BlogChapter)
 admin.site.register(CustomOrder)
 admin.site.register(GetDiscount)
+admin.site.register(CallBack)

@@ -365,7 +365,7 @@ def door_detail(request, slug):
 
     locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
     delivery_date = datetime.now() + timedelta(days=3)
-    catalog_tags = door.catalogs_cloud.all()  # Или другой способ получения тегов для двери
+    catalog_tags = door.catalogs_cloud.all()
 
     # Если catalog_tags пустой, берем 4 случайных тега
     if not catalog_tags.exists():
