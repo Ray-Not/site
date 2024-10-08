@@ -71,6 +71,11 @@ class DeliveryRegion(models.Model):
         pass
 
 
+class CallBack(models.Model):
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=18)
+
+
 class Catalog(models.Model):
     title = models.CharField(max_length=255)
     chapter = models.CharField(max_length=255)
