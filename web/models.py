@@ -169,11 +169,14 @@ class Door(models.Model):
         blank=True
     )
     equipment = models.CharField(max_length=1024*1024)
+    description = models.CharField(max_length=255, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = slugify(self.title, separator='-')
             self.slug = slug
+        if not self.description:
+            self.description = f'Купить дверь {self.title}, недорого'
         super().save(*args, **kwargs)
 
     def get_reviews(self):

@@ -71,6 +71,11 @@
   overflow: hidden;
   height: 100vh;
 }
+.categories-dropdown {
+    max-height: 200px; /* Установите желаемую максимальную высоту */
+    overflow-y: auto; /* Включите прокрутку по вертикали */
+}
+
 </style>
 <header class="container sticky-top" style="background-color: #fff;">
   <nav class='d-flex border-bottom justify-content-center'>
@@ -81,14 +86,35 @@
           <img class='img-fluid' src="{% static 'images/logos/logo.jpg' %}" alt="Логотип"/>
         </a>
       </div>
-      <div class='col-5 d-flex flex-column' style="font-size: x-small;">
+      <div class='col-3 d-flex flex-column' style="font-size: x-small;">
         <a href="tel:+79296224835" class="text-center d-flex flex-column link-dark link-underline-dark">
           <label class="col-12 fw-bold" style="font-size: xx-small; white-space: nowrap;">Обратный звонок</label>
-          <label class="col-12" style="font-size: 5px white-space: nowrap;">+7(499) 322-91-25</label>
+          <label class="col-12" style="font-size: xx-small; white-space: nowrap;">+7(499) 322-91-25</label>
         </a>
       </div>
-      <div class="col-2 d-flex justify-content-center align-items-center">
-        <i class="bi bi-list" style="font-size: 30px;" onclick="toggleMenu()"></i>
+      <div class="col-4 d-flex justify-content-center align-items-center">
+        <label class="nav-link link-dark nav-item dropdown me-3" style="font-size: 12px;">Каталог <i class="bi bi-list"></i></label>
+        <div class="categories-dropdown w-100 bg-light">
+          <div class="row rounded shadow p-3">
+            <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Все двери</a>
+            {% for chapter, catalogs in chapters_with_titles.items %}
+            <div class="col-12" style="font-family: tilda-light">
+                <label class="mt-3 border-bottom">{{ chapter }}</label>
+                <ul class="list-unstyled categories-item">
+                    {% for catalog in catalogs %}
+                        <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'catalog_with_slug' catalog.slug %}">
+                            <li style="font-size: medium;">
+                                {{ catalog.title }} 
+                                <label class='text-secondary' style="font-size: small;">{{ catalog.door_count }} шт.</label>
+                            </li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <i class="bi bi-list" style="font-size: 15px;" onclick="toggleMenu()"></i>
       </div>
       <div class="col-12">
         <form method="GET" action="{% url 'catalog' %}">
