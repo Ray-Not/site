@@ -192,6 +192,9 @@
           <label class="mt-3 border-bottom text-dark">
               <a class="nav-link link-dark {% if request.path == '/shop_card/' %}active{% endif %}" href="/shop_card/">Корзина</a>
           </label>
+          <label class="mt-3 border-bottom text-dark">
+            <a class="nav-link link-dark {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">Сравнение</a>
+          </label>
       </div>
     </div>
   </div>
@@ -327,3 +330,12 @@ function openCatalogMenu() {
             </ul>
         </div>
         {% endfor %} -->
+
+<script>
+  function loadComparisonPage() {
+      let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
+  
+      const url = `/compare/?door_ids=${compareList.join(',')}`;
+      window.location.href = url; // Перенаправляем на страницу сравнения
+  }
+  </script>

@@ -892,9 +892,20 @@
           <a class="text-center text-danger col-2 nav-link link-dark {% if request.path == '/shop_card/' %}active{% endif %}" href="/shop_card/">
             <i class="bi bi-basket2" style="font-size: 25px;"></i>
           </a>
+          <a class="text-center text-danger col-2 nav-link link-dark  {% if request.path == '/compare/' %}active{% endif %}" href="javascript:void(0);" onclick="loadComparisonPage()">
+            <i class="bi bi-bar-chart" style="font-size: 25px;"></i>
+          </a>
       </div>
     </div>
     
+<script>
+  function loadComparisonPage() {
+      let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
+  
+      const url = `/compare/?door_ids=${compareList.join(',')}`;
+      window.location.href = url; // Перенаправляем на страницу сравнения
+  }
+</script>
     <!-- Включение footer -->
     {% include 'footer/footer.html' %}
 
