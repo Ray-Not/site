@@ -72,7 +72,7 @@
   height: 100vh;
 }
 @media (max-width: 991.98px) {
-  .categories-dropdown {
+  .catalogs {
       max-height: 200px; /* Установите желаемую максимальную высоту */
       overflow-y: auto; /* Включите прокрутку по вертикали */
   }
@@ -95,27 +95,7 @@
         </a>
       </div>
       <div class="col-4 d-flex justify-content-center align-items-center">
-        <label class="nav-link link-dark nav-item dropdown me-3" style="font-size: 12px;">Каталог <i class="bi bi-list"></i></label>
-        <div class="categories-dropdown w-100 bg-light">
-          <div class="row rounded shadow p-3">
-            <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Все двери</a>
-            {% for chapter, catalogs in chapters_with_titles.items %}
-            <div class="col-12" style="font-family: tilda-light">
-                <label class="mt-3 border-bottom">{{ chapter }}</label>
-                <ul class="list-unstyled categories-item">
-                    {% for catalog in catalogs %}
-                        <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'catalog_with_slug' catalog.slug %}">
-                            <li style="font-size: medium;">
-                                {{ catalog.title }} 
-                                <label class='text-secondary' style="font-size: small;">{{ catalog.door_count }} шт.</label>
-                            </li>
-                        </a>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
+        <label class="me-3 d-flex justify-content-center" style="font-size: 12px;" onclick="openCatalogMenu()">Каталог<i class="bi bi-list ms-1"></i></label>
         <i class="bi bi-list" style="font-size: 15px;" onclick="toggleMenu()"></i>
       </div>
       <div class="col-12">
@@ -217,6 +197,27 @@
     </div>
   </div>
 
+  <!-- Catalogs menu -->
+  <div class="catalogs d-none w-100 bg-light" id="catalogMenu">
+    <div class="row rounded shadow p-3">
+      <a class="link-underline link-underline-opacity-0 text-dark {% if request.path == '/catalog/' %}active{% endif %}" href="/catalog/">Все двери</a>
+      {% for chapter, catalogs in chapters_with_titles.items %}
+      <div class="col-12" style="font-family: tilda-light">
+          <label class="mt-3 border-bottom">{{ chapter }}</label>
+          <ul class="list-unstyled categories-item">
+              {% for catalog in catalogs %}
+                  <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'catalog_with_slug' catalog.slug %}">
+                      <li style="font-size: medium;">
+                          {{ catalog.title }} 
+                          <label class='text-secondary' style="font-size: small;">{{ catalog.door_count }} шт.</label>
+                      </li>
+                  </a>
+              {% endfor %}
+          </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </header>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -275,5 +276,8 @@ function toggleMenu() {
   }
 }
 
-
+function openCatalogMenu() {
+    const catalogMenu = document.getElementById('catalogMenu'); // Получаем элемент меню
+    catalogMenu.classList.toggle('d-none'); // Переключаем класс d-none для показа/скрытия
+}
 </script>
