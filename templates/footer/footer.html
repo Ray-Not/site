@@ -178,7 +178,7 @@
                               <img src="{{MEDIA_URL}}${item.image}" alt="${item.title}" class="img-fluid" style="height: 100%; object-fit: cover;">
                           </div>
                           <div class="col-12">
-                                  <p class="text-center mt-2">${item.title}</p>
+                            <a href="/detail/${item.slug}/"><p class="text-center mt-2">${item.title}</p></a>
                           </div>
                       </div>
                   </div>`;
@@ -192,7 +192,7 @@
   
   // Вызываем функцию при загрузке страницы, чтобы отобразить просмотренные двери
   window.onload = displayViewedDoors;
-  </script>
+</script>
 <script>
   function addToViewed(title, image, price, slug) {
     // Получаем текущие просмотренные товары из localStorage
