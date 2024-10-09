@@ -181,6 +181,7 @@ class Door(models.Model):
         related_name='catalogs_cloud',
         blank=True
     )
+    hidden = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.slug:

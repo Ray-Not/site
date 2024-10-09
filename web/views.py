@@ -164,7 +164,7 @@ def catalog(request, slug=None):
         form = OrderForm()
 
     # В случае передачи слага
-    doors_queryset = Door.objects.all().order_by('id')
+    doors_queryset = Door.objects.filter(hidden=False).order_by('id')
     catalogs = Catalog.objects.all()
     if slug:
         catalog = get_object_or_404(Catalog, slug=slug)
