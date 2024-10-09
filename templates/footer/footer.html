@@ -55,7 +55,7 @@
               {% with door.images|split_and_get_all as image_urls %}
                 {% for image_url in image_urls %}
                   <div class="image-container d-flex justify-content-center door-image" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
-                    <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;"></a>
+                    <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;"></a>
                   </div>
                 {% endfor %}
               {% endwith %}
@@ -63,7 +63,7 @@
           </section>
 
           <section class="card-body d-flex flex-column mt-auto">
-            <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')"><p class="card-title fw-bold">{{ door.title }}</p></a>
+            <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><p class="card-title fw-bold">{{ door.title }}</p></a>
             {% if door.discount %}
             <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
               <label class="card-text rounded" style="color: #ff0000;">{{ door.price|calculate_discount:door.discount }} ₽</label>
@@ -80,7 +80,7 @@
             {% endif %}
             <div class="d-flex flex-lg-row flex-column mt-auto align-items-center justify-content-center w-100" style="gap: 5px;">
               <a href="{% url 'door_detail' slug=door.slug %}" class="flex-grow-1 w-100" style="font-size: 5px;">
-                  <button class="btn btn-outline-danger fw-bold btn-sm w-100" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')">Подробнее</button>
+                  <button class="btn btn-outline-danger fw-bold btn-sm w-100" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')">Подробнее</button>
               </a>
               <div class="flex-grow-1 w-100">
                   <button class="btn btn-outline-danger fw-bold btn-sm w-100" data-bs-toggle="modal" data-bs-target="#requestModal">
@@ -153,84 +153,89 @@
 
 
 <script>
-  function displayViewedDoors() {
-      // Получаем просмотренные двери из localStorage
-      console.log(localStorage.getItem('viewedDoors'));
-      let viewedData = localStorage.getItem('viewedDoors');
-      let viewed = viewedData ? JSON.parse(viewedData) : [];
-  
-      // Находим элемент для вывода
-      const viewedItemsContainer = document.getElementById('viewed-items');
-  
-      // Очищаем контейнер
-      viewedItemsContainer.innerHTML = '';
-  
-      // Проверяем, есть ли просмотренные двери
-      if (viewed.length > 0) {
-          // Создаем элементы для каждой просмотренной двери
-          viewed.forEach((item, index) => {
-            console.log(item.slug)
-              const isActive = index === 0 ? 'active' : '';
-              const itemsHTML = `
-                  <div class="carousel-item ${isActive}">
-                      <div class="row viewed-item d-flex justify-content-center">
-                          <div class="col-12 door-image d-flex justify-content-center">
-                              <a href="/detail/${item.slug}/"><img src="{{MEDIA_URL}}${item.image}" alt="${item.title}" class="img-fluid" style="height: 100%; object-fit: cover;"></a>
-                          </div>
-                          <div class="col-12">
+function displayViewedDoors() {
+    let viewedData = localStorage.getItem('viewedDoors');
+    let viewed = viewedData ? JSON.parse(viewedData) : [];
+    console.log(viewed);
+
+    const viewedItemsContainer = document.getElementById('viewed-items');
+    viewedItemsContainer.innerHTML = '';
+
+    if (viewed.length > 0) {
+        viewed.forEach((item, index) => {
+            const isActive = index === 0 ? 'active' : '';
+
+            // Преобразование строки images в массив
+            let images = [];
+            if (typeof item.images === 'string') {
+                images = JSON.parse(item.images.replace(/'/g, '"')); // Заменяем одинарные кавычки на двойные
+            } else if (Array.isArray(item.images)) {
+                images = item.images; // Если уже массив, используем его
+            }
+
+            // Проверяем, является ли images массивом
+            const imagesHTML = Array.isArray(images) ? 
+                images.map((image, imgIndex) => `
+                  <div class="image-container d-flex justify-content-center door-image" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
+                        <a href="/detail/${item.slug}/">
+                            <img src="{{MEDIA_URL}}${image}" alt="${item.title} Image ${imgIndex + 1}" class="img-fluid" style="height: 100%; object-fit: cover;">
+                        </a>
+                    </div>
+                `).join('') 
+                : '<div class="col-12 text-center">Нет изображений.</div>'; // Если это не массив, показываем сообщение
+
+            const itemsHTML = `
+                <div class="carousel-item ${isActive}">
+                    <div class="row viewed-item d-flex justify-content-center">
+                        <div class="col-12 door-image d-flex justify-content-center">
+                            <div class="row">
+                                ${imagesHTML} <!-- Здесь вставляем изображения -->
+                            </div>
+                        </div>
+                        <div class="col-12">
                             <a href="/detail/${item.slug}/"><p class="text-center mt-2">${item.title}</p></a>
-                          </div>
-                      </div>
-                  </div>`;
-              viewedItemsContainer.innerHTML += itemsHTML;
-          });
-      } else {
-          // Если нет просмотренных дверей
-          viewedItemsContainer.innerHTML = '<p class="text-center">Нет просмотренных дверей.</p>';
-      }
-  }
-  
-  // Вызываем функцию при загрузке страницы, чтобы отобразить просмотренные двери
-  window.onload = displayViewedDoors;
+                        </div>
+                    </div>
+                </div>`;
+            viewedItemsContainer.innerHTML += itemsHTML;
+        });
+    } else {
+        viewedItemsContainer.innerHTML = '<p class="text-center">Нет просмотренных дверей.</p>';
+    }
+}
+window.onload = displayViewedDoors;
 </script>
 <script>
-  function addToViewed(title, image, price, slug) {
-    // Получаем текущие просмотренные товары из localStorage
+function addToViewed(title, images, price, slug) {
     console.log("Функция вызвана!");
     console.log("Title:", title);
-    console.log("Image:", image);
+    console.log("Images:", images); // Теперь это массив
     console.log("Price:", price);
 
-    // Инициализация массива для хранения просмотренных дверей
     let viewed = [];
 
-    // Безопасное извлечение и парсинг данных из localStorage
     const storedViewed = localStorage.getItem('viewedDoors');
     if (storedViewed) {
-      try {
-        viewed = JSON.parse(storedViewed);
-      } catch (error) {
-        console.error("Ошибка при парсинге viewedDoors:", error);
-        // Если парсинг не удался, очищаем данные
-        localStorage.removeItem('viewedDoors');
-      }
+        try {
+            viewed = JSON.parse(storedViewed);
+        } catch (error) {
+            console.error("Ошибка при парсинге viewedDoors:", error);
+            localStorage.removeItem('viewedDoors');
+        }
     }
 
-    // Проверяем, существует ли уже товар с таким заголовком в просмотренных
     const existingItem = viewed.find(item => item.title === title);
 
     if (!existingItem) {
-      // Добавляем новый товар в массив, если он еще не просмотрен
-      viewed.unshift({ title: title, image: image, price: price, slug: slug });
-      console.log("Товар добавлен:", { title, image, price });
+        viewed.unshift({ title: title, images: images, price: price, slug: slug });
+        console.log("Товар добавлен:", { title, images, price });
 
-      // Сохраняем обновленный массив в localStorage
-      localStorage.setItem('viewedDoors', JSON.stringify(viewed));
+        localStorage.setItem('viewedDoors', JSON.stringify(viewed));
     } else {
-      console.log("Товар уже в просмотренных:", existingItem);
+        console.log("Товар уже в просмотренных:", existingItem);
     }
 
-    // Проверяем, что данные сохранены правильно
     console.log("Сохраненные данные в localStorage:", JSON.parse(localStorage.getItem('viewedDoors')));
-  }
+}
+
 </script>
