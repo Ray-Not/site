@@ -201,8 +201,6 @@
               </a>
             </aside>
             <aside class="my-4 text-center">
-              <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Двери</h1> -->
-              <!-- <h2 class=" text-danger mt-3" style="font-family: tilda;">По выгодным ценам</h2> -->
               <h1 style="font-family: tilda;">Двери</h1>
               <h2 style="font-family: tilda;">По выгодным ценам</h2>
             </aside>
@@ -220,7 +218,7 @@
               </p>
             </aside>
             <aside class="row d-flex justify-content-center">
-              <h1 style="font-family: tilda;" class="text-center">Фильтры по категориям</h1>
+              <h2  style="font-family: tilda;" class="text-center">Фильтры по категориям</h2>
               <section class="col-12 col-lg-8 d-flex flex-column">
                 <form method="get" id="filter-form" action="{% url 'catalog' %}" class="w-100">
                   <fieldset>
@@ -337,7 +335,7 @@
               </section>
             </aside>
             <aside class="my-4">
-              <h1 style="font-family: tilda;" class="text-center">Популярные категории</h1>
+              <h2 style="font-family: tilda;" class="text-center">Популярные категории</h2>
               <div class="row">
                 {% for catalog in random_catalogs %}
                   <div class="col-lg-3 col-6 door-item d-flex flex-column my-2" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
@@ -364,7 +362,7 @@
             </aside>
             <!-- Начало баннера замерщика -->
             <aside class="my-4 text-center">
-              <h1 style="font-family: tilda;">Доставка и выезд мастера</h1>
+              <h2 style="font-family: tilda;">Доставка и выезд мастера</h2>
             </aside>
             <section class="row d-flex justify-content-center mt-4">
               <div class="d-flex align-items-end">
@@ -422,9 +420,7 @@
             </section>
             <!-- Конец -->
             <aside class="my-4 text-center">
-                <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
-                <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
-                <h1 style="font-family: tilda;">Популярные стальные двери</h1>
+                <h2 style="font-family: tilda;">Популярные стальные двери</h2>
             </aside>
             <section class="random-doors container">
               <section class="row">
@@ -481,7 +477,7 @@
               </section>
             </section>
             <aside class="my-4 text-center">
-              <h1 style="font-family: tilda;">Наши услуги</h1>
+              <h2 style="font-family: tilda;">Наши услуги</h2>
             </aside>
             <aside class="my-4 row d-flex justify-content-center gap-3 ">
               <div class="col-lg-2 col-md-4 col-sm-6 col-11 shadow d-flex flex-column justify-content-center align-items-center py-5 text-center rounded-5">
@@ -506,7 +502,7 @@
               </div>
             </aside>
             <aside class="my-4 text-center">
-                <h1 style="font-family: tilda;">Доставка и выезд мастера</h1>
+                <h2 style="font-family: tilda;">Доставка и выезд мастера</h2>
             </aside>
             <section class="row d-flex flex-lg-row flex-column justify-content-center">
               <div class="col col-lg-6 d-flex text-center">
@@ -558,9 +554,7 @@
               </div>
             </section>
             <aside class="my-4 text-center">
-                <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
-                <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
-                <h1 style="font-family: tilda;">Установка дверей и сопутствующие работы</h1>
+                <h2 style="font-family: tilda;">Установка дверей и сопутствующие работы</h2>
             </aside>
             <aside class="d-flex flex-column flex-lg-row" style="gap: 10px;">
               <table class="table">
@@ -644,7 +638,7 @@
             </section>
             </aside>
             <aside class="my-4 text-center">
-                <h1 style="font-family: tilda;">Почему</h1>
+                <h2 style="font-family: tilda;">Почему</h2>
                 <h2 style="font-family: tilda;">выбирают нас</h2>
             </aside>
             <aside class="row d-flex justify-content-center">
@@ -747,17 +741,13 @@
             <aside>
             </aside>
             <aside class="my-4 text-center">
-                <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Найдите нас</h1>
-                <h2 class=" mt-3 text-danger" style="font-family: tilda;">На карте</h2> -->
-                <h1 style="font-family: tilda;">Найдите нас</h1>
+                <h2 style="font-family: tilda;">Найдите нас</h2>
                 <h2 style="font-family: tilda;">На карте</h2>
             </aside>
             <aside id="map" class="d-flex justify-content-center">
             </aside>
             <aside class="my-4">
-              <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Найдите нас</h1>
-              <h2 class=" mt-3 text-danger" style="font-family: tilda;">На карте</h2> -->
-              <h1 style="font-family: tilda;" class="text-center">Как оформить заказ</h1>
+              <h2 style="font-family: tilda;" class="text-center">Как оформить заказ</h2>
           </aside>
           <aside class="row shadow p-3 mb-5 bg-body-tertiary rounded d-flex flex-lg-row flex-column">
             <div class="col d-flex flex-column justify-content-center border-end-lg text-center">
@@ -775,9 +765,7 @@
             </div>
           </aside>
           <aside class="my-4">
-            <!-- <h1 class="text-white px-4 bg-dark rounded d-inline" style="font-family: tilda;">Почему</h1>
-            <h2 class="text-danger mt-3" style="font-family: tilda;">выбирают нас</h2> -->
-            <h1 style="font-family: tilda;" class="text-center">Отзывы о нас</h1>
+            <h2 style="font-family: tilda;" class="text-center">Отзывы о нас</h2>
           </aside>
           <aside class="container my-5">
             <div class="row">
