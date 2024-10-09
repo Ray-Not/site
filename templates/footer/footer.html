@@ -180,7 +180,7 @@ function displayViewedDoors() {
             // Проверяем, является ли images массивом и формируем HTML
             if (Array.isArray(images)) {
                 imagesHTML += images.map((image, imgIndex) => `
-                    <div class="image-container d-flex justify-content-center door-image mx-auto" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
+                    <div class="image-container d-flex justify-content-center door-image bg-danger" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
                         <a href="/detail/${item.slug}/">
                             <img src="{{MEDIA_URL}}${image}" alt="${item.title} Image ${imgIndex + 1}" class="img-fluid" style="height: 100%; object-fit: cover;">
                         </a>
