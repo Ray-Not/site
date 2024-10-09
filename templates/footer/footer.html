@@ -156,7 +156,7 @@
 function displayViewedDoors() {
     let viewedData = localStorage.getItem('viewedDoors');
     let viewed = viewedData ? JSON.parse(viewedData) : [];
-    console.log(viewed);
+    console.log("Viewed data:", viewed);
 
     const viewedItemsContainer = document.getElementById('viewed-items');
     viewedItemsContainer.innerHTML = '';
@@ -165,32 +165,38 @@ function displayViewedDoors() {
         viewed.forEach((item, index) => {
             const isActive = index === 0 ? 'active' : '';
 
-            // Преобразование строки images в массив
+            // Transforming the string images into an array
             let images = [];
             if (typeof item.images === 'string') {
-                images = JSON.parse(item.images.replace(/'/g, '"')); // Заменяем одинарные кавычки на двойные
+                try {
+                    images = JSON.parse(item.images.replace(/'/g, '"')); // Replace single quotes with double quotes
+                } catch (e) {
+                    console.error("Error parsing images:", e);
+                    images = [];
+                }
             } else if (Array.isArray(item.images)) {
-                images = item.images; // Если уже массив, используем его
+                images = item.images; // Use it if already an array
             }
-            // Начинаем с обертки для изображений
+
+            // Starting with the wrapper for images
             let imagesHTML = `
             <section class="d-flex align-items-center p-2 door-section" style="overflow: hidden;">
-            <div class="d-flex flex-row flex-wrap align-items-center door-section" style="width: 100%;">`;
+            <div class="d-flex flex-row flex-wrap align-items-center door-section justify-content-center" style="width: 100%;">`;
 
-            // Проверяем, является ли images массивом и формируем HTML
+            // Check if images is an array and generate HTML
             if (Array.isArray(images)) {
                 imagesHTML += images.map((image, imgIndex) => `
-                    <div class="image-container d-flex justify-content-center door-image" style="flex: 1 1 calc(33% - 10px); margin: 5px; overflow: hidden;">
+                    <div class="door-image" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
                         <a href="/detail/${item.slug}/">
                             <img src="{{MEDIA_URL}}${image}" alt="${item.title} Image ${imgIndex + 1}" class="img-fluid" style="height: 100%; object-fit: cover;">
                         </a>
                     </div>
-                `).join(''); // Объединяем элементы изображений в одну строку
+                `).join(''); // Join the image elements into one string
             } else {
-                imagesHTML += '<div class="col-12 text-center">Нет изображений.</div>'; // Если это не массив, показываем сообщение
+                imagesHTML += '<div class="col-12 text-center">Нет изображений.</div>'; // Show message if not an array
             }
 
-            // Закрываем обертку
+            // Closing the wrapper
             imagesHTML += `
             </div>
             </section>`;
@@ -198,9 +204,9 @@ function displayViewedDoors() {
             const itemsHTML = `
                 <div class="carousel-item ${isActive}">
                     <div class="row viewed-item d-flex justify-content-center">
-                        <div class="col-12 door-image d-flex justify-content-center">
+                        <div class="col-12 d-flex justify-content-center">
                             <div class="row">
-                                ${imagesHTML} <!-- Здесь вставляем изображения -->
+                                ${imagesHTML} <!-- Insert images here -->
                             </div>
                         </div>
                         <div class="col-12 mt-4">
@@ -214,7 +220,10 @@ function displayViewedDoors() {
         viewedItemsContainer.innerHTML = '<p class="text-center">Нет просмотренных дверей.</p>';
     }
 }
-window.onload = displayViewedDoors;
+
+// Wait until the DOM is fully loaded before executing
+document.addEventListener('DOMContentLoaded', displayViewedDoors);
+
 </script>
 <script>
 function addToViewed(title, images, price, slug) {
