@@ -257,7 +257,7 @@ $(document).ready(function() {
                 {% with door.images|split_and_get_all as image_urls %}
                     {% for image_url in image_urls %}
                         <div class="image-container" style="flex: 1 1 calc(33.33% - 10px); margin: 5px; height: 360px; overflow: hidden;">
-                          <a href="{% url 'door_detail' slug=door.slug %}"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: contain;"></a>
+                          <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: contain;"></a>
                         </div>
                     {% endfor %}
                 {% endwith %}
@@ -265,7 +265,7 @@ $(document).ready(function() {
         </section>
           
         <section class="card-body">
-          <a href="{% url 'door_detail' slug=door.slug %}"><p class="card-title fw-bold">{{ door.title }}</p></a>
+          <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')"><p class="card-title fw-bold">{{ door.title }}</p></a>
           {% if door.discount %}
           <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
               {% with result=door.price|calculate_discount:door.discount %}
@@ -563,46 +563,5 @@ function addToCompare(doorId) {
     alert('Товар добавлен в корзину!');
   }
   </script>
-<script>
-  function addToViewed(title, image, price, slug) {
-    // Получаем текущие просмотренные товары из localStorage
-    console.log("Функция вызвана!");
-    console.log("Title:", title);
-    console.log("Image:", image);
-    console.log("Price:", price);
-
-    // Инициализация массива для хранения просмотренных дверей
-    let viewed = [];
-
-    // Безопасное извлечение и парсинг данных из localStorage
-    const storedViewed = localStorage.getItem('viewedDoors');
-    if (storedViewed) {
-      try {
-        viewed = JSON.parse(storedViewed);
-      } catch (error) {
-        console.error("Ошибка при парсинге viewedDoors:", error);
-        // Если парсинг не удался, очищаем данные
-        localStorage.removeItem('viewedDoors');
-      }
-    }
-
-    // Проверяем, существует ли уже товар с таким заголовком в просмотренных
-    const existingItem = viewed.find(item => item.title === title);
-
-    if (!existingItem) {
-      // Добавляем новый товар в массив, если он еще не просмотрен
-      viewed.unshift({ title: title, image: image, price: price, slug: slug });
-      console.log("Товар добавлен:", { title, image, price });
-
-      // Сохраняем обновленный массив в localStorage
-      localStorage.setItem('viewedDoors', JSON.stringify(viewed));
-    } else {
-      console.log("Товар уже в просмотренных:", existingItem);
-    }
-
-    // Проверяем, что данные сохранены правильно
-    console.log("Сохраненные данные в localStorage:", JSON.parse(localStorage.getItem('viewedDoors')));
-  }
-</script>
 
 {% endblock %}
