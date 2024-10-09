@@ -31,7 +31,7 @@
   </ol>
 </nav>
 <aside class="my-4">
-    <h1 style="font-family: tilda;">Популярные категории</h1>
+    <h2 style="font-family: tilda;">Популярные категории</h2>
     <div class="row">
       {% for catalog in random_catalogs|random_catalogs %}
         <div class="col-lg-3 col-6 door-item d-flex flex-column my-2" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
