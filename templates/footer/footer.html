@@ -172,17 +172,24 @@ function displayViewedDoors() {
             } else if (Array.isArray(item.images)) {
                 images = item.images; // Если уже массив, используем его
             }
+            // Начинаем с обертки для изображений
+            let imagesHTML = `<div class="d-flex flex-row flex-wrap align-items-center door-section" style="width: 100%;">`;
 
-            // Проверяем, является ли images массивом
-            const imagesHTML = Array.isArray(images) ? 
-                images.map((image, imgIndex) => `
+            // Проверяем, является ли images массивом и формируем HTML
+            if (Array.isArray(images)) {
+                imagesHTML += images.map((image, imgIndex) => `
                     <div class="image-container d-flex justify-content-center door-image" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
                         <a href="/detail/${item.slug}/">
-                            <img src="{{MEDIA_URL}}${image}" alt="${item.title} Image ${imgIndex + 1}" class="img-fluid" style="height: 100%; object-fit: cover;"">
+                            <img src="{{MEDIA_URL}}${image}" alt="${item.title} Image ${imgIndex + 1}" class="img-fluid" style="height: 100%; object-fit: cover;">
                         </a>
                     </div>
-                `).join('') 
-                : '<div class="col-12 text-center">Нет изображений.</div>'; // Если это не массив, показываем сообщение
+                `).join(''); // Объединяем элементы изображений в одну строку
+            } else {
+                imagesHTML += '<div class="col-12 text-center">Нет изображений.</div>'; // Если это не массив, показываем сообщение
+            }
+
+            // Закрываем обертку
+            imagesHTML += `</div>`;
 
             const itemsHTML = `
                 <div class="carousel-item ${isActive}">
@@ -192,7 +199,7 @@ function displayViewedDoors() {
                                 ${imagesHTML} <!-- Здесь вставляем изображения -->
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mt-4">
                             <a href="/detail/${item.slug}/"><p class="text-center mt-2">${item.title}</p></a>
                         </div>
                     </div>
