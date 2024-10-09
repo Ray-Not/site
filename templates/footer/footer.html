@@ -173,7 +173,9 @@ function displayViewedDoors() {
                 images = item.images; // Если уже массив, используем его
             }
             // Начинаем с обертки для изображений
-            let imagesHTML = `<div class="d-flex flex-row flex-wrap align-items-center door-section" style="width: 100%;">`;
+            let imagesHTML = `
+            <section class="d-flex align-items-center p-2 door-section" style="overflow: hidden;">
+            <div class="d-flex flex-row flex-wrap align-items-center door-section" style="width: 100%;">`;
 
             // Проверяем, является ли images массивом и формируем HTML
             if (Array.isArray(images)) {
@@ -189,7 +191,9 @@ function displayViewedDoors() {
             }
 
             // Закрываем обертку
-            imagesHTML += `</div>`;
+            imagesHTML += `
+            </div>
+            </section>`;
 
             const itemsHTML = `
                 <div class="carousel-item ${isActive}">
@@ -200,7 +204,7 @@ function displayViewedDoors() {
                             </div>
                         </div>
                         <div class="col-12 mt-4">
-                            <a href="/detail/${item.slug}/"><p class="text-center mt-2">${item.title}z</p></a>
+                            <a href="/detail/${item.slug}/"><p class="text-center mt-2">${item.title}</p></a>
                         </div>
                     </div>
                 </div>`;
