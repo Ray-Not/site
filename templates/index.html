@@ -441,7 +441,7 @@
                           {% with door.images|split_and_get_all as image_urls %}
                             {% for image_url in image_urls %}
                               <div class="image-container d-flex justify-content-center door-image" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
-                                <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;"></a>
+                                <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;"></a>
                               </div>
                             {% endfor %}
                           {% endwith %}
@@ -449,7 +449,7 @@
                       </section>
             
                       <section class="card-body d-flex flex-column mt-auto">
-                        <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')"><p class="card-title fw-bold">{{ door.title }}</p></a>
+                        <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><p class="card-title fw-bold">{{ door.title }}</p></a>
                         {% if door.discount %}
                         <label class="rounded p-2" style="background-color: #ffe5e5; font-family: gasalt;">
                           <label class="card-text rounded" style="color: #ff0000;">{{ door.price|calculate_discount:door.discount }} ₽</label>
@@ -465,7 +465,7 @@
                         <label class="card-text p-2 rounded text-dark" style="font-family: gasalt;">{{ door.price|format_number }} ₽</label>
                         {% endif %}
                         <div class="d-flex flex-lg-row flex-column mt-auto align-items-center justify-content-center w-100" style="gap: 5px;">
-                          <a href="{% url 'door_detail' slug=door.slug %}" class="flex-grow-1 w-100" style="font-size: 5px;" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_one }}', '{{ door.price }}', '{{ door.slug }}')">
+                          <a href="{% url 'door_detail' slug=door.slug %}" class="flex-grow-1 w-100" style="font-size: 5px;" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')">
                               <button class="btn btn-outline-danger fw-bold btn-sm w-100">Подробнее</button>
                           </a>
                           <div class="flex-grow-1 w-100">
