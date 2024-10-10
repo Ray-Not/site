@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from web.models import Door
+from web.models import Door, Catalog
 import random
 
 used_numbers = set()
@@ -17,16 +17,38 @@ class Command(BaseCommand):
     help = 'Меняет название дверям'
 
     def handle(self, *args, **kwargs):
-        brands = [
-            'Комфорт', 'Дионис', 'Сенатор',
-            'Престиж', 'Гранд',
-            'Йошкар-Ола', 'Стандарт', 'Mastino',
-            'Labirint', 'Интекрон', 'Арма', 'Акрон'
-        ]
-        doors = Door.objects.all()
+        # Список брендов и соответствующих каталогов
+        brands_catalog_mapping = {
+            'Комфорт': 'Комфорт (производитель)',
+            'Дионис': 'Дионис',
+            'Сенатор': 'Сенатор',
+            'Престиж': 'Престиж',
+            'Гранд': 'Гранд',
+            'Йошкар-Ола': 'Йошкар-Ола',
+            'Стандарт': 'Стандарт',
+            'Mastino': 'Mastino',
+            'Labirint': 'Labirint',
+            'Интекрон': 'Интекрон',
+            'Арма': 'Арма',
+            'Акрон': 'Акрон'
+        }
 
-        # Итерируем по дверям и скрываем те, в title которых нет брендов
-        for door in doors:
-            if not any(brand in door.title for brand in brands):
-                door.hidden = True
-                door.save()
+        # Получаем все скрытые двери
+        hidden_doors = Door.objects.filter(hidden=False)
+
+        # Проходим по всем дверям, добавляем в каталоги
+        for door in hidden_doors:
+            for brand, catalog_title in brands_catalog_mapping.items():
+                if brand in door.title:
+                    # Ищем каталог по его title
+                    catalog = Catalog.objects.get(title=catalog_title)
+                    
+                    # Проверяем, находится ли дверь уже в этом каталоге
+                    if catalog not in door.catalogs.all():
+                        # Добавляем каталог к ManyToMany-полю catalogs у двери
+                        door.catalogs.add(catalog)
+                        # Сохраняем изменения
+                        door.save()
+                        print(f'Дверь "{door.title}" добавлена в каталог "{catalog_title}".')
+                    else:
+                        print(f'Дверь "{door.title}" уже находится в каталоге "{catalog_title}".')

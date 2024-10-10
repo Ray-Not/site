@@ -101,7 +101,7 @@ def delivery_detail(request, slug):
 
     context = {
         'region': region,
-        'tags_cloud': Catalog.objects.order_by('?')[:4],
+        'tags_cloud': Catalog.objects.exclude(chapter="По производителям").order_by('?')[:11],
     }
 
     return render(request, 'pages/delivery_detail.html', context)
@@ -223,7 +223,8 @@ def catalog(request, slug=None):
         'selected_purposes': selected_purposes,
         'selected_out_covers': selected_out_covers,
         'selected_in_covers': selected_in_covers,
-        'tags_cloud': Catalog.objects.order_by('?')[:4],
+        'tags_cloud': Catalog.objects.exclude(chapter="По производителям").order_by('?')[:11],
+        'tags_cloud_extends': Catalog.objects.filter(chapter="По производителям"),
         'catalog': catalog if slug else None,
         'catalogs': catalogs,
         'page': page_number
@@ -355,7 +356,7 @@ def door_detail(request, slug):
 
     # Если catalog_tags пустой, берем 4 случайных тега
     if not catalog_tags.exists():
-        tags_cloud = Catalog.objects.order_by('?')[:4]
+        tags_cloud = Catalog.objects.exclude(chapter="По производителям").order_by('?')[:11]
     else:
         tags_cloud = catalog_tags
 

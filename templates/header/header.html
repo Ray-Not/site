@@ -206,7 +206,7 @@
         <div class="row">
             {% for chapter, catalogs in chapters_with_titles.items %}
             <div class="col-6 text-start mb-4" style="font-family: tilda-light;">
-                <label class="text-dark fw-bold border-bottom">{{ chapter }}</label>
+                <label class="text-dark fw-bold border-bottom fw-bold text-danger">{{ chapter }}</label>
                 <ul class="list-unstyled categories-item">
                     {% for catalog in catalogs %}
                     <a class="link-underline link-underline-opacity-0 text-dark" href="{% url 'catalog_with_slug' catalog.slug %}">

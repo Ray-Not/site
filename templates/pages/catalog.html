@@ -229,6 +229,14 @@ $(document).ready(function() {
           {% endfor %}
       </div>
     </section>
+    <section class="row d-flex flex-row mt-2">
+      <div class="tags-cloud d-flex flex-wrap">
+          <label class="text-center" style="font-size: 15px;">Категории по производителям: </label>
+          {% for tag in tags_cloud_extends %}
+          <a href="{% url 'catalog_with_slug' tag.slug %}" class="btn btn-light link-underline link-underline-opacity-0 px-2 py-0 mx-1 mb-2" style="color: #000; font-size: 15px; border: 1px solid #ddd;">{{ tag.title }}</a>
+          {% endfor %}
+      </div>
+    </section>
     <!-- </div> -->
     <p class="my-4 col text-center">Сортировать по:</p>
     <div class="d-flex flex-lg-row align-items-center my-3">
