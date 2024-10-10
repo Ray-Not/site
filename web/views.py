@@ -23,7 +23,7 @@ def index(request):
         'Тефлон', 'Silver', 'Quartet',
         'Престиж', 'Противопожарные', 'Labirint',
         'Премиум', 'Ле-гран', 'Интекрон',
-        'Лира', 'Страж', 'Profildoors',
+        'Лира', 'Profildoors',
         'Regidoors', 'Falko'
     ]
     purposes = [
@@ -125,7 +125,7 @@ def catalog(request, slug=None):
         'Тефлон', 'Silver', 'Quartet',
         'Престиж', 'Противопожарные', 'Labirint',
         'Премиум', 'Ле-гран', 'Интекрон',
-        'Лира', 'Страж', 'Profildoors',
+        'Лира', 'Profildoors',
         'Regidoors', 'Falko'
     ]
     purposes = [
