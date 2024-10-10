@@ -215,9 +215,9 @@ $(document).ready(function() {
   
   <aside class="col-lg-8 col-12">
     {% if catalog %}
-      <h1 class="text-center my-4">{{ catalog.title }}</h1>
+      <h1>Входные металлические {{ catalog.title|lower }} двери</h1>
     {% else %}
-      <h2 class="text-center my-4">Входные двери от производителя</h2>
+      <h2 class="text-center my-4">Входные металлические двери от производителя</h2>
     {% endif %}
     <section class="row d-flex flex-row mt-2">
       <div class="tags-cloud d-flex flex-wrap">
