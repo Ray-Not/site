@@ -17,14 +17,16 @@ class Command(BaseCommand):
     help = 'Меняет название дверям'
 
     def handle(self, *args, **kwargs):
-        doors = Door.objects.filter(title__icontains="Страж")
+        brands = [
+            'Комфорт', 'Дионис', 'Сенатор',
+            'Престиж', 'Гранд',
+            'Йошкар-Ола', 'Стандарт', 'Mastino',
+            'Labirint', 'Интекрон', 'Арма', 'Акрон'
+        ]
+        doors = Door.objects.all()
 
-        count = doors.count()
-        self.stdout.write(self.style.SUCCESS(f'Найдено {count} дверей'))
-
-        # for door in doors:
-        #     random_number = generate_unique_number()
-        #     new_title = f"Входная металлическая дверь в квартиру Стандарт {random_number}"
-        #     door.title = new_title
-        #     door.save()
-        #     self.stdout.write(self.style.SUCCESS(f'Обновлено: {new_title}'))
+        # Итерируем по дверям и скрываем те, в title которых нет брендов
+        for door in doors:
+            if not any(brand in door.title for brand in brands):
+                door.hidden = True
+                door.save()
