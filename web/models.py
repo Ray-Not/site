@@ -88,7 +88,7 @@ class Catalog(models.Model):
         null=True,
         blank=True
     )
-    description = models.CharField(max_length=150, null=True)
+    description = models.CharField(max_length=150, null=True, blank=True)
 
     def get_door_count(self):
         """Возвращает количество дверей, связанных с данной категорией."""
