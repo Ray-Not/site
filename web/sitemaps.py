@@ -19,7 +19,7 @@ class DoorSitemap(Sitemap):
     priority = 0.8
 
     def items(self):
-        return Door.objects.all()
+        return Door.objects.filter(hidden=False)
 
     def lastmod(self, obj):
         return obj.created_at
