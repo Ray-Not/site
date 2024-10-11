@@ -508,12 +508,47 @@ class CustomOrder(models.Model):
         verbose_name='Ручка-скоба'
     )
 
+    def save(self, *args, **kwargs):
+
+        if self.pk is None:
+            super(Order, self).save(*args, **kwargs)
+
+            message = f'Заявка на персональную дверь.\nТелефон: {self.phone}.'
+
+            # Отправка email уведомления
+            send_mail(
+                'Новая заявка создана',
+                message,
+                settings.DEFAULT_FROM_EMAIL,  # От кого
+                [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
+                fail_silently=False,
+            )
+        else:
+            super(Order, self).save(*args, **kwargs)
+
     def __str__(self):
         return f'От {self.phone} пришел заказ'
 
 
 class GetDiscount(models.Model):
     phone = models.CharField(max_length=32)
+
+    def save(self, *args, **kwargs):
+
+        if self.pk is None:
+            super(Order, self).save(*args, **kwargs)
+
+            message = f'Заявка на скидку.\nТелефон: {self.phone}.'
+            # Отправка email уведомления
+            send_mail(
+                'Новая заявка создана',
+                message,
+                settings.DEFAULT_FROM_EMAIL,  # От кого
+                [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
+                fail_silently=False,
+            )
+        else:
+            super(Order, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return f"{self.phone} нужна скидка"
