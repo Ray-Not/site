@@ -201,7 +201,7 @@ class Door(models.Model):
         blank=True
     )
     hidden = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now=True) 
+    created_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
