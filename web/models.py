@@ -3,7 +3,7 @@ import uuid
 from django.db import models
 from django.core.mail import send_mail
 from django.conf import settings
-
+from django.urls import reverse
 from ckeditor.fields import RichTextField
 from django.db import models
 from slugify import slugify
@@ -39,6 +39,9 @@ class Blog(models.Model):
         if not self.slug:
             self.slug = slugify(self.title, separator='-')
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog_detail', args=[str(self.id)])
 
     def __str__(self):
         return self.title
@@ -217,6 +220,9 @@ class Door(models.Model):
 
     def get_order_count(self):
         return self.orders.count()
+
+    def get_absolute_url(self):
+        return reverse('door_detail', args=[str(self.id)])
 
     def __str__(self):
         return self.title
