@@ -81,22 +81,21 @@ class CallBack(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def save(self, *args, **kwargs):
-        # Проверка, что объект создается, а не обновляется
         if self.pk is None:
             super(CallBack, self).save(*args, **kwargs)  # Сначала сохраняем объект
 
             # Отправка email уведомления
             send_mail(
                 'Новая заявка создана',
-                f'Была создана новая заявка от {self.name}.\nТелефон: {self.phone}',
+                f'Была создана новая заявка [обратный вызов] от {self.name}.\nТелефон: {self.phone}',
                 settings.DEFAULT_FROM_EMAIL,  # От кого
                 [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
                 fail_silently=False,
             )
         else:
-            super(CallBack, self).save(*args, **kwargs) 
+            super(CallBack, self).save(*args, **kwargs)
 
 
 class Catalog(models.Model):
@@ -245,7 +244,20 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         if not self.order_number:
             self.order_number = self.generate_unique_order_number()
-        super().save(*args, **kwargs)
+
+        if self.pk is None:
+            super(Order, self).save(*args, **kwargs)  # Сначала сохраняем объект
+
+            # Отправка email уведомления
+            send_mail(
+                'Новая заявка создана',
+                f'Была создана новая заявка от {self.name}.\nТелефон: {self.phone}. Дверь {self.door.title}',
+                settings.DEFAULT_FROM_EMAIL,  # От кого
+                [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
+                fail_silently=False,
+            )
+        else:
+            super(Order, self).save(*args, **kwargs)
 
     def generate_unique_order_number(self):
         while True:
