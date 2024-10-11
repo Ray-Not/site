@@ -248,10 +248,14 @@ class Order(models.Model):
         if self.pk is None:
             super(Order, self).save(*args, **kwargs)  # Сначала сохраняем объект
 
+            message = f'Была создана новая заявка от {self.name}.\nТелефон: {self.phone}\nАдрес: {self.address}\nСообщение: {self.message}'
+            if self.door:
+                message += f' Дверь: {self.door.title}.'
+
             # Отправка email уведомления
             send_mail(
                 'Новая заявка создана',
-                f'Была создана новая заявка от {self.name}.\nТелефон: {self.phone}. Дверь {self.door.title}',
+                message,
                 settings.DEFAULT_FROM_EMAIL,  # От кого
                 [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
                 fail_silently=False,
