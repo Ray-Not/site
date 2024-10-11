@@ -518,7 +518,7 @@ class CustomOrder(models.Model):
     def save(self, *args, **kwargs):
 
         if self.pk is None:
-            super(Order, self).save(*args, **kwargs)
+            super(CustomOrder, self).save(*args, **kwargs)
 
             message = f'Заявка на персональную дверь.\nТелефон: {self.phone}.'
 
@@ -531,7 +531,7 @@ class CustomOrder(models.Model):
                 fail_silently=False,
             )
         else:
-            super(Order, self).save(*args, **kwargs)
+            super(CustomOrder, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'От {self.phone} пришел заказ'
