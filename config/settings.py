@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'web',
     'ckeditor',
-    'compressor'
+    'compressor',
+    'django.contrib.sitemaps'
 ]
 
 MIDDLEWARE = [

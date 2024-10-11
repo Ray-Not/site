@@ -91,7 +91,7 @@ class CallBack(models.Model):
                 'Новая заявка создана',
                 f'Была создана новая заявка [обратный вызов] от {self.name}.\nТелефон: {self.phone}',
                 settings.DEFAULT_FROM_EMAIL,  # От кого
-                [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
+                ['4109974@inbox.ru'],  # Кому отправляем (ваша же почта)
                 fail_silently=False,
             )
         else:
@@ -201,6 +201,7 @@ class Door(models.Model):
         blank=True
     )
     hidden = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now=True) 
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -257,7 +258,7 @@ class Order(models.Model):
                 'Новая заявка создана',
                 message,
                 settings.DEFAULT_FROM_EMAIL,  # От кого
-                [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
+                ['4109974@inbox.ru'],  # Кому отправляем (ваша же почта)
                 fail_silently=False,
             )
         else:
@@ -520,7 +521,7 @@ class CustomOrder(models.Model):
                 'Новая заявка создана',
                 message,
                 settings.DEFAULT_FROM_EMAIL,  # От кого
-                [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
+                ['4109974@inbox.ru'],  # Кому отправляем (ваша же почта)
                 fail_silently=False,
             )
         else:
@@ -543,8 +544,8 @@ class GetDiscount(models.Model):
             send_mail(
                 'Новая заявка создана',
                 message,
-                settings.DEFAULT_FROM_EMAIL,  # От кого
-                [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
+                settings.DEFAULT_FROM_EMAIL,
+                ['4109974@inbox.ru'],
                 fail_silently=False,
             )
         else:
