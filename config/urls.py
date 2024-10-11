@@ -4,13 +4,16 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.sitemaps.views import sitemap
-from  web.sitemaps import BlogSitemap, DoorSitemap
+from  web.sitemaps import BlogSitemap, DoorSitemap, ContactPageSitemap, HomePageSitemap, DeliveryPageSitemap
 
 handler404 = 'web.views.custom_404_view'
 
 sitemaps = {
     'blogs': BlogSitemap,
     'doors': DoorSitemap,
+    'index': HomePageSitemap,
+    'contact': ContactPageSitemap,
+    'delivery': DeliveryPageSitemap,
 }
 
 urlpatterns = [
