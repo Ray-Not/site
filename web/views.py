@@ -4,6 +4,7 @@ import json
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Avg, Max, Min, Case, When, Value, IntegerField
 from django.shortcuts import get_object_or_404, redirect, render
+from django.core.mail import send_mail
 
 from .filters import DoorFilter
 from .forms import CustomOrderForm, OrderForm, ReviewForm, GetDiscountForm

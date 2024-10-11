@@ -1,5 +1,9 @@
 import uuid
 
+from django.db import models
+from django.core.mail import send_mail
+from django.conf import settings
+
 from ckeditor.fields import RichTextField
 from django.db import models
 from slugify import slugify
@@ -77,6 +81,22 @@ class CallBack(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        # Проверка, что объект создается, а не обновляется
+        if self.pk is None:
+            super(CallBack, self).save(*args, **kwargs)  # Сначала сохраняем объект
+
+            # Отправка email уведомления
+            send_mail(
+                'Новая заявка создана',
+                f'Была создана новая заявка от {self.name}.\nТелефон: {self.phone}',
+                settings.DEFAULT_FROM_EMAIL,  # От кого
+                [settings.DEFAULT_FROM_EMAIL],  # Кому отправляем (ваша же почта)
+                fail_silently=False,
+            )
+        else:
+            super(CallBack, self).save(*args, **kwargs) 
 
 
 class Catalog(models.Model):

@@ -160,3 +160,12 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
     ('text/x-less', 'lessc {infile} {outfile}'),
 )
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.beget.com'  # SMTP-сервер Beget
+EMAIL_PORT = 465  # Порт для SSL (используйте 587 для TLS)
+EMAIL_USE_SSL = True  # Используем SSL для подключения
+EMAIL_HOST_USER = 'paritet-dveri@paritet-dveri.ru'  # Ваш email на Beget
+EMAIL_HOST_PASSWORD = '5FNTsh%hFFRy'  # Пароль от почты на Beget
+DEFAULT_FROM_EMAIL = 'paritet-dveri@paritet-dveri.ru'  # Ваш email, который будет в "отправителе"
