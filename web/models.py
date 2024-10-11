@@ -543,7 +543,7 @@ class GetDiscount(models.Model):
     def save(self, *args, **kwargs):
 
         if self.pk is None:
-            super(Order, self).save(*args, **kwargs)
+            super(GetDiscount, self).save(*args, **kwargs)
 
             message = f'Заявка на скидку.\nТелефон: {self.phone}.'
             # Отправка email уведомления
@@ -555,7 +555,7 @@ class GetDiscount(models.Model):
                 fail_silently=False,
             )
         else:
-            super(Order, self).save(*args, **kwargs)
+            super(GetDiscount, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return f"{self.phone} нужна скидка"
