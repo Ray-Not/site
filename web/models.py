@@ -250,7 +250,7 @@ class Order(models.Model):
 
             message = f'Была создана новая заявка от {self.name}.\nТелефон: {self.phone}\nАдрес: {self.address}\nСообщение: {self.message}'
             if self.door:
-                message += f' Дверь: {self.door.title}.'
+                message += f'\nДверь: {self.door.title}.'
 
             # Отправка email уведомления
             send_mail(
