@@ -1,13 +1,24 @@
 from django.contrib.sitemaps import Sitemap
-from django.urls import reverse
-from .models import YourModel  # Импортируйте свои модели
+from .models import Blog, Door
 
-class YourModelSitemap(Sitemap):
-    changefreq = "monthly"
+
+class BlogSitemap(Sitemap):
+    changefreq = "weekly"
     priority = 0.8
 
     def items(self):
-        return YourModel.objects.all()  # Возвращает все объекты вашей модели
+        return Blog.objects.all()
 
-    def location(self, item):
-        return reverse('yourmodel_detail', args=[item.pk])  # Укажите ваш URL
+    def lastmod(self, obj):
+        return obj.created_at
+
+
+class DoorSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.8
+
+    def items(self):
+        return Door.objects.all()
+
+    def lastmod(self, obj):
+        return obj.created_at
