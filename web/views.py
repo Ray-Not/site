@@ -2,7 +2,7 @@ import locale
 from datetime import datetime, timedelta
 import json
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Avg, Max, Min
+from django.db.models import Avg, Max, Min, Case, When, Value, IntegerField
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .filters import DoorFilter
@@ -380,7 +380,13 @@ def door_detail(request, slug):
 
 
 def reviews(request):
-    reviews = Review.objects.all()
+    reviews = Review.objects.annotate(
+        has_message=Case(
+            When(message__isnull=False, message__gt='', then=Value(1)),  # Объекты с непустым message
+            default=Value(0),  # Все остальные объекты (пустое message или null)
+            output_field=IntegerField()
+        )
+    ).order_by('-has_message', '?')
     paginator = Paginator(reviews, 20)
     page_number = request.GET.get('page')
 

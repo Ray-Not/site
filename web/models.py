@@ -131,7 +131,7 @@ class Review(models.Model):
         null=True
     )
     rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
-    message = models.CharField(max_length=255, null=True, blank=True)
+    message = models.CharField(max_length=1024, null=True, blank=True)
 
     def __str__(self):
         return f'От {self.name} [{self.order}]: Рейтинг {self.rating}'
