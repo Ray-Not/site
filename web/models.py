@@ -91,7 +91,7 @@ class CallBack(models.Model):
 
             # Отправка email уведомления
             send_mail(
-                'Новая заявка создана',
+                'Обратный звонок',
                 f'Была создана новая заявка [обратный вызов] от {self.name}.\nТелефон: {self.phone}',
                 settings.DEFAULT_FROM_EMAIL,  # От кого
                 ['4109974@inbox.ru'],  # Кому отправляем (ваша же почта)
@@ -261,7 +261,7 @@ class Order(models.Model):
 
             # Отправка email уведомления
             send_mail(
-                'Новая заявка создана',
+                'Новый заказ',
                 message,
                 settings.DEFAULT_FROM_EMAIL,  # От кого
                 ['4109974@inbox.ru'],  # Кому отправляем (ваша же почта)
@@ -524,7 +524,7 @@ class CustomOrder(models.Model):
 
             # Отправка email уведомления
             send_mail(
-                'Новая заявка создана',
+                'Заказ по параметрам',
                 message,
                 settings.DEFAULT_FROM_EMAIL,  # От кого
                 ['4109974@inbox.ru'],  # Кому отправляем (ваша же почта)
@@ -548,7 +548,7 @@ class GetDiscount(models.Model):
             message = f'Заявка на скидку.\nТелефон: {self.phone}.'
             # Отправка email уведомления
             send_mail(
-                'Новая заявка создана',
+                'Получение скидки',
                 message,
                 settings.DEFAULT_FROM_EMAIL,
                 ['4109974@inbox.ru'],
