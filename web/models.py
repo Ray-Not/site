@@ -207,6 +207,8 @@ class Door(models.Model):
     )
     hidden = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True)
+    h1 = models.CharField(max_length=256, blank=True)
+    description = models.CharField(max_length=512, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

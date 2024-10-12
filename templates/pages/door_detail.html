@@ -10,7 +10,11 @@
 
 {% endblock %}
 {% block description %}
+{% if not door.description %}
 <meta name="description" content="Купить {{ door.title }}"/>
+{% else %}
+<meta name="description" content="{{ door.description }}"/>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -155,7 +159,13 @@
   </div>
 </section>
 <section class="row door-card mx-auto">
-    <h1 class="my-3">{{ door.title }}</h1>
+    <h1 class="my-3">
+      {% if door.h1 %}
+        {{ door.h1 }}
+        {% else %}
+        {{ door.title }}
+      {% endif %}
+    </h1>
     <div class="d-flex align-items-center p-2 col-lg-6 col-12 flex-column" data-bs-ride="false">
         <section class="row">
             <div class="d-flex flex-row flex-wrap align-items-start" style="width: 100%; overflow: hidden;">
