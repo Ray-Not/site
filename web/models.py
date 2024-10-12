@@ -256,12 +256,14 @@ class Order(models.Model):
             super(Order, self).save(*args, **kwargs)  # Сначала сохраняем объект
 
             message = f'Была создана новая заявка от {self.name}.\nТелефон: {self.phone}\nАдрес: {self.address}\nСообщение: {self.message}'
+            title = 'Вызов на замер'
             if self.door:
                 message += f'\nДверь: {self.door.title}.'
+                title = "Новый заказ"
 
             # Отправка email уведомления
             send_mail(
-                'Новый заказ',
+                title,
                 message,
                 settings.DEFAULT_FROM_EMAIL,  # От кого
                 ['4109974@inbox.ru'],  # Кому отправляем (ваша же почта)
