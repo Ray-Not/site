@@ -59,7 +59,7 @@ def index(request):
 
     return render(request, 'index.html', {
         'form': form,
-        'reviews': reviews,
+        'reviews': reviews[:6],
         'range': range(1, 6),
         'min_price': min_price,
         'max_price': max_price,
