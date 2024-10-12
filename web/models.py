@@ -112,6 +112,7 @@ class Catalog(models.Model):
     )
     description = models.CharField(max_length=150, null=True, blank=True)
     content = models.TextField(default='')
+    custom_h1 = models.CharField(max_length=256, default='Входные металлические {{ catalog.title|lower }} двери')
 
     def get_door_count(self):
         """Возвращает количество дверей, связанных с данной категорией."""

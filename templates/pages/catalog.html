@@ -2,10 +2,14 @@
 {% load custom_filters %}
 {% load static %}
 
-{% if catalog.description %} 
-{% block description %}
-<meta name="description" content="Купить металлические входные двери {% if catalog %}{{ catalog.title }}{% endif %} в квартиру, доставка, изготовление на заказ и установка готовых входных металлических дверей  в Москве в квартиру и загородный дом. Каталог с фото и описанием. Гарантия на двери 1 год. Акции и скидки.">
-{% endblock %}
+{% if catalog %}
+  {% block description %}
+    {% if not catalog.description %} 
+      <meta name="description" content="Купить металлические входные двери {% if catalog %}{{ catalog.title }}{% endif %} в квартиру, доставка, изготовление на заказ и установка готовых входных металлических дверей  в Москве в квартиру и загородный дом. Каталог с фото и описанием. Гарантия на двери 1 год. Акции и скидки.">
+    {% else %}
+      <meta name="description" content="{{ catalog.description }}">
+    {% endif %}
+  {% endblock %}
 {% endif %}
 
 {% block title %}
@@ -217,7 +221,7 @@ $(document).ready(function() {
   
   <aside class="col-lg-8 col-12">
     {% if catalog %}
-      <h1>Входные металлические {{ catalog.title|lower }} двери</h1>
+      <h1>{{ catalog.custom_h1 }}</h1>
     {% else %}
       <h2 class="text-center my-4">Входные металлические двери от производителя</h2>
     {% endif %}
