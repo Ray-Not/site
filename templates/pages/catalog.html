@@ -229,6 +229,11 @@ $(document).ready(function() {
           {% endfor %}
       </div>
     </section>
+    <section class="row d-flex flex-row mt-2">
+      <div class="tags-cloud d-flex flex-wrap">
+        {% if catalog %}{{ catalog.content }}{% endif %}
+      </div>
+    </section>
     <!-- </div> -->
     <p class="my-4 col text-center">Сортировать по:</p>
     <div class="d-flex flex-lg-row align-items-center my-3">
