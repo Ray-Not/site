@@ -49,7 +49,13 @@ def index(request):
             return redirect('index')
     else:
         form = OrderForm()
-    reviews = Review.objects.all().order_by('-id')[:6]
+    reviews = Review.objects.annotate(
+        has_message=Case(
+            When(message__isnull=False, message__gt='', then=Value(1)),  # Объекты с непустым message
+            default=Value(0),  # Все остальные объекты (пустое message или null)
+            output_field=IntegerField()
+        )
+    ).order_by('-has_message', '?')
 
     return render(request, 'index.html', {
         'form': form,
