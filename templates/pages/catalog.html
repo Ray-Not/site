@@ -100,7 +100,11 @@ $(document).ready(function() {
     <li class="breadcrumb-item active" aria-current="page">Каталог</li>
   </ol>
 </nav>
-
+{% if catalog %}
+<h1>{{ catalog.custom_h1 }}</h1>
+{% else %}
+<h2 class="text-center my-4">Входные металлические двери от производителя</h2>
+{% endif %}
 <section class="row flex-lg-row flex-column">
   <section class="col-lg-4 col-12">
     <form method="get" id="filter-form" action="{% url 'catalog' %}">
@@ -220,11 +224,6 @@ $(document).ready(function() {
   </section>
   
   <aside class="col-lg-8 col-12">
-    {% if catalog %}
-      <h1>{{ catalog.custom_h1 }}</h1>
-    {% else %}
-      <h2 class="text-center my-4">Входные металлические двери от производителя</h2>
-    {% endif %}
     <section class="row d-flex flex-row mt-2">
       <div class="tags-cloud d-flex flex-wrap">
           <label class="text-center" style="font-size: 15px;">Основные категории: </label>
