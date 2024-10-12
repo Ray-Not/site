@@ -234,7 +234,7 @@ $(document).ready(function() {
     </section>
     <section class="row d-flex flex-row mt-2">
       <div class="tags-cloud d-flex flex-wrap">
-        {% if catalog %}{{ catalog.content }}{% endif %}
+        {% if catalog %}{{ catalog.content|safe }}{% endif %}
       </div>
     </section>
     <!-- </div> -->
