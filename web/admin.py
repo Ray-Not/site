@@ -8,7 +8,7 @@ from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
 
 @admin.register(Door)
 class DoorAdmin(admin.ModelAdmin):
-    search_fields = ('slug',)
+    search_fields = ('title',)
     list_display = ('title', 'price', 'purpose', 'created_at')
     ordering = ('id',)
 
