@@ -3,7 +3,7 @@
 {% load custom_filters %}
 
 {% block title %}
-Купить {{ door.title }} 🛒 в Москве по цене {{ door.price }} руб. 🚪 Паритет двери 🛠️
+{{ door.title }} купить 🛒 в Москве по цене {{ door.price }} руб. 🚪 Паритет двери 🛠️
 {% endblock %}
 
 {% block keywords %}
@@ -11,7 +11,7 @@
 {% endblock %}
 {% block description %}
 {% if not door.description %}
-<meta name="description" content="Купить {{ door.title }}"/>
+<meta name="description" content="{{ door.title }}"/>
 {% else %}
 <meta name="description" content="{{ door.description }}"/>
 {% endif %}
