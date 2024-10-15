@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from web.models import Catalog
+from web.models import Door
 
 
 class Command(BaseCommand):
@@ -8,8 +8,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        regions = Catalog.objects.filter(image=1)
+        doors = Door.objects.all()
 
-        for region in regions:
-            region.image = None
-            region.save()
+        for door in doors:
+            door.price = door.price * 1.1
+            door.save()
