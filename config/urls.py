@@ -6,7 +6,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
 from web.sitemaps import (BlogSitemap, ContactPageSitemap, DeliveryPageSitemap,
-                          DoorSitemap, HomePageSitemap)
+                          DoorSitemap, HomePageSitemap, CatalogSitemap)
 
 handler404 = 'web.views.custom_404_view'
 
@@ -16,6 +16,7 @@ sitemaps = {
     'index': HomePageSitemap,
     'contact': ContactPageSitemap,
     'delivery': DeliveryPageSitemap,
+    'catalog': CatalogSitemap
 }
 
 urlpatterns = [

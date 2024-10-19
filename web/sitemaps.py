@@ -1,7 +1,15 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
-from .models import Blog, Door
+from .models import Blog, Door, Catalog
+
+
+class CatalogSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.8
+
+    def items(self):
+        return Catalog.objects.all()
 
 
 class BlogSitemap(Sitemap):
