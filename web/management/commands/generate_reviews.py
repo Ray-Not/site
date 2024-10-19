@@ -1,6 +1,9 @@
 import csv
+
 from django.core.management.base import BaseCommand
+
 from web.models import Review  # Замените на вашу модель отзывов
+
 
 class Command(BaseCommand):
     help = 'Присваивает отзывы из CSV файла в поле content объектов отзывов'

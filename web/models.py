@@ -1,11 +1,10 @@
 import uuid
 
-from django.db import models
-from django.core.mail import send_mail
-from django.conf import settings
-from django.urls import reverse
 from ckeditor.fields import RichTextField
+from django.conf import settings
+from django.core.mail import send_mail
 from django.db import models
+from django.urls import reverse
 from slugify import slugify
 
 

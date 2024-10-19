@@ -1,6 +1,8 @@
-from django.core.management.base import BaseCommand
-from web.models import Door, Catalog
 import random
+
+from django.core.management.base import BaseCommand
+
+from web.models import Catalog, Door
 
 used_numbers = set()
 

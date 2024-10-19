@@ -1,9 +1,12 @@
 from random import sample
-from django.db.models import Count
-from .models import Catalog, Door
-from .forms import OrderForm, CallBackForm
+
 from django.contrib import messages
+from django.db.models import Count
 from django.shortcuts import redirect
+
+from .forms import CallBackForm, OrderForm
+from .models import Catalog, Door
+
 
 def footer_context(request):
     # Querying catalogs with door counts
@@ -66,7 +69,6 @@ def footer_context(request):
 
     context = {
         'form_footer': OrderForm(),
-        'form_callback': form_callback,
         'chapters_with_titles': chapters_with_titles,
         'random_doors': random_doors,
         'random_catalogs': random_catalogs,

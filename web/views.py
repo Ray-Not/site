@@ -1,15 +1,16 @@
+import json
 import locale
 from datetime import datetime, timedelta
-import json
+
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Avg, Max, Min, Case, When, Value, IntegerField
+from django.db.models import Avg, Case, IntegerField, Max, Min, Value, When
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt
 
 from .filters import DoorFilter
-from .forms import CustomOrderForm, OrderForm, ReviewForm, GetDiscountForm
+from .forms import CustomOrderForm, GetDiscountForm, OrderForm, ReviewForm, CallBackForm
 from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
                      Review, Tag)
-from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -43,6 +44,14 @@ def index(request):
     max_price = Door.objects.aggregate(Max('price'))['price__max']
 
     if request.method == 'POST':
+        form_callback = CallBackForm(request.POST)
+        if form_callback.is_valid():
+            form_callback.save()
+            return redirect('index')
+    else:
+        form_callback = CallBackForm()
+
+    if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
             form.save()
@@ -59,6 +68,7 @@ def index(request):
 
     return render(request, 'index.html', {
         'form': form,
+        'form_callback': form_callback,
         'reviews': reviews[:6],
         'range': range(1, 6),
         'min_price': min_price,

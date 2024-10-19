@@ -13,3 +13,4 @@ Pillow
 colorama
 beautifulsoup4
 django-compressor
+django-simple-captcha

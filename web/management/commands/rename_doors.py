@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
-from web.models import Door
 from slugify import slugify
+
+from web.models import Door
 
 
 class Command(BaseCommand):

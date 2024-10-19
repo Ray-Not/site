@@ -1,6 +1,7 @@
+import csv
+
 import requests
 from bs4 import BeautifulSoup
-import csv
 
 # URL для отзывов, где Pagen заменяем на конкретный номер страницы
 url_template = 'https://belwood.kz/about/comments/?PAGEN_1={page}'

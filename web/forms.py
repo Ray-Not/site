@@ -1,12 +1,16 @@
 from django import forms
 
-from .models import CustomOrder, Order, Review, GetDiscount, CallBack
+from .models import CallBack, CustomOrder, GetDiscount, Order, Review
+from captcha.fields import CaptchaField
 
 
 class CallBackForm(forms.ModelForm):
+
+    captcha = CaptchaField()
+
     class Meta:
         model = CallBack
-        fields = ['name', 'phone',]
+        fields = ['name', 'phone', 'captcha']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),

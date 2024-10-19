@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'web',
     'ckeditor',
     'compressor',
-    'django.contrib.sitemaps'
+    'django.contrib.sitemaps',
+    'captcha'
 ]
 
 MIDDLEWARE = [

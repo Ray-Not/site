@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
-from .models import Blog, Door
 from django.urls import reverse
+
+from .models import Blog, Door
 
 
 class BlogSitemap(Sitemap):
