@@ -20,6 +20,8 @@
     <!-- Компрессор -->
     <!-- Подключение стилей CSS -->
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="preload" href="{% static 'fonts/TildaSans-Light.ttf' %}" as="font" type="font/truetype" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/TildaSans-Medium.ttf' %}" as="font" type="font/truetype" crossorigin="anonymous">
     {% compress css %}
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <link rel="stylesheet" href="{% static 'css/a_pallete.css' %}">
@@ -195,6 +197,8 @@
                 <span class="visually-hidden">Next</span>
               </button>
             </div> -->
+
+            <!-- ТУТ нужно оптимизировать фотку -->
             <!-- <aside class="mt-2 position-relative" style="overflow: hidden;">
               <source srcset="{% static 'images/index_banner.webp' %}" type="image/webp">
               <img src="{% static 'images/index_banner.png' %}" 
@@ -205,6 +209,7 @@
                 Открыть каталог
               </a>
             </aside> -->
+
             <aside class="my-4 text-center">
               <h1 style="font-family: tilda;">Двери</h1>
               <h2 style="font-family: tilda;">По выгодным ценам</h2>
