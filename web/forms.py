@@ -1,7 +1,7 @@
+from captcha.fields import CaptchaField
 from django import forms
 
 from .models import CallBack, CustomOrder, GetDiscount, Order, Review
-from captcha.fields import CaptchaField
 
 
 class CallBackForm(forms.ModelForm):

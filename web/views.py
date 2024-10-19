@@ -8,7 +8,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
 from .filters import DoorFilter
-from .forms import CustomOrderForm, GetDiscountForm, OrderForm, ReviewForm, CallBackForm
+from .forms import (CallBackForm, CustomOrderForm, GetDiscountForm, OrderForm,
+                    ReviewForm)
 from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
                      Review, Tag)
 

@@ -1,10 +1,8 @@
 from random import sample
 
-from django.contrib import messages
 from django.db.models import Count
-from django.shortcuts import redirect
 
-from .forms import CallBackForm, OrderForm
+from .forms import OrderForm
 from .models import Catalog, Door
 
 
@@ -58,14 +56,6 @@ def footer_context(request):
     else:
         random_ids = sample(list(Door.objects.values_list('id', flat=True)), 8)
         random_doors = Door.objects.filter(id__in=random_ids)
-
-    # Handling the callback form
-    form_callback = CallBackForm(request.POST or None)
-
-    if request.method == 'POST':
-        if form_callback.is_valid():
-            form_callback.save()
-            form_callback = CallBackForm()
 
     context = {
         'form_footer': OrderForm(),
