@@ -167,43 +167,13 @@
     <main>
         <aside class='container'>
           {% block content %}
-            <!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-              <article class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="{% static 'images/banners/baner-argus-slide.png' %}" class="d-block w-100" alt="Аргус">
-                </div>
-                <div class="carousel-item">
-                  <img src="{% static 'images/banners/paritet-slide-01-min-slide.png' %}" class="d-block w-100" alt="Доставка">
-                </div>
-                <div class="carousel-item">
-                  <img src="{% static 'images/banners/paritet-slide-02-min-slide.png' %}" class="d-block w-100" alt="Установка">
-                </div>
-                <div class="carousel-item">
-                  <img src="{% static 'images/banners/paritet-slide-03-min-slide.png' %}" class="d-block w-100" alt="Интекрон">
-                </div>
-                <div class="carousel-item">
-                  <img src="{% static 'images/banners/paritet-slide-slide.png' %}" class="d-block w-100" alt="Термодвери">
-                </div>
-                <div class="carousel-item">
-                  <img src="{% static 'images/banners/skidka-na-vse-dveri-slide.png' %}" class="d-block w-100" alt="Скидка">
-                </div>
-              </article>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div> -->
 
             <!-- ТУТ нужно оптимизировать фотку -->
             <aside class="mt-2 position-relative" style="overflow: hidden;">
               <source srcset="{% static 'images/index_banner.webp' %}" type="image/webp">
-              <img src="{% static 'images/index_banner.png' %}" 
+              <!-- <img src="{% static 'images/index_banner.png' %}" 
                    alt="Описание изображения" 
-                   style="width: 100%; height: auto; object-fit: cover;">
+                   style="width: 100%; height: auto; object-fit: cover;"> -->
               <a href="/catalog" class="btn btn-outline-dark position-absolute banner-btn" 
                  style="top: 80%; left: 62%; transform: translate(-50%, -50%);">
                 Открыть каталог
@@ -344,13 +314,13 @@
                 </form>
               </section>
             </aside>
-            <!-- <aside class="my-4">
+            <aside class="my-4">
               <h2 style="font-family: tilda;" class="text-center">Популярные категории</h2>
               <div class="row">
                 {% for catalog in random_catalogs %}
                   <div class="col-lg-3 col-6 door-item d-flex flex-column my-2" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
                     <a href="{% url 'catalog_with_slug' catalog.slug %}">
-                      <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
+                      <!-- <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;"> -->
                     </a>
                     <article class="d-flex flex-column mt-2">
                       <label class="fw-bold" style="font-size: small;">
@@ -369,7 +339,7 @@
                 </section>
                 </div>
               </div>
-            </aside> -->
+            </aside>
             <!-- Начало баннера замерщика -->
             <aside class="my-4 text-center">
               <h2 style="font-family: tilda;">Доставка и выезд мастера</h2>
@@ -378,7 +348,7 @@
               <div class="d-flex align-items-end">
                 <div class="col-12 rounded-3 d-flex justify-content-between align-items-center flex-lg-row flex-column p-lg-0 p-4" style="background-color: #ff0000; position: relative;">
                   <div class="col-lg-4 d-lg-flex d-none p-0" style="overflow: hidden; height: 250px;">
-                    <img class="img-fluid" src="{% static 'images/banners/zamer_banner.png' %}" alt="Zamer Banner">
+                    <!-- <img class="img-fluid" src="{% static 'images/banners/zamer_banner.png' %}" alt="Zamer Banner"> -->
                   </div>
                   <div class="col-lg-5 col-12 text-light d-flex flex-column justify-content-center">
                     <p style="font-size: 30px; font-weight: bold;">Вызовите замерщика</p>
@@ -447,7 +417,7 @@
                           {% with door.images|split_and_get_all as image_urls %}
                             {% for image_url in image_urls %}
                               <div class="image-container d-flex justify-content-center door-image" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
-                                <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;"></a>
+                                <!-- <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;"></a> -->
                               </div>
                             {% endfor %}
                           {% endwith %}
@@ -560,7 +530,7 @@
                 </table>
               </div>
               <div class="col col-lg-6 text-center">
-                <img src="{% static 'images/banners/moscow.jpeg' %}" style="width: 350px; height: 400px;" alt="Карта Москвы">
+                <!-- <img src="{% static 'images/banners/moscow.jpeg' %}" style="width: 350px; height: 400px;" alt="Карта Москвы"> -->
               </div>
             </section>
             <aside class="my-4 text-center">
