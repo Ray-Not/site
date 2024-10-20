@@ -279,11 +279,11 @@ function openCatalogMenu() {
         </div>
         {% endfor %} -->
 
-<scrip defer>
+<script defer>
   function loadComparisonPage() {
       let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
   
       const url = `/compare/?door_ids=${compareList.join(',')}`;
       window.location.href = url; // Перенаправляем на страницу сравнения
   }
-  </scrip>
+  </script>
