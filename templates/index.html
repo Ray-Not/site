@@ -43,7 +43,7 @@
 </head>
 
 <style>
-  /* @font-face {
+  @font-face {
       font-family: 'tilda';
       src: url('{% static "fonts/TildaSans-Medium.ttf" %}') format('truetype');
       font-weight: 500;
@@ -63,7 +63,7 @@
     font-weight: 400;
     font-style: normal;
     font-display: swap;
-  } */
+  }
   #map {
       height: 500px;
       width: 100%;
@@ -173,29 +173,12 @@
               <source srcset="{% static 'images/index_banner.webp' %}" type="image/webp">
               <img src="{% static 'images/index_banner.png' %}" 
                    alt="Описание изображения" 
+                   loading="lazy"
                    style="width: 100%; height: auto; object-fit: cover;">
               <a href="/catalog" class="btn btn-outline-dark position-absolute banner-btn" 
                  style="top: 80%; left: 62%; transform: translate(-50%, -50%);">
                 Открыть каталог
               </a>
-            </aside>
-
-            <aside class="my-4 text-center">
-              <h1 style="font-family: tilda;">Двери</h1>
-              <h2 style="font-family: tilda;">По выгодным ценам</h2>
-            </aside>
-            <aside>
-              <p class="text-dark h5 lh-1-lg" style="font-family: tilda-light;">
-                Входные металлические двери в Москве представлены в огромном ассортименте: модели отличаются по комплектации, отделке, стоимости.
-                Приобрести двери в розницу с оптового склада в Москве по цене производителя просто. Мы собрали популярные модели известных брендов
-                в одном месте – каталоге «Паритет Двери». Все двери прошли обязательную сертификацию и соответствуют нормам ГОСТ.
-                Клиенты «Паритет-двери» всегда получают крепкие двери по доступной цене. Мы позаботились о том, чтобы выбор был максимально
-                простым и результативным. Вы никогда не увидите у нас двери сомнительного происхождения. Аналитики ежедневно просматривают десятки
-                каталогов, изучают рыночную ситуацию. Поэтому в наш интернет-магазин попадают лучшие отечественные двери.
-                Российских производителей выбрали не случайно. Кто как не наши матера знают особенности планировки, климата, вкусовых предпочтений.
-                Партнеры компании занимают уверенные позиции, предлагают продукцию исключительного качества. Мы закупаем металлические и межкомнатные
-                двери напрямую, без посредников. Цены формируем с учётом реальных затрат. Никаких накруток и дополнительных наценок.
-              </p>
             </aside>
             <aside class="row d-flex justify-content-center">
               <h2  style="font-family: tilda;" class="text-center">Фильтры по категориям</h2>
@@ -320,7 +303,7 @@
                 {% for catalog in random_catalogs %}
                   <div class="col-lg-3 col-6 door-item d-flex flex-column my-2" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
                     <a href="{% url 'catalog_with_slug' catalog.slug %}">
-                      <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;">
+                      <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;" loading="lazy">
                     </a>
                     <article class="d-flex flex-column mt-2">
                       <label class="fw-bold" style="font-size: small;">
@@ -348,7 +331,7 @@
               <div class="d-flex align-items-end">
                 <div class="col-12 rounded-3 d-flex justify-content-between align-items-center flex-lg-row flex-column p-lg-0 p-4" style="background-color: #ff0000; position: relative;">
                   <div class="col-lg-4 d-lg-flex d-none p-0" style="overflow: hidden; height: 250px;">
-                    <img class="img-fluid" src="{% static 'images/banners/zamer_banner.png' %}" alt="Zamer Banner">
+                    <img class="img-fluid" src="{% static 'images/banners/zamer_banner.png' %}" alt="Zamer Banner" loading="lazy">
                   </div>
                   <div class="col-lg-5 col-12 text-light d-flex flex-column justify-content-center">
                     <p style="font-size: 30px; font-weight: bold;">Вызовите замерщика</p>
@@ -417,7 +400,7 @@
                           {% with door.images|split_and_get_all as image_urls %}
                             {% for image_url in image_urls %}
                               <div class="image-container d-flex justify-content-center door-image" style="flex: 1 1 calc(50% - 10px); margin: 5px; overflow: hidden;">
-                                <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;"></a>
+                                <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;" loading="lazy"></a>
                               </div>
                             {% endfor %}
                           {% endwith %}
@@ -530,7 +513,7 @@
                 </table>
               </div>
               <div class="col col-lg-6 text-center">
-                <img src="{% static 'images/banners/moscow.jpeg' %}" style="width: 350px; height: 400px;" alt="Карта Москвы">
+                <img src="{% static 'images/banners/moscow.jpeg' %}" style="width: 350px; height: 400px;" alt="Карта Москвы" loading="lazy">
               </div>
             </section>
             <aside class="my-4 text-center">
@@ -774,6 +757,23 @@
                     <p>Пока нет отзывов</p>
                 {% endfor %}
             </div>
+          </aside>
+          <aside class="my-4 text-center">
+            <h1 style="font-family: tilda;">Двери</h1>
+            <h2 style="font-family: tilda;">По выгодным ценам</h2>
+          </aside>
+          <aside>
+            <p class="text-dark h5 lh-1-lg" style="font-family: tilda-light;">
+              Входные металлические двери в Москве представлены в огромном ассортименте: модели отличаются по комплектации, отделке, стоимости.
+              Приобрести двери в розницу с оптового склада в Москве по цене производителя просто. Мы собрали популярные модели известных брендов
+              в одном месте – каталоге «Паритет Двери». Все двери прошли обязательную сертификацию и соответствуют нормам ГОСТ.
+              Клиенты «Паритет-двери» всегда получают крепкие двери по доступной цене. Мы позаботились о том, чтобы выбор был максимально
+              простым и результативным. Вы никогда не увидите у нас двери сомнительного происхождения. Аналитики ежедневно просматривают десятки
+              каталогов, изучают рыночную ситуацию. Поэтому в наш интернет-магазин попадают лучшие отечественные двери.
+              Российских производителей выбрали не случайно. Кто как не наши матера знают особенности планировки, климата, вкусовых предпочтений.
+              Партнеры компании занимают уверенные позиции, предлагают продукцию исключительного качества. Мы закупаем металлические и межкомнатные
+              двери напрямую, без посредников. Цены формируем с учётом реальных затрат. Никаких накруток и дополнительных наценок.
+            </p>
           </aside>
         </div>
         
