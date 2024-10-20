@@ -50,6 +50,12 @@
         </div>
     </div>
 
+    <aside class="my-4 text-center">
+        <h2 style="font-family: tilda;">Найдите нас</h2>
+        <h2 style="font-family: tilda;">На карте</h2>
+    </aside>
+    <aside id="map" class="d-flex justify-content-center">
+    </aside>
     <!-- Контактная информация с фоном и размытием -->
     <div class="contact-info text-center py-4 rounded-lg shadow-sm text-white">
         <h3 class="h4 mb-4">Контактная информация</h3>
@@ -89,4 +95,20 @@
         z-index: 2; /* Контент над размытием */
     }
 </style>
+
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<script>
+    ymaps.ready(function () {
+        var map = new ymaps.Map("map", {
+            center: [55.88471, 37.60377], // Центр карты (широта, долгота)
+            zoom: 15 // 
+        });
+
+        var placemark = new ymaps.Placemark([55.88471, 37.60377], {
+            balloonContent: 'Паритет'
+        });
+
+        map.geoObjects.add(placemark);
+    });
+</script>
 {% endblock %}
