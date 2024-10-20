@@ -14,3 +14,4 @@ colorama
 beautifulsoup4
 django-compressor
 django-simple-captcha
+sorl-thumbnail
