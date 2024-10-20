@@ -168,32 +168,27 @@
         <aside class='container'>
           {% block content %}
 
-          <aside class="my-4">
-            <h2 style="font-family: tilda;" class="text-center">Популярные категории</h2>
-            <div class="row">
-              {% for catalog in random_catalogs %}
-                <div class="col-lg-3 col-6 door-item d-flex flex-column my-2" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
-                  <a href="{% url 'catalog_with_slug' catalog.slug %}">
-                    <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;" loading="lazy">
-                  </a>
-                  <article class="d-flex flex-column mt-2">
-                    <label class="fw-bold" style="font-size: small;">
-                      {{ catalog.title }}
-                    </label>
-                    <label class="text-secondary" style="font-size: small;">
-                      {{ catalog.get_door_count }} шт.
-                    </label>
-                  </article>
-                </div>
-              {% endfor %}
-              <div class="row d-flex justify-content-center">
-              <section class="d-flex justify-content-center flex-lg-row flex-column col-12 col-lg-10 btn-sm btn-lg-md">
-                <a href="{% url 'catalog' %}" class="btn m-3 rounded-pill text-light fw-bold px-3 py-0" style="background-color: blue;">Каталог металлических дверей</a>
-                <a href="{% url 'calculator' %}" class="btn m-3 rounded-pill text-light fw-bold px-3 py-0" style="background-color: sienna;">Изготовление дверей на заказ</a>
-              </section>
-              </div>
-            </div>
-          </aside>
+            <aside class="my-4 text-center">
+              <h1 style="font-family: tilda;">Двери</h1>
+              <h2 style="font-family: tilda;">По выгодным ценам</h2>
+            </aside>
+            <aside>
+              <p class="text-dark h5 lh-1-lg" style="font-family: tilda-light;">
+                Входные металлические двери в Москве представлены в огромном ассортименте: модели отличаются по комплектации, отделке, стоимости. Приобрести двери в розницу с оптового склада в Москве по цене производителя просто. Мы собрали популярные модели известных брендов в одном месте – каталоге «Паритет Двери». Все двери прошли обязательную сертификацию и соответствуют нормам ГОСТ.
+              </p>
+            </aside>
+            <!-- ТУТ нужно оптимизировать фотку -->
+            <aside class="mt-2 position-relative" style="overflow: hidden;">
+              <source srcset="{% static 'images/index_banner.webp' %}" type="image/webp">
+              <img src="{% static 'images/index_banner.png' %}" 
+                   alt="Описание изображения" 
+                   loading="lazy"
+                   style="width: 100%; height: auto; object-fit: cover;">
+              <a href="/catalog" class="btn btn-outline-dark position-absolute banner-btn" 
+                 style="top: 80%; left: 62%; transform: translate(-50%, -50%);">
+                Открыть каталог
+              </a>
+            </aside>
             <aside class="row d-flex justify-content-center">
               <h2  style="font-family: tilda;" class="text-center">Фильтры по категориям</h2>
               <section class="col-12 col-lg-8 d-flex flex-column">
@@ -310,6 +305,32 @@
                   </fieldset>
                 </form>
               </section>
+            </aside>
+            <aside class="my-4">
+              <h2 style="font-family: tilda;" class="text-center">Популярные категории</h2>
+              <div class="row">
+                {% for catalog in random_catalogs %}
+                  <div class="col-lg-3 col-6 door-item d-flex flex-column my-2" data-price="{{ door.price }}" data-orders="{{ door.get_order_count }}" data-novelty="{{ door.id }}">
+                    <a href="{% url 'catalog_with_slug' catalog.slug %}">
+                      <img src="{{ MEDIA_URL }}{{ catalog.image }}" class="img-fluid rounded-4" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%;  object-fit: cover;" loading="lazy">
+                    </a>
+                    <article class="d-flex flex-column mt-2">
+                      <label class="fw-bold" style="font-size: small;">
+                        {{ catalog.title }}
+                      </label>
+                      <label class="text-secondary" style="font-size: small;">
+                        {{ catalog.get_door_count }} шт.
+                      </label>
+                    </article>
+                  </div>
+                {% endfor %}
+                <div class="row d-flex justify-content-center">
+                <section class="d-flex justify-content-center flex-lg-row flex-column col-12 col-lg-10 btn-sm btn-lg-md">
+                  <a href="{% url 'catalog' %}" class="btn m-3 rounded-pill text-light fw-bold px-3 py-0" style="background-color: blue;">Каталог металлических дверей</a>
+                  <a href="{% url 'calculator' %}" class="btn m-3 rounded-pill text-light fw-bold px-3 py-0" style="background-color: sienna;">Изготовление дверей на заказ</a>
+                </section>
+                </div>
+              </div>
             </aside>
             <!-- Начало баннера замерщика -->
             <aside class="my-4 text-center">
@@ -587,36 +608,6 @@
                     <button type="submit" class="btn btn-light col-4">Оставить заявку</button>
                   </form>
             </section>
-            </aside>
-
-            <aside class="my-4 text-center">
-              <h1 style="font-family: tilda;">Двери</h1>
-              <h2 style="font-family: tilda;">По выгодным ценам</h2>
-            </aside>
-            <aside>
-              <p class="text-dark h5 lh-1-lg" style="font-family: tilda-light;">
-                Входные металлические двери в Москве представлены в огромном ассортименте: модели отличаются по комплектации, отделке, стоимости.
-                Приобрести двери в розницу с оптового склада в Москве по цене производителя просто. Мы собрали популярные модели известных брендов
-                в одном месте – каталоге «Паритет Двери». Все двери прошли обязательную сертификацию и соответствуют нормам ГОСТ.
-                Клиенты «Паритет-двери» всегда получают крепкие двери по доступной цене. Мы позаботились о том, чтобы выбор был максимально
-                простым и результативным. Вы никогда не увидите у нас двери сомнительного происхождения. Аналитики ежедневно просматривают десятки
-                каталогов, изучают рыночную ситуацию. Поэтому в наш интернет-магазин попадают лучшие отечественные двери.
-                Российских производителей выбрали не случайно. Кто как не наши матера знают особенности планировки, климата, вкусовых предпочтений.
-                Партнеры компании занимают уверенные позиции, предлагают продукцию исключительного качества. Мы закупаем металлические и межкомнатные
-                двери напрямую, без посредников. Цены формируем с учётом реальных затрат. Никаких накруток и дополнительных наценок.
-              </p>
-            </aside>
-            <!-- ТУТ нужно оптимизировать фотку -->
-            <aside class="mt-2 position-relative" style="overflow: hidden;">
-              <source srcset="{% static 'images/index_banner.webp' %}" type="image/webp">
-              <img src="{% static 'images/index_banner.png' %}" 
-                   alt="Описание изображения" 
-                   loading="lazy"
-                   style="width: 100%; height: auto; object-fit: cover;">
-              <a href="/catalog" class="btn btn-outline-dark position-absolute banner-btn" 
-                 style="top: 80%; left: 62%; transform: translate(-50%, -50%);">
-                Открыть каталог
-              </a>
             </aside>
             <aside class="my-4 text-center">
                 <h2 style="font-family: tilda;">Почему</h2>
