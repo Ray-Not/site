@@ -81,23 +81,19 @@
 <header class="container sticky-top" style="background-color: #fff;">
   <nav class='d-flex border-bottom justify-content-center'>
     <!-- Мобильная версия -->
-    <div class="row mx-auto d-flex d-lg-none justify-content-center align-items-center mt-4 mb-3">
-      <div class='col-4 d-flex justify-content-center align-items-center px-0'>
-        <a href="/">
-          <!-- <img class='img-fluid' src="{% static 'images/logos/main_logo_blue.png' %}" alt="Логотип"/> -->
-          <p class="fs-1">ДВЕРИ</p>
-        </a>
+    <div class="row d-lg-none justify-content-center align-items-center mt-4 mb-3">
+      <div class='col-8 d-flex' style="font-size: x-small;">
+        <div class="row d-flex w-100">
+          <a href="#" class="link-dark link-underline-dark d-flex align-items-center justify-content-between w-100" data-bs-toggle="modal" data-bs-target="#callbackModal">
+            <div class="btn btn-outline-danger fw-bold p-0" style="font-size: small; flex: 1 1 auto;">Обратный звонок</div>
+            <div class="text-center ms-3" style="font-size: large; white-space: nowrap;">+7 (929) 622-48-35</div>
+          </a>
+        </div>
       </div>
-      <div class='col-6 d-flex flex-column' style="font-size: x-small;">
-        <a href="#" class="text-center d-flex justify-content-center flex-column link-dark link-underline-dark" data-bs-toggle="modal" data-bs-target="#callbackModal">
-          <label class="btn btn-outline-danger col-10 fw-bold p-0 m-0" style="font-size: small;">Обратный звонок</label>
-          <label class="col-12" style="font-size: small;">+7 (929) 622-48-35</label>
-        </a>      
+      <div class="col-4 d-flex justify-content-center align-items-center">
+        <button class="btn btn-danger" style="font-size: 12px;" onclick="openCatalogMenu()">Каталог<i class="bi bi-list ms-1"></i></button>
       </div>
-      <div class="col-2 d-flex justify-content-center align-items-center">
-        <label class="btn btn-danger d-flex justify-content-center p-1" style="font-size: 12px;" onclick="openCatalogMenu()">Каталог<i class="bi bi-list ms-1"></i></label>
-        <!-- <i class="bi bi-list" style="font-size: 15px;" onclick="toggleMenu()"></i> -->
-      </div>
+      
       <div class="col-12">
         <form method="GET" action="{% url 'catalog' %}">
           <div class="input-group mt-2" style="width: 100%;">
@@ -112,8 +108,7 @@
     <!-- Десктопная версия -->
     <article class="col-lg-3 d-none d-lg-flex justify-content-center align-items-center">
       <a href="/">
-      <!-- <img class='img-fluid btn btn-link' src="{% static 'images/logos/main_logo_blue.png' %}" alt="Логотип"/> -->
-      <p class="fs-1">ДВЕРИ</p>
+      <img class='img-fluid btn btn-link' src="{% static 'images/logos/main_logo_blue.png' %}" alt="Логотип"/>
       </a>
     </article>
     <article class='col-lg-5 d-none d-lg-flex align-items-center justify-content-center'>
