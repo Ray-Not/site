@@ -10,12 +10,12 @@ class Command(BaseCommand):
         doors = Door.objects.all()
 
         for door in doors:
-            base_slug = slugify(door.title)
-            unique_slug = self.get_unique_slug(base_slug)
+            # base_slug = slugify(door.title)
+            # unique_slug = self.get_unique_slug(base_slug)
 
-            door.slug = unique_slug
+            # door.slug = unique_slug
             door.description = f'{door.title} 🛒 купить в Москве по цене {door.price} руб. 🚪 Паритет двери 🛠️. Быстрая доставка 🚚 и профессиональная установка под ключ в Москве и МО. Отзывы покупателей, фото и характеристики. Заказывайте по телефону или через сайт.'
-            door.h1 = door.title
+            # door.h1 = door.title
             door.save()
 
     def get_unique_slug(self, base_slug):
