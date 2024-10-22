@@ -206,8 +206,8 @@ def catalog(request, slug=None):
         doors = paginator.page(paginator.num_pages)
 
     # Получение минимальной и максимальной цены
-    min_price = Door.objects.aggregate(Min('price'))['price__min']
-    max_price = Door.objects.aggregate(Max('price'))['price__max']
+    min_price = Door.objects.filter(hidden=False).aggregate(Min('price'))['price__min']
+    max_price = Door.objects.filter(hidden=False).aggregate(Max('price'))['price__max']
 
     # Получение выбранных фильтров
     selected_brands = (
