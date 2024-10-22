@@ -117,6 +117,9 @@ class Catalog(models.Model):
         """Возвращает количество дверей, связанных с данной категорией."""
         return self.catalogs.count()
 
+    def get_absolute_url(self):
+        return reverse('catalog', args=[self.slug])
+
     def __str__(self) -> str:
         return f"{self.title} из '{self.chapter}'"
 
@@ -225,7 +228,7 @@ class Door(models.Model):
         return self.orders.count()
 
     def get_absolute_url(self):
-        return reverse('door_detail', args=[str(self.id)])
+        return reverse('door_detail', args=[self.slug])
 
     def __str__(self):
         return self.title
