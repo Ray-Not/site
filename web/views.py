@@ -15,7 +15,7 @@ from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
 from django.views.decorators.cache import cache_page
 
 
-# @cache_page(60 * 60)
+@cache_page(60 * 60)
 def index(request):
     brands = [
         'Комфорт', 'Дионис', 'Сенатор',
