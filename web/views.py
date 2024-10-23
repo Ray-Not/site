@@ -15,7 +15,7 @@ from .models import (Blog, BlogChapter, Catalog, DeliveryRegion, Door, Order,
 from django.views.decorators.cache import cache_page
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def index(request):
     brands = [
         'Комфорт', 'Дионис', 'Сенатор',
@@ -83,7 +83,7 @@ def index(request):
     })
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def installation(request):
 
     if request.method == 'POST':
@@ -98,12 +98,12 @@ def installation(request):
     })
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def garant(request):
     return render(request, 'pages/garant.html')
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def delivery(request):
 
     moscow_regions = DeliveryRegion.objects.filter(region='moscow')
@@ -117,7 +117,7 @@ def delivery(request):
     return render(request, 'pages/delivery.html', context)
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def delivery_detail(request, slug):
 
     region = get_object_or_404(DeliveryRegion, slug=slug)
@@ -130,7 +130,7 @@ def delivery_detail(request, slug):
     return render(request, 'pages/delivery_detail.html', context)
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def catalog(request, slug=None):
     brands = [
         'Комфорт', 'Дионис', 'Сенатор',
@@ -255,7 +255,7 @@ def catalog(request, slug=None):
     })
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def blog_chapter(request):
     chapters = BlogChapter.objects.all()
     chapter_blog = {}
@@ -271,7 +271,7 @@ def blog_chapter(request):
     return render(request, 'pages/blog_chapter.html', context)
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def blog_chapter_detail(request, chapter_slug):
     chapter = get_object_or_404(BlogChapter, slug=chapter_slug)
     blogs = chapter.blogs.all()
@@ -284,7 +284,7 @@ def blog_chapter_detail(request, chapter_slug):
     return render(request, 'pages/blog_chapter_detail.html', context)
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def blog_post_detail(request, chapter_slug, post_slug):
     blog = get_object_or_404(Blog, slug=post_slug)
     chapter = get_object_or_404(BlogChapter, slug=chapter_slug)
@@ -297,7 +297,7 @@ def blog_post_detail(request, chapter_slug, post_slug):
     return render(request, 'pages/blog_post_detail.html', context)
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def door_detail(request, slug):
 
     door = get_object_or_404(Door, slug=slug)
@@ -407,7 +407,7 @@ def door_detail(request, slug):
     return render(request, 'pages/door_detail.html', context)
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def reviews(request):
     reviews = Review.objects.annotate(
         has_message=Case(
@@ -467,12 +467,12 @@ def reviews(request):
     return render(request, 'pages/reviews.html', context)
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def contact(request):
     return render(request, 'pages/contact.html')
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def shop_card(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -510,7 +510,7 @@ def shop_card(request):
     return render(request, 'pages/shop_card.html', context)
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
 
@@ -530,7 +530,7 @@ def compare_doors(request):
     })
 
 
-#@cache_page(60 * 60)
+@cache_page(60 * 60)
 def calculator(request):
     if request.method == 'POST':
         form = CustomOrderForm(request.POST)
