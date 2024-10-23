@@ -31,6 +31,7 @@
       "@context": "https://schema.org/",
       "@type": "Product",
       "name": "{{ door.title }}",
+      "image": "https://paritet-dveri.ru/{{MEDIA_URL}}{{ door.images|split_and_get_one }}",
       "description": "Некоторое описание",
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -41,7 +42,8 @@
         "@type": "AggregateOffer",
         "lowPrice": {{ min_price }},
         "highPrice": 100000,
-        "priceCurrency": "RUB"
+        "priceCurrency": "RUB",
+        "availability": "https://schema.org/InStock"
       }
     }
 </script>
