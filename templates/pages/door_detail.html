@@ -184,6 +184,12 @@
                     <img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100px; width: 100px; object-fit: cover;" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ MEDIA_URL }}{{ image_url }}">
                 </div>
             {% endfor %}
+            {% with door.images|split_and_get_one as image_url %}
+              <meta property="og:image" content="{{ image_url }}">
+              <meta property="og:title" content="{{ door.title }}">
+              <meta property="og:description" content="{{ door.description }}">
+              <meta property="og:image:alt" content="{{ door.title }}">
+            {% endwith %}
         </div>
         <!-- Модальное окно для показа большой картинки -->
         <section class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
