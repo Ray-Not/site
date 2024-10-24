@@ -269,17 +269,12 @@ $(document).ready(function() {
                 {% with door.images|split_and_get_all as image_urls %}
                     {% for image_url in image_urls %}
                         <div class="image-container" style="flex: 1 1 calc(33.33% - 10px); margin: 5px; height: 360px; overflow: hidden;">
-                            {% thumbnail image_url "400x360" crop="center" as thumb %}
-                                <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')">
-                                    <img src="{{ thumb.url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: contain;">
-                                </a>
-                            {% endthumbnail %}
+                          <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><img src="{{ MEDIA_URL }}{{ image_url }}" class="img-fluid" alt="{{ door.title }} - Image {{ forloop.counter }}" style="height: 100%; width: 100%; object-fit: contain;"></a>
                         </div>
                     {% endfor %}
                 {% endwith %}
             </div>
-        </section>
-        
+          </section>
           
         <section class="card-body">
           <a href="{% url 'door_detail' slug=door.slug %}" onclick="addToViewed('{{ door.title }}', '{{ door.images|split_and_get_all|escapejs }}', '{{ door.price }}', '{{ door.slug }}')"><p class="card-title fw-bold">{{ door.title }}</p></a>
