@@ -41,7 +41,7 @@
       "@type": "Product",
       "name": "{{ door.title }}",
       "image": "https://paritet-dveri.ru/{{MEDIA_URL}}{{ door.images|split_and_get_one }}",
-      "description": "Некоторое описание",
+      "description": "{{door.description}}",
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": {{ avg_rating }},
@@ -53,6 +53,29 @@
         "highPrice": 100000,
         "priceCurrency": "RUB",
         "availability": "https://schema.org/InStock"
+      }
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Главная",
+            "item": "https://paritet-dveri.ru/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Каталог дверей",
+            "item": "https://paritet-dveri.ru/catalog/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ door.title }}",
+            "item": "https://paritet-dveri.ru/{{ door.get_absolute_url }}"
+          }
+        ]
       }
     }
 </script>
