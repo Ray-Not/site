@@ -26,6 +26,15 @@
       color: #fff; /* Белый текст при наведении */
   }
 </style>
+<meta property="og:type" content="product">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="{{ door.title }}">
+<meta property="og:description" content="{{ door.description|default_if_none:'Описание отсутствует' }}">
+<meta property="og:image" content="https://paritet-dveri.ru/{{ door.images|split_and_get_one }}">
+<meta property="og:image:alt" content="{{ door.title }}">
+<meta property="og:price:amount" content="{{ min_price|default:0 }}">
+<meta property="og:price:currency" content="RUB">
+
 <script type="application/ld+json">
     {
       "@context": "https://schema.org/",
