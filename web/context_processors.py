@@ -42,7 +42,6 @@ def footer_context(request):
     for catalog in catalogs_with_door_count:
         chapter = catalog.chapter
         if not chapter:
-            print(f"Ошибка: пустое значение для chapter в {catalog}")
             continue  # Skip catalogs with empty chapter
 
         if chapter not in chapters_with_titles:
@@ -65,5 +64,4 @@ def footer_context(request):
         'random_catalogs_in_footer': random_catalogs_in_footer
     }
 
-    print("Контекст перед рендерингом:", context)
     return context

@@ -44,7 +44,6 @@ class DoorFilter(django_filters.FilterSet):
         ]
 
     def filter_by_brand(self, queryset, name, value):
-        print(name, value)
         brands = value.split(',')
         query = Q()
         for brand in brands:
@@ -52,7 +51,6 @@ class DoorFilter(django_filters.FilterSet):
         return queryset.filter(query)
 
     def filter_by_purpose(self, queryset, name, value):
-        print(name, value)
         purposes = value.split(',')
         query = Q()
         for purpose in purposes:
@@ -60,7 +58,6 @@ class DoorFilter(django_filters.FilterSet):
         return queryset.filter(query)
 
     def filter_by_in_cover(self, queryset, name, value):
-        print(name, value)
         in_covers = value.split(',')
         query = Q()
         for in_cover in in_covers:
@@ -68,7 +65,6 @@ class DoorFilter(django_filters.FilterSet):
         return queryset.filter(query)
 
     def filter_by_out_cover(self, queryset, name, value):
-        print(name, value)
         out_covers = value.split(',')
         query = Q()
         for out_cover in out_covers:
