@@ -186,7 +186,7 @@
               </p>
             </aside>
             <!-- ТУТ нужно оптимизировать фотку -->
-            <aside class="mt-2 position-relative" style="overflow: hidden;">
+            <aside class="my-2 position-relative" style="overflow: hidden;">
               <source srcset="{% static 'images/index_banner.webp' %}" type="image/webp">
               <img src="{% static 'images/index_banner.png' %}" 
                    alt="Описание изображения" 
@@ -197,7 +197,7 @@
                 Открыть каталог
               </a>
             </aside>
-            <aside class="row d-flex justify-content-center">
+            <aside class="row d-flex justify-content-center my-2">
               <h2  style="font-family: tilda;" class="text-center">Фильтры по категориям</h2>
               <section class="col-12 col-lg-8 d-flex flex-column">
                 <form method="get" id="filter-form" action="{% url 'catalog' %}" class="w-100">
