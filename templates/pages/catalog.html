@@ -14,7 +14,13 @@
 {% endif %}
 
 {% block title %}
-Купить металлические входные двери {% if catalog %}{{ catalog.title }}{% endif %} в Москве с установкой по цене производителя - на сайте Паритет двери - Страница {{ page }}
+  {% if catalog %}
+    {% if catalog.custom_title %}
+      {{ catalog.custom_title }}
+    {% else %}
+      Купить металлические входные двери {{ catalog.title }} в Москве с установкой по цене производителя - на сайте Паритет двери - Страница {{ page }}
+    {% endif %}
+  {% endif %}
 {% endblock %}
 
 {% block keywords %}
