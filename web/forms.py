@@ -13,7 +13,11 @@ class CallBackForm(forms.ModelForm):
         fields = ['name', 'phone', 'captcha']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'phone_mask',
+                'placeholder': '+7 (___) ___-__-__'
+            }),
         }
 
 
@@ -22,7 +26,12 @@ class GetDiscountForm(forms.ModelForm):
         model = GetDiscount
         fields = ['phone',]
         widgets = {
-            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'phone_mask',
+                'placeholder': '+7 (___) ___-__-__',
+
+            }),
         }
 
 
@@ -35,7 +44,11 @@ class OrderForm(forms.ModelForm):
                 attrs={'type': 'datetime-local', 'class': 'form-control'}
             ),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'phone_mask',
+                'placeholder': '+7 (___) ___-__-__'
+            }),
             'address': forms.TextInput(
                 attrs={'class': 'form-control', 'rows': 3}
             ),
